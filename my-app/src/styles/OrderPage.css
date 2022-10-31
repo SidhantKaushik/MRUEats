@@ -1,3 +1,7 @@
+.OrderPage{
+    font-family: 'Unna', serif;
+    font-weight: 400;
+}
 .OrderBanner{
     background-color: #033453;
     padding: 0;
@@ -9,10 +13,8 @@
         "image firstline"
         "image secondline"
         "image thirdline";
-    max-height: 200px;
+    max-height: 180px;
     color: #FFFFFF;
-    font-family: 'Unna', serif;
-    font-weight: 400;
 }
 .OrderBanner *{
     margin: 0;
@@ -40,12 +42,37 @@
 .secondLine{
     grid-area: secondline;
     display: flex;
-    grid-column-gap: 20px;
+    grid-column-gap: 10px;
     align-items: center;
 }
 .thirdLine{
     grid-area: thirdline;
     display: flex;
-    grid-column-gap: 20px;
+    grid-column-gap: 10px;
     align-items: center;
+    padding-bottom: 10px;
+}
+
+.mainContentBody{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 2fr 1fr;
+    grid-template-areas:
+        "orderDetails deliveryInfo"
+        "orderDetails paymentInfo";
+    height: 100%;
+}
+.mainContentBody h2{
+    text-align: center;
+}
+.orderDetails{
+    grid-area: orderDetails;
+    border-right: 1px solid #000;
+}
+.deliveryOptions{
+    grid-area: deliveryInfo;
+    border-bottom: 1px solid black;
+}
+.paymentInfo{
+    grid-area: paymentInfo;
 }
