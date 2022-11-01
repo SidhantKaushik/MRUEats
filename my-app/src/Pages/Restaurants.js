@@ -1,9 +1,9 @@
 import logo from '../logo.svg';
 import '../styles/RestaurantsPage.css'
 
-function OrderPage() {
+function RestaurantPage() {
     return (
-        <div className="OrderPage">
+        <div className="RestaurantPage">
             <div className="RestaurantBanner">
                 <img src={logo} className="restaurantImage" alt="logo" />
                 <div className="firstLine">
@@ -19,7 +19,7 @@ function OrderPage() {
                     <h2 className="openStatus restaurantInfo">OPEN</h2>
                 </div>
                 <div>
-                    <input type="text" id="menuSearch" className="menuSearchBar" onkeyup="myFunction()" placeholder="Search for items" title="Type in a menu name"></input>
+                    <input type="text" id="menuSearch" className="menuSearchBar" onKeyUp="myFunction()" placeholder="Search for items" title="Type in a menu name"></input>
                 </div>
             </div>
             <div className="mainContentBody">
@@ -56,5 +56,5 @@ function OrderPage() {
     );
   }
   
-  export default OrderPage;
+  export default RestaurantPage;
   

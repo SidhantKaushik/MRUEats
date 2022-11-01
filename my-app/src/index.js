@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import OrderPage from './Pages/OrderPage';
-import RestaurantsPage from './Pages/Restaurants';
+// import OrderPage from './Pages/OrderPage';
+// import RestaurantsPage from './Pages/Restaurants';
+ import AdminPage from './Pages/Admin';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RestaurantsPage />
+    <AdminPage />
   </React.StrictMode>
 );
 
