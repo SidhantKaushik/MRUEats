@@ -29,6 +29,11 @@
     padding-left: 20px;
     padding-right: 20px;
 }
+
+.openStatus {
+    color: #C3EC99;
+}
+
 .firstLine
 {
     font-style: italic;
