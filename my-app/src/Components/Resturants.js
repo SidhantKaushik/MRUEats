@@ -5,8 +5,14 @@ const Resturants = (props) => {
     return ( 
                    <>
                         <h1>Resturants</h1>
-                        <div>
-                            
+                        <div id="categories">
+
+                        </div>
+                        <div id="search-box">
+                            <h2>Search Box</h2>
+                            <div className='restu'>
+
+                            </div>
                         </div>
                    </>
       
