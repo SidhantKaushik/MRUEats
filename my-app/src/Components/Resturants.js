@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/Header.css'
+import '../styles/Resturants.css'
 
 const Resturants = (props) => {
     return ( 
