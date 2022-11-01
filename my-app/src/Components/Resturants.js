@@ -5,6 +5,9 @@ const Resturants = (props) => {
     return ( 
                    <>
                         <h1>Resturants</h1>
+                        <div>
+                            
+                        </div>
                    </>
       
     )
