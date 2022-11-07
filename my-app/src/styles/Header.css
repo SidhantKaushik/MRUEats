@@ -25,4 +25,5 @@ h1 {
 
 .menu li a{
     color: white;
+    text-decoration: none;
 }

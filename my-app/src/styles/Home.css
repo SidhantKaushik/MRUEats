@@ -1,0 +1,8 @@
+.category img{
+    width: 300px;
+    height: 150px;
+    object-fit: cover;
+}
+.restaurants img{
+    border-radius: 50%;
+}
