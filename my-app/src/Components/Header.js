@@ -5,12 +5,16 @@ import { Link } from 'react-router-dom';
 
 const Header = (props) => {
     return ( 
-                    <ul className = "menu">
-                    <li><Link to='/'>Resturants</Link></li>
-                    <li><Link to='/profile'>Profile</Link></li>
-                    <li><Link to='/order'>OrderPage</Link></li>
-                    <li><Link to='/cart'>Cart</Link></li>
-                    </ul>      
+        <div className='header'>
+            <h1>MRU EATS</h1>
+            <ul className = "menu">
+                <li><Link to='/'>Resturants</Link></li>
+                <li><Link to='/profile'>Profile</Link></li>
+                <li><Link to='/order'>OrderPage</Link></li>
+                <li><Link to='/cart'>Cart</Link></li>
+            </ul>
+        </div>
+                         
       
     )
 }
