@@ -6,6 +6,7 @@ const ResturantOrder = (props) => {
     return ( 
         <>
             <div>
+                <Link to='/'>Go Back</Link>
                 Menu Goes Here
             </div>
         </>
