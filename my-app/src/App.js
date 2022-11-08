@@ -6,6 +6,7 @@ import Header from './Components/Header'
 import Resturants from './Components/Resturants'
 import Profile from './Components/Profile';
 import Cart from './Components/Cart'
+import Account from './Components/Account'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route exact path='/profile' element={<Profile/>}></Route>
           <Route exact path='/order' element={<OrderPage/>}></Route>
           <Route exact path='/cart' element={<Cart/>}></Route>
+          <Route exact path='/account' element={<Account/>}></Route>
       </Routes>
       
       </div>

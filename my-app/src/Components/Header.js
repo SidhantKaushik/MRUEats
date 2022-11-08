@@ -10,6 +10,7 @@ const Header = (props) => {
                     <li><Link to='/profile'>Profile</Link></li>
                     <li><Link to='/order'>OrderPage</Link></li>
                     <li><Link to='/cart'>Cart</Link></li>
+                    <li><Link to='/account'>Account</Link></li>
                     </ul>      
       
     )
