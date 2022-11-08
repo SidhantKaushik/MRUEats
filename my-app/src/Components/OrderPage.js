@@ -19,7 +19,7 @@ function OrderPage() {
                     <h2 className="openStatus">OPEN</h2>
                 </div>
             </div>
-            <div className="mainContentBody">
+            <div className="mainContent">
                 <div className="orderDetails">
                     <h2>Your Order</h2>
                     <div className="itemsSelected">

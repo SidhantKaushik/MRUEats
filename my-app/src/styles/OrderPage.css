@@ -58,7 +58,7 @@
     padding-bottom: 10px;
 }
 
-.mainContentBody{
+.mainContent{
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 2fr 1fr;
@@ -67,7 +67,7 @@
         "orderDetails paymentInfo";
     height: 100%;
 }
-.mainContentBody h2{
+.mainContent h2{
     text-align: center;
 }
 .orderDetails{
