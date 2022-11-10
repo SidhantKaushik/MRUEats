@@ -1,4 +1,4 @@
-import logo from '../logo.svg'
+import logo from '../logo.svg';
 import '../styles/OrderPage.css'
 
 function OrderPage() {
@@ -19,7 +19,7 @@ function OrderPage() {
                     <h2 className="openStatus">OPEN</h2>
                 </div>
             </div>
-            <div className="mainContent">
+            <div className="mainContentBody">
                 <div className="orderDetails">
                     <h2>Your Order</h2>
                     <div className="itemsSelected">
