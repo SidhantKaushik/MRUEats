@@ -11,6 +11,7 @@ connectDB();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+
 app.use('/api/restaurants', require('./routes/restaurantRoutes'));
 app.use('/api/menu', require('./routes/menuRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
@@ -19,5 +20,5 @@ app.use(errorHandler);
 
 // port connection
 app.listen(PORT, 3000, function () {
-	console.log("Server running at port = " + PORT);
+	console.log("Server running at port=" + PORT);
 });
