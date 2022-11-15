@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/Header.css'
-import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
+import ReactDOM from 'react-dom'
+import { Link } from 'react-router-dom'
 
 const Header = (props) => {
     return ( 
@@ -12,11 +12,11 @@ const Header = (props) => {
                 <li><Link to='/profile'>Profile</Link></li>
                 <li><Link to='/order'>OrderPage</Link></li>
                 <li><Link to='/cart'>Cart</Link></li>
+                <li><Link to='/admin'>Admin</Link></li>
+                <li><Link to='/signup'>Sign Up</Link></li>
             </ul>
         </div>
-                         
-      
+
     )
 }
-
 export default Header;
