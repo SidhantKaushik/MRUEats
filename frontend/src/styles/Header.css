@@ -1,0 +1,32 @@
+.header {
+    background-color: #033453;
+    margin-bottom: 2px;
+    padding: 20px 0;
+}
+
+h1 {
+    margin: 0;
+    margin-right: auto;
+    margin-right: min(100px);
+    float: left;
+    color: white;
+    font-size: 50px;
+}
+
+.menu {
+    text-align: right;
+    margin-top: 0;
+}
+
+.menu li {
+    margin: 5px;
+    font-size: 30px;
+    display: inline-block;
+    text-decoration: none;
+    padding-left: 2%;
+}
+
+.menu li a {
+    color: white;
+    text-decoration: none;
+}
