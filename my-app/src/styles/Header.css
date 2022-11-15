@@ -1,7 +1,8 @@
-.header {
+/* .header {
     background-color: #033453;
     margin-bottom: 2px;
-    padding: 20px 0;
+    padding: 5px 20px 2.5px;
+    align-items: center;
 }
 h1 {
     margin: 0;
@@ -26,4 +27,65 @@ h1 {
 .menu li a{
     color: white;
     text-decoration: none;
+} */
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: stretch;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 56px;
+    background-color: #033453;
+    border-bottom: solid gray 1px;
+}
+
+h1{
+    flex: 0 1 auto;
+    width: fit-content;
+    white-space: nowrap;
+    color: white;
+    padding-left: 10px;
+}
+
+h1 a{
+    color: white;
+    text-decoration: none;
+}
+
+.menu{
+    display: flex;
+width: 100%;
+justify-content: space-evenly;
+opacity: 0.95;
+position: relative;
+}
+
+.menu li{
+    text-decoration: none;
+    padding-left: 2%;
+    list-style: none;
+}
+
+.menu li a{
+    color: white;
+    text-decoration: none;
+}
+
+.locationInfo{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 40px;
+  background-color: #033453;
+}
+
+.locationInfo p{
+  margin: 0;
+  padding-left: 10px;
+  color: white;
 }
