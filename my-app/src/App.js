@@ -8,7 +8,7 @@ import Profile from './Components/Profile';
 import Cart from './Components/Cart'
 
 import ResturantOrder from './Components/ResturantOrder';
-import Resturants from './Components/Resturants';
+// import Resturants from './Components/Resturants';
 import AdminPage from './Components/Admin'
 import SignupPage from './Components/Signup'
 import Account from './Components/Account'
