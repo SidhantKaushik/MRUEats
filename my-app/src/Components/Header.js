@@ -5,14 +5,18 @@ import { Link } from 'react-router-dom'
 
 const Header = (props) => {
     return ( 
-            <ul className = 'menu'>
+        <div className='header'>
+            <h1>MRU EATS</h1>
+            <ul className = "menu">
                 <li><Link to='/'>Resturants</Link></li>
                 <li><Link to='/profile'>Profile</Link></li>
                 <li><Link to='/order'>OrderPage</Link></li>
                 <li><Link to='/cart'>Cart</Link></li>
                 <li><Link to='/admin'>Admin</Link></li>
                 <li><Link to='/signup'>Sign Up</Link></li>
-            </ul>      
+            </ul>
+        </div>
+
     )
 }
 export default Header;

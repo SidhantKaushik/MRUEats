@@ -1,0 +1,36 @@
+.home {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+.category img{
+    width: 300px;
+    height: 150px;
+    object-fit: cover;
+}
+
+#categories {
+    align-self: center;
+    margin: auto;
+}
+#categories .category{
+    padding: 20px;
+}
+
+#search-box{
+    
+}
+
+.restaurants {
+    display: inline-block;
+    
+}
+.logo {
+    float: left
+}
+.logo img{
+    border-radius: 50%;
+    width: 150px;
+}
+.info {
+    float: right;
+}
