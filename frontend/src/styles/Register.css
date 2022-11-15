@@ -48,17 +48,17 @@ form {
     margin: 0 auto;
     padding: 10px 20px;
 
-  }
-  
-  label {
+}
+
+label {
     display: block;
     margin-bottom: 6px;
-  }
-  
-  input,
-  select,
-  textarea {
+}
+
+input,
+select,
+textarea {
     width: 100%;
     padding: 2px;
     border: 1px solid #ccc;
-  }
+}

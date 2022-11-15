@@ -1,0 +1,175 @@
+* {
+    font-family: 'Unna', serif;
+    font-weight: 400;
+}
+
+a {
+    color: darkblue;
+}
+
+.backgroundEffect {
+    background-color: darkblue;
+    display: flex;
+}
+
+.AccountPage {
+    background-color: white;
+    width: 95%;
+    height: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.profileSide {
+    grid-column: 1;
+}
+
+.profileToolBar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    align-items: center;
+    font-size: 2rem;
+    overflow: hidden;
+    border-bottom: solid black 2px;
+}
+
+.standardLayout {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-areas:
+        "title required"
+        "input input";
+    margin: 0px 10px;
+    justify-content: space-between;
+}
+
+.standardLayout h2:first-of-type {
+    grid-area: title;
+    margin: 10px;
+}
+
+.required {
+    grid-area: required;
+    margin: 10px;
+    color: gray;
+}
+
+.standardLayout input {
+    grid-area: input;
+    background-color: lightgray;
+    border: 0;
+    height: 120%;
+    margin-bottom: 10px;
+}
+
+.twoLayout {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-areas:
+        "title required"
+        "input input";
+    margin: 0px 10px;
+    justify-content: space-between;
+}
+
+.twoLayout h2:first-of-type {
+    grid-area: title;
+    margin: 10px;
+}
+
+.twoLayout input {
+    grid-area: input;
+    background-color: lightgray;
+    border: 0;
+    height: 120%;
+    margin-bottom: 10px;
+}
+
+.orderSide {
+    grid-column: 2;
+    background-color: pink;
+}
+
+.ProfileInformation {
+    display: grid;
+    grid-template-areas:
+        "fName fName fName lName lName lName"
+        "email email email email email email"
+        "countryCode phone phone phone phone phone"
+        "street street street street street street"
+        "province province postal postal country country"
+        "current current current current current current"
+        ". . . . . save";
+}
+
+.firstName {
+    grid-area: fName;
+}
+
+.lastName {
+    grid-area: lName;
+}
+
+.emailDiv {
+    grid-area: email;
+}
+
+.countryCode {
+    grid-area: countryCode;
+}
+
+.phoneNumber {
+    grid-area: phone;
+}
+
+.streetAddress {
+    grid-area: street;
+}
+
+.province {
+    grid-area: province;
+}
+
+.postal {
+    grid-area: postal;
+}
+
+.country {
+    grid-area: country;
+}
+
+.currentLocation {
+    grid-area: current;
+}
+
+#saveButton {
+    grid-area: save;
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+#OrderHistory {
+    font-size: 2rem;
+    margin-right: auto;
+    margin-left: 15px;
+    display: flex;
+}
+
+.orderHistoryToolBar {
+    border-bottom: solid black 2px;
+}
+
+@media (max-width: 900px) {
+    .AccountPage {
+        display: flex;
+        flex-direction: column;
+    }
+
+    h2 {
+        font-size: 1em;
+    }
+}

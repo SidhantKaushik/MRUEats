@@ -1,11 +1,10 @@
-//import logo from '../logo.svg'
 import '../styles/Order.css'
 
 function Order() {
     return (
         <div className="OrderPage">
             <div className="OrderBanner">
-               {/* <img src={logo} className="restrauntImage" alt="logo" />*/}
+                {/* <img src={logo} className="restrauntImage" alt="logo" />*/}
                 <div className="firstLine">
                     <h1 className="restrauntName">Booster Juice</h1>
                     <div className="stars">XXXXX</div>
@@ -49,7 +48,6 @@ function Order() {
             </div>
         </div>
     );
-  }
-  
-  export default Order;
-  
+}
+
+export default Order;

@@ -2,6 +2,7 @@
     font-family: 'Unna', serif;
     font-weight: 400;
 }
+
 .OrderBanner {
     background-color: #033453;
     padding: 0;
@@ -16,11 +17,12 @@
     max-height: 180px;
     color: #ffffff;
 }
-.OrderBanner *{
+
+.OrderBanner * {
     margin: 0;
 }
-.restrauntImage
-{
+
+.restrauntImage {
     grid-area: image;
     height: 150px;
     width: 150px;
@@ -43,12 +45,14 @@
     grid-column-gap: 20px;
     align-items: center;
 }
+
 .secondLine {
     grid-area: secondline;
     display: flex;
     grid-column-gap: 10px;
     align-items: center;
 }
+
 .thirdLine {
     grid-area: thirdline;
     display: flex;
@@ -66,17 +70,21 @@
         "orderDetails paymentInfo";
     height: 100%;
 }
+
 .mainContent h2 {
     text-align: center;
 }
+
 .orderDetails {
     grid-area: orderDetails;
     border-right: 1px solid #000;
 }
+
 .deliveryOptions {
     grid-area: deliveryInfo;
     border-bottom: 1px solid black;
 }
+
 .paymentInfo {
     grid-area: paymentInfo;
 }

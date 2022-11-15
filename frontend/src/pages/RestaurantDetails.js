@@ -1,4 +1,4 @@
-import '../styles/Restaurant.css'
+import '../styles/RestaurantDetails.css'
 
 function RestaurantDetails() {
     return (
@@ -48,12 +48,11 @@ function RestaurantDetails() {
                 </div>
                 <div className="addItem">
                     <h2>Menu Item Name</h2>
-                    
+
                 </div>
             </div>
         </div>
     );
-  }
-  
-  export default RestaurantDetails;
-  
+}
+
+export default RestaurantDetails;
