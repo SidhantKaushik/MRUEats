@@ -3,7 +3,7 @@ import '../styles/Admin.css'
 function Admin() {
     return (
         <div className="AdminPage">
-            <div className="mainContentBody">
+            <div className="adminMainBody">
                 <div className="restaurants">
                     <h2>Restaurants</h2>
 
@@ -22,10 +22,9 @@ function Admin() {
 
                 </div>
                 <div className="restaurantSection">
-                    <div className="RestaurantBanner">
-                        {/*<img src={logo} className="restaurantImage" alt="logo" />*/}
+                    <div className="adminRestaurantBanner">
                         <div className="firstLine">
-                            <h1 className="restaurant-name">Booster Juice</h1>
+                            <h2 className="restaurant-name">Booster Juice</h2>
                             <div className="restaurantRating">XXXXX</div>
                         </div>
                         <div className="secondLine">

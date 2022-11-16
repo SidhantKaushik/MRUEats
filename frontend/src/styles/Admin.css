@@ -3,7 +3,7 @@
     font-weight: 400;
 }
 
-.mainContentBody {
+.adminMainBody {
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-template-areas:
@@ -32,7 +32,7 @@
     display: grid;
     grid-template-rows: 1fr 5fr 1fr;
     grid-template-areas:
-        "restaurantBanner"
+        "adminRestaurantBanner"
         "menuItems"
         "menuButtons";
     height: 100vh;
@@ -47,20 +47,20 @@
     border-top: 1px solid #B4B2AF;
 }
 
-.RestaurantBanner {
-    grid-area: restaurantBanner;
+.adminRestaurantBanner {
+    padding: 3em;
+    grid-area: adminRestaurantBanner;
     background-color: #FCFCFC;
     display: grid;
-    grid-template-columns: min-content auto;
     grid-template-areas:
-        "image firstline buttons"
-        "image secondline buttons"
-        "image thirdline buttons";
+        "firstline buttons"
+        "secondline buttons"
+        "thirdline buttons";
     color: #000000;
     border-bottom: 1px solid #B4B2AF;
 }
 
-.RestaurantBanner * {
+.adminRestaurantBanner * {
     margin: 0;
 }
 
