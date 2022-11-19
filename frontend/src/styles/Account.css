@@ -5,7 +5,9 @@
 
 a {
     color: darkblue;
+    text-decoration: none;
 }
+
 
 .backgroundEffect {
     background-color: darkblue;
@@ -148,8 +150,18 @@ a {
 
 #saveButton {
     grid-area: save;
-    margin-top: 15px;
-    margin-right: 10px;
+    margin-top: 20px;
+    margin-right: 6px;
+    height: 100%;
+    margin-bottom: 10px;
+    display:flex;
+}
+
+#saveButtonBtn{
+    width:200px;
+    padding:0;
+    margin-left: auto;
+    height: 30px;
 }
 
 #OrderHistory {
@@ -163,6 +175,8 @@ a {
     border-bottom: solid black 2px;
 }
 
+
+
 @media (max-width: 900px) {
     .AccountPage {
         display: flex;
@@ -170,6 +184,20 @@ a {
     }
 
     h2 {
-        font-size: 1em;
+        font-size: .7em;
+    }
+    .ProfileInformation {
+        display: grid;
+        grid-template-areas:
+            "fName fName fName lName lName lName"
+            "email email email email email email"
+            "countryCode phone phone phone phone phone"
+            "street street street street street street"
+            "province province postal postal country country"
+            "current current current current current current"
+            ". . . save save save";
+    }
+    #changePassword{
+        font-size: .6em;
     }
 }

@@ -75,7 +75,10 @@ const Account = (props) => {
                                 <input type="text" id="currentLocation" name="currentLocation"></input>
                             </div>
                         </div>
-                        <input type="submit" id="saveButton" value="Save"></input>
+                        <div id="saveButton">
+                        <input type="submit" id="saveButtonBtn" value="Save"></input>
+                        </div>
+                        
                     </div>
 
                 </div>
