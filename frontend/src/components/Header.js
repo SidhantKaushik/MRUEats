@@ -27,7 +27,7 @@ function Header() {
         <>
         <header className='header'>
         <h1><Link to='/'>MRU EATS</Link></h1>
-            <ul className="menu">
+            <ul className="menu-header">
                 {user ? (<>
                     <li><Link to='/order'>Order</Link></li>
                     <li><Link to='/cart'>Cart</Link></li>

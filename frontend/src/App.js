@@ -9,7 +9,8 @@ import Order from './pages/Order';
 import Account from './pages/Account';
 import Cart from './pages/Cart';
 import Admin from './pages/Admin';
-import RestaurantOrder from './pages/RestaurantOrder';
+import RestaurantDetails from './pages/RestaurantDetails';
+
 
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
             <Route exact path='/order' element={<Order />}></Route>
             <Route exact path='/cart' element={<Cart />}></Route>
             <Route exact path='/admin' element={<Admin />}></Route>
-            <Route exact path='/restaurantorder' element={<RestaurantOrder />}></Route>
+            <Route exact path='/RestaurantDetails' element={<RestaurantDetails/>}></Route>
+
           </Routes>
         </div>
       </Router>
