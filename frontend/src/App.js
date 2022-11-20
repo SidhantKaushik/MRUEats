@@ -10,17 +10,58 @@ import Account from './pages/Account';
 import Cart from './pages/Cart';
 import Admin from './pages/Admin';
 import RestaurantDetails from './pages/RestaurantDetails';
+import { useEffect, useState } from 'react';
 
 
 
 function App() {
+
+  const [restaurants, setRestaurants] = useState([]);
+
+  useEffect(() => {
+    const getRestaurants = async () => {
+      try {
+        const url = "api/restaurants";
+        const response = await fetch(url);
+        const data = await response.json();
+        setRestaurants(data);
+        console.log(restaurants)
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    getRestaurants();
+  }, [])
+
+  // useEffect(() => {
+  //   fetch('/api/restaurants')
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error(
+  //           `This is an HTTP error: The status is ${response.status}`
+  //         );
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((actualData) => {
+  //       setRestaurants(JSON.parse(actualData))
+  //       console.log(restaurants)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
+  // }, []);
+  
+
   return (
     <>
       <Router>
         <div className="App">
           <Header />
           <Routes>
-            <Route exact path='/' element={<Home />}></Route>
+            <Route exact path='/'>
+              <Home restaurants={restaurants}/>
+            </Route>
             <Route exact path='/login' element={<Login />}></Route>
             <Route exact path='/register' element={<Register />}></Route>
             <Route exact path='/account' element={<Account />}></Route>
@@ -28,7 +69,6 @@ function App() {
             <Route exact path='/cart' element={<Cart />}></Route>
             <Route exact path='/admin' element={<Admin />}></Route>
             <Route exact path='/RestaurantDetails' element={<RestaurantDetails/>}></Route>
-
           </Routes>
         </div>
       </Router>

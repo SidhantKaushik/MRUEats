@@ -1,6 +1,6 @@
 import '../styles/RestaurantDetails.css'
 
-function RestaurantDetails() {
+function RestaurantDetails(props) {
     return (
         <div className="RestaurantPage">
             <div className="RestaurantBanner">
