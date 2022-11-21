@@ -41,6 +41,8 @@
 
 .menuItems {
     grid-area: menuItems;
+    height: 100%;
+    overflow: auto;
 }
 
 .menuButtons {
@@ -186,6 +188,25 @@
 .buttonText {
     margin-right: 1em;
     cursor: pointer;
+}
+
+/* menu list css */
+
+.menu-list-name {
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 23px;
+}
+
+.menuListItem {
+    background-color: white;
+    margin: 1em;
+    padding: 1em;
+
+    font-weight: 400;
+    font-size: 1.35em;
+    line-height: 23px;
+    border-radius: 10px;
 }
 
 /* popups css */

@@ -32,17 +32,6 @@ function Admin() {
       }
       getRestaurants();
 
-      const getMenuUsingID = async () => {
-        try {
-          const url = "http://localhost:3000/api/menu/"+selectedRestaurant.id;
-          const response = await fetch(url);
-          const data = await response.json();
-          setMenu(data);
-        } catch (err) {
-          console.error(err);
-        }
-      }
-      getMenuUsingID();
     }, [])
 
     while(!restaurants[0]){
@@ -60,6 +49,23 @@ function Admin() {
     var restaurantList = restaurants.map((restaurant) =>
         <li key={restaurant.id} className='restaurantListItem' id={restaurant.id} onClick={populateForm}>{restaurant.name}</li>
     );
+
+    const getMenuUsingID = async () => {
+        try {
+          const url = "http://localhost:3000/api/menu/"+selectedRestaurant.id;
+          const response = await fetch(url);
+          const data = await response.json();
+          setMenu(data);
+        } catch (err) {
+          console.error(err);
+        }
+    }
+    
+    getMenuUsingID();
+
+    // var menuItemList = menu.map((menu) =>
+    // <li key={menu.id} className='menuListItem' id={menu.id}>{menu.name}</li>
+    // );
 
     function ConvertTime(hour) {
         var ampm = hour >= 12 ? 'pm' : 'am';
@@ -172,9 +178,12 @@ function Admin() {
                     </div>
 
                     <div className='menuItems'>
-                        {/* {menu.map((menu) =>
-                            <div>{menu.menuCategory}</div>
-                        )} */}
+                        {menu.map((menu) =>
+                        <div className='menuListItem' id={menu.id}>
+                            <h5 className='menu-list-name'>{menu.name} • ${menu.price}</h5>
+                            <p>{menu.description}</p>
+                        </div>
+                        )}
                     </div>
 
                     <div className="menuButtons">
