@@ -29,3 +29,15 @@
     right: calc(5% - 20px);
     top: calc(100vh - 98vh);
   }
+
+/*Mobile*/
+@media (max-width:425px) {
+  .box {
+    width: 80%;
+  }
+
+  .close-icon {
+    right: calc(5% - 5px);
+    top: calc(100vh - 98vh);
+  }
+}
