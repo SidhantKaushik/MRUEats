@@ -10,18 +10,20 @@ const Account = (props) => {
                         <a href='' id="changePassword">Change Password</a>
                     </div>
                     <div className="ProfileInformation">
-                        <div className="firstName">
-                            <div className="standardLayout">
-                                <h2>First Name</h2>
-                                <h2 className="required">Required</h2>
-                                <input type="text" id="fname" name="fname"></input>
+                        <div className="FLName">
+                            <div className="firstName">
+                                <div className="standardLayout">
+                                    <h2>First Name</h2>
+                                    <h2 className="required">Required</h2>
+                                    <input type="text" id="fname" name="fname"></input>
+                                </div>
                             </div>
-                        </div>
-                        <div className="lastName">
-                            <div className="standardLayout">
-                                <h2>Last Name</h2>
-                                <h2 className="required">Required</h2>
-                                <input type="text" id="lastName" name="lastName"></input>
+                            <div className="lastName">
+                                <div className="standardLayout">
+                                    <h2>Last Name</h2>
+                                    <h2 className="required">Required</h2>
+                                    <input type="text" id="lastName" name="lastName"></input>
+                                </div>
                             </div>
                         </div>
                         <div className="emailDiv">
@@ -31,17 +33,19 @@ const Account = (props) => {
                                 <input type="text" id="email" name="email"></input>
                             </div>
                         </div>
-                        <div className="countryCode">
-                            <div className="twoLayout">
-                                <h2>Country</h2>
-                                <input type="text" id="province" name="province"></input>
+                        <div className="countryPhone">
+                            <div className="countryCode">
+                                <div className="twoLayout">
+                                    <h2>Country</h2>
+                                    <input type="text" id="province" name="province"></input>
+                                </div>
                             </div>
-                        </div>
-                        <div className="phoneNumber">
-                            <div className="standardLayout">
-                                <h2>Phone Number</h2>
-                                <h2 className="required">Optional</h2>
-                                <input type="text" id="phoneNumber" name="phoneNumber"></input>
+                            <div className="phoneNumber">
+                                <div className="standardLayout">
+                                    <h2>Phone Number</h2>
+                                    <h2 className="required">Optional</h2>
+                                    <input type="text" id="phoneNumber" name="phoneNumber"></input>
+                                </div>
                             </div>
                         </div>
                         <div className="streetAddress">
@@ -50,6 +54,8 @@ const Account = (props) => {
                                 <input type="text" id="currentLocation" name="currentLocation"></input>
                             </div>
                         </div>
+                        
+                        <div className="info">
                         <div className="province">
                             <div className="twoLayout">
                                 <h2>Province</h2>
@@ -58,7 +64,7 @@ const Account = (props) => {
                         </div>
                         <div className="postal">
                             <div className="twoLayout">
-                                <h2>Postal Code</h2>
+                                <h2 id="pCode">Postal Code</h2>
                                 <input type="text" id="postalCode" name="postalCode"></input>
                             </div>
                         </div>
@@ -67,6 +73,7 @@ const Account = (props) => {
                                 <h2>Country</h2>
                                 <input type="text" id="country" name="country"></input>
                             </div>
+                        </div>
                         </div>
                         <div className="currentLocation">
                             <div className="standardLayout">

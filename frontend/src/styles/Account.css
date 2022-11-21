@@ -13,6 +13,37 @@ a {
     background-color: darkblue;
     display: flex;
 }
+.info {
+    grid-area: info;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: auto;
+}
+
+.countryPhone{
+    grid-area: countryPhone;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: auto;
+}
+.FLName{
+    grid-area: FLName;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: auto;
+}
+.countryCode{
+    width:50%;
+}
+.phoneNumber{
+    width:50%;
+}
+#pCode{
+    white-space: nowrap;
+}
 
 .AccountPage {
     background-color: white;
@@ -66,6 +97,7 @@ a {
     border: 0;
     height: 120%;
     margin-bottom: 10px;
+    min-width: 0;
 }
 
 .twoLayout {
@@ -96,56 +128,53 @@ a {
     background-color: pink;
 }
 
+
 .ProfileInformation {
     display: grid;
     grid-template-areas:
-        "fName fName fName lName lName lName"
+        "FLName FLName FLName FLName FLName FLName"
         "email email email email email email"
-        "countryCode phone phone phone phone phone"
+        "countryPhone countryPhone countryPhone countryPhone countryPhone countryPhone"
         "street street street street street street"
-        "province province postal postal country country"
+        "info info info info info info"
         "current current current current current current"
         ". . . . . save";
+        
+}
+
+.province{
+    width: 33%;
+}
+.postal{
+    width: 33%;
+}
+.country{
+    width: 33%;
 }
 
 .firstName {
-    grid-area: fName;
+    width: 50%;
 }
 
 .lastName {
-    grid-area: lName;
+    width:50%;
 }
 
 .emailDiv {
     grid-area: email;
+    min-width:0;
 }
 
-.countryCode {
-    grid-area: countryCode;
-}
-
-.phoneNumber {
-    grid-area: phone;
-}
 
 .streetAddress {
     grid-area: street;
+    min-width:20vw;
 }
 
-.province {
-    grid-area: province;
-}
-
-.postal {
-    grid-area: postal;
-}
-
-.country {
-    grid-area: country;
-}
 
 .currentLocation {
     grid-area: current;
+    min-width:0;
 }
 
 #saveButton {
@@ -184,16 +213,16 @@ a {
     }
 
     h2 {
-        font-size: .7em;
+        font-size: .50em;
     }
     .ProfileInformation {
         display: grid;
         grid-template-areas:
-            "fName fName fName lName lName lName"
+            "FLName FLName FLName FLName FLName FLName"
             "email email email email email email"
-            "countryCode phone phone phone phone phone"
+            "countryPhone countryPhone countryPhone countryPhone countryPhone countryPhone"
             "street street street street street street"
-            "province province postal postal country country"
+            "info info info info info info"
             "current current current current current current"
             ". . . save save save";
     }
