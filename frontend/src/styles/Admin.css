@@ -93,6 +93,8 @@
 
 .menuItemForm {
     float: right;
+    display: flex;
+    justify-content: end;
 }
 
 .menuButton {
