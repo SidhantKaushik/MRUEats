@@ -33,35 +33,13 @@ function App() {
     getRestaurants();
   }, [])
 
-  // useEffect(() => {
-  //   fetch('/api/restaurants')
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error(
-  //           `This is an HTTP error: The status is ${response.status}`
-  //         );
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((actualData) => {
-  //       setRestaurants(JSON.parse(actualData))
-  //       console.log(restaurants)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
-  // }, []);
-  
-
   return (
     <>
       <Router>
         <div className="App">
           <Header />
           <Routes>
-            <Route exact path='/'>
-              <Home restaurants={restaurants}/>
-            </Route>
+            <Route exact path='/' element={<Home restaurants={{restaurants}}/>}></Route>
             <Route exact path='/login' element={<Login />}></Route>
             <Route exact path='/register' element={<Register />}></Route>
             <Route exact path='/account' element={<Account />}></Route>
