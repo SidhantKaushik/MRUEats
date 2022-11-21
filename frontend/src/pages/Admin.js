@@ -12,6 +12,8 @@ function Admin() {
     const [restaurants, setRestaurants] = useState([]);
     const [menu, setMenu] = useState([]);
     const [restoEditIsOpen, setRestoEditIsOpen] = useState(false);
+    const [restoAddIsOpen, setRestoAddIsOpen] = useState(false);
+    const [restoDeleteIsOpen, setRestoDeleteIsOpen] = useState(false);
 
     useEffect(() => {
       const getRestaurants = async () => {
@@ -48,7 +50,7 @@ function Admin() {
 
     const populateForm = async (e) => {
         var restaurantId = e.target.id;
-        selectedRestaurant = restaurants.find(restaurant => restaurant.id == restaurantId);
+        selectedRestaurant = restaurants.find(restaurant => restaurant.id === restaurantId);
         console.log("picked:" + restaurantId);
     }
 
@@ -65,7 +67,15 @@ function Admin() {
     //Edit popups
     const toggleRestoEditPopup = () => {
         setRestoEditIsOpen(!restoEditIsOpen);
-      }
+    }
+
+    const toggleRestoAddPopup = () => {
+        setRestoAddIsOpen(!restoAddIsOpen);
+    } 
+
+    const toggleRestoDeletePopup = () => {
+        setRestoDeleteIsOpen(!restoDeleteIsOpen);
+    } 
 
     return (
         <div className="AdminPage">
@@ -73,8 +83,8 @@ function Admin() {
                 <div className="restaurants">
                     <div className='restaurantHeader'>
                         <h2 id='restaurantTitle'>Restaurants</h2>
-                        <button className="addRestoButton" onClick={toggleRestoEditPopup}><FaPlus/></button>
-                        {restoEditIsOpen && <Popup
+                        <button className="addRestoButton" onClick={toggleRestoAddPopup}><FaPlus/></button>
+                        {restoAddIsOpen && <Popup
                         content={<>
                             <h4 className='popup-title'>Add Restaurant</h4>
                             <form className='restaurant-form'>
@@ -89,7 +99,7 @@ function Admin() {
                                 </form>
                             <button className='popup-submit'>Save Changes</button>
                         </>}
-                        handleClose={toggleRestoEditPopup}
+                        handleClose={toggleRestoAddPopup}
                         />}
                     </div>
                     <div className='restaurantsList'>
@@ -111,10 +121,37 @@ function Admin() {
                             <h2 className="openStatus restaurantInfo">OPEN</h2>
                         </div>
                         <div className='restaurantButtons'>
-                            <form>
-                                <button className='restaurantButton'><span className='buttonText'>Edit Information</span><FaEdit/></button>
-                                <button className='restaurantButton'><span className='buttonText'>Remove Restaurant</span><FaTrash/></button>
-                            </form>
+                            
+                                <button className='restaurantButton' onClick={toggleRestoEditPopup}><span className='buttonText'>Edit Information</span><FaEdit/></button>
+                                <button className='restaurantButton' onClick={toggleRestoDeletePopup}><span className='buttonText'>Remove Restaurant</span><FaTrash/></button>
+                          
+
+                            {restoEditIsOpen && <Popup
+                                content={<>
+                                    <h4 className='popup-title'>Edit Restaurant</h4>
+                                    <form className='restaurant-form'>
+                                        <label>Logo<input type="text" placeholder='enter url'/></label>
+                                        <label>Name<input type="text" /></label>
+                                        <label>Rating<input type="number" min="1" max="5"/></label>
+                                        <label>Address<input type="text"/></label>
+                                        <label>Delivery Fee<input type="text" placeholder='$'/></label>
+                                        <label>Opening Time<input type="time" /></label>
+                                        <label>Closing Time<input type="time" /></label>
+                                        {/* <label>Categories<input type="text" /></label> */}
+                                        </form>
+                                    <button className='popup-submit'>Save Changes</button>
+                                </>}
+                                handleClose={toggleRestoEditPopup}
+                            />}
+
+                            {restoDeleteIsOpen && <Popup
+                                content={<>
+                                    <h4 className='popup-title'>Delete Restaurant</h4>
+                                    <p className='delete-confirmation'>Are you sure you want to delete this restaurant? This action cannot be undone.</p>
+                                    <button className='popup-submit'>Delete Restaurant</button>
+                                </>}
+                                handleClose={toggleRestoDeletePopup}
+                            />}
                         </div>
                     </div>
 

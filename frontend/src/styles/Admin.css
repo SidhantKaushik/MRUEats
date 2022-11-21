@@ -83,9 +83,6 @@
 .restaurantButtons {
     grid-area: buttons;
     top: 50%;
-}
-
-.restaurantButtons form {
     display: flex;
     flex-direction: column;
     float: right;
@@ -198,12 +195,12 @@
 .popup-title {
     font-weight: bold;
     font-size: 1.25em;
+    margin-top: 2em;
     margin-left: 2em;
 }
 
 .popup-submit {
-    margin-top: 1em;
-    margin-right: 3em;
+    margin: 1em 3em 2em 1em;
     padding: 8px;
     float: right;
 }
@@ -222,6 +219,11 @@
 .restaurant-form input {
     background-color: rgb(224, 224, 224);
     border: 1px solid rgb(209, 209, 209);
+}
+
+.delete-confirmation {
+    margin-left: 2em;
+    padding: 1em;
 }
 
 /*Mobile*/

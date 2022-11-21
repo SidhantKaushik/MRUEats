@@ -10,9 +10,9 @@
   }
   
   .box {
-    width: 40%;
+    width: 50%;
     margin: 0 auto;
-    height: 60%;
+    height: fit-content;
     max-height: 70%;
     background: #fff;
     padding: 1em;
