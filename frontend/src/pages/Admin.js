@@ -1,5 +1,10 @@
 import '../styles/Admin.css'
 import { useEffect, useState } from 'react';
+import { FaEdit } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
+
+//https://www.freecodecamp.org/news/how-to-use-react-icons/
 
 function Admin() {
  
@@ -48,7 +53,7 @@ function Admin() {
                 <div className="restaurants">
                     <div className='restaurantHeader'>
                         <h2 id='restaurantTitle'>Restaurants</h2>
-                        <button className="addRestoButton">+</button>
+                        <button className="addRestoButton"><FaPlus/></button>
                     </div>
                     <ul className='restaurantsList'>{restaurantList}</ul>
                 </div>
@@ -68,8 +73,8 @@ function Admin() {
                         </div>
                         <div>
                             <form className='restaurantButtons'>
-                                <button className='restaurantButton'>Edit Information</button>
-                                <button className='restaurantButton'>Remove Restaurant</button>
+                                <button className='restaurantButton'><span className='buttonText'>Edit Information</span><FaEdit/></button>
+                                <button className='restaurantButton'><span className='buttonText'>Remove Restaurant</span><FaTrash/></button>
                             </form>
                         </div>
                     </div>
