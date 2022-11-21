@@ -61,7 +61,7 @@ function RestaurantDetails() {
                 {/*<img src={logo} className="restaurantImage" alt="logo" />*/}
                 <div className="firstLine">
                     <h1 className="restaurant-name">{restaurantSelected.name}</h1>
-                    <div className="restaurantRating">{"X".repeat(restaurantSelected.rating)}</div>
+                    <div className="restaurantRating">{"⭐".repeat(restaurantSelected.rating)}</div>
                 </div>
                 <div className="secondLine">
                     <h2 className="restaurantInfo">{restaurantSelected.address} •</h2>
