@@ -61,7 +61,7 @@ function Login() {
   return (
     <form onSubmit={onSubmit}>
       <label>
-        <p>Username</p>
+        <p>Email Address</p>
         <input type="text" name="email" value={email} onChange={onChange} />
       </label>
       <label>
