@@ -15,7 +15,7 @@ const getAllRestaurants = asyncHandler(async (req, res) => {
 // @route  GET /api/restaurants/:id
 // @access Private
 const getRestaurantById = asyncHandler(async (req, res) => {
-    const restaurants = await Restaurant.find();
+    const restaurants = await Restaurant.find({id: req.params.id});
 
     res.status(200).json(restaurants);
 });
