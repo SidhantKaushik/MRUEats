@@ -20,9 +20,27 @@ function Admin() {
       getRestaurants();
     }, [])
 
+    while(!restaurants[0]){
+        return;
+    }
+
+    var selectedRestaurant = restaurants[0];
+
+    const populateForm = async (e) => {
+        var restaurantId = e.target.id;
+        selectedRestaurant = restaurants.find(restaurant => restaurant.id == restaurantId);
+        console.log("picked:" + restaurantId);
+    }
+
     var restaurantList = restaurants.map((restaurant) =>
-    <li key="{restaurant}" className='restaurantListItem'>{restaurant.name}</li>
+        <li key={restaurant.id} className='restaurantListItem' id={restaurant.id} onClick={populateForm}>{restaurant.name}</li>
     );
+
+    function ConvertTime(hour) {
+        var ampm = hour >= 12 ? 'pm' : 'am';
+        hour = (hour % 12) || 12;
+        return hour + ampm;
+    }
 
     return (
         <div className="AdminPage">
@@ -37,15 +55,15 @@ function Admin() {
                 <div className="restaurantSection">
                     <div className="adminRestaurantBanner">
                         <div className="firstLine">
-                            <h2 className="restaurant-name">Booster Juice</h2>
-                            <div className="restaurantRating">XXXXX</div>
+                            <h2 className="restaurant-name">{selectedRestaurant.name}</h2>
+                            <div className="restaurantRating">{"X".repeat(selectedRestaurant.rating)}</div>
                         </div>
                         <div className="secondLine">
-                            <h2 className="restaurantInfo">4703 130th Avenue Souteast •</h2>
+                            <h2 className="restaurantInfo">{selectedRestaurant.address} •</h2>
                             <h2 className="restaurantInfo">$3.09 Delivery</h2>
                         </div>
                         <div className="thirdLine">
-                            <h2 className="restaurantInfo">Delivery Hours: 8:00AM - 7:30PM •</h2>
+                            <h2 className="restaurantInfo">Delivery Hours: {ConvertTime(selectedRestaurant.open)} - {ConvertTime(selectedRestaurant.close)}  •</h2>
                             <h2 className="openStatus restaurantInfo">OPEN</h2>
                         </div>
                         <div>
