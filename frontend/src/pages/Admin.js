@@ -14,6 +14,9 @@ function Admin() {
     const [restoEditIsOpen, setRestoEditIsOpen] = useState(false);
     const [restoAddIsOpen, setRestoAddIsOpen] = useState(false);
     const [restoDeleteIsOpen, setRestoDeleteIsOpen] = useState(false);
+    const [menuAddIsOpen, setMenuAddIsOpen] = useState(false);
+    const [menuEditIsOpen, setMenuEditIsOpen] = useState(false);
+    const [menuDeleteIsOpen, setMenuDeleteIsOpen] = useState(false);
 
     useEffect(() => {
       const getRestaurants = async () => {
@@ -75,6 +78,18 @@ function Admin() {
 
     const toggleRestoDeletePopup = () => {
         setRestoDeleteIsOpen(!restoDeleteIsOpen);
+    } 
+
+    const toggleMenuAddPopup = () => {
+        setMenuAddIsOpen(!menuAddIsOpen);
+    } 
+
+    const toggleMenuEditPopup = () => {
+        setMenuEditIsOpen(!menuEditIsOpen);
+    } 
+
+    const toggleMenuDeletePopup = () => {
+        setMenuDeleteIsOpen(!menuDeleteIsOpen);
     } 
 
     return (
@@ -146,9 +161,10 @@ function Admin() {
 
                             {restoDeleteIsOpen && <Popup
                                 content={<>
-                                    <h4 className='popup-title'>Delete Restaurant</h4>
-                                    <p className='delete-confirmation'>Are you sure you want to delete this restaurant? This action cannot be undone.</p>
-                                    <button className='popup-submit'>Delete Restaurant</button>
+                                    <h4 className='popup-title'>Remove Restaurant</h4>
+                                    <p className='delete-confirmation'>Are you sure you want to remove this restaurant? This action cannot be undone.</p>
+                                    <button className='popup-submit'>Remove Restaurant</button> 
+                                    {/* may have to put button into form so popup closes on submit*/}
                                 </>}
                                 handleClose={toggleRestoDeletePopup}
                             />}
@@ -162,11 +178,49 @@ function Admin() {
                     </div>
 
                     <div className="menuButtons">
-                        <form className='menuItemForm'>
-                            <button className='menuButton'>Add</button>
-                            <button className='menuButton'>Edit</button>
-                            <button className='menuButton'>Delete</button>
-                        </form>
+                        <button className='menuButton' onClick={toggleMenuAddPopup}>Add</button>
+                        <button className='menuButton' onClick={toggleMenuEditPopup}>Edit</button>
+                        <button className='menuButton' onClick={toggleMenuDeletePopup}>Delete</button>
+
+                        {menuAddIsOpen && <Popup
+                                content={<>
+                                    <h4 className='popup-title'>Add Menu Item</h4>
+                                    <form className='restaurant-form'>
+                                        <label>Name<input type="text" /></label>
+                                        <label>Price<input type="text" placeholder='$'/></label>
+                                        <label>Drescription<input type="text"/></label>
+                                        <label>Category<input type="text" /></label> 
+                                        {/*turn categories into dropdown*/}
+                                    </form>
+                                    <button className='popup-submit'>Save Changes</button> 
+                                </>}
+                                handleClose={toggleMenuAddPopup}
+                        />}
+
+                        {menuEditIsOpen && <Popup
+                                content={<>
+                                    <h4 className='popup-title'>Edit Menu Item</h4>
+                                    <form className='restaurant-form'>
+                                        <label>Name<input type="text" /></label>
+                                        <label>Price<input type="text" placeholder='$'/></label>
+                                        <label>Drescription<input type="text"/></label>
+                                        <label>Category<input type="text" /></label> 
+                                        {/*turn categories into dropdown*/}
+                                    </form>
+                                    <button className='popup-submit'>Save Changes</button> 
+                                </>}
+                                handleClose={toggleMenuEditPopup}
+                        />}
+
+                        {menuDeleteIsOpen && <Popup
+                                content={<>
+                                    <h4 className='popup-title'>Remove Menu Item</h4>
+                                    <p className='delete-confirmation'>Are you sure you want to remove this menu item? This action cannot be undone.</p>
+                                    <button className='popup-submit'>Remove Menu Item</button> 
+                                    {/* may have to put button into form so popup closes on submit*/}
+                                </>}
+                                handleClose={toggleMenuDeletePopup}
+                            />}
                     </div>
                 </div>
             </div>

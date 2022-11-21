@@ -46,6 +46,9 @@
 .menuButtons {
     grid-area: menuButtons;
     border-top: 1px solid #B4B2AF;
+    float: right;
+    display: flex;
+    justify-content: end;
 }
 
 .adminRestaurantBanner {
@@ -86,12 +89,6 @@
     display: flex;
     flex-direction: column;
     float: right;
-}
-
-.menuItemForm {
-    float: right;
-    display: flex;
-    justify-content: end;
 }
 
 .menuButton {
