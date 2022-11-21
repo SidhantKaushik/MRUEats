@@ -6,34 +6,26 @@
     height: 100vh;
     top: 0;
     left: 0;
+    
   }
   
   .box {
-    position: relative;
-    width: 70%;
+    width: 40%;
     margin: 0 auto;
-    height: auto;
-    max-height: 70vh;
-    margin-top: calc(100vh - 85vh - 20px);
+    height: 60%;
+    max-height: 70%;
     background: #fff;
-    border-radius: 4px;
-    padding: 20px;
+    padding: 1em;
     border: 1px solid #999;
-    overflow: auto;
+    overflow-y: auto;
+ 
   }
   
   .close-icon {
-    content: 'x';
     cursor: pointer;
     position: fixed;
-    right: calc(15% - 30px);
-    top: calc(100vh - 85vh - 33px);
-    background: #ededed;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    line-height: 20px;
+    background:transparent;
     text-align: center;
-    border: 1px solid #999;
-    font-size: 20px;
+    right: calc(5% - 20px);
+    top: calc(100vh - 98vh);
   }

@@ -193,6 +193,37 @@
     cursor: pointer;
 }
 
+/* popups css */
+
+.popup-title {
+    font-weight: bold;
+    font-size: 1.25em;
+    margin-left: 2em;
+}
+
+.popup-submit {
+    margin-top: 1em;
+    margin-right: 3em;
+    padding: 8px;
+    float: right;
+}
+
+.restaurant-form {
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px 20px;
+}
+
+.restaurant-form label {
+    font-weight: 600;
+    font-size: 1em;
+}
+
+.restaurant-form input {
+    background-color: rgb(224, 224, 224);
+    border: 1px solid rgb(209, 209, 209);
+}
+
 /*Mobile*/
 @media (max-width:425px) {
     .adminMainBody {

@@ -76,9 +76,18 @@ function Admin() {
                         <button className="addRestoButton" onClick={toggleRestoEditPopup}><FaPlus/></button>
                         {restoEditIsOpen && <Popup
                         content={<>
-                            <b>Edit Restaurant</b>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            <button>Add</button>
+                            <h4 className='popup-title'>Add Restaurant</h4>
+                            <form className='restaurant-form'>
+                                <label>Logo<input type="text" placeholder='enter url'/></label>
+                                <label>Name<input type="text" /></label>
+                                <label>Rating<input type="number" min="1" max="5"/></label>
+                                <label>Address<input type="text"/></label>
+                                <label>Delivery Fee<input type="text" placeholder='$'/></label>
+                                <label>Opening Time<input type="time" /></label>
+                                <label>Closing Time<input type="time" /></label>
+                                {/* <label>Categories<input type="text" /></label> */}
+                                </form>
+                            <button className='popup-submit'>Save Changes</button>
                         </>}
                         handleClose={toggleRestoEditPopup}
                         />}
