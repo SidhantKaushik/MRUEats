@@ -5,7 +5,7 @@ import { FaRegWindowClose } from "react-icons/fa";
 const Popup = props => {
   return (
     <div className="popup-box">
-      <div className="box">
+      <div className="popup-container">
         <span className="close-icon" onClick={props.handleClose}><FaRegWindowClose/></span>
         {props.content}
       </div>

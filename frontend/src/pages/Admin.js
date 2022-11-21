@@ -63,10 +63,6 @@ function Admin() {
     
     getMenuUsingID();
 
-    // var menuItemList = menu.map((menu) =>
-    // <li key={menu.id} className='menuListItem' id={menu.id}>{menu.name}</li>
-    // );
-
     function ConvertTime(hour) {
         var ampm = hour >= 12 ? 'pm' : 'am';
         hour = (hour % 12) || 12;
@@ -134,12 +130,12 @@ function Admin() {
                             <div className="restaurantRating">{"X".repeat(selectedRestaurant.rating)}</div>
                         </div>
                         <div className="secondLine">
-                            <h2 className="restaurantInfo">{selectedRestaurant.address} •</h2>
-                            <h2 className="restaurantInfo">$3.09 Delivery</h2>
+                            <span className="restaurantInfo">{selectedRestaurant.address} •</span>
+                            <span className="restaurantInfo">$3.09 Delivery</span>
                         </div>
                         <div className="thirdLine">
-                            <h2 className="restaurantInfo">Delivery Hours: {ConvertTime(selectedRestaurant.open)} - {ConvertTime(selectedRestaurant.close)}  •</h2>
-                            <h2 className="openStatus restaurantInfo">OPEN</h2>
+                            <span className="restaurantInfo">Delivery Hours: {ConvertTime(selectedRestaurant.open)} - {ConvertTime(selectedRestaurant.close)}  •</span>
+                            <span className="openStatus restaurantInfo">OPEN</span>
                         </div>
                         <div className='restaurantButtons'>
                             

@@ -9,7 +9,7 @@
     
   }
   
-  .box {
+  .popup-container {
     width: 50%;
     margin: 0 auto;
     height: fit-content;
@@ -18,26 +18,20 @@
     padding: 1em;
     border: 1px solid #999;
     overflow-y: auto;
- 
+    margin-top: 15%;
   }
   
   .close-icon {
     cursor: pointer;
-    position: fixed;
+    position: relative;
     background:transparent;
     text-align: center;
-    right: calc(5% - 20px);
-    top: calc(100vh - 98vh);
+    float: right;
   }
 
 /*Mobile*/
 @media (max-width:425px) {
-  .box {
+  .popup-container {
     width: 80%;
-  }
-
-  .close-icon {
-    right: calc(5% - 5px);
-    top: calc(100vh - 98vh);
   }
 }
