@@ -1,25 +1,38 @@
 import '../styles/Admin.css'
+import { useEffect, useState } from 'react';
 
 function Admin() {
+ 
+    const [restaurants, setRestaurants] = useState([]);
+
+    useEffect(() => {
+      const getRestaurants = async () => {
+        try {
+          const url = "api/restaurants";
+          const response = await fetch(url);
+          const data = await response.json();
+          setRestaurants(data);
+          
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      getRestaurants();
+    }, [])
+
+    var restaurantList = restaurants.map((restaurant) =>
+    <li key="{restaurant}" className='restaurantListItem'>{restaurant.name}</li>
+    );
+
     return (
         <div className="AdminPage">
             <div className="adminMainBody">
                 <div className="restaurants">
-                    <h2>Restaurants</h2>
-
-                    <ol className='restaurantsList'>
-                        <li>Restaurant 1</li>
-                        <li>Restaurant 2</li>
-                        <li>Restaurant 3</li>
-                        <li>Restaurant 4</li>
-                        <li>Restaurant 5</li>
-                        <li>Restaurant 6</li>
-                        <li>Restaurant 7</li>
-                        <li>Restaurant 8</li>
-                        <li>Restaurant 9</li>
-                        <li>Restaurant 10</li>
-                    </ol>
-
+                    <div className='restaurantHeader'>
+                        <h2 id='restaurantTitle'>Restaurants</h2>
+                        <button className="addRestoButton">+</button>
+                    </div>
+                    <ul className='restaurantsList'>{restaurantList}</ul>
                 </div>
                 <div className="restaurantSection">
                     <div className="adminRestaurantBanner">
