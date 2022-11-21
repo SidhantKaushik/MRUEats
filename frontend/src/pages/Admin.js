@@ -9,6 +9,8 @@ import { FaTrash } from "react-icons/fa";
 function Admin() {
  
     const [restaurants, setRestaurants] = useState([]);
+    const [menu, setMenu] = useState([]);
+
 
     useEffect(() => {
       const getRestaurants = async () => {
@@ -23,6 +25,18 @@ function Admin() {
         }
       }
       getRestaurants();
+
+      const getMenuUsingID = async () => {
+        try {
+          const url = "http://localhost:3000/api/menu/"+selectedRestaurant.id;
+          const response = await fetch(url);
+          const data = await response.json();
+          setMenu(data);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      getMenuUsingID();
     }, [])
 
     while(!restaurants[0]){
@@ -55,7 +69,9 @@ function Admin() {
                         <h2 id='restaurantTitle'>Restaurants</h2>
                         <button className="addRestoButton"><FaPlus/></button>
                     </div>
-                    <ul className='restaurantsList'>{restaurantList}</ul>
+                    <div className='restaurantsList'>
+                        <ul>{restaurantList}</ul>
+                    </div>     
                 </div>
                 <div className="restaurantSection">
                     <div className="adminRestaurantBanner">
@@ -71,8 +87,8 @@ function Admin() {
                             <h2 className="restaurantInfo">Delivery Hours: {ConvertTime(selectedRestaurant.open)} - {ConvertTime(selectedRestaurant.close)}  •</h2>
                             <h2 className="openStatus restaurantInfo">OPEN</h2>
                         </div>
-                        <div>
-                            <form className='restaurantButtons'>
+                        <div className='restaurantButtons'>
+                            <form>
                                 <button className='restaurantButton'><span className='buttonText'>Edit Information</span><FaEdit/></button>
                                 <button className='restaurantButton'><span className='buttonText'>Remove Restaurant</span><FaTrash/></button>
                             </form>
@@ -80,7 +96,9 @@ function Admin() {
                     </div>
 
                     <div className='menuItems'>
-                        {/* TODO: populate menu with menu item components*/}
+                        {/* {menu.map((menu) =>
+                            <div>{menu.menuCategory}</div>
+                        )} */}
                     </div>
 
                     <div className="menuButtons">
