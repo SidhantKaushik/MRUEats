@@ -28,9 +28,31 @@ function RestaurantDetails() {
     console.log(restaurantSelected);
 
     function ConvertTime(hour) {
-        var ampm = hour >= 12 ? 'pm' : 'am';
-        hour = (hour % 12) || 12;
-        return hour + ampm;
+        
+        if(hour <= 1200){
+            var hourString = hour.toString();
+            hourString = hourString.substring(0,2) + ':' + hourString.substring(2,4);
+            return hourString+"AM";
+        }
+        else{
+            hour = hour - 1200;
+            var hourString = hour.toString();
+            hourString = hourString.substring(0,2) + ':' + hourString.substring(2,4);
+            return hourString+"PM";
+        }
+    }
+    function checkIfOpen() {
+        const d = new Date();
+        let time = d.getHours() +""+ d.getMinutes();
+        console.log(time);
+        console.log(restaurantSelected.open);
+        console.log(restaurantSelected.close);
+        if ( time > restaurantSelected.open && time < restaurantSelected.close ){
+             return "Open";
+        }
+        else{
+            return "Closed";
+        }
     }
 
     return (
@@ -39,7 +61,7 @@ function RestaurantDetails() {
                 {/*<img src={logo} className="restaurantImage" alt="logo" />*/}
                 <div className="firstLine">
                     <h1 className="restaurant-name">{restaurantSelected.name}</h1>
-                    <div className="restaurantRating">{"X".repeat(restaurantSelected.rating)}</div>
+                    <div className="restaurantRating">{"⭐".repeat(restaurantSelected.rating)}</div>
                 </div>
                 <div className="secondLine">
                     <h2 className="restaurantInfo">{restaurantSelected.address} •</h2>
@@ -47,7 +69,7 @@ function RestaurantDetails() {
                 </div>
                 <div className="thirdLine">
                     <h2 className="restaurantInfo">Delivery Hours: {ConvertTime(restaurantSelected.open)} - {ConvertTime(restaurantSelected.close)} •</h2>
-                    <h2 className="openStatus restaurantInfo">{"todo"}</h2>
+                    <h2 className="openStatus restaurantInfo">{checkIfOpen()}</h2>
                 </div>
                 <div>
                     <input type="text" id="menuSearch" className="menuSearchBar" onKeyUp="myFunction()" placeholder="Search for items" title="Type in a menu name"></input>
