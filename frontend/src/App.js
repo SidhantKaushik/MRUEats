@@ -34,7 +34,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const getRestaurants = async () => {
+    const getMenu = async () => {
       try {
         const url = "api/menu";
         const response = await fetch(url);
@@ -44,7 +44,7 @@ function App() {
         console.error(err);
       }
     }
-    getRestaurants();
+    getMenu();
   }, [])
 
   return (
