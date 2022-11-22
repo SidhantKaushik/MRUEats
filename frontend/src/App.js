@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react';
 function App() {
 
   const [restaurants, setRestaurants] = useState([]);
+  const [menu, setMenu] = useState([])
 
   useEffect(() => {
     const getRestaurants = async () => {
@@ -25,7 +26,20 @@ function App() {
         const response = await fetch(url);
         const data = await response.json();
         setRestaurants(data);
-        console.log(restaurants)
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    getRestaurants();
+  }, [])
+
+  useEffect(() => {
+    const getRestaurants = async () => {
+      try {
+        const url = "api/menu";
+        const response = await fetch(url);
+        const data = await response.json();
+        setMenu(data);
       } catch (err) {
         console.error(err);
       }
@@ -46,7 +60,7 @@ function App() {
             <Route exact path='/order' element={<Order />}></Route>
             <Route exact path='/cart' element={<Cart />}></Route>
             <Route exact path='/admin' element={<Admin />}></Route>
-            <Route exact path='/RestaurantDetails' element={<RestaurantDetails/>}></Route>
+            <Route exact path='/RestaurantDetails' element={<RestaurantDetails menu={{menu}}/>}></Route>
           </Routes>
         </div>
       </Router>

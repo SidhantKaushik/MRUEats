@@ -1,20 +1,41 @@
 import '../styles/RestaurantDetails.css'
+import {Link, useLocation} from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { set } from 'mongoose'
 
-function RestaurantDetails(props) {
+const RestaurantDetails = (props) => {
+
+    const [menuItems, setMenuItems] = useState([])
+    const item = []
+
+    const location = useLocation()
+    useEffect(() => {
+        if(location.state) {
+            for(let i = 0; i < props.menu.menu.length; i++){                
+                if (location.state.id === props.menu.menu[i].id){
+                    item.push(props.menu.menu[i]) 
+               }
+            }
+        }
+        setMenuItems(item)
+    }, [])
+
+    console.log(menuItems)
+
     return (
         <div className="RestaurantPage">
             <div className="RestaurantBanner">
                 {/*<img src={logo} className="restaurantImage" alt="logo" />*/}
                 <div className="firstLine">
-                    <h1 className="restaurant-name">Booster Juice</h1>
+                    <h1 className="restaurant-name">{location.state.name}</h1>
                     <div className="restaurantRating">XXXXX</div>
                 </div>
                 <div className="secondLine">
-                    <h2 className="restaurantInfo">4703 130th Avenue Souteast •</h2>
+                    <h2 className="restaurantInfo">{location.state.address}</h2>
                     <h2 className="restaurantInfo">$3.09 Delivery</h2>
                 </div>
                 <div className="thirdLine">
-                    <h2 className="restaurantInfo">Delivery Hours: 8:00AM - 7:30PM •</h2>
+                    <h2 className="restaurantInfo">Delivery Hours: {location.state.open} - {location.state.close} •</h2>
                     <h2 className="openStatus restaurantInfo">OPEN</h2>
                 </div>
                 <div>

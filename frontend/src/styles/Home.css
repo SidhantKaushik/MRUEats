@@ -18,13 +18,15 @@
     padding: 20px;
 }
 
-/* #search-box{
-    
-} */
+#search-box{
+    justify-content: center;
+}
+
 
 .restaurants {
-    display: inline-block;
-
+   display: inline-block;
+   text-align: left;
+   width: 600px;
 }
 
 .logo {
@@ -37,5 +39,5 @@
 }
 
 .info {
-    float: right;
+    
 }
