@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import '../styles/Home.css';
@@ -10,14 +10,31 @@ const Home = (props) => {
 
     const { user } = useSelector((state) => state.auth);
 
+    let allRest = []
+    let filterRest = []
+    allRest = [...props.restaurants.restaurants]
+
+    const [rest, setRest] = useState([allRest]);
+    
+
     useEffect(() => {
         if (!user) {
             navigate('/login');
         }
+        setRest(allRest)
     }, [user, navigate]);
 
-    console.log(props.restaurants)
+    function filter(e) {
+        filterRest = []
+        for(let i = 0; i < allRest.length; i++){    
+            if (allRest[i].name.includes(e.target.value)){
+                filterRest.push(allRest[i])
+            }
+        }
+        setRest(filterRest)
+    }
 
+    
     return (
         <div className='home'>
             <div id="categories">
@@ -42,7 +59,9 @@ const Home = (props) => {
                             </select>
                         </div> */}
 
-                {props.restaurants.restaurants.map((p, index) => (
+                <input type='text' placeholder='Search Restaurants' onChange={filter}></input>
+
+                {rest.map((p, index) => (
                     <RestaurantItem
                         name={p.name}
                         logo={p.logo}

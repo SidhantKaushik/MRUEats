@@ -20,13 +20,15 @@
 
 #search-box{
     justify-content: center;
+    width: 500px;
 }
 
 
 .restaurants {
    display: inline-block;
    text-align: left;
-   width: 600px;
+   width: 500px;
+   
 }
 
 .logo {
