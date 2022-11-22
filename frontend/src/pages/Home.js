@@ -27,7 +27,7 @@ const Home = (props) => {
     function filter(e) {
         filterRest = []
         for(let i = 0; i < allRest.length; i++){    
-            if (allRest[i].name.includes(e.target.value)){
+            if (allRest[i].name.includes(e.target.value) || allRest[i].name.toLowerCase().includes(e.target.value.toLowerCase())){
                 filterRest.push(allRest[i])
             }
         }
