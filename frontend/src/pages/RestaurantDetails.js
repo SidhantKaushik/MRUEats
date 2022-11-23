@@ -58,7 +58,7 @@ function RestaurantDetails() {
     return (
         <div className="RestaurantPage">
             <div className="RestaurantBanner">
-                {/*<img src={logo} className="restaurantImage" alt="logo" />*/}
+=
                 <div className="firstLine">
                     <h1 className="restaurant-name">{restaurantSelected.name}</h1>
                     <div className="restaurantRating">{"⭐".repeat(restaurantSelected.rating)}</div>
@@ -92,7 +92,7 @@ function RestaurantDetails() {
                     </ol>
 
                 </div>
-                <div className="menu">
+                <div className="restaurantMenu">
                     <h2>Promotions</h2>
 
                     <div className="menuItem">

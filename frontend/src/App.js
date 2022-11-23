@@ -11,16 +11,34 @@ import Cart from './pages/Cart';
 import Admin from './pages/Admin';
 import RestaurantOrder from './pages/RestaurantOrder';
 import RestaurantDetails from './pages/RestaurantDetails';
-
+import { useEffect, useState } from 'react';
 
 function App() {
+
+  const [restaurants, setRestaurants] = useState([]);
+
+  useEffect(() => {
+    const getRestaurants = async () => {
+      try {
+        const url = "api/restaurants";
+        const response = await fetch(url);
+        const data = await response.json();
+        setRestaurants(data);
+        
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    getRestaurants();
+  }, [])
+
   return (
     <>
       <Router>
         <div className="App">
           <Header />
           <Routes>
-            <Route exact path='/' element={<Home />}></Route>
+            <Route exact path='/' element={<Home restaurants={restaurants}/>}></Route>
             <Route exact path='/login' element={<Login />}></Route>
             <Route exact path='/register' element={<Register />}></Route>
             <Route exact path='/account' element={<Account />}></Route>
