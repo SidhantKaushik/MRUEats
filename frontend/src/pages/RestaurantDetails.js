@@ -22,10 +22,62 @@ const RestaurantDetails = (props) => {
 
     console.log(menuItems)
 
+    let { id } = useParams();
+    console.log(id);
+
+    const [restaurant, setRestaurant] = useState([]);
+
+    useEffect(() => {
+      const getRestaurantUsingID = async () => {
+        try {
+          const url = "http://localhost:3000/api/restaurants/"+id;
+          const response = await fetch(url);
+          const data = await response.json();
+          setRestaurant(data);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+        getRestaurantUsingID();
+    }, [])
+    while(!restaurant[0]){
+        return;
+    }
+    const restaurantSelected = restaurant[0];
+    console.log(restaurantSelected);
+
+    function ConvertTime(hour) {
+        
+        if(hour <= 1200){
+            var hourString = hour.toString();
+            hourString = hourString.substring(0,2) + ':' + hourString.substring(2,4);
+            return hourString+"AM";
+        }
+        else{
+            hour = hour - 1200;
+            var hourString = hour.toString();
+            hourString = hourString.substring(0,2) + ':' + hourString.substring(2,4);
+            return hourString+"PM";
+        }
+    }
+    function checkIfOpen() {
+        const d = new Date();
+        let time = d.getHours() +""+ d.getMinutes();
+        console.log(time);
+        console.log(restaurantSelected.open);
+        console.log(restaurantSelected.close);
+        if ( time > restaurantSelected.open && time < restaurantSelected.close ){
+             return "Open";
+        }
+        else{
+            return "Closed";
+        }
+    }
+
     return (
         <div className="RestaurantPage">
             <div className="RestaurantBanner">
-                {/*<img src={logo} className="restaurantImage" alt="logo" />*/}
+=
                 <div className="firstLine">
                     <h1 className="restaurant-name">{location.state.name}</h1>
                     <div className="restaurantRating">XXXXX</div>
@@ -59,7 +111,7 @@ const RestaurantDetails = (props) => {
                     </ol>
 
                 </div>
-                <div className="menu">
+                <div className="restaurantMenu">
                     <h2>Promotions</h2>
 
                     <div className="menuItem">

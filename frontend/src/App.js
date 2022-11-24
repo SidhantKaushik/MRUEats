@@ -9,10 +9,9 @@ import Order from './pages/Order';
 import Account from './pages/Account';
 import Cart from './pages/Cart';
 import Admin from './pages/Admin';
+import RestaurantOrder from './pages/RestaurantOrder';
 import RestaurantDetails from './pages/RestaurantDetails';
 import { useEffect, useState } from 'react';
-
-
 
 function App() {
 
@@ -53,14 +52,14 @@ function App() {
         <div className="App">
           <Header />
           <Routes>
-            <Route exact path='/' element={<Home restaurants={{restaurants}}/>}></Route>
+            <Route exact path='/' element={<Home />}></Route>
             <Route exact path='/login' element={<Login />}></Route>
             <Route exact path='/register' element={<Register />}></Route>
             <Route exact path='/account' element={<Account />}></Route>
             <Route exact path='/order' element={<Order />}></Route>
             <Route exact path='/cart' element={<Cart />}></Route>
             <Route exact path='/admin' element={<Admin />}></Route>
-            <Route exact path='/RestaurantDetails' element={<RestaurantDetails menu={{menu}}/>}></Route>
+            <Route exact path='/restaurantorder' element={<RestaurantOrder />}></Route>
           </Routes>
         </div>
       </Router>
