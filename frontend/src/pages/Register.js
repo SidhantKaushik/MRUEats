@@ -38,7 +38,6 @@ function Register() {
 
 
     const onChange = (e) => {
-
         setFormData((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
@@ -63,8 +62,6 @@ function Register() {
             toast.error('Please enter a valid email address');
         }
         //password check
-        console.log(password);
-        console.log(password_c);
         if (password !== password_c) {
             toast.error('Password does not match');
         }
@@ -78,6 +75,7 @@ function Register() {
                 lastname,
                 email,
                 password,
+                password_c
             }
             dispatch(register(userData));
         }
@@ -92,7 +90,7 @@ function Register() {
         <div class="main-container">
             <div class="box">
                 <div className="title">
-                <h3>SIGN UP</h3>
+                <h3>Register</h3>
                 </div>
                 <form onSubmit={onSubmit}>
                     <div className='fName'>

@@ -15,14 +15,14 @@ const Account = (props) => {
                                 <div className="standardLayout">
                                     <h2>First Name</h2>
                                     <h2 className="required">Required</h2>
-                                    <input type="text" id="fname" name="fname"></input>
+                                    <input type="text" id="fname" name="fname" placeholder=""></input>
                                 </div>
                             </div>
                             <div className="lastName">
                                 <div className="standardLayout">
                                     <h2>Last Name</h2>
                                     <h2 className="required">Required</h2>
-                                    <input type="text" id="lastName" name="lastName"></input>
+                                    <input type="text" id="lastName" name="lastName" placeholder=""></input>
                                 </div>
                             </div>
                         </div>
@@ -30,28 +30,28 @@ const Account = (props) => {
                             <div className="standardLayout">
                                 <h2>Email</h2>
                                 <h2 className="required">Required</h2>
-                                <input type="text" id="email" name="email"></input>
+                                <input type="text" id="email" name="email" placeholder=""></input>
                             </div>
                         </div>
                         <div className="countryPhone">
                             <div className="countryCode">
                                 <div className="twoLayout">
                                     <h2>Country</h2>
-                                    <input type="text" id="province" name="province"></input>
+                                    <input type="text" id="province" name="province" placeholder=""></input>
                                 </div>
                             </div>
                             <div className="phoneNumber">
                                 <div className="standardLayout">
                                     <h2>Phone Number</h2>
                                     <h2 className="required">Optional</h2>
-                                    <input type="text" id="phoneNumber" name="phoneNumber"></input>
+                                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder=""></input>
                                 </div>
                             </div>
                         </div>
                         <div className="streetAddress">
                             <div className="twoLayout">
                                 <h2>Street Address</h2>
-                                <input type="text" id="currentLocation" name="currentLocation"></input>
+                                <input type="text" id="currentLocation" name="currentLocation" placeholder=""></input>
                             </div>
                         </div>
                         
@@ -59,28 +59,21 @@ const Account = (props) => {
                         <div className="province">
                             <div className="twoLayout">
                                 <h2>Province</h2>
-                                <input type="text" id="province" name="province"></input>
+                                <input type="text" id="province" name="province" placeholder=""></input>
                             </div>
                         </div>
                         <div className="postal">
                             <div className="twoLayout">
                                 <h2 id="pCode">Postal Code</h2>
-                                <input type="text" id="postalCode" name="postalCode"></input>
+                                <input type="text" id="postalCode" name="postalCode" placeholder=""></input>
                             </div>
                         </div>
                         <div className="country">
                             <div className="twoLayout">
                                 <h2>Country</h2>
-                                <input type="text" id="country" name="country"></input>
+                                <input type="text" id="country" name="country" placeholder=""></input>
                             </div>
                         </div>
-                        </div>
-                        <div className="currentLocation">
-                            <div className="standardLayout">
-                                <h2>Current Location</h2>
-                                <h2 className="required">Required</h2>
-                                <input type="text" id="currentLocation" name="currentLocation"></input>
-                            </div>
                         </div>
                         <div id="saveButton">
                         <input type="submit" id="saveButtonBtn" value="Save"></input>

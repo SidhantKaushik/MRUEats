@@ -6,13 +6,19 @@ const userSchema = new mongoose.Schema({
   firstname: String,
   lastname: String,
   email: String,
-  //Maybe number
-  /*    phone_number: String,
-     postal_code: String, */
   isAdmin: Boolean,
+  isCourier: Boolean,
   password_bcrypt: String,
-  /*   apikey: String,
-    orders: Array */
+  
+  details: {
+    address: String,
+    country: String,
+    country_code : Number,
+    phone_number: Number,
+    postal_code: String,
+    province: String
+  }
+  
 });
 
 module.exports = mongoose.model("User", userSchema, "users");
