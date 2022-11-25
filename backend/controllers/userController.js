@@ -66,12 +66,12 @@ const registerUser = asyncHandler(async (req, res) => {
             isCourier: user.isCourier,
 
             details:{
-                address: user.address,
-                country: user.country,
-                country_code : user.country_code,
-                phone_number: user.phone_number,
-                postal_code: user.postal_code,
-                province: user.province
+                address: user.details.address,
+                country: user.details.country,
+                country_code : user.details.country_code,
+                phone_number: user.details.phone_number,
+                postal_code: user.details.postal_code,
+                province: user.details.province
             },
 
             token: generateToken(user.id)
@@ -103,14 +103,53 @@ const loginUser = asyncHandler(async (req, res) => {
             isCourier: user.isCourier,
 
             details:{
-                address: user.address,
-                country: user.country,
-                country_code : user.country_code,
-                phone_number: user.phone_number,
-                postal_code: user.postal_code,
-                province: user.province
+                address: user.details.address,
+                country: user.details.country,
+                country_code : user.details.country_code,
+                phone_number: user.details.phone_number,
+                postal_code: user.details.postal_code,
+                province: user.details.province
             },
 
+            token: generateToken(user.id)
+
+        });
+    } else {
+        res.status(400);
+        throw new Error('Invalid credentials')
+    }
+});
+
+// @desc   Updates user information
+// @route  PUT /api/users/update
+// @access Private
+const updateUser = asyncHandler(async (req, res) => {
+    console.log(req.body);
+    const { firstname, lastname, email, phone_number, address, postal_code } = req.body;
+    
+    //Check for user email
+    const user = await User.findOne({ email });
+    console.log(user);
+
+    if (user) {
+        res.json({
+
+            id: user.id,
+            firstname: firstname,
+            lastname: lastname,
+            email: user.email,
+            isAdmin: user.isAdmin,
+            isCourier: user.isCourier,
+
+            details:{
+                address: address,
+                country: user.details.country,
+                country_code : user.details.country_code,
+                phone_number: phone_number,
+                postal_code: postal_code,
+                province: user.details.province
+            },
+            
             token: generateToken(user.id)
 
         });
@@ -166,7 +205,7 @@ const generateToken = (id) => {
 module.exports = {
     registerUser,
     loginUser,
-    //getMe,
+    updateUser,
     //getUsers,
     getAdmins,
     //getUserById

@@ -8,8 +8,8 @@ import '../styles/Register.css';
 
 function Register() {
     const [formData, setFormData] = useState({
-        first_name: '',
-        last_name: '',
+        firstname: '',
+        lastname: '',
         email: '',
         password: '',
         password_c: ''
@@ -34,8 +34,6 @@ function Register() {
         dispatch(reset());
 
     }, [user, isError, isSuccess, message, navigate, dispatch]);
-
-
 
     const onChange = (e) => {
         setFormData((prevState) => ({

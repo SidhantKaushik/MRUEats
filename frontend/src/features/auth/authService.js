@@ -17,7 +17,7 @@ const register = async (userData) => {
 const login = async (userData) => {
 
     const response = await axios.post(API_URL + 'login', userData);
-    //Fix 
+     
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
     }
@@ -29,11 +29,24 @@ const logout = () => {
     localStorage.removeItem('user');
 }
 
+//Update user info
+
+const update = async (userData) => {
+    
+    console.log(userData)
+    const response = await axios.put(API_URL + "update", userData);
+    if (response.data) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+    }
+    console.log(response.data)
+    return response.data;
+};
+
 const authService = {
     register,
     login,
     logout,
-
+    update,
 }
 
 export default authService;
