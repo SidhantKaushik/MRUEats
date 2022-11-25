@@ -10,18 +10,31 @@ const Home = (props) => {
 
     const { user } = useSelector((state) => state.auth);
 
-    let allRest = []
     let filterRest = []
-    allRest = [...props.restaurants.restaurants]
+    let allRest = [...props.restaurants.restaurants]
+    console.log(allRest)
 
-    const [rest, setRest] = useState([allRest]);
+    const [rest, setRest] = useState([]);
+
+    useEffect(() => {
+        const getRestaurants = async () => {
+          try {
+            const url = "api/restaurants";
+            const response = await fetch(url);
+            const data = await response.json();
+            setRest(data);
+          } catch (err) {
+            console.error(err);
+          }
+        }
+        getRestaurants();
+      }, [])
     
 
     useEffect(() => {
         if (!user) {
             navigate('/login');
         }
-        setRest(allRest)
     }, [user, navigate]);
 
     function filter(e) {
