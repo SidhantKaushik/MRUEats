@@ -9,7 +9,8 @@ const User = require('../models/User');
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
 
-    const { firstname, lastname, email, password } = req.body;
+    let id = 1;
+    const { firstname, lastname, email, password, password_c } = req.body;
 
     if (!firstname || !lastname || !email || !password) {
         res.status(400);
@@ -28,22 +29,44 @@ const registerUser = asyncHandler(async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    //Creates ID for new user
+    const idCheck = await User.find({});
+    id += idCheck.length;
+
     //Create user
     const user = await User.create({
         id: 1,
         firstname: firstname,
         lastname: lastname,
+        delivery_loc: "",
         email: email,
-        isAdmin: false,
-        password_bcrypt: hashedPassword
+        isAdmin: true,
+        isCourier: false,
+        password_bcrypt: hashedPassword,
+
+        details:{
+            address: "",
+            country:"Canada",
+            country_code:"1",
+            phone_number: null,
+            postal_code: "",
+            province:"Alberta",
+            city: "Calgary"
+        }
     });
 
     if (user) {
         res.status(201).json({
-            _id: user.id,
-            name: user.name,
+
+            id: user.id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            delivery_loc: user.deliver_loc,
             email: user.email,
-            token: generateToken(user._id)
+            isAdmin: user.isAdmin,
+            isCourier: user.isCourier,
+
+            token: generateToken(id)
         });
     } else {
         res.status(400);
@@ -63,10 +86,17 @@ const loginUser = asyncHandler(async (req, res) => {
 
     if (user && (await bcrypt.compare(password, user.password))) {
         res.json({
-            _id: user.id,
-            name: user.name,
+
+            id: user.id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            delivery_loc: user.deliver_loc,
             email: user.email,
-            token: generateToken(user._id)
+            isAdmin: user.isAdmin,
+            isCourier: user.isCourier,
+
+            token: generateToken(id)
+
         });
     } else {
         res.status(400);
@@ -74,13 +104,74 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 });
 
-
-// @desc   Get user data
-// @route  Get /api/users/me
+// @desc   Gets user info
+// @route  GET /api/users/:id
 // @access Private
-const getMe = asyncHandler(async (req, res) => {
-    res.status(200).json(req.user);
+const getUser = asyncHandler(async (req, res) => {
+    
+
+    //Check for user email
+    const user = await User.find({id: req.params.id});
+    console.log("penis");
+    console.log(user[0]);
+
+    if (user) {
+        res.json({user});
+    } else {
+        res.status(400);
+        throw new Error('Invalid credentials')
+    }
 });
+
+
+// @desc   Updates user information
+// @route  PUT /api/users/update
+// @access Private
+const updateUser = asyncHandler(async (req, res) => {
+    
+    const { firstname, lastname, email, phone_number, address, postal_code } = req.body;
+    
+    //Check for user email
+    const user = await User.find({email});
+
+    console.log(user);
+
+
+
+    // if (user) {
+    //     res.json({
+
+    //         firstname: firstname,
+    //         lastname: lastname,
+    //         email: user.email,
+    //         isAdmin: user.isAdmin,
+    //         isCourier: user.isCourier,
+
+    //         details:{
+    //             address: address,
+    //             country: user.details.country,
+    //             country_code : user.details.country_code,
+    //             phone_number: phone_number,
+    //             postal_code: postal_code,
+    //             province: user.details.province
+    //         },
+            
+    //         token: generateToken(user.id)
+
+    //     });
+    // } else {
+    //     res.status(400);
+    //     throw new Error('Invalid credentials')
+    // }
+});
+
+
+// // @desc   Get user data
+// // @route  Get /api/users/me
+// // @access Private
+// const getMe = asyncHandler(async (req, res) => {
+//     res.status(200).json(req.user);
+// });
 
 //Generate JWT
 const generateToken = (id) => {
@@ -121,8 +212,8 @@ const getAdmins = asyncHandler(async (req, res) => {
 module.exports = {
     registerUser,
     loginUser,
-    getMe,
-    getUsers,
-    /*getUserById,
-    getAdmins */
+    updateUser,
+    getUser,
+    //getAdmins,
+    //getUserById
 }

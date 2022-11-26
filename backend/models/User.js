@@ -11,8 +11,18 @@ const userSchema = new mongoose.Schema({
      postal_code: String, */
   isAdmin: Boolean,
   password_bcrypt: String,
-  /*   apikey: String,
-    orders: Array */
+  
+  details: {
+    address: String,
+    delivery_loc: String,
+    country: String,
+    country_code : Number,
+    phone_number: Number,
+    postal_code: String,
+    province: String,
+    city: String
+  }
+  
 });
 
 module.exports = mongoose.model("User", userSchema, "users");
