@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react';
 function App() {
 
   const [restaurants, setRestaurants] = useState([]);
+  const [menu, setMenu] = useState([])
 
   useEffect(() => {
     const getRestaurants = async () => {
@@ -24,12 +25,25 @@ function App() {
         const response = await fetch(url);
         const data = await response.json();
         setRestaurants(data);
-        
       } catch (err) {
         console.error(err);
       }
     }
     getRestaurants();
+  }, [])
+
+  useEffect(() => {
+    const getMenu = async () => {
+      try {
+        const url = "api/menu";
+        const response = await fetch(url);
+        const data = await response.json();
+        setMenu(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    getMenu();
   }, [])
 
   return (
@@ -38,15 +52,14 @@ function App() {
         <div className="App">
           <Header />
           <Routes>
-            <Route exact path='/' element={<Home restaurants={restaurants}/>}></Route>
+            <Route exact path='/' element={<Home restaurants={{restaurants}}/>}></Route>
             <Route exact path='/login' element={<Login />}></Route>
             <Route exact path='/register' element={<Register />}></Route>
             <Route exact path='/account' element={<Account />}></Route>
             <Route exact path='/order' element={<Order />}></Route>
             <Route exact path='/cart' element={<Cart />}></Route>
             <Route exact path='/admin' element={<Admin />}></Route>
-            <Route exact path='/restaurantorder' element={<RestaurantOrder />}></Route>
-            <Route exact path='/restaurant/:id' element={<RestaurantDetails />}></Route>
+            <Route exact path='/restaurantDetails' element={<RestaurantDetails menu={{menu}}/>}></Route>
           </Routes>
         </div>
       </Router>
