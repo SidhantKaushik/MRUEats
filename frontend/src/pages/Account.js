@@ -1,197 +1,183 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
+import { useSelector} from 'react-redux';
 import { update, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 import PhoneNumber from '../helpers/phone-format';
 import '../styles/Account.css'
 import { toast } from 'react-toastify';
 
-const Account = (props) => {
-    
-    
-    const [currentUser, setCurrentUser] = useState({});
-    
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
 
-    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+const Account = (props) => {
+    const [currentUser, setCurrentUser] = useState({});
+
+    const navigate = useNavigate();
 
     //Grabs user info from local storage
     useEffect(() => {
         
         const user = JSON.parse(localStorage.getItem('user'));
-
+    
+        if (!user) {
+            navigate('/login');
+        }
         if (user){
-            setCurrentUser(user);
-            email = currentUser.email;
-            country = currentUser.details.country;  
-            country_code = currentUser.details.country_code; 
-            province = currentUser.details.province 
+            const getUser = async () => {
+
+                try{
+                    const url = "api/users/" + user.id;
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    setCurrentUser(data.user[0]);
+                } catch (err){
+                    console.error(err)
+                }
+            }
+            getUser();
         }
 
     }, []);
 
-    useEffect(() =>{
+    console.log(currentUser)
+    // const onSubmit = (e) => {
 
-        if (!user) {
-            navigate('/login');
-        }
-
-    }, [user]);
-
-    //Can't assign the variables 
-    const [formData, setFormData] = useState({
-        firstname: '',
-        lastname: '',
-        email: currentUser.email,
-        address: '',
-        country: currentUser.details?.country,
-        country_code: currentUser.details?.country_code,
-        phone_number: null,
-        postal_code: '',
-        province: currentUser.details?.province,
-    
-    });
-
-    const { firstname, lastname, email, address, country, country_code, phone_number, postal_code, province } = formData;
-
-
-    //Check if a user is logged in to access page
-    useEffect(() => {
-        if (isError) {
-            toast.error(message);
-        }
-
-        if (isSuccess){
-            toast.error('Updated information');
-            navigate('/account');
-        }
-
-        dispatch(reset());
-
-    }, [user, isError, isSuccess, message, dispatch, navigate]);
-
-    const onChange = (e) => {
-        setFormData((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value
-
-        }));
-    }
-
-    const onSubmit = (e) => {
-
-        e.preventDefault();
+    //     e.preventDefault();
         
-        //Check for number
-        if(phone_number){
-            console.log(phone_number)
-        }
-        else{   
-            const userData = {
-                firstname: firstname,
-                lastname: lastname,
-                email: currentUser.email,
+    //     //Check for number
+    //     if(!firstname && !lastname && !phone_number && !address && !postal_code){
+    //         toast.error('No changes to save');
+    //         return;
+    //     }else if (!firstname && !lastname){
+    //         const userData = {
+    //             firstname: currentUser.firstname,
+    //             lastname: lastname,
+    //             email: currentUser.email,
 
-                details: {
-                    phone_number: phone_number,
-                    address: address,
-                    postal_code: postal_code
-                }
-            }
-            console.log(userData);
-            dispatch(update(userData));
-        }
-    }
+    //             details: {
+    //                 phone_number: phone_number,
+    //                 address: address,
+    //                 postal_code: postal_code
+    //             }
+    //         }
+    //         console.log(userData);
+    //        // dispatch(update(userData));
+    //     }
+    //     else{   
+    //         const userData = {
+    //             firstname: firstname,
+    //             lastname: lastname,
+    //             email: currentUser.email,
+
+    //             details: {
+    //                 phone_number: phone_number,
+    //                 address: address,
+    //                 postal_code: postal_code
+    //             }
+    //         }
+    //         console.log(userData);
+    //         //dispatch(update(userData));
+    //     }
+    // }
 
   
-    if (isLoading) {
-        return <Spinner />;
-    }
-
+    // if (isLoading) {
+    //     return <Spinner />;
+    // }
+    console.log(currentUser)
     return (
         <div className="backgroundEffect">
             <div className="AccountPage">
                 <div className="profileSide">
+                    
                     <div className="profileToolBar">
                         <p>Profile</p>
-                        <a href='' id="changePassword">Change Password</a>
+                        <p>* Required</p>
+                        <Link to='/account-edit' state={{user: currentUser}}>Edit</Link>
                     </div>
-                    <form onSubmit={onSubmit}>
                         <div className="ProfileInformation">
                             <div className="FLName">
                                 <div className="firstName">
                                     <div className="standardLayout">
                                         <h2>First Name</h2>
-                                        <h2 className="required">Required</h2>
-                                        <input type="text" id="firstname" name="firstname" value={firstname} placeholder={currentUser.firstname} onChange={onChange}></input>
+                                        <h2 className="required">*</h2>
+                                        <input type="text" id="firstname" name="firstname" value={currentUser.firstname} placeholder={currentUser.firstname} readOnly></input>
                                     </div>
                                 </div>
                                 <div className="lastName">
                                     <div className="standardLayout">
                                         <h2>Last Name</h2>
-                                        <h2 className="required">Required</h2>
-                                        <input type="text" id="lastname" name="lastname" value={lastname} placeholder={currentUser.lastname} onChange={onChange}></input>
+                                        <h2 className="required">*</h2>
+                                        <input type="text" id="lastname" name="lastname" value={currentUser.lastname} placeholder={currentUser.lastname} readOnly></input>
                                     </div>
                                 </div>
                             </div>
                             <div className="emailDiv">
                                 <div className="standardLayout">
                                     <h2>Email</h2>
-                                    <h2 className="required">Required</h2>
-                                    <input type="text" id="email" name="email" value={email} placeholder={currentUser.email} readOnly></input>
+                                    <h2 className="required">*</h2>
+                                    <input type="text" id="email" name="email" value={currentUser.email} placeholder={currentUser.email} readOnly></input>
+                                </div>
+                            </div>
+                            <div className="deliveryLocation">
+                                <div className="twoLayout">
+                                    <h2>Delivery Location</h2>
+                                    <h2 className="required">*</h2>
+                                    <input type="text" id="dLocation" name="dLocation" value={currentUser?.deliver_location} placeholder={currentUser?.delivery_location} readOnly></input>
                                 </div>
                             </div>
                             <div className="countryPhone">
                                 <div className="countryCode">
                                     <div className="twoLayout">
                                         <h2>Country Code</h2>
-                                        <input type="number" id="country_code" name="country_code" value={country_code} placeholder={currentUser.details?.country_code} readOnly></input>
+                                        <input type="number" id="country_code" name="country_code" value={currentUser.details?.country_code} placeholder={currentUser.details?.country_code} readOnly></input>
                                     </div>
                                 </div>
                                 <div className="phoneNumber">
                                     <div className="standardLayout">
                                         <h2>Phone Number</h2>
-                                        <h2 className="required">Optional</h2>
                                         
-                                        <input type="text" id="phone_number" maxlength="16" name="phone_number" value={phone_number} placeholder={currentUser.details?.phone_number} onChange={onChange}></input>
+                                        <input type="number" id="phone_number" name="phone_number" value={currentUser.details?.phone_number} placeholder={currentUser.details?.phone_number} readOnly></input>
                                     </div>
                                 </div>
                             </div>
                             <div className="streetAddress">
                                 <div className="twoLayout">
                                     <h2>Street Address</h2>
-                                    <input type="text" id="address" name="address" value={address} placeholder={currentUser.details?.address} onChange={onChange}></input>
+                                    <input type="text" id="address" name="address" value={currentUser.details?.address} placeholder={currentUser.details?.address} readOnly></input>
                                 </div>
                             </div>
                             
                             <div className="info">
+                            <div className="city">
+                                <div className="twoLayout">
+                                    <h2 id="city">City</h2>
+                                    <input type="text" id="city" name="city" value={currentUser.details?.city} placeholder={currentUser.details?.city} readOnly></input>
+                                </div>
+                            </div>    
                             <div className="province">
                                 <div className="twoLayout">
                                     <h2>Province</h2>
-                                    <input type="text" id="province" name="province" value={province} placeholder={currentUser.details?.province} readOnly></input>
+                                    <input type="text" id="province" name="province" value={currentUser.details?.province} placeholder={currentUser.details?.province} readOnly></input>
                                 </div>
                             </div>
                             <div className="postal">
                                 <div className="twoLayout">
                                     <h2 id="pCode">Postal Code</h2>
-                                    <input type="text" id="postal_code" name="postal_code" value={postal_code} placeholder={currentUser.details?.postal_code} onChange={onChange}></input>
+                                    <input type="text" id="postal_code" name="postal_code" value={currentUser.details?.postal_code} placeholder={currentUser.details?.postal_code} readOnly></input>
                                 </div>
                             </div>
                             <div className="country">
                                 <div className="twoLayout">
                                     <h2>Country</h2>
-                                    <input type="text" id="country" name="country" value={country} placeholder={currentUser.details?.country} readOnly></input>
+                                    <input type="text" id="country" name="country" value={currentUser.details?.country} placeholder={currentUser.details?.country} readOnly></input>
                                 </div>
                             </div>
                             </div>
-                            <div id="saveButton">
+                            {/* <div id="saveButton">
                             <input type="submit" id="saveButtonBtn" value="Save"></input>
-                            </div>
-                            
+                            </div> */}
+               
                         </div>
-                    </form>
                 </div>
                 <div className="orderSide">
                     <div className="orderHistoryToolBar">

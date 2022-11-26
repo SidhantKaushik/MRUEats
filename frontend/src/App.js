@@ -11,6 +11,8 @@ import Cart from './pages/Cart';
 import Admin from './pages/Admin';
 import RestaurantOrder from './pages/RestaurantOrder';
 import RestaurantDetails from './pages/RestaurantDetails';
+import EditAccount from './pages/EditAccount';
+
 
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
             <Route exact path='/login' element={<Login />}></Route>
             <Route exact path='/register' element={<Register />}></Route>
             <Route exact path='/account' element={<Account />}></Route>
+            <Route exact path='/account-edit' element={<EditAccount />}></Route>
             <Route exact path='/order' element={<Order />}></Route>
             <Route exact path='/cart' element={<Cart />}></Route>
             <Route exact path='/admin' element={<Admin />}></Route>

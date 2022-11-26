@@ -9,7 +9,7 @@ const User = require('../models/User');
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
 
-    let id = null;
+    let id = 1;
     const { firstname, lastname, email, password, password_c } = req.body;
 
     console.log(req.body)
@@ -32,14 +32,15 @@ const registerUser = asyncHandler(async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     //Creates ID for new user
-    const idCheck = await User.find({})
-    id = idCheck.length + 1
+    const idCheck = await User.find({});
+    id += idCheck.length;
 
     //Create user
     const user = await User.create({
         id: id,
         firstname: firstname,
         lastname: lastname,
+        delivery_loc: "",
         email: email,
         isAdmin: true,
         isCourier: false,
@@ -51,7 +52,8 @@ const registerUser = asyncHandler(async (req, res) => {
             country_code:"1",
             phone_number: null,
             postal_code: "",
-            province:"Alberta"
+            province:"Alberta",
+            city: "Calgary"
         }
     });
 
@@ -61,20 +63,12 @@ const registerUser = asyncHandler(async (req, res) => {
             id: user.id,
             firstname: user.firstname,
             lastname: user.lastname,
+            delivery_loc: user.deliver_loc,
             email: user.email,
             isAdmin: user.isAdmin,
             isCourier: user.isCourier,
 
-            details:{
-                address: user.details.address,
-                country: user.details.country,
-                country_code : user.details.country_code,
-                phone_number: user.details.phone_number,
-                postal_code: user.details.postal_code,
-                province: user.details.province
-            },
-
-            token: generateToken(user.id)
+            token: generateToken(id)
         });
     } else {
         res.status(400);
@@ -98,20 +92,12 @@ const loginUser = asyncHandler(async (req, res) => {
             id: user.id,
             firstname: user.firstname,
             lastname: user.lastname,
+            delivery_loc: user.deliver_loc,
             email: user.email,
             isAdmin: user.isAdmin,
             isCourier: user.isCourier,
 
-            details:{
-                address: user.details.address,
-                country: user.details.country,
-                country_code : user.details.country_code,
-                phone_number: user.details.phone_number,
-                postal_code: user.details.postal_code,
-                province: user.details.province
-            },
-
-            token: generateToken(user.id)
+            token: generateToken(id)
 
         });
     } else {
@@ -120,43 +106,65 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 });
 
-// @desc   Updates user information
-// @route  PUT /api/users/update
+// @desc   Gets user info
+// @route  GET /api/users/:id
 // @access Private
-const updateUser = asyncHandler(async (req, res) => {
-    console.log(req.body);
-    const { firstname, lastname, email, phone_number, address, postal_code } = req.body;
+const getUser = asyncHandler(async (req, res) => {
     
+
     //Check for user email
-    const user = await User.findOne({ email });
-    console.log(user);
+    const user = await User.find({id: req.params.id});
+    console.log("penis");
+    console.log(user[0]);
 
     if (user) {
-        res.json({
-
-            id: user.id,
-            firstname: firstname,
-            lastname: lastname,
-            email: user.email,
-            isAdmin: user.isAdmin,
-            isCourier: user.isCourier,
-
-            details:{
-                address: address,
-                country: user.details.country,
-                country_code : user.details.country_code,
-                phone_number: phone_number,
-                postal_code: postal_code,
-                province: user.details.province
-            },
-            
-            token: generateToken(user.id)
-
-        });
+        res.json({user});
     } else {
         res.status(400);
         throw new Error('Invalid credentials')
     }
+});
+
+
+// @desc   Updates user information
+// @route  PUT /api/users/update
+// @access Private
+const updateUser = asyncHandler(async (req, res) => {
+    
+    const { firstname, lastname, email, phone_number, address, postal_code } = req.body;
+    
+    //Check for user email
+    const user = await User.find({email});
+
+    console.log(user);
+
+
+
+    // if (user) {
+    //     res.json({
+
+    //         firstname: firstname,
+    //         lastname: lastname,
+    //         email: user.email,
+    //         isAdmin: user.isAdmin,
+    //         isCourier: user.isCourier,
+
+    //         details:{
+    //             address: address,
+    //             country: user.details.country,
+    //             country_code : user.details.country_code,
+    //             phone_number: phone_number,
+    //             postal_code: postal_code,
+    //             province: user.details.province
+    //         },
+            
+    //         token: generateToken(user.id)
+
+    //     });
+    // } else {
+    //     res.status(400);
+    //     throw new Error('Invalid credentials')
+    // }
 });
 
 
@@ -206,7 +214,7 @@ module.exports = {
     registerUser,
     loginUser,
     updateUser,
-    //getUsers,
+    getUser,
     getAdmins,
     //getUserById
 }

@@ -5,7 +5,11 @@ const API_URL = '/api/users/';
 //Register user
 const register = async (userData) => {
 
-    const response = await axios.post(API_URL, userData);
+    const response = await axios.post(API_URL, userData, {
+        headers: {
+            'authorization': userData.token
+        }
+    });
 
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
@@ -30,7 +34,6 @@ const logout = () => {
 }
 
 //Update user info
-
 const update = async (userData) => {
     
     console.log(userData)

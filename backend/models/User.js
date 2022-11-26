@@ -12,11 +12,13 @@ const userSchema = new mongoose.Schema({
   
   details: {
     address: String,
+    delivery_loc: String,
     country: String,
     country_code : Number,
     phone_number: Number,
     postal_code: String,
-    province: String
+    province: String,
+    city: String
   }
   
 });
