@@ -6,7 +6,7 @@
 
 .courier-page {
     display: grid;
-    grid-template-rows: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
     grid-template-areas:
         "active-orders"
         "past-orders";

@@ -69,6 +69,20 @@ function Admin() {
         return hour + ampm;
     }
 
+    function checkIfOpen() {
+        const d = new Date();
+        let time = d.getHours() +""+ d.getMinutes();
+        console.log(time);
+        console.log(selectedRestaurant.open);
+        console.log(selectedRestaurant.close);
+        if ( time > selectedRestaurant.open && time < selectedRestaurant.close ){
+             return "Open";
+        }
+        else{
+            return "Closed";
+        }
+    }
+
     //Edit popups
     const toggleRestoEditPopup = () => {
         setRestoEditIsOpen(!restoEditIsOpen);
@@ -127,7 +141,7 @@ function Admin() {
                     <div className="adminRestaurantBanner">
                         <div className="firstLine">
                             <h2 className="restaurant-name">{selectedRestaurant.name}</h2>
-                            <div className="restaurantRating">{"X".repeat(selectedRestaurant.rating)}</div>
+                            <div className="restaurantRating">{"⭐".repeat(selectedRestaurant.rating)}</div>
                         </div>
                         <div className="secondLine">
                             <span className="restaurantInfo">{selectedRestaurant.address} •</span>
@@ -135,7 +149,7 @@ function Admin() {
                         </div>
                         <div className="thirdLine">
                             <span className="restaurantInfo">Delivery Hours: {ConvertTime(selectedRestaurant.open)} - {ConvertTime(selectedRestaurant.close)}  •</span>
-                            <span className="openStatus restaurantInfo">OPEN</span>
+                            <span className="openStatus restaurantInfo">{checkIfOpen()}</span>
                         </div>
                         <div className='restaurantButtons'>
                             
