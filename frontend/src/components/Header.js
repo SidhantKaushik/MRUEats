@@ -33,7 +33,7 @@ function Header() {
                     <li><Link to='/cart'>Cart</Link></li>
                     <li><Link to='/account'>Account</Link></li>
                     <li><Link to='/admin'>Admin</Link></li>
-                    <li><button className='btn' onClick={onLogout}>Logout</button></li>
+                    <li><a className='btn' onClick={onLogout}>Logout</a></li>
 
                 </>) : (<>
                     <li><Link to='/login'>Login</Link></li>

@@ -1,4 +1,4 @@
-header{
+.header{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -16,6 +16,9 @@ h1{
     width: fit-content;
     white-space: nowrap;
     padding-left: 10px;
+}
+.header li a{
+    cursor: pointer;
 }
 
 h1 a{
