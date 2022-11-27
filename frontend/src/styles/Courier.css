@@ -1,0 +1,22 @@
+
+.courier-page * {
+    font-family: 'Unna', serif;
+    font-weight: 400;
+}
+
+.courier-page {
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    grid-template-areas:
+        "active-orders"
+        "past-orders";
+    height: 100vh;
+}
+
+.active-orders {
+    grid-area: active-orders;
+}
+
+.past-orders {
+    grid-area: past-orders;
+}
