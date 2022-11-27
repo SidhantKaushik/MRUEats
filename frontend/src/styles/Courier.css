@@ -13,10 +13,78 @@
     height: 100vh;
 }
 
-.active-orders {
+.courier-page .active-orders {
     grid-area: active-orders;
+    margin: 2em 2em 0em 2em;
 }
 
-.past-orders {
+.courier-page .past-orders {
     grid-area: past-orders;
+    margin: 2em;
+}
+
+.courier-page .active-container {
+    height: 90%;
+    overflow: auto;
+    display: grid;
+}
+
+.courier-page .past-container {
+    height: 80%;
+    overflow: auto;
+    display: grid;
+}
+
+.courier-page h3 {
+    margin: 0 0 10px 0;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.courier-page img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.courier-page .order-item {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-areas:
+        "order-logo order-info status-info";
+    background-color: #F5F5F5;
+    height: 200px;
+    width: 95%;
+    border-radius: 15px;
+    margin: 1em;
+}
+
+.courier-page .order-logo {
+    grid-area: order-logo;
+    display: flex;
+    align-self: center;
+    border-radius: 50px;
+    margin: 0 auto;
+}
+.courier-page .order-info {
+    grid-area: order-info;
+    line-height: 10px;
+}
+.courier-page .status-info {
+    grid-area: status-info;
+    display: flex;
+    align-self: center;
+}
+
+.courier-page .status-button{
+    border-radius: 50px;
+    border: 1px solid rgb(190, 189, 189);
+    color: #033453;
+    background-color: white;
+    padding: 6px;
+}
+
+.order-resto-title{
+    font-weight: bold;
+    font-size: 1.2em;
 }
