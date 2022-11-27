@@ -15,12 +15,12 @@ h1{
     flex: 0 1 auto;
     width: fit-content;
     white-space: nowrap;
-    color: white;
     padding-left: 10px;
 }
 
 h1 a{
-    color: white;
+    font-family: 'Staatliches', cursive !important;
+    color: #FFB703 !important;
     text-decoration: none;
 }
 
