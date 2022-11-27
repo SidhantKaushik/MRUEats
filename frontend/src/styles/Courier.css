@@ -84,7 +84,31 @@
     padding: 6px;
 }
 
-.order-resto-title{
+.courier-page .order-resto-title{
     font-weight: bold;
     font-size: 1.2em;
+}
+
+/*Mobile*/
+@media (max-width:425px) {
+    .courier-page .order-item {
+        display: grid;
+        grid-template-columns: 1fr 4fr 1fr;
+        grid-template-areas:
+            "order-logo order-info status-info";
+        background-color: #F5F5F5;
+        height: 200px;
+        width: 95%;
+        border-radius: 15px;
+        margin: 0;
+    }
+
+    .courier-page .order-logo {
+        display: none;
+    }
+
+    .courier-page .status-info {
+        align-self: flex-start;
+        margin: 1em;
+    }
 }
