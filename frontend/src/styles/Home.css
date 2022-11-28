@@ -8,7 +8,7 @@
     padding-right:30px;
     padding-top: 20px;
     max-width: 1400px;
-    min-width: 80vw;
+    min-width: 70vw;
     margin-left:auto;
     margin-right:auto;
 }
@@ -38,6 +38,7 @@ body{
     height: 100%;
     width: 100%;
     justify-self: center;
+    z-index: -1;
 }
 .SplashScreen img{
     height: 300px;
@@ -76,19 +77,27 @@ body{
     margin-top: 5px;
     border-radius: 5px;
 }
-.restaurants{
+.restaurantsHomePage{
     display: grid;
     grid-template-areas:
         "logo name . . rating"
         "logo address . . rating";
+    grid-template-columns: 80px 1fr 1fr;
+    margin-bottom: 10px;
 }
-.restaurants .logo{
+.restaurantsHomePage .logo{
     grid-area: logo;
+    align-self: center;
 }
-.restaurants .name{
+.restaurantsHomePage .logo img{
+    width: 60px;
+    height:60px;
+}
+.restaurantsHomePage .name{
     grid-area: name;
+    
 }
-.restaurants .rating{
+.restaurantsHomePage .rating{
     grid-area: rating;
     background-color: #033453;
     color:white;
@@ -97,11 +106,11 @@ body{
     display: flex;
     align-self: center;
 }
-.restaurants .rating p{
+.restaurantsHomePage .rating p{
     margin-left:auto;
     margin-right:auto;
     align-self:center;
 }
-.restaurants .address{
+.restaurantsHomePage .address{
     grid-area: address;
 }
