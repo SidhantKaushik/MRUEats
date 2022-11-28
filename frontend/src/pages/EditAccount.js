@@ -19,8 +19,11 @@ const EditAccount = (props) => {
 
     });
 
-    console.log(user.details.country)
+    console.log(user)
     //onSubmit for cancel and save
+    //Check Postal Code 
+    //Check Phone Number
+    //Check City is all letters
     return (
         <div className="backgroundEffect">
             <div className="AccountPage">
@@ -64,7 +67,7 @@ const EditAccount = (props) => {
                                 <div className="countryCode">
                                     <div className="twoLayout">
                                         <h2>Country Code</h2>
-                                        <CountryCodes code={user.details?.country_code} ></CountryCodes>
+                                        <CountryCodes code={user.details?.country_code} isActive={true}></CountryCodes>
                                     </div>
                                 </div>
                                 <div className="phoneNumber">
@@ -78,7 +81,7 @@ const EditAccount = (props) => {
                             <div className="streetAddress">
                                 <div className="twoLayout">
                                     <h2>Street Address</h2>
-                                    <input type="text" id="address" name="address" placeholder={user.details?.phone_number} ></input>
+                                    <input type="text" id="address" name="address" placeholder={user.details?.address} ></input>
                                 </div>
                             </div>
                             

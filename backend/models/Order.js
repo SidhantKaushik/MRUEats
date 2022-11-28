@@ -13,7 +13,7 @@ const orderSchema = new mongoose.Schema({
   user_id: Number,
   price: Number,
   date_ordered: String,
-  isActive: Boolean
+  isActive: Boolean,
 });
 
 module.exports = mongoose.model("Order", orderSchema, "orders");

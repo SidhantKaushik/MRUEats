@@ -5,14 +5,21 @@ import { update, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 import PhoneNumber from '../helpers/phone-format';
 import '../styles/Account.css'
-
+import { toast } from 'react-toastify';
+import PostalCode from '../helpers/postal-code-format';
+import CountryCodes from '../components/CountryCodes';
+import OrderHistory from '../components/OrderHistory';
 
 const Account = (props) => {
     const [currentUser, setCurrentUser] = useState({});
+    const [orders, setOrders] = useState({});
+    
 
     const navigate = useNavigate();
+    //?
+    const { user } = useSelector((state) => state.auth);
 
-    //Grabs user info from local storage
+    //Gets user info from local storage
     useEffect(() => {
         
         const user = JSON.parse(localStorage.getItem('user'));
@@ -20,6 +27,7 @@ const Account = (props) => {
         if (!user) {
             navigate('/login');
         }
+        //Uses user info from local storage to search database
         if (user){
             const getUser = async () => {
 
@@ -31,58 +39,37 @@ const Account = (props) => {
                 } catch (err){
                     console.error(err)
                 }
-            }
+            } 
             getUser();
         }
 
+    }, [navigate]);
+    console.log(currentUser)
+    useEffect(() => {
+
+        const getOrders = async () => {
+            try{
+                //Add props.user.id instead of 1
+                const url = "api/orders/" + 1;
+                const response = await fetch(url);
+                const data = await response.json();
+                console.log(data)
+                setOrders(data);
+                
+    
+            } catch (err){
+                console.error(err)
+            }
+        }
+        getOrders();
+
     }, []);
 
-    console.log(currentUser)
-    // const onSubmit = (e) => {
-
-    //     e.preventDefault();
-        
-    //     //Check for number
-    //     if(!firstname && !lastname && !phone_number && !address && !postal_code){
-    //         toast.error('No changes to save');
-    //         return;
-    //     }else if (!firstname && !lastname){
-    //         const userData = {
-    //             firstname: currentUser.firstname,
-    //             lastname: lastname,
-    //             email: currentUser.email,
-
-    //             details: {
-    //                 phone_number: phone_number,
-    //                 address: address,
-    //                 postal_code: postal_code
-    //             }
-    //         }
-    //         console.log(userData);
-    //        // dispatch(update(userData));
-    //     }
-    //     else{   
-    //         const userData = {
-    //             firstname: firstname,
-    //             lastname: lastname,
-    //             email: currentUser.email,
-
-    //             details: {
-    //                 phone_number: phone_number,
-    //                 address: address,
-    //                 postal_code: postal_code
-    //             }
-    //         }
-    //         console.log(userData);
-    //         //dispatch(update(userData));
-    //     }
-    // }
-
-  
-    // if (isLoading) {
-    //     return <Spinner />;
-    // }
-    console.log(currentUser)
+    
+    const formattedPhoneNum = PhoneNumber(currentUser.details?.phone_number);
+    const formattedPostalCode = PostalCode(currentUser.details?.postal_code)?.toUpperCase().replace(/(.{3})/g, "$1 ");
+    
+    
     return (
         <div className="backgroundEffect">
             <div className="AccountPage">
@@ -127,15 +114,15 @@ const Account = (props) => {
                             <div className="countryPhone">
                                 <div className="countryCode">
                                     <div className="twoLayout">
-                                        <h2>Country Code</h2>
-                                        <input type="number" id="country_code" name="country_code" value={currentUser.details?.country_code} placeholder={currentUser.details?.country_code} readOnly></input>
+                                        <h2>Country Code</h2> 
+                                        <CountryCodes code={currentUser.details?.country_code} isActive={false}></CountryCodes>
                                     </div>
                                 </div>
                                 <div className="phoneNumber">
                                     <div className="standardLayout">
                                         <h2>Phone Number</h2>
                                         
-                                        <input type="number" id="phone_number" name="phone_number" value={currentUser.details?.phone_number} placeholder={currentUser.details?.phone_number} readOnly></input>
+                                        <input type="text" id="phone_number" name="phone_number" value={formattedPhoneNum} placeholder={formattedPhoneNum} readOnly></input>
                                     </div>
                                 </div>
                             </div>
@@ -162,7 +149,7 @@ const Account = (props) => {
                             <div className="postal">
                                 <div className="twoLayout">
                                     <h2 id="pCode">Postal Code</h2>
-                                    <input type="text" id="postal_code" name="postal_code" value={currentUser.details?.postal_code} placeholder={currentUser.details?.postal_code} readOnly></input>
+                                    <input type="text" id="postal_code" name="postal_code" value={formattedPostalCode} placeholder={formattedPostalCode} readOnly></input>
                                 </div>
                             </div>
                             <div className="country">
@@ -181,6 +168,12 @@ const Account = (props) => {
                 <div className="orderSide">
                     <div className="orderHistoryToolBar">
                         <p id="OrderHistory">Order History</p>
+                        {/* Add function to loop through each order */}
+                        {/* Issue with rendering */}
+                        { orders?.map((p, index) => (
+                        
+                        <OrderHistory user={currentUser}></OrderHistory>))}
+
                     </div>
                 </div>
             </div>
