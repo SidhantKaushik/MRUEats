@@ -40,18 +40,18 @@ const registerUser = asyncHandler(async (req, res) => {
         id: id,
         firstname: firstname,
         lastname: lastname,
-        delivery_loc: "",
+        delivery_loc: "123 Street",
         email: email,
         isAdmin: true,
         isCourier: false,
         password_bcrypt: hashedPassword,
 
         details:{
-            address: "",
+            address: "123 Street",
             country:"Canada",
             country_code:"1",
-            phone_number: null,
-            postal_code: "",
+            phone_number: 1111111111,
+            postal_code: "T2X 1O4",
             province:"Alberta",
             city: "Calgary"
         }
@@ -68,7 +68,7 @@ const registerUser = asyncHandler(async (req, res) => {
             isAdmin: user.isAdmin,
             isCourier: user.isCourier,
 
-            token: generateToken(id)
+            token: generateToken(user.id)
         });
     } else {
         res.status(400);
@@ -85,7 +85,7 @@ const loginUser = asyncHandler(async (req, res) => {
     
     //Check for user email
     const user = await User.findOne({ email });
-
+    console.log(user)
     if (user && (await bcrypt.compare(password, user.password_bcrypt))) {
         res.json({
 
@@ -97,7 +97,7 @@ const loginUser = asyncHandler(async (req, res) => {
             isAdmin: user.isAdmin,
             isCourier: user.isCourier,
 
-            token: generateToken(id)
+            token: generateToken(user.id)
 
         });
     } else {

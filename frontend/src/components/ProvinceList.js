@@ -28,7 +28,7 @@ function ProvinceList(props){
         setValue(value);
     }
 
-    return <Select options={options} value={value} onChange={changeHandler} placeholder={props.province} />
+    return <Select options={options} value={value} onChange={changeHandler} placeholder={props.province}/>
 }
 
 export default ProvinceList;
