@@ -1,9 +1,14 @@
 import '../styles/Admin.css'
 import { useEffect, useState } from 'react';
+import Popup from '../components/Popup';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import { FaEdit } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
-import Popup from '../components/Popup';
+
+const RESTAURANTS_API_URL = '/api/restaurants/';
+const MENU_API_URL = '/api/restaurants/';
 
 //https://www.freecodecamp.org/news/how-to-use-react-icons/
 
@@ -11,6 +16,18 @@ function Admin() {
  
     const [restaurants, setRestaurants] = useState([]);
     const [menu, setMenu] = useState([]);
+
+    const [restaurantFormData, setRestaurantFormData] = useState({
+        logo: '',
+        restaurantName: '',
+        rating: '',
+        address: '',
+        open: '',
+        close: '',
+        category: ''
+    });
+    const { logo, restaurantName, rating, address, open, close, category } = restaurantFormData;
+
     const [restoEditIsOpen, setRestoEditIsOpen] = useState(false);
     const [restoAddIsOpen, setRestoAddIsOpen] = useState(false);
     const [restoDeleteIsOpen, setRestoDeleteIsOpen] = useState(false);
@@ -25,7 +42,7 @@ function Admin() {
           const response = await fetch(url);
           const data = await response.json();
           setRestaurants(data);
-          
+
         } catch (err) {
           console.error(err);
         }
@@ -38,12 +55,18 @@ function Admin() {
         return;
     }
 
-    var selectedRestaurant = restaurants[0];
+    let restaurantCategories = restaurants.map(({category}) => (category));
+    
+    var categoryList = restaurantCategories.map((category) =>
+    <option value={category}>{category}</option>
+    );
 
+    let selectedRestaurant = restaurants[0];
+      
     const populateForm = async (e) => {
         var restaurantId = e.target.id;
         selectedRestaurant = restaurants.find(restaurant => restaurant.id === restaurantId);
-        console.log("picked:" + restaurantId);
+        
     }
 
     var restaurantList = restaurants.map((restaurant) =>
@@ -52,7 +75,7 @@ function Admin() {
 
     const getMenuUsingID = async () => {
         try {
-          const url = "http://localhost:3000/api/menu/"+selectedRestaurant.id;
+          const url = "http://localhost:3000/api/menu/" + selectedRestaurant.id;
           const response = await fetch(url);
           const data = await response.json();
           setMenu(data);
@@ -63,6 +86,8 @@ function Admin() {
     
     getMenuUsingID();
 
+    //helpers
+
     function ConvertTime(hour) {
         var ampm = hour >= 12 ? 'pm' : 'am';
         hour = (hour % 12) || 12;
@@ -72,9 +97,6 @@ function Admin() {
     function checkIfOpen() {
         const d = new Date();
         let time = d.getHours() +""+ d.getMinutes();
-        console.log(time);
-        console.log(selectedRestaurant.open);
-        console.log(selectedRestaurant.close);
         if ( time > selectedRestaurant.open && time < selectedRestaurant.close ){
              return "Open";
         }
@@ -108,6 +130,50 @@ function Admin() {
         setMenuDeleteIsOpen(!menuDeleteIsOpen);
     } 
 
+    //FORM 
+
+    const onChange = (e) => {
+
+        setRestaurantFormData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+
+        }));
+    }
+
+    //API CALLS
+
+    //Add restaurant
+
+    const addRestaurant = async (e) =>{
+
+        e.preventDefault();
+
+        //if none inputed 
+        if(!logo && !restaurantName && !rating && !address && !open && !close && !category)
+        {
+            toast.error('Form not filled');
+            return;
+        }
+
+        const restaurantData = {
+            logo,
+            restaurantName,
+            rating,
+            address,
+            open,
+            close,
+            category,
+        }
+
+        try {
+            const response = await axios.post(RESTAURANTS_API_URL, restaurantData);
+            console.log(response);
+        } catch (error) {
+            console.log(error.response); 
+        }
+    }
+
     return (
         <div className="AdminPage">
             <div className="adminMainBody">
@@ -118,17 +184,39 @@ function Admin() {
                         {restoAddIsOpen && <Popup
                         content={<>
                             <h4 className='popup-title'>Add Restaurant</h4>
-                            <form className='restaurant-form'>
-                                <label>Logo<input type="text" placeholder='enter url'/></label>
-                                <label>Name<input type="text" /></label>
-                                <label>Rating<input type="number" min="1" max="5"/></label>
-                                <label>Address<input type="text"/></label>
-                                <label>Delivery Fee<input type="text" placeholder='$'/></label>
-                                <label>Opening Time<input type="time" /></label>
-                                <label>Closing Time<input type="time" /></label>
-                                {/* <label>Categories<input type="text" /></label> */}
-                                </form>
-                            <button className='popup-submit'>Save Changes</button>
+                            <form className='restaurant-form' onSubmit={addRestaurant}>            
+                                <div className='logo'>
+                                    <label>Logo</label>
+                                    <input type="text" name="logo" value={logo} placeholder='enter url' onChange={onChange}/>
+                                </div>
+                                <div className='restNameInput'>
+                                    <label>Name</label>
+                                    <input type="text" name="restaurantName" value={restaurantName} onChange={onChange}/>
+                                </div>
+                                <div className='rating'>
+                                    <label>Rating</label>
+                                    <input type="number" name="rating"  value={rating} min="1" max="5" onChange={onChange}/>
+                                </div>
+                                <div className='address'>
+                                    <label>Address</label>
+                                    <input type="text" name="address"  value={address} onChange={onChange}/>
+                                </div>
+                                <div className='openTime'>
+                                    <label>Opening Time</label>
+                                    <input type="time" name="open" value={open} onChange={onChange}/>
+                                </div>
+                                <div className='closingTime'>
+                                    <label>Closing Time</label>
+                                    <input type="time" name="close" value={close} onChange={onChange}/>
+                                </div>
+                                <div className='category'>
+                                    <label>Category</label>
+                                    <select name="category" value={category} onChange={onChange}>{categoryList}</select>
+                                </div>
+                                <div className='submitButton'>
+                                    <input className='popup-submit' type="submit" value="Save Changes"/>
+                                </div>
+                            </form>
                         </>}
                         handleClose={toggleRestoAddPopup}
                         />}
@@ -161,16 +249,38 @@ function Admin() {
                                 content={<>
                                     <h4 className='popup-title'>Edit Restaurant</h4>
                                     <form className='restaurant-form'>
-                                        <label>Logo<input type="text" placeholder='enter url'/></label>
-                                        <label>Name<input type="text" /></label>
-                                        <label>Rating<input type="number" min="1" max="5"/></label>
-                                        <label>Address<input type="text"/></label>
-                                        <label>Delivery Fee<input type="text" placeholder='$'/></label>
-                                        <label>Opening Time<input type="time" /></label>
-                                        <label>Closing Time<input type="time" /></label>
-                                        {/* <label>Categories<input type="text" /></label> */}
-                                        </form>
-                                    <button className='popup-submit'>Save Changes</button>
+                                        <div className='logo'>
+                                            <label>Logo</label>
+                                            <input type="text" name="logo" value={logo} placeholder='enter url' onChange={onChange}/>
+                                        </div>
+                                        <div className='restNameInput'>
+                                            <label>Name</label>
+                                            <input type="text" name="restaurantName" value={restaurantName} onChange={onChange}/>
+                                        </div>
+                                        <div className='rating'>
+                                            <label>Rating</label>
+                                            <input type="number" name="rating"  value={rating} min="1" max="5" onChange={onChange}/>
+                                        </div>
+                                        <div className='address'>
+                                            <label>Address</label>
+                                            <input type="text" name="address"  value={address} onChange={onChange}/>
+                                        </div>
+                                        <div className='openTime'>
+                                            <label>Opening Time</label>
+                                            <input type="time" name="open" value={open} onChange={onChange}/>
+                                        </div>
+                                        <div className='closingTime'>
+                                            <label>Closing Time</label>
+                                            <input type="time" name="close" value={close} onChange={onChange}/>
+                                        </div>
+                                        <div className='category'>
+                                            <label>Category</label>
+                                            <select name="category" value={category} onChange={onChange}>{categoryList}</select>
+                                        </div>
+                                        <div className='submitButton'>
+                                            <input className='popup-submit' type="submit" value="Save Changes"/>
+                                        </div>
+                                    </form>
                                 </>}
                                 handleClose={toggleRestoEditPopup}
                             />}

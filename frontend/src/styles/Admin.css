@@ -1,7 +1,3 @@
-.body {
-    background-image: none;
-}
-
 .AdminPage * {
     font-family: 'Unna', serif;
     font-weight: 400;
@@ -70,7 +66,7 @@
     border-bottom: 1px solid #B4B2AF;
 }
 
-.AdminPage .adminRestaurantBanner * {
+.AdminPage .adminRestaurantBanner {
     margin: 0;
 }
 
@@ -179,7 +175,6 @@
 
 .AdminPage .addRestoButton {
     background-color: transparent;
-
     width: 35px;
     height: 35px;
     margin-right: 15px;
@@ -223,31 +218,84 @@
     margin-left: 2em;
 }
 
-.AdminPage .popup-submit {
-    margin: 1em 3em 2em 1em;
-    padding: 8px;
-    float: right;
+.AdminPage .restaurant-form label {
+    font-weight: 600;
+    font-size: 1em;
+    line-height: 25px;
+}
+
+.AdminPage .restaurant-form input, .restaurant-form select {
+    background: #d9d9d9;
+    height: 30px;
+    border: 1px solid #ccc;
+    width: 100%;
 }
 
 .AdminPage .restaurant-form {
     width: 90%;
     margin: 0 auto;
     padding: 10px 20px;
+    display: grid;
+    grid-template-areas:
+        "logo logo"
+        "restNameInput rating"
+        "address address"
+        "openTime closingTime"
+        "category category"
+        "submitButton submitButton";
+    column-gap: 15px;
+    row-gap: 10px;
 }
 
-.AdminPage .restaurant-form label {
-    font-weight: 600;
-    font-size: 1em;
+.AdminPage .logo{
+    grid-area:logo;
+}
+.AdminPage .restNameInput{
+    grid-area:restNameInput;
+}
+.AdminPage .rating{
+    grid-area:rating;
+}
+.AdminPage .address{
+    grid-area:address;
+}
+.AdminPage .openTime{
+    grid-area:openTime;
+}
+.AdminPage .closingTime{
+    grid-area:closingTime;
+}
+.AdminPage .category{
+    grid-area:category;
+}
+.AdminPage .submitButton{
+    margin-top: 1em;
+    grid-area:submitButton;
+    justify-self: right;
 }
 
-.AdminPage .restaurant-form input {
-    background-color: rgb(224, 224, 224);
-    border: 1px solid rgb(209, 209, 209);
+.AdminPage .popup-submit {
+    margin: 2em 0 2em 0;
+    padding: 8px;
 }
 
 .AdminPage .delete-confirmation {
     margin-left: 2em;
     padding: 1em;
+}
+
+.AdminPage input {
+    background: #d9d9d9;
+    height: 30px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+.AdminPage label {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 25px;
+    color: #000;
 }
 
 /*Mobile*/
