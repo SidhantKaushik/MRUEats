@@ -157,7 +157,7 @@ function Admin() {
 
     const updateRestaurant = async (restaurantData) => {
 
-        const response = await axios.put(API_URL + 'UPDATE', restaurantData);
+        const response = await axios.put(RESTAURANTS_API_URL + 'UPDATE', restaurantData);
 
         if (response.data) {
             console.log(response.data);
@@ -168,7 +168,7 @@ function Admin() {
 
     const deleteRestaurant = async (restaurantData) => {
 
-        const response = await axios.delete(API_URL + 'DELETE', restaurantData);
+        const response = await axios.delete(RESTAURANTS_API_URL + 'DELETE', restaurantData);
 
         if (response.data) {
             console.log(response.data);
