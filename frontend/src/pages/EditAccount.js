@@ -17,15 +17,15 @@ const EditAccount = (props) => {
     const location = useLocation();
     const {currentUser} = location.state;
 
-    const [firstName, setFirstName] = useState({});
-    const [lastName, setLastName] = useState({});
-    const [deliveryLoc, setDeliveryLoc] = useState({});
-    const [countryCode, setCountryCode] = useState({});
-    const [phoneNum, setPhoneNum] = useState({});
-    const [address, setAddress] = useState({});
-    const [province, setProvince] = useState({});
-    const [city, setCity] = useState({});
-    const [postalCode, setPostalCode] = useState({});
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [deliveryLoc, setDeliveryLoc] = useState('');
+    const [countryCode, setCountryCode] = useState();
+    const [phoneNum, setPhoneNum] = useState('');
+    const [address, setAddress] = useState('');
+    const [province, setProvince] = useState('');
+    const [city, setCity] = useState('');
+    const [postalCode, setPostalCode] = useState('');
     
     const { user } = useSelector((state) => state.auth);
     
@@ -69,33 +69,35 @@ const EditAccount = (props) => {
         const userData = {
             id: currentUser._id,
             email: currentUser.email,
-            firstname: isFilled(firstName) ? currentUser.firstname : firstName,
-            lastname: isFilled(lastName) ? currentUser.lastname : lastName,
-            address: isEmpty(address) ? currentUser.details?.address : address,
-            delivery_loc: isEmpty(deliveryLoc) ? currentUser.delivery_loc : deliveryLoc,
+            firstname: isEmpty(firstName) ? currentUser?.firstname : firstName,
+            lastname: isEmpty(lastName) ? currentUser?.lastname : lastName,
+            address: isEmpty(address) ? currentUser?.details?.address : address,
+            delivery_loc: isEmpty(deliveryLoc) ? currentUser?.delivery_loc : deliveryLoc,
             country_code: isEmpty(countryCode) ? currentUser.details?.country_code : countryCode,
             phone_number: isEmpty(phoneNum) ? currentUser.details?.phone_number : phoneNum,
             postal_code: isEmpty(formattedPostalCode) ? currentUser.details?.postal_code : formattedPostalCode,
             province: isEmpty(province) ? currentUser.details?.province : province,
             city: isEmpty(city) ? currentUser.details?.city : city,
-            country: currentUser.details?.country
+            country: currentUser.details.country
             
         }
         updateUserInfo(userData);
         navigate('/account');
-        
-        
     }
 
-    function isFilled(value){
-        return value.length >= 0;
+    function isEmpty(value){
+        if(value){
+            return value.length === 0;
+        }else{
+            return true;
+        }    
     }
     
-    function isEmpty(obj){
+    // function isEmpty(obj){
         
-        return Object.keys(obj).length === 0;
+    //     return Object.keys(obj).length === 0;
         
-    }
+    // }
     
     //Formats phone number
     const formattedPhoneNum = FormatPhoneNum(currentUser.details?.phone_number);
@@ -186,7 +188,6 @@ const EditAccount = (props) => {
             <Autocomplete apiKey={'AIzaSyDfqQTDbhIl14z0v12wC0xvdRPr7abl_Ww'} onPlaceSelected={(place) => {console.log(place);
                 setCity(place.address_components[0]);
                 setProvince(place.address_components[(place.address_components.length - 2)])
-                console.log(place.address_components[(place.address_components.length - 2)])        
             }} options={{ types: ["(cities)"], componentRestrictions: {country: "ca"}}} defaultValue={currentUser.city} />
             {/* <input type="text" id="city" name="city" placeholder={currentUser.details?.city} onChange={onChange}></input> */}
             </div>
@@ -216,10 +217,13 @@ const EditAccount = (props) => {
             <div id="saveButton">
             <input type="submit" id="saveButtonBtn" value="Save"></input>
             </div>
+            
+            <Link to='/account'>
             <div id="cancelButton">
-            {/* <input type="cancel" id="cancelButtonBtn" value="Cancel"></input> */}
-            <Link to='/account'>Cancel</Link>
+            <input type="submit" id="cancelButtonBtn" value="Cancel"></input> 
             </div>
+            </Link>
+            
             </div>
             </form>
             </div>
