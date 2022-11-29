@@ -406,14 +406,27 @@ function Admin() {
                         {menuAddIsOpen && <Popup
                                 content={<>
                                     <h4 className='popup-title'>Add Menu Item</h4>
-                                    <form className='restaurant-form'>
-                                        <label>Name<input type="text" /></label>
-                                        <label>Price<input type="text" placeholder='$'/></label>
-                                        <label>Drescription<input type="text"/></label>
-                                        <label>Category<input type="text" /></label> 
-                                        {/*turn categories into dropdown*/}
+                                    <form className='menu-form'>
+                                        <div className='menuName'>
+                                            <label>Name</label>
+                                            <input type="text" />
+                                        </div>
+                                        <div className='price'>
+                                            <label>Price</label>
+                                            <input type="text" placeholder='$'/>
+                                        </div>
+                                        <div className='description'>
+                                            <label>Drescription</label>
+                                            <input type="text"/>
+                                        </div>
+                                        <div className='menuCategory'>
+                                            <label>Category</label>
+                                            <select></select>
+                                        </div>
+                                        <div className='submitButton'>
+                                            <input className='popup-submit' type="submit" value="Save Changes"/>
+                                        </div>
                                     </form>
-                                    <button className='popup-submit'>Save Changes</button> 
                                 </>}
                                 handleClose={toggleMenuAddPopup}
                         />}
@@ -421,14 +434,27 @@ function Admin() {
                         {menuEditIsOpen && <Popup
                                 content={<>
                                     <h4 className='popup-title'>Edit Menu Item</h4>
-                                    <form className='restaurant-form'>
-                                        <label>Name<input type="text" /></label>
-                                        <label>Price<input type="text" placeholder='$'/></label>
-                                        <label>Drescription<input type="text"/></label>
-                                        <label>Category<input type="text" /></label> 
-                                        {/*turn categories into dropdown*/}
+                                    <form className='menu-form'>
+                                        <div className='menuName'>
+                                            <label>Name</label>
+                                            <input type="text" />
+                                        </div>
+                                        <div className='price'>
+                                            <label>Price</label>
+                                            <input type="text" placeholder='$'/>
+                                        </div>
+                                        <div className='description'>
+                                            <label>Drescription</label>
+                                            <input type="text"/>
+                                        </div>
+                                        <div className='menuCategory'>
+                                            <label>Category</label>
+                                            <select></select>
+                                        </div>
+                                        <div className='submitButton'>
+                                            <input className='popup-submit' type="submit" value="Save Changes"/>
+                                        </div>
                                     </form>
-                                    <button className='popup-submit'>Save Changes</button> 
                                 </>}
                                 handleClose={toggleMenuEditPopup}
                         />}

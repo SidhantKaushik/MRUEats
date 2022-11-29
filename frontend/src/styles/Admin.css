@@ -209,7 +209,7 @@
     border-radius: 10px;
 }
 
-/* popups css */
+/* popups/form css */
 
 .AdminPage .popup-title {
     font-weight: bold;
@@ -218,13 +218,13 @@
     margin-left: 2em;
 }
 
-.AdminPage .restaurant-form label {
+.AdminPage label {
     font-weight: 600;
     font-size: 1em;
     line-height: 25px;
 }
 
-.AdminPage .restaurant-form input, .restaurant-form select {
+.AdminPage input, select {
     background: #d9d9d9;
     height: 30px;
     border: 1px solid #ccc;
@@ -242,6 +242,20 @@
         "address address"
         "openTime closingTime"
         "category category"
+        "submitButton submitButton";
+    column-gap: 15px;
+    row-gap: 10px;
+}
+
+.AdminPage .menu-form {
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: grid;
+    grid-template-areas:
+        "menuName price"
+        "description description"
+        "menuCategory menuCategory"
         "submitButton submitButton";
     column-gap: 15px;
     row-gap: 10px;
@@ -272,6 +286,19 @@
     margin-top: 1em;
     grid-area:submitButton;
     justify-self: right;
+}
+
+.AdminPage .menuName{
+    grid-area:menuName;
+}
+.AdminPage .price{
+    grid-area:price;
+}
+.AdminPage .description{
+    grid-area:description;
+}
+.AdminPage .menuCategory{
+    grid-area:menuCategory;
 }
 
 .AdminPage .popup-submit {
