@@ -3,9 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import '../styles/Home.css';
 
 const RestaurantItem = (props) => {
-
-    console.log(props)
-
     return (
         <Link to='/restaurantDetails' state={{id:props.id, name:props.name, address:props.address, close:props.close, open:props.open}}>
         <div className='restaurants'>

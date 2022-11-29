@@ -2,27 +2,62 @@ import '../styles/RestaurantDetails.css'
 import {Link, useLocation} from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import { set } from 'mongoose'
+import Category from './Category'
+import MenuItem from './MenuItem'
 
 const RestaurantDetails = (props) => {
 
-    console.log("hello")
-
     const [menuItems, setMenuItems] = useState([])
-    const item = []
+    const [currItem, setCurrItem] = useState([])
+    let currentItem = []
+    let item = []
+    // let oldItems = JSON.parse(localStorage.getItem('itemsArray')) || [];
 
     const location = useLocation()
     useEffect(() => {
         if(location.state) {
+            item = []
             for(let i = 0; i < props.menu.menu.length; i++){                
-                if (location.state.id === props.menu.menu[i].id){
+                if (location.state.id === props.menu.menu[i].restaurant_id){
                     item.push(props.menu.menu[i]) 
                }
             }
         }
-        setMenuItems(item)
+        if(item.length != 0){
+            localStorage.setItem('itemsArray', JSON.stringify(item))
+            setMenuItems(JSON.parse(localStorage.getItem('itemsArray')))
+        }
+    }, [])
+
+    //When page is refreshed, menu data is retreived from local storage
+    useEffect(() => {
+        setMenuItems(JSON.parse(localStorage.getItem('itemsArray')))
     }, [])
 
     console.log(menuItems)
+
+    function filter(e){
+        item = []
+        for(let i = 0; i < menuItems.length; i++){    
+            if (menuItems[i].name.includes(e.target.value) || menuItems[i].name.toLowerCase().includes(e.target.value.toLowerCase())){
+                item.push(menuItems[i])
+            }
+        }
+        setMenuItems(item)
+    }
+
+    function menuSelect(props) {
+        currentItem = []
+        console.log(menuItems[0].name)
+        console.log(props)
+        for(let i = 0; i < menuItems.length; i++){    
+            if (menuItems[i].name == props){
+                currentItem.push(menuItems[i])
+            }
+        }
+        console.log(currentItem)
+        setCurrItem(currentItem)
+    }
 
     // let { id } = 1
     // console.log(id);
@@ -98,32 +133,41 @@ const RestaurantDetails = (props) => {
             </div>
             <div className="mainContentBody">
                 <div className="menuCategories">
-
+                <h3>Categorgies</h3>
                     <ol className='categoriesList'>
-                        <li>Promotions</li>
-                        <li>Category 2</li>
-                        <li>Category 3</li>
-                        <li>Category 4</li>
-                        <li>Category 5</li>
-                        <li>Category 6</li>
-                        <li>Category 7</li>
-                        <li>Category 8</li>
-                        <li>Category 9</li>
-                        <li>Category 10</li>
+                    <li className='category-item' onClick={filter}>
+                        All 
+                    </li>
+                        {menuItems.map((p, index) => (
+                            <Category
+                                category={p.category}
+                                filter={filter}
+                            />
+                        ))} 
                     </ol>
-
                 </div>
                 <div className="restaurantMenu">
                     <h2>Promotions</h2>
 
-                    <div className="menuItem">
-                        {/* TODO: Implement menu item component */}
-                        {/* TODO: populate menu with menu item components*/}
+                    <div className="menu-list">
+                        {menuItems.map((p, index) => (
+                            <MenuItem
+                                name={p.name}
+                                desc={p.description}
+                                price={p.price}
+                                category={p.category}
+                                menuSelect={menuSelect}
+                            />
+                        ))} 
                     </div>
                 </div>
                 <div className="addItem">
                     <h2>Menu Item Name</h2>
-
+                            {currItem.map((p, index) => {
+                                return (
+                                    <>{p.name}</>
+                                )
+                            })}
                 </div>
             </div>
         </div>
