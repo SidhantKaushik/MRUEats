@@ -7,15 +7,17 @@ import Spinner from '../components/Spinner';
 import '../styles/Register.css';
 
 function Register() {
+    //Add delivery_loc
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
         email: '',
+        delivery_loc: '',
         password: '',
         password_c: ''
     });
 
-    const { firstname, lastname, email, password, password_c } = formData;
+    const { firstname, lastname, email, delivery_loc, password, password_c } = formData;
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -50,8 +52,19 @@ function Register() {
 
         e.preventDefault();
 
-        console.log(password);
-        console.log(password_c);
+        //if none inputed
+        if(!firstname && !lastname && !email && !delivery_loc && !password && !password_c)
+        {
+            toast.error('Form not filled');
+            return;
+        }
+
+        //email address validation
+        const regex = new RegExp("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
+        if(!regex.test(email)){
+            toast.error('Please enter a valid email address');
+        }
+        //password check
         if (password !== password_c) {
             toast.error('Password does not match');
         } else {
@@ -59,6 +72,7 @@ function Register() {
                 firstname,
                 lastname,
                 email,
+                delivery_loc,
                 password,
             }
             dispatch(register(userData));
@@ -97,7 +111,11 @@ function Register() {
                         <label for="confirm-password">Confirm Password</label>
                         <input type="password" id="password_c" name="password_c" value={password_c} placeholder='Confirm password' onChange={onChange} />
                     </div>
-                    <div>
+                    <div className='dLocation'>
+                        <label for="deliveryLoc">Delivery Location</label>
+                        <input type="text" id="dLocation" name="delivery_loc" value={delivery_loc} placeholder='Enter delivery location Ex.(B140 or 123 Street SE)' onChange={onChange} />
+                    </div>
+                    <div className='submitbtn'>
                         <input id="register-button" type="submit" value="Register" />
                     </div>
                 </form>

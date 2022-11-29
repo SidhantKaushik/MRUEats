@@ -26,6 +26,7 @@ function ProvinceList(props){
 
     const changeHandler = value => {
         setValue(value);
+        props.setProvince(value.value);
     }
 
     return <Select options={options} value={value} onChange={changeHandler} placeholder={props.province}/>

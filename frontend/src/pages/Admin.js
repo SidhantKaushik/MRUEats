@@ -1,6 +1,7 @@
 import '../styles/Admin.css'
 
 function Admin() {
+
     return (
         <div className="AdminPage">
             <div className="mainContentBody">
@@ -54,6 +55,10 @@ function Admin() {
                             <button className='menuButton'>Edit</button>
                             <button className='menuButton'>Delete</button>
                         </form>
+                        {/* Take out after */}
+                        <div className='submitbtn'>
+                        <input id="register-button" type="submit" value="Register"/>
+                        </div>
                     </div>
                 </div>
             </div>

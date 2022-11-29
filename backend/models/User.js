@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     delivery_loc: String,
     country: String,
     country_code : Number,
-    phone_number: Number,
+    phone_number: String,
     postal_code: String,
     province: String,
     city: String
