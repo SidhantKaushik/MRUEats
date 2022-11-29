@@ -177,6 +177,40 @@ function Admin() {
 
     }
 
+    const createMenuItem = async (menuItemData) => {
+
+
+        const response = await axios.post(MENU_API_URL + 'ADD', menuItemData);
+
+        if (response.data) {
+            console.log(response.data);
+        }
+         return response.data;
+
+    }
+
+    const updateMenuItem = async (menuItemData) => {
+
+        const response = await axios.put(MENU_API_URL + 'UPDATE', menuItemData);
+
+        if (response.data) {
+            console.log(response.data);
+        }
+         return response.data;
+
+    }
+
+    const deleteMenuItem = async (menuItemData) => {
+
+        const response = await axios.delete(MENU_API_URL + 'DELETE', menuItemData);
+
+        if (response.data) {
+            console.log(response.data);
+        }
+         return response.data;
+
+    }
+
     //Add restaurant
 
     const addRestaurant = (e) =>{
