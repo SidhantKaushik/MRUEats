@@ -10,11 +10,10 @@ import axios from 'axios';
 const RESTAURANTS_API_URL = '/api/restaurants/';
 const MENU_API_URL = '/api/restaurants/';
 
-//https://www.freecodecamp.org/news/how-to-use-react-icons/
-
 function Admin() {
  
     const [restaurants, setRestaurants] = useState([]);
+    const [menus, setMenus] = useState([]);
     const [menu, setMenu] = useState([]);
 
     const [restaurantFormData, setRestaurantFormData] = useState({
@@ -29,12 +28,12 @@ function Admin() {
     const { logo, restaurantName, rating, address, open, close, category } = restaurantFormData;
 
     const [menuFormData, setMenuFormData] = useState({
-        name: '',
+        menuName: '',
         price: '',
         description: '',
         menuCategory: ''
     });
-    const { name, price, description, menuCategory } = menuFormData;
+    const { menuName, price, description, menuCategory } = menuFormData;
 
     const [restoEditIsOpen, setRestoEditIsOpen] = useState(false);
     const [restoAddIsOpen, setRestoAddIsOpen] = useState(false);
@@ -57,13 +56,26 @@ function Admin() {
       }
       getRestaurants();
 
+      const getMenus = async () => {
+        try {
+          const url = "http://localhost:3000/api/menu/";
+          const response = await fetch(url);
+          const data = await response.json();
+          setMenus(data);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
+      getMenus();
+
     }, [])
 
     while(!restaurants[0]){
         return;
     }
 
-    let restaurantCategories = restaurants.map(({category}) => (category));
+    let restaurantCategories = [...new Set(restaurants.map(({category}) => (category)))];
     
     var categoryList = restaurantCategories.map((category) =>
     <option value={category}>{category}</option>
@@ -93,6 +105,13 @@ function Admin() {
     }
     
     getMenuUsingID();
+
+    console.log(menus);
+    let menuCategories = [...new Set(menus.map(({category}) => (category)))];
+    
+    var menuCategoryList = menuCategories.map((category) =>
+    <option value={category}>{category}</option>
+    );
 
     //helpers
 
@@ -245,25 +264,102 @@ function Admin() {
         createRestaurant(restaurantData);
     }
 
+    
     const onUpdateRestSubmit = (e) =>{
 
         e.preventDefault();
 
         //if none inputed 
-        if(!name && !price && !description && !menuCategory)
+        if(!logo && !restaurantName && !rating && !address && !open && !close && !category)
+        {
+            toast.error('Form not filled');
+            return;
+        }
+
+        const restaurantData = {
+            logo,
+            restaurantName,
+            rating,
+            address,
+            open,
+            close,
+            category,
+        }
+
+        updateRestaurant(restaurantData);
+    }
+
+    const onDeleteRestSubmit = (e) =>{
+
+        e.preventDefault();
+
+        const restaurantData = {
+            logo,
+            restaurantName,
+            rating,
+            address,
+            open,
+            close,
+            category,
+        }
+
+        deleteRestaurant(restaurantData);
+    }
+
+    const onAddMenuSubmit = (e) =>{
+
+        e.preventDefault();
+
+        //if none inputed 
+        if(!menuName && !price && !description && !menuCategory)
         {
             toast.error('Form not filled');
             return;
         }
 
         const menuData = {
-            name,
+            menuName,
+            price,
+            description,
+            menuCategory,
+        }
+
+        createMenuItem(menuData);
+    }
+
+    const onUpdateMenuSubmit = (e) =>{
+
+        e.preventDefault();
+
+        //if none inputed 
+        if(!menuName && !price && !description && !menuCategory)
+        {
+            toast.error('Form not filled');
+            return;
+        }
+
+        const menuData = {
+            menuName,
             price,
             description,
             menuCategory,
         }
 
         updateRestaurant(menuData);
+    }
+
+    const onDeleteMenuSubmit = (e) =>{
+
+        e.preventDefault();
+
+        const menuData = {
+            menuName,
+            price,
+            description,
+            menuCategory,
+        }
+
+        deleteMenuItem(menuData);
     }
 
     return (
@@ -340,7 +436,7 @@ function Admin() {
                             {restoEditIsOpen && <Popup
                                 content={<>
                                     <h4 className='popup-title'>Edit Restaurant</h4>
-                                    <form className='restaurant-form'>
+                                    <form className='restaurant-form' onSubmit={onUpdateRestSubmit}>
                                         <div className='logo'>
                                             <label>Logo</label>
                                             <input type="text" name="logo" value={logo} placeholder='enter url' onChange={onChange}/>
@@ -381,8 +477,11 @@ function Admin() {
                                 content={<>
                                     <h4 className='popup-title'>Remove Restaurant</h4>
                                     <p className='delete-confirmation'>Are you sure you want to remove this restaurant? This action cannot be undone.</p>
-                                    <button className='popup-submit'>Remove Restaurant</button> 
-                                    {/* may have to put button into form so popup closes on submit*/}
+                                    <form onSubmit={onDeleteRestSubmit}>
+                                        <div className='submitButton'>
+                                            <input className='popup-submit' type="submit" value="Remove Restaurant"/>
+                                        </div>
+                                    </form>
                                 </>}
                                 handleClose={toggleRestoDeletePopup}
                             />}
@@ -406,22 +505,22 @@ function Admin() {
                         {menuAddIsOpen && <Popup
                                 content={<>
                                     <h4 className='popup-title'>Add Menu Item</h4>
-                                    <form className='menu-form'>
+                                    <form className='menu-form' onSubmit={onAddMenuSubmit}>
                                         <div className='menuName'>
                                             <label>Name</label>
-                                            <input type="text" />
+                                            <input type="text" name="menuName" value={menuName} onChange={onChange}/>
                                         </div>
                                         <div className='price'>
                                             <label>Price</label>
-                                            <input type="text" placeholder='$'/>
+                                            <input type="text" placeholder='$' name="price" value={price} onChange={onChange}/>
                                         </div>
                                         <div className='description'>
                                             <label>Drescription</label>
-                                            <input type="text"/>
+                                            <input type="text" name="description" value={description} onChange={onChange}/>
                                         </div>
                                         <div className='menuCategory'>
                                             <label>Category</label>
-                                            <select></select>
+                                            <select name="menuCategory" value={menuCategory} onChange={onChange}>{menuCategoryList}</select>
                                         </div>
                                         <div className='submitButton'>
                                             <input className='popup-submit' type="submit" value="Save Changes"/>
@@ -434,22 +533,22 @@ function Admin() {
                         {menuEditIsOpen && <Popup
                                 content={<>
                                     <h4 className='popup-title'>Edit Menu Item</h4>
-                                    <form className='menu-form'>
+                                    <form className='menu-form' onSubmit={onUpdateMenuSubmit}>
                                         <div className='menuName'>
                                             <label>Name</label>
-                                            <input type="text" />
+                                            <input type="text" name="menuName" value={menuName} onChange={onChange}/>
                                         </div>
                                         <div className='price'>
                                             <label>Price</label>
-                                            <input type="text" placeholder='$'/>
+                                            <input type="text" placeholder='$' name="price" value={price} onChange={onChange}/>
                                         </div>
                                         <div className='description'>
                                             <label>Drescription</label>
-                                            <input type="text"/>
+                                            <input type="text" name="description" value={description} onChange={onChange}/>
                                         </div>
                                         <div className='menuCategory'>
                                             <label>Category</label>
-                                            <select></select>
+                                            <select name="menuCategory" value={menuCategory} onChange={onChange}>{menuCategoryList}</select>
                                         </div>
                                         <div className='submitButton'>
                                             <input className='popup-submit' type="submit" value="Save Changes"/>
@@ -463,8 +562,11 @@ function Admin() {
                                 content={<>
                                     <h4 className='popup-title'>Remove Menu Item</h4>
                                     <p className='delete-confirmation'>Are you sure you want to remove this menu item? This action cannot be undone.</p>
-                                    <button className='popup-submit'>Remove Menu Item</button> 
-                                    {/* may have to put button into form so popup closes on submit*/}
+                                    <form onSubmit={onDeleteMenuSubmit}>
+                                        <div className='submitButton'>
+                                            <input className='popup-submit' type="submit" value="Remove Menu Item"/>
+                                        </div>
+                                    </form>
                                 </>}
                                 handleClose={toggleMenuDeletePopup}
                             />}

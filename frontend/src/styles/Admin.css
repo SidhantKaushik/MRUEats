@@ -304,6 +304,9 @@
 .AdminPage .popup-submit {
     margin: 2em 0 2em 0;
     padding: 8px;
+    background-color: #033453;
+    color: white;
+    float: right;
 }
 
 .AdminPage .delete-confirmation {
@@ -311,19 +314,6 @@
     padding: 1em;
 }
 
-.AdminPage input {
-    background: #d9d9d9;
-    height: 30px;
-    border: 1px solid #ccc;
-    width: 100%;
-}
-
-.AdminPage label {
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 25px;
-    color: #000;
-}
 
 /*Mobile*/
 @media (max-width:425px) {
