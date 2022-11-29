@@ -18,10 +18,8 @@ function Header() {
 
     return (
         <header className='header'>
-            <div className='home'>
-                <Link to='/'>Home</Link>
-            </div>
-            <ul className="menu">
+        <h1><Link to='/'>MRU EATS</Link></h1>
+            <ul className="menu-header">
                 {user ? (<>
                     <li><Link to='/order'>Order</Link></li>
                     <li><Link to='/cart'>Cart</Link></li>

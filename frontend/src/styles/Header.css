@@ -18,15 +18,20 @@ h1 {
     margin-top: 0;
 }
 
-.menu li {
-    margin: 5px;
-    font-size: 30px;
-    display: inline-block;
+.menu-header{
+    display: flex;
+width: 100%;
+justify-content: space-evenly;
+opacity: 0.95;
+position: relative;
+}
+
+.menu-header li{
     text-decoration: none;
     padding-left: 2%;
 }
 
-.menu li a {
+.menu-header li a{
     color: white;
     text-decoration: none;
 }

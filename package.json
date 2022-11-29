@@ -19,7 +19,8 @@
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.7.2"
+    "mongoose": "^6.7.2",
+    "react-icons": "^4.6.0"
   },
   "devDependencies": {
     "concurrently": "^7.5.0",

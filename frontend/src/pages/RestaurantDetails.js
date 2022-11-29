@@ -1,20 +1,95 @@
 import '../styles/RestaurantDetails.css'
+import {Link, useLocation} from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { set } from 'mongoose'
 
-function RestaurantDetails() {
+const RestaurantDetails = (props) => {
+
+    console.log("hello")
+
+    const [menuItems, setMenuItems] = useState([])
+    const item = []
+
+    const location = useLocation()
+    useEffect(() => {
+        if(location.state) {
+            for(let i = 0; i < props.menu.menu.length; i++){                
+                if (location.state.id === props.menu.menu[i].id){
+                    item.push(props.menu.menu[i]) 
+               }
+            }
+        }
+        setMenuItems(item)
+    }, [])
+
+    console.log(menuItems)
+
+    // let { id } = 1
+    // console.log(id);
+
+    // const [restaurant, setRestaurant] = useState([]);
+
+    // useEffect(() => {
+    //   const getRestaurantUsingID = async () => {
+    //     try {
+    //       const url = "http://localhost:3000/api/restaurants/"+id;
+    //       const response = await fetch(url);
+    //       const data = await response.json();
+    //       setRestaurant(data);
+    //     } catch (err) {
+    //       console.error(err);
+    //     }
+    //   }
+    //     getRestaurantUsingID();
+    // }, [])
+    // while(!restaurant[0]){
+    //     return;
+    // }
+    // const restaurantSelected = restaurant[0];
+    // console.log(restaurantSelected);
+
+    // function ConvertTime(hour) {
+        
+    //     if(hour <= 1200){
+    //         var hourString = hour.toString();
+    //         hourString = hourString.substring(0,2) + ':' + hourString.substring(2,4);
+    //         return hourString+"AM";
+    //     }
+    //     else{
+    //         hour = hour - 1200;
+    //         var hourString = hour.toString();
+    //         hourString = hourString.substring(0,2) + ':' + hourString.substring(2,4);
+    //         return hourString+"PM";
+    //     }
+    // }
+    // function checkIfOpen() {
+    //     const d = new Date();
+    //     let time = d.getHours() +""+ d.getMinutes();
+    //     console.log(time);
+    //     // console.log(restaurantSelected.open);
+    //     // console.log(restaurantSelected.close);
+    //     if ( time > restaurantSelected.open && time < restaurantSelected.close ){
+    //          return "Open";
+    //     }
+    //     else{
+    //         return "Closed";
+    //     }
+    // }
+
     return (
         <div className="RestaurantPage">
             <div className="RestaurantBanner">
-                {/*<img src={logo} className="restaurantImage" alt="logo" />*/}
+=
                 <div className="firstLine">
-                    <h1 className="restaurant-name">Booster Juice</h1>
+                    <h1 className="restaurant-name">{location.state.name}</h1>
                     <div className="restaurantRating">XXXXX</div>
                 </div>
                 <div className="secondLine">
-                    <h2 className="restaurantInfo">4703 130th Avenue Souteast •</h2>
+                    <h2 className="restaurantInfo">{location.state.address}</h2>
                     <h2 className="restaurantInfo">$3.09 Delivery</h2>
                 </div>
                 <div className="thirdLine">
-                    <h2 className="restaurantInfo">Delivery Hours: 8:00AM - 7:30PM •</h2>
+                    <h2 className="restaurantInfo">Delivery Hours: {location.state.open} - {location.state.close} •</h2>
                     <h2 className="openStatus restaurantInfo">OPEN</h2>
                 </div>
                 <div>
@@ -38,7 +113,7 @@ function RestaurantDetails() {
                     </ol>
 
                 </div>
-                <div className="menu">
+                <div className="restaurantMenu">
                     <h2>Promotions</h2>
 
                     <div className="menuItem">
