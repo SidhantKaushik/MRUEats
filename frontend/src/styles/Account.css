@@ -11,6 +11,38 @@ a {
     background-color: darkblue;
     display: flex;
 }
+.info {
+    grid-area: info;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: auto;
+}
+
+.countryPhone{
+    grid-area: countryPhone;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: auto;
+}
+.FLName{
+    grid-area: FLName;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: auto;
+}
+.countryCode{
+    width:30%;
+    margin-left: auto;
+}
+.phoneNumber{
+    width:40%;
+}
+#pCode{
+    white-space: nowrap;
+}
 
 .AccountPage {
     background-color: white;
@@ -142,7 +174,7 @@ a {
     grid-area: country;
 }
 
-.currentLocation {
+.deliveryLocation {
     grid-area: current;
 }
 

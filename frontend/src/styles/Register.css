@@ -12,6 +12,47 @@
     width: 50vw;
     height: 60vh;
     border: 8px solid #033453;
+    background-color: rgba(255, 255, 255, .8);
+}
+
+form {
+    display: grid;
+    grid-template-areas:
+        "fName lName"
+        "email email"
+        "dLocation dLocation"
+        "password password"
+        "confirm confirm"
+        "submit submit";
+    column-gap: 15px;
+    row-gap: 10px;
+}
+
+.fName{
+    grid-area:fName;
+}
+.lName{
+    grid-area:lName;
+}
+.email{
+    grid-area:email;
+}
+.dLocation{
+    grid-area:dLocation;
+}
+.pass1{
+    grid-area:password;
+}
+.pass2{
+    grid-area:confirm;
+}
+.submitbtn{
+    margin-top: 30px;
+    grid-area:submit;
+    justify-self: center;
+}
+.title{
+    grid-area: signup;
 }
 
 h3 {
@@ -44,10 +85,17 @@ label {
 }
 
 form {
-    width: 400px;
-    margin: 0 auto;
-    padding: 10px 20px;
-
+    display: grid;
+    grid-template-areas:
+        "fName fName"
+        "lName lName"
+        "email email"
+        "dLocation dLocation"
+        "password password"
+        "confirm confirm"
+        "submit submit";
+    column-gap: 15px;
+    row-gap: 10px;
 }
 
 label {

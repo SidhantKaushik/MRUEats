@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
   id: Number,
   firstname: String,
   lastname: String,
+  delivery_loc: String,
   email: String,
   //Maybe number
   /*    phone_number: String,
@@ -14,7 +15,6 @@ const userSchema = new mongoose.Schema({
   
   details: {
     address: String,
-    delivery_loc: String,
     country: String,
     country_code : Number,
     phone_number: String,
