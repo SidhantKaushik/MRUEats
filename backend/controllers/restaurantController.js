@@ -20,40 +20,68 @@ const getRestaurantById = asyncHandler(async (req, res) => {
     res.status(200).json(restaurants);
 });
 
-// @desc   Add restaurant 
-// @route  POST /api/restaurants/
+// @desc   Adds a new restaurant
+// @route  POST /api/restaurants/ADD
 // @access Private
 const addRestaurant = asyncHandler(async (req, res) => {
-    const { logo, name, rating, address, open, close, category } = req.body;
 
-    //Create restaurant
     const restaurant = await Restaurant.create({
-        id: 1,
-        logo: logo,
-        name: name,
-        rating: rating,
-        address: address,
-        open: open,
-        close: close,
-        category: category
+        id: req.body.id,
+        name: req.body.name,
+        rating: req.body.rating,
+        address: req.body.address,
+        open: req.body.open,
+        close: req.body.close,
+        category: req.body.category
     });
 
-    if (restaurant) {
-        res.status(201).json({
-            _id: restaurant.id,
-            logo: restaurant.logo,
-            name: restaurant.name,
-            rating: restaurant.rating,
-            address: restaurant.address,
-            open: restaurant.open,
-            close: restaurant.close,
-            category: restaurant.category,
-        });
-    } else {
-        res.status(400);
-        throw new Error('Invalid restaurant data');
+    if(restaurant){
+
+        res.status(201).json({restaurant});
+
     }
-    res.status(200);
+});
+
+// @desc   Updates a restaurant
+// @route  PUT /api/restaurants/UPDATE
+// @access Private
+const updateRestaurant = asyncHandler(async (req, res) => {
+
+    await Restaurant.findByIdAndUpdate(req.body.id, { 
+        id: req.body.id,
+        name: req.body.name,
+        rating: req.body.rating,
+        address: req.body.address,
+        open: req.body.open,
+        close: req.body.close,
+        category: req.body.category },
+        function (err, docs) {
+            if (err){
+                console.log(err)
+            }
+            else{
+                console.log("Updated Restaurant : ", docs);
+            }
+    });
+    
+});
+
+
+// @desc   Deletes a restaurant
+// @route  DELETE /api/restaurants/DELETE
+// @access Private
+const deleteRestaurant = asyncHandler(async (req, res) => {
+
+    await Restaurant.findByIdAndDelete(req.body.id,
+        function (err, docs) {
+            if (err){
+                console.log(err)
+            }
+            else{
+                console.log("Deleted Restaurant : ", docs);
+            }
+    });
+    
 });
 
 module.exports = {
@@ -61,5 +89,7 @@ module.exports = {
     getAllRestaurants,
     getRestaurantById,
     addRestaurant,
+    updateRestaurant,
+    deleteRestaurant
 
 }

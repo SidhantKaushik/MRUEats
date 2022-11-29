@@ -1,11 +1,11 @@
 import '../styles/Admin.css'
-import { useEffect, useState } from 'react';
-import Popup from '../components/Popup';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { FaEdit } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
+import { useEffect, useState } from 'react';
+import Popup from '../components/Popup';
+import axios from 'axios';
 
 const RESTAURANTS_API_URL = '/api/restaurants/';
 const MENU_API_URL = '/api/restaurants/';
@@ -143,9 +143,43 @@ function Admin() {
 
     //API CALLS
 
+    const createRestaurant = async (restaurantData) => {
+
+
+        const response = await axios.post(RESTAURANTS_API_URL + 'ADD', restaurantData);
+
+        if (response.data) {
+            console.log(response.data);
+        }
+         return response.data;
+
+    }
+
+    const updateRestaurant = async (restaurantData) => {
+
+        const response = await axios.put(API_URL + 'UPDATE', restaurantData);
+
+        if (response.data) {
+            console.log(response.data);
+        }
+         return response.data;
+
+    }
+
+    const deleteRestaurant = async (restaurantData) => {
+
+        const response = await axios.delete(API_URL + 'DELETE', restaurantData);
+
+        if (response.data) {
+            console.log(response.data);
+        }
+         return response.data;
+
+    }
+
     //Add restaurant
 
-    const addRestaurant = async (e) =>{
+    const addRestaurant = (e) =>{
 
         e.preventDefault();
 
@@ -166,12 +200,7 @@ function Admin() {
             category,
         }
 
-        try {
-            const response = await axios.post(RESTAURANTS_API_URL, restaurantData);
-            console.log(response);
-        } catch (error) {
-            console.log(error.response); 
-        }
+        createRestaurant(restaurantData);
     }
 
     return (
