@@ -11,6 +11,7 @@ router.route('/:id').get(getUser).put(protect, updateUser);
 //router.get('/me', getMe);
 //router.get('/', getUsers);
 router.get('/admins', protect, getAdmins);
+router.put('/UPDATE', updateUser);
 //router.get('/:id', getUserById);
 
 

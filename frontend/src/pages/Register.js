@@ -7,15 +7,17 @@ import Spinner from '../components/Spinner';
 import '../styles/Register.css';
 
 function Register() {
+    //Add delivery_loc
     const [formData, setFormData] = useState({
         firstname: '',
         lastname: '',
         email: '',
+        delivery_loc: '',
         password: '',
         password_c: ''
     });
 
-    const { firstname, lastname, email, password, password_c } = formData;
+    const { firstname, lastname, email, delivery_loc, password, password_c } = formData;
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -48,7 +50,7 @@ function Register() {
         e.preventDefault();
 
         //if none inputed
-        if(!firstname && !lastname && !email && !password && !password_c)
+        if(!firstname && !lastname && !email && !delivery_loc && !password && !password_c)
         {
             toast.error('Form not filled');
             return;
@@ -72,6 +74,7 @@ function Register() {
                 firstname,
                 lastname,
                 email,
+                delivery_loc,
                 password,
                 password_c
             }
@@ -110,6 +113,10 @@ function Register() {
                     <div className='pass2'>
                         <label for="confirm-password">Confirm Password</label>
                         <input type="password" id="password_c" name="password_c" value={password_c} placeholder='Confirm password' onChange={onChange} />
+                    </div>
+                    <div className='dLocation'>
+                        <label for="deliveryLoc">Delivery Location</label>
+                        <input type="text" id="dLocation" name="delivery_loc" value={delivery_loc} placeholder='Enter delivery location Ex.(B140 or 123 Street SE)' onChange={onChange} />
                     </div>
                     <div className='submitbtn'>
                         <input id="register-button" type="submit" value="Register" />

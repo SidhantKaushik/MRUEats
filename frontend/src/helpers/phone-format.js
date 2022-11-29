@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 
-// export default function InputPhoneNumber(){
+function InputPhoneNumber(props){
 
-//     const [input, setInput] = useState('');
-//     const handleInput = (e) => {
-//         const formattedPhoneNum = formatPhoneNum(e.target.value);
-//         setInput(formattedPhoneNum);
-//     };
-//     return <input onChange={e => handleInput(e)} value={input} />
-// }
+    const [input, setInput] = useState('');
+    const handleInput = (e) => {
+        const formattedPhoneNum = FormatPhoneNum(e.target.value);
+        setInput(formattedPhoneNum);
+        props.setPhoneNum(formattedPhoneNum);
+    };
+    return <input onChange={e => handleInput(e)} value={input} placeholder={props.num}/>
+}
 
-export default function formatPhoneNum(value){
+function FormatPhoneNum(value){
     if (!value) return value;
-    const phoneNum = value.toString().replace(/[^\d]/g, '');
-    const phoneNumLength = phoneNum.length;
+        const phoneNum = value.toString().replace(/[^\d]/g, '');
+        const phoneNumLength = phoneNum.length;
     if (phoneNumLength < 4) return phoneNum;
     if (phoneNumLength < 7){
         return `(${phoneNum.slice(0, 3)}) ${phoneNum.slice(3)}`;
@@ -21,3 +22,5 @@ export default function formatPhoneNum(value){
     return `(${phoneNum.slice(0, 3)}) ${phoneNum.slice(3, 6,)}-${phoneNum.slice(6, 10)}`;
 
 }
+
+export { InputPhoneNumber, FormatPhoneNum };

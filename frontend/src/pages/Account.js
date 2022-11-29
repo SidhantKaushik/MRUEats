@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useSelector} from 'react-redux';
 import { update, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
-import PhoneNumber from '../helpers/phone-format';
+import {FormatPhoneNum} from '../helpers/phone-format';
 import '../styles/Account.css'
 import { toast } from 'react-toastify';
 import PostalCode from '../helpers/postal-code-format';
@@ -16,8 +16,8 @@ const Account = (props) => {
     
 
     const navigate = useNavigate();
-    //?
-    const { user } = useSelector((state) => state.auth);
+    
+    //const { user } = useSelector((state) => state.auth);
 
     //Gets user info from local storage
     useEffect(() => {
@@ -43,30 +43,47 @@ const Account = (props) => {
             getUser();
         }
 
-    }, [navigate]);
-    console.log(currentUser)
-    useEffect(() => {
+        if(currentUser && user){
 
-        const getOrders = async () => {
-            try{
-                //Add props.user.id instead of 1
-                const url = "api/orders/" + 1;
-                const response = await fetch(url);
-                const data = await response.json();
-                console.log(data)
-                setOrders(data);
+            const getOrders = async () => {
+                try{
+                    //Add props.user.id instead of 1
+                    const url = "api/orders/" + 1;
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    setOrders(data);
+                    
+        
+                } catch (err){
+                    console.error(err)
+                }
+            }
+            getOrders();
+        }
+    }, [navigate, currentUser]);
+
+    // useEffect(() => {
+
+    //     const getOrders = async () => {
+    //         try{
+    //             //Add props.user.id instead of 1
+    //             const url = "api/orders/" + 1;
+    //             const response = await fetch(url);
+    //             const data = await response.json();
+    //             console.log(data)
+    //             setOrders(data);
                 
     
-            } catch (err){
-                console.error(err)
-            }
-        }
-        getOrders();
+    //         } catch (err){
+    //             console.error(err)
+    //         }
+    //     }
+    //     getOrders();
 
-    }, []);
+    // }, []);
 
-    
-    const formattedPhoneNum = PhoneNumber(currentUser.details?.phone_number);
+    //Update
+    const formattedPhoneNum = FormatPhoneNum(currentUser.details?.phone_number);
     const formattedPostalCode = PostalCode(currentUser.details?.postal_code)?.toUpperCase().replace(/(.{3})/g, "$1 ");
     
     
@@ -78,7 +95,7 @@ const Account = (props) => {
                     <div className="profileToolBar">
                         <p>Profile</p>
                         <p>* Required</p>
-                        <Link to='/account-edit' state={{user: currentUser}}>Edit</Link>
+                        <Link to='/account-edit' state={{currentUser: currentUser}}>Edit</Link>
                     </div>
                         <div className="ProfileInformation">
                             <div className="FLName">
@@ -170,9 +187,9 @@ const Account = (props) => {
                         <p id="OrderHistory">Order History</p>
                         {/* Add function to loop through each order */}
                         {/* Issue with rendering */}
-                        { orders?.map((p, index) => (
+                        {/* { orders?.map((p, index) => ( */}
                         
-                        <OrderHistory user={currentUser}></OrderHistory>))}
+                        <OrderHistory user={currentUser}></OrderHistory>
 
                     </div>
                 </div>

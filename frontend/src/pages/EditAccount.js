@@ -1,29 +1,112 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import { useNavigate, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import CountryCodes from "../components/CountryCodes";
 import ProvinceList from "../components/ProvinceList";
+import { InputPhoneNumber, FormatPhoneNum } from "../helpers/phone-format";
+import PostalCode from "../helpers/postal-code-format";
+import axios from "axios";
+const API_URL = '/api/users/';
 
 const EditAccount = (props) => {
-
+    //Check if currentUser is logged in
     //Needed for passing state through <Link>s
     const location = useLocation();
-    const {user} = location.state;
+    const {currentUser} = location.state;
+    
+    const [firstName, setFirstName] = useState({});
+    const [lastName, setLastName] = useState({});
+    const [deliveryLoc, setDeliveryLoc] = useState({});
+    const [countryCode, setCountryCode] = useState({});
+    const [phoneNum, setPhoneNum] = useState({});
+    const [address, setAddress] = useState({});
+    const [province, setProvince] = useState({});
+    const [city, setCity] = useState({});
+    const [postalCode, setPostalCode] = useState({});
 
-    const [formData, setFormData] = useState({
-        firstname: "",
-        lastname: "",
-        delivery_loc: "",
-        //email?
+    const { user } = useSelector((state) => state.auth);
+
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        if (!user) {
+            navigate('/login');
+        }
+    }, [navigate, user]);
+
+    const onChange = (e) => {
+
+        if(e.target.name === 'firstname'){
+            setFirstName(e.target.value);
+        }    
+        if(e.target.name === 'lastname'){
+            setLastName(e.target.value);
+        }
+        if(e.target.name === 'delivery_loc'){
+            setDeliveryLoc(e.target.value);
+        }
+        if(e.target.name === 'address'){
+            setAddress(e.target.value);
+        }
+        if(e.target.name === 'city'){
+            setCity(e.target.value);
+        }
+        if(e.target.name === 'postal_code'){
+            setPostalCode(e.target.value);
+        }
+
+    }
+    //Need to add wrong inputs
+    const onSubmit = (e) => {
+
+        e.preventDefault();
+     
+        const formattedPostalCode = PostalCode(postalCode)?.toUpperCase().replace(/(.{3})/g, "$1 ");
+           
+            const userData = {
+                email: currentUser.email,
+                firstname: isFilled(firstName) ? currentUser.firstname : firstName,
+                lastname: isFilled(lastName) ? currentUser.lastname : lastName,
+
+                details:{
+                    address: isEmpty(address) ? currentUser.details?.address : address,
+                    delivery_loc: isEmpty(deliveryLoc) ? currentUser.details?.delivery_loc : deliveryLoc,
+                    country_code: !isEmpty(countryCode) ? currentUser.details?.country_code : countryCode,
+                    phone_number: isEmpty(phoneNum) ? currentUser.details?.phone_number : phoneNum,
+                    postal_code: isEmpty(formattedPostalCode) ? currentUser.details?.postal_code : formattedPostalCode,
+                    province: isEmpty(province) ? currentUser.details?.province : province,
+                    city: isEmpty(city) ? currentUser.details?.city : city,
+                }
+        }
+        
+        updateUserInfo(userData);
 
 
-    });
+    }
+    function isFilled(value){
+        return value.length >= 0;
+    }
 
-    console.log(user)
-    //onSubmit for cancel and save
-    //Check Postal Code 
-    //Check Phone Number
-    //Check City is all letters
+    function isEmpty(obj){
+        
+        return Object.keys(obj).length === 0;
+
+    }
+    
+    const formattedPhoneNum = FormatPhoneNum(currentUser.details?.phone_number);
+    
+    const updateUserInfo = async (userData) => {
+
+        
+        const response = await axios.post(API_URL + 'UPDATE', userData);
+     
+        if (response.data) {
+            console.log(response.data);
+        }
+         return response.data;
+
+    }
     return (
         <div className="backgroundEffect">
             <div className="AccountPage">
@@ -32,20 +115,21 @@ const EditAccount = (props) => {
                         <p>Profile</p>
                         <p>* Required</p>
                     </div>
+                    <form onSubmit={onSubmit}>
                         <div className="ProfileInformation">
                             <div className="FLName">
                                 <div className="firstName">
                                     <div className="standardLayout">
                                         <h2>First Name</h2>
                                         <h2 className="required">*</h2>
-                                        <input type="text" id="firstname" name="firstname" placeholder={user.firstname} ></input>
+                                        <input type="text" id="firstname" name="firstname" placeholder={currentUser.firstname}  onChange={onChange}></input>
                                     </div>
                                 </div>
                                 <div className="lastName">
                                     <div className="standardLayout">
                                         <h2>Last Name</h2>
                                         <h2 className="required">*</h2>
-                                        <input type="text" id="lastname" name="lastname" placeholder={user.lastname}></input>
+                                        <input type="text" id="lastname" name="lastname" placeholder={currentUser.lastname} onChange={onChange}></input>
                                     </div>
                                 </div>
                             </div>
@@ -53,35 +137,35 @@ const EditAccount = (props) => {
                                 <div className="standardLayout">
                                     <h2>Email</h2>
                                     <h2 className="required">Permanent</h2>
-                                    <input type="text" id="email" name="email" value={user.email} placeholder={user.email} readOnly></input>
+                                    <input type="text" id="email" name="email" value={currentUser.email} placeholder={currentUser.email} readOnly></input>
                                 </div>
                             </div>
                             <div className="deliveryLocation">
                                 <div className="twoLayout">
                                     <h2>Delivery Location</h2>
                                     <h2 className="required">*</h2>
-                                    <input type="text" id="dLocation" name="dLocation" placeholder={user.delivery_loc}></input>
+                                    <input type="text" id="dLocation" name="delivery_loc" placeholder={currentUser.delivery_loc} onChange={onChange}></input>
                                 </div>
                             </div>
                             <div className="countryPhone">
                                 <div className="countryCode">
                                     <div className="twoLayout">
                                         <h2>Country Code</h2>
-                                        <CountryCodes code={user.details?.country_code} isActive={true}></CountryCodes>
+                                        <CountryCodes code={currentUser.details?.country_code} isActive={true} setCountryCode={setCountryCode}></CountryCodes>
                                     </div>
                                 </div>
                                 <div className="phoneNumber">
                                     <div className="standardLayout">
                                         <h2>Phone Number</h2>
-                                        
-                                        <input type="number" id="phone_number" name="phone_number" placeholder={user.details?.phone_number} ></input>
+                                        <InputPhoneNumber num={formattedPhoneNum} setPhoneNum={setPhoneNum} isActive={true}></InputPhoneNumber>
+                                        {/* <input type="number" id="phone_number" name="phone_number" value={phoneNum} placeholder={currentUser.details?.phone_number} onChange={onChange}></input> */}
                                     </div>
                                 </div>
                             </div>
                             <div className="streetAddress">
                                 <div className="twoLayout">
                                     <h2>Street Address</h2>
-                                    <input type="text" id="address" name="address" placeholder={user.details?.address} ></input>
+                                    <input type="text" id="address" name="address" placeholder={currentUser.details?.address} onChange={onChange}></input>
                                 </div>
                             </div>
                             
@@ -89,36 +173,39 @@ const EditAccount = (props) => {
                             <div className="city">
                                 <div className="twoLayout">
                                     <h2 id="city">City</h2>
-                                    <input type="text" id="city" name="city" placeholder={user.details?.city}></input>
+                                    <input type="text" id="city" name="city" placeholder={currentUser.details?.city} onChange={onChange}></input>
                                 </div>
                             </div>    
                             <div className="province">
                                 <div className="twoLayout">
                                     <h2>Province</h2>
-                                    <ProvinceList province={user.details?.province} ></ProvinceList>
+                                    <ProvinceList province={currentUser.details?.province} setProvince={setProvince}></ProvinceList>
                                 </div>
                             </div>
                             <div className="postal">
                                 <div className="twoLayout">
                                     <h2 id="pCode">Postal Code</h2>
-                                    <input type="text" id="postal_code" name="postal_code" placeholder={user.details?.postal_code}></input>
+                                    <input type="text" id="postal_code" name="postal_code" placeholder={currentUser.details?.postal_code} onChange={onChange}></input>
                                 </div>
                             </div>
                             <div className="country">
                                 <div className="twoLayout">
                                     <h2>Country</h2>
                                     <h2 className="required">Permanent</h2>
-                                    <input type="text" id="country" name="country" value={user.details?.country} placeholder={user.details?.country} readOnly></input>
+                                    <input type="text" id="country" name="country" value={currentUser.details?.country} placeholder={currentUser.details?.country} readOnly></input>
                                 </div>
                             </div>
-                            </div>
+                        </div>
+                        
                             <div id="saveButton">
                             <input type="submit" id="saveButtonBtn" value="Save"></input>
                             </div>
                             <div id="cancelButton">
-                            <input type="submit" id="saveButtonBtn" value="Cancel"></input>
+                            <input type="submit" id="cancelButtonBtn" value="Cancel"></input>
+                            <Link to='/account'>Cancel</Link>
                             </div>
                         </div>
+                        </form>
                 </div>
             </div>
         </div>

@@ -8,10 +8,10 @@ const OrderHistory = (props) => {
 
         <div>
             <div>
-            Restaurant
+            Restaurant name
             </div>
             <div>
-            Hallo
+            Restaurant details
             </div>
         </div>
     )

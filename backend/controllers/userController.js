@@ -10,11 +10,9 @@ const User = require('../models/User');
 const registerUser = asyncHandler(async (req, res) => {
 
     let id = 1;
-    const { firstname, lastname, email, password, password_c } = req.body;
+    const { firstname, lastname, email, delivery_loc, password, password_c } = req.body;
 
-    console.log(req.body)
-
-    if (!firstname || !lastname || !email || !password || !password_c) {
+    if (!firstname || !lastname || !email || !delivery_loc || !password || !password_c) {
         res.status(400);
         throw new Error('Please add all fields');
     };
@@ -40,7 +38,7 @@ const registerUser = asyncHandler(async (req, res) => {
         id: id,
         firstname: firstname,
         lastname: lastname,
-        delivery_loc: "123 Street",
+        delivery_loc: delivery_loc,
         email: email,
         isAdmin: true,
         isCourier: false,
@@ -114,8 +112,6 @@ const getUser = asyncHandler(async (req, res) => {
 
     //Check for user email
     const user = await User.find({id: req.params.id});
-    console.log("penis");
-    console.log(user[0]);
 
     if (user) {
         res.json({user});
@@ -127,11 +123,11 @@ const getUser = asyncHandler(async (req, res) => {
 
 
 // @desc   Updates user information
-// @route  PUT /api/users/update
+// @route  PUT /api/users/UPDATE
 // @access Private
 const updateUser = asyncHandler(async (req, res) => {
     
-    const { firstname, lastname, email, phone_number, address, postal_code } = req.body;
+    const { email } = req.body;
     
     //Check for user email
     const user = await User.find({email});

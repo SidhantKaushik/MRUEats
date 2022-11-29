@@ -36,12 +36,10 @@ const logout = () => {
 //Update user info
 const update = async (userData) => {
     
-    console.log(userData)
-    const response = await axios.put(API_URL + "update", userData);
+    const response = await axios.put(API_URL + "UPDATE", userData);
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
     }
-    console.log(response.data)
     return response.data;
 };
 

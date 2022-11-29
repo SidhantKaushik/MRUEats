@@ -23,6 +23,7 @@ function CountryCodes(props){
 
     const changeHandler = value => {
         setValue(value);
+        props.setCountryCode(value.value);
     }
 
     if(props.isActive){
