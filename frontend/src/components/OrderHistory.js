@@ -11,7 +11,7 @@ const OrderHistory = (props) => {
             Restaurant name
             </div>
             <div>
-            Restaurant details
+            Order details
             </div>
         </div>
     )

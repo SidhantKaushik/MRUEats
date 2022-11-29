@@ -45,11 +45,11 @@ const registerUser = asyncHandler(async (req, res) => {
         password_bcrypt: hashedPassword,
 
         details:{
-            address: "123 Street",
+            address: "",
             country:"Canada",
-            country_code:"1",
-            phone_number: 1111111111,
-            postal_code: "T2X 1O4",
+            country_code:1,
+            phone_number: "",
+            postal_code: "",
             province:"Alberta",
             city: "Calgary"
         }
@@ -140,17 +140,18 @@ const updateUser = asyncHandler(async (req, res) => {
             postal_code: req.body.postal_code,
             province: req.body.province,
             city: req.body.city,
+            country: req.body.country
         }
     }, function (err, data){
 
         if(err){console.log(err);}
         else{
-            res.json({user})
+            res.json({data})
             console.log("Updated User: ", data);
         }
 
 
-    }).clone().catch(function(err){console.log(err)});
+    });
 
 
 
