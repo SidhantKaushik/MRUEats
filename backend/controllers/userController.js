@@ -127,11 +127,34 @@ const getUser = asyncHandler(async (req, res) => {
 // @access Private
 const updateUser = asyncHandler(async (req, res) => {
     
-    const { email } = req.body;
-    
     //Check for user email
-    const user = await User.find({email});
+    const user = await User.findByIdAndUpdate(req.body.id, {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
 
+        details:{
+            address: req.body.address,
+            delivery_loc: req.body.delivery_loc,
+            country_code: req.body.country_code,
+            phone_number: req.body.phone_number,
+            postal_code: req.body.postal_code,
+            province: req.body.province,
+            city: req.body.city,
+        }
+    }, function (err, data){
+
+        if(err){console.log(err);}
+        else{
+            res.json({user})
+            console.log("Updated User: ", data);
+        }
+
+
+    }).clone().catch(function(err){console.log(err)});
+
+
+
+    
     console.log(user);
 
 

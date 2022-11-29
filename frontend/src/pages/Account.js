@@ -41,10 +41,14 @@ const Account = (props) => {
                 }
             } 
             getUser();
+            //Update
+            
         }
 
         if(currentUser && user){
-
+            
+            
+            
             const getOrders = async () => {
                 try{
                     //Add props.user.id instead of 1
@@ -81,11 +85,7 @@ const Account = (props) => {
     //     getOrders();
 
     // }, []);
-
-    //Update
-    const formattedPhoneNum = FormatPhoneNum(currentUser.details?.phone_number);
-    const formattedPostalCode = PostalCode(currentUser.details?.postal_code)?.toUpperCase().replace(/(.{3})/g, "$1 ");
-    
+    console.log(currentUser);
     
     return (
         <div className="backgroundEffect">
@@ -125,13 +125,14 @@ const Account = (props) => {
                                 <div className="twoLayout">
                                     <h2>Delivery Location</h2>
                                     <h2 className="required">*</h2>
-                                    <input type="text" id="dLocation" name="dLocation" value={currentUser?.deliver_location} placeholder={currentUser?.delivery_location} readOnly></input>
+                                    <input type="text" id="dLocation" name="dLocation" value={currentUser.deliver_location} placeholder={currentUser?.delivery_location} readOnly></input>
                                 </div>
                             </div>
                             <div className="countryPhone">
                                 <div className="countryCode">
+                                    <h2>Country Code</h2> 
                                     <div className="twoLayout">
-                                        <h2>Country Code</h2> 
+                                        
                                         <CountryCodes code={currentUser.details?.country_code} isActive={false}></CountryCodes>
                                     </div>
                                 </div>
@@ -139,7 +140,7 @@ const Account = (props) => {
                                     <div className="standardLayout">
                                         <h2>Phone Number</h2>
                                         
-                                        <input type="text" id="phone_number" name="phone_number" value={formattedPhoneNum} placeholder={formattedPhoneNum} readOnly></input>
+                                        <input type="text" id="phone_number" name="phone_number" value={FormatPhoneNum(currentUser.details?.phone_number)} placeholder={FormatPhoneNum(currentUser.details?.phone_number)} readOnly></input>
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +167,7 @@ const Account = (props) => {
                             <div className="postal">
                                 <div className="twoLayout">
                                     <h2 id="pCode">Postal Code</h2>
-                                    <input type="text" id="postal_code" name="postal_code" value={formattedPostalCode} placeholder={formattedPostalCode} readOnly></input>
+                                    <input type="text" id="postal_code" name="postal_code" value={PostalCode(currentUser.details?.postal_code)?.toUpperCase().replace(/(.{3})/g, "$1 ")} placeholder={PostalCode(currentUser.details?.postal_code)?.toUpperCase().replace(/(.{3})/g, "$1 ")} readOnly></input>
                                 </div>
                             </div>
                             <div className="country">

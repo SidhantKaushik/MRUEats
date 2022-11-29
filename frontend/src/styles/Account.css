@@ -36,10 +36,11 @@ a {
     flex: auto;
 }
 .countryCode{
-    width:50%;
+    width:30%;
+    margin-left: auto;
 }
 .phoneNumber{
-    width:50%;
+    width:40%;
 }
 #pCode{
     white-space: nowrap;
@@ -172,7 +173,7 @@ a {
 }
 
 
-.currentLocation {
+.deliveryLocation {
     grid-area: current;
     min-width:0;
 }

@@ -23,6 +23,7 @@ form {
     grid-template-areas:
         "fName lName"
         "email email"
+        "dLocation dLocation"
         "password password"
         "confirm confirm"
         "submit submit";
@@ -38,6 +39,9 @@ form {
 }
 .email{
     grid-area:email;
+}
+.dLocation{
+    grid-area:dLocation;
 }
 .pass1{
     grid-area:password;
@@ -97,6 +101,7 @@ form {
         "fName fName"
         "lName lName"
         "email email"
+        "dLocation dLocation"
         "password password"
         "confirm confirm"
         "submit submit";
