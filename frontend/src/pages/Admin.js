@@ -28,6 +28,14 @@ function Admin() {
     });
     const { logo, restaurantName, rating, address, open, close, category } = restaurantFormData;
 
+    const [menuFormData, setMenuFormData] = useState({
+        name: '',
+        price: '',
+        description: '',
+        menuCategory: ''
+    });
+    const { name, price, description, menuCategory } = menuFormData;
+
     const [restoEditIsOpen, setRestoEditIsOpen] = useState(false);
     const [restoAddIsOpen, setRestoAddIsOpen] = useState(false);
     const [restoDeleteIsOpen, setRestoDeleteIsOpen] = useState(false);
@@ -213,7 +221,7 @@ function Admin() {
 
     //Add restaurant
 
-    const addRestaurant = (e) =>{
+    const onAddRestSubmit = (e) =>{
 
         e.preventDefault();
 
@@ -237,6 +245,27 @@ function Admin() {
         createRestaurant(restaurantData);
     }
 
+    const onUpdateRestSubmit = (e) =>{
+
+        e.preventDefault();
+
+        //if none inputed 
+        if(!name && !price && !description && !menuCategory)
+        {
+            toast.error('Form not filled');
+            return;
+        }
+
+        const menuData = {
+            name,
+            price,
+            description,
+            menuCategory,
+        }
+
+        updateRestaurant(menuData);
+    }
+
     return (
         <div className="AdminPage">
             <div className="adminMainBody">
@@ -247,7 +276,7 @@ function Admin() {
                         {restoAddIsOpen && <Popup
                         content={<>
                             <h4 className='popup-title'>Add Restaurant</h4>
-                            <form className='restaurant-form' onSubmit={addRestaurant}>            
+                            <form className='restaurant-form' onSubmit={onAddRestSubmit}>            
                                 <div className='logo'>
                                     <label>Logo</label>
                                     <input type="text" name="logo" value={logo} placeholder='enter url' onChange={onChange}/>
