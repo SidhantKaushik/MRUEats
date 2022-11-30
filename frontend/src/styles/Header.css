@@ -1,4 +1,4 @@
-header{
+.header{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -15,16 +15,19 @@ h1{
     flex: 0 1 auto;
     width: fit-content;
     white-space: nowrap;
-    color: white;
     padding-left: 10px;
+}
+.header li a{
+    cursor: pointer;
 }
 
 h1 a{
-    color: white;
+    font-family: 'Staatliches', cursive !important;
+    color: #FFB703 !important;
     text-decoration: none;
 }
 
-.menu{
+.menu-header{
     display: flex;
 width: 100%;
 justify-content: space-evenly;
@@ -32,13 +35,13 @@ opacity: 0.95;
 position: relative;
 }
 
-.menu li{
+.menu-header li{
     text-decoration: none;
     padding-left: 2%;
     list-style: none;
 }
 
-.menu li a{
+.menu-header li a{
     color: white;
     text-decoration: none;
 }

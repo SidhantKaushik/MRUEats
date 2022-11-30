@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { login, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
-//import '../styles/Login.css'
+import '../styles/Login.css'
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -59,6 +59,7 @@ function Login() {
   }
 
   return (
+    <div className='Login'>
     <form onSubmit={onSubmit}>
       <label>
         <p>Email Address</p>
@@ -69,9 +70,10 @@ function Login() {
         <input type="password" name="password" value={password} onChange={onChange} />
       </label>
       <div>
-        <button type="submit">Submit</button>
+        <button className="submitButton" type="submit">Login</button>
       </div>
     </form>
+    </div>
   )
 }
 
