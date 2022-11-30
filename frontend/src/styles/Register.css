@@ -1,6 +1,3 @@
-body{
-    background-image: url(../images/signup-page.jpg);
-}
 .main-container {
     display:flex;
     margin-top: 30px;
@@ -41,6 +38,23 @@ form {
 }
 .pass1{
     grid-area:password;
+    display:grid;
+    grid-template-areas:
+    "PasswordText infoAboutPassword"
+    "passwordInput passwordInput";
+    justify-content: space-between;
+}
+#passwordText{
+    grid-area: PasswordText;
+}
+#requirementsForPass{
+    grid-area: infoAboutPassword;
+    margin:0;
+    color: #FFB703;
+    font-family: 'Staatliches', cursive !important;
+}
+#password{
+    grid-area: passwordInput;
 }
 .pass2{
     grid-area:confirm;
@@ -68,9 +82,11 @@ h3 {
 #register-button {
     width: 185px;
     height: 40px;
-    color: white;
+    color: #FFB703 !important;
+    font-size: 1.5em;
     background: #033453;
     margin: 1em;
+    font-family: 'Staatliches', cursive !important;
 }
 
 input {

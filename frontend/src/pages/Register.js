@@ -108,7 +108,8 @@ function Register() {
                         <input type="email" id="email" name="email" value={email} placeholder='Enter your email' onChange={onChange} />
                     </div>
                     <div className='pass1'>
-                        <label for="password">Password</label>
+                        <label id="passwordText" for="password">Password</label>
+                        <p id="requirementsForPass">Minimum 6 Characters</p>
                         <input type="password" id="password" name="password" value={password} placeholder='Enter password' onChange={onChange} />
                     </div>
                     <div className='pass2'>

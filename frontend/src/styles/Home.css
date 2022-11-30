@@ -1,45 +1,116 @@
 .home {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-areas:
+        "splash splash splash"
+        "categories list list";
+    grid-template-columns: 1fr 1fr 1fr;
+    padding-left: 30px;
+    padding-right:30px;
+    padding-top: 20px;
+    max-width: 1400px;
+    min-width: 70vw;
+    margin-left:auto;
+    margin-right:auto;
+}
+@media (max-width: 900px) {
+    .home{
+        grid-template-areas:
+        "splash"
+        "categories"
+        "list";
+        grid-template-columns: 1fr;
+    }
+    .HomePage h2{
+        font-size: 1em;
+    }
+}
+body{
+    background-color: #E5E5E5;
 }
 
-.category img {
-    width: 300px;
-    height: 150px;
+
+.categories{
+    grid-area: categories;
+}
+.SplashScreen{
+    position: relative;
+    grid-area: splash;
+    height: 100%;
+    width: 100%;
+    justify-self: center;
+    z-index: -1;
+}
+.SplashScreen img{
+    height: 300px;
+    object-fit: fill;
+    width: 100%;
+}
+.restaurantList{
+    grid-area: list;
+}
+.restaurantList img{
+    height: 100px;
     object-fit: cover;
 }
-
-#categories {
+#orderNow{
+    position: absolute;
+    right:0px;
+    font-size: 24px;
+    bottom: 4px;
+    color: white;
+    background-color: #033453;
+    padding-left: 10px;
+    padding-right:10px;
+}
+.SearchBar{
+    width: 100%;
+    overflow:hidden;
+    border-radius: 5px;
+}
+.SearchBar input{
+    background-color: #F6F6F3;
+    padding-left:10px;
+}
+.list{
+    background-color: #f0f1f1;
+    padding: 15px;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+.restaurantsHomePage{
+    display: grid;
+    grid-template-areas:
+        "logo name . . rating"
+        "logo address . . rating";
+    grid-template-columns: 80px 1fr 1fr;
+    margin-bottom: 10px;
+}
+.restaurantsHomePage .logo{
+    grid-area: logo;
     align-self: center;
-    margin: auto;
 }
-
-#categories .category {
-    padding: 20px;
+.restaurantsHomePage .logo img{
+    width: 60px;
+    height:60px;
 }
-
-#search-box{
-    justify-content: center;
-    width: 500px;
-}
-
-
-.restaurants {
-   display: inline-block;
-   text-align: left;
-   width: 500px;
-   
-}
-
-.logo {
-    float: left
-}
-
-.logo img {
-    border-radius: 50%;
-    width: 150px;
-}
-
-.info {
+.restaurantsHomePage .name{
+    grid-area: name;
     
+}
+.restaurantsHomePage .rating{
+    grid-area: rating;
+    background-color: #033453;
+    color:white;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-self: center;
+}
+.restaurantsHomePage .rating p{
+    margin-left:auto;
+    margin-right:auto;
+    align-self:center;
+}
+.restaurantsHomePage .address{
+    grid-area: address;
 }

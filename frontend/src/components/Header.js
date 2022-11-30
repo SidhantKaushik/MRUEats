@@ -33,7 +33,7 @@ function Header() {
                     <li><Link to='/cart'>Cart</Link></li>
                     <li><Link to='/account'>Account</Link></li>
                     <li><Link to='/admin'>Admin</Link></li>
-                    <li><button className='btn' onClick={onLogout}>Logout</button></li>
+                    <li><a className='btn' onClick={onLogout}>Logout</a></li>
 
                 </>) : (<>
                     <li><Link to='/login'>Login</Link></li>
@@ -49,7 +49,7 @@ function Header() {
             </div>
             <style jsx="true">{`
                 
-                .menu{
+                .menu-header{
                     display:flex;
                     flex-wrap: wrap;
                     justify-content: ${user ? 'space-evenly' : 'flex-end'};
@@ -57,7 +57,7 @@ function Header() {
                     padding: 0px;
                     overflow: hidden;
                 }
-                .menu li{
+                .menu-header li{
                     list-style-type: none;
                     padding-right: 10px;
                 }
@@ -80,7 +80,7 @@ function Header() {
                     }
                 
                    
-                    .menu{
+                    .menu-header{
                         display: ${hamburgerOpen ? 'flex' : 'none'};
                         flex-direction: column;
                         background-color: #033453;
