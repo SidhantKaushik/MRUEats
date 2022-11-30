@@ -5,7 +5,7 @@ import '../styles/RestaurantDetails.css';
 const Category = (props) => {
 
     return (    
-       <li className='category-item' onClick={props.filter}>
+       <li className='category-item' onClick={()=>props.filter(props.category)}>
             {props.category}
        </li>
     )

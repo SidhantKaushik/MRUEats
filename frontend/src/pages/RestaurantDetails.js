@@ -8,9 +8,12 @@ import MenuItem from './MenuItem'
 const RestaurantDetails = (props) => {
 
     const [menuItems, setMenuItems] = useState([])
-    const [currItem, setCurrItem] = useState([])
+    const [categories, setCategories] = useState([])
+    const [currItem, setCurrItem] = useState([{name:"Select menu items to show up here"}])
+
     let currentItem = []
     let item = []
+    let filterItem = []
     // let oldItems = JSON.parse(localStorage.getItem('itemsArray')) || [];
 
     const location = useLocation()
@@ -24,26 +27,44 @@ const RestaurantDetails = (props) => {
             }
         }
         if(item.length != 0){
+            console.log('test')
             localStorage.setItem('itemsArray', JSON.stringify(item))
             setMenuItems(JSON.parse(localStorage.getItem('itemsArray')))
+            item = item.filter((value, index, self) => 
+                index === self.findIndex((t) => (
+                    t.category === value.category 
+                  ))
+            )
+            localStorage.setItem('categories', JSON.stringify(item))
+            setCategories(JSON.parse(localStorage.getItem('categories')))
         }
     }, [])
 
     //When page is refreshed, menu data is retreived from local storage
     useEffect(() => {
         setMenuItems(JSON.parse(localStorage.getItem('itemsArray')))
+        setCategories(JSON.parse(localStorage.getItem('categories')))
     }, [])
 
     console.log(menuItems)
 
-    function filter(e){
+    function filter(props){
         item = []
-        for(let i = 0; i < menuItems.length; i++){    
-            if (menuItems[i].name.includes(e.target.value) || menuItems[i].name.toLowerCase().includes(e.target.value.toLowerCase())){
-                item.push(menuItems[i])
+        filterItem = []
+        let x = JSON.parse(localStorage.getItem('itemsArray'))
+        for(let i = 0; i < x.length; i++){    
+            if (x[i].category == props){
+                filterItem.push(x[i])
             }
         }
-        setMenuItems(item)
+        
+        if (props.target != undefined){
+            setMenuItems(x)
+        }
+        else {
+            setMenuItems(filterItem)
+        }
+        
     }
 
     function menuSelect(props) {
@@ -110,7 +131,6 @@ const RestaurantDetails = (props) => {
     //         return "Closed";
     //     }
     // }
-
     return (
         <div className="RestaurantPage">
             <div className="RestaurantBanner">
@@ -138,7 +158,7 @@ const RestaurantDetails = (props) => {
                     <li className='category-item' onClick={filter}>
                         All 
                     </li>
-                        {menuItems.map((p, index) => (
+                        {categories.map((p, index) => (
                             <Category
                                 category={p.category}
                                 filter={filter}
@@ -168,6 +188,7 @@ const RestaurantDetails = (props) => {
                                     <>{p.name}</>
                                 )
                             })}
+                    <button>Add To Cart</button>
                 </div>
             </div>
         </div>
