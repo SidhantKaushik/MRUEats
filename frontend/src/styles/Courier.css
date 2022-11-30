@@ -51,42 +51,73 @@
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
     grid-template-areas:
-        "order-logo order-info status-info";
+        "order-logo order-info order-buttons";
     background-color: #F5F5F5;
     height: 200px;
-    width: 95%;
+    width: 50vw;
     border-radius: 15px;
     margin: 1em;
 }
 
 .courier-page .order-logo {
     grid-area: order-logo;
+    margin: 2em;
     display: flex;
     align-self: center;
+}
+
+.courier-page .logo {
     border-radius: 50px;
-    margin: 0 auto;
 }
 .courier-page .order-info {
     grid-area: order-info;
     line-height: 10px;
 }
-.courier-page .status-info {
-    grid-area: status-info;
+.courier-page .order-buttons {
+    grid-area: order-buttons;
     display: flex;
     align-self: center;
+    flex-direction: column;
 }
 
-.courier-page .status-button{
+.courier-page .status-button, .expand-button{
     border-radius: 50px;
     border: 1px solid rgb(190, 189, 189);
-    color: #033453;
+    color: #365466;
     background-color: white;
-    padding: 6px;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bolder;
+    width: max-content;
 }
 
 .courier-page .order-resto-title{
     font-weight: bold;
     font-size: 1.2em;
+}
+
+/*popups*/
+
+.courier-page .popup-title {
+    font-weight: bold;
+    font-size: 1.25em;
+    margin-top: 2em;
+    margin-left: 1em;
+}
+
+.courier-page .menu-list-name {
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 23px;
+}
+
+.courier-page .menuListItem {
+    background-color: #f2f2f2;
+    margin: 1em;
+    padding: 10px;
+    font-size: 1.2em;
+    line-height: 23px;
+    border-radius: 10px;
 }
 
 /*Mobile*/

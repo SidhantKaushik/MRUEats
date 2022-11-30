@@ -106,7 +106,6 @@ function Admin() {
     
     getMenuUsingID();
 
-    console.log(menus);
     let menuCategories = [...new Set(menus.map(({category}) => (category)))];
     
     var menuCategoryList = menuCategories.map((category) =>
