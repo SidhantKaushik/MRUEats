@@ -124,7 +124,7 @@ const Account = (props) => {
                                 <div className="twoLayout">
                                     <h2>Delivery Location</h2>
                                     <h2 className="required">*</h2>
-                                    <input type="text" id="dLocation" name="dLocation" value={currentUser?.deliver_loc} placeholder={currentUser?.delivery_loc} readOnly></input>
+                                    <input type="text" id="dLocation" name="delivery_loc" value={currentUser.delivery_loc} placeholder={currentUser.delivery_loc} readOnly></input>
                                 </div>
                             </div>
                             <div className="countryPhone">
@@ -139,7 +139,7 @@ const Account = (props) => {
                                     <div className="standardLayout">
                                         <h2>Phone Number</h2>
                                         
-                                        <input type="text" id="phone_number" name="phone_number" value={FormatPhoneNum(currentUser.details?.phone_number)} placeholder={FormatPhoneNum(currentUser.details?.phone_number)} readOnly></input>
+                                        <input type="text" id="phone_number" name="phone_number" value={currentUser.details?.phone_number} placeholder={currentUser.details?.phone_number} readOnly></input>
                                     </div>
                                 </div>
                             </div>

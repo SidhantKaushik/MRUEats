@@ -3,17 +3,17 @@
     font-weight: 400;
 }
 
-a {
+.Account a {
     color: darkblue;
     text-decoration: none;
 }
 
 
-.backgroundEffect {
+.Account .backgroundEffect {
     background-color: darkblue;
     display: flex;
 }
-.info {
+.Account .info {
     grid-area: info;
     display: flex;
     flex-direction: row;
@@ -21,28 +21,28 @@ a {
     flex: auto;
 }
 
-.countryPhone{
+.Account .countryPhone{
     grid-area: countryPhone;
     display: flex;
     flex-direction: row;
     width: 100%;
     flex: auto;
 }
-.FLName{
+.Account .FLName{
     grid-area: FLName;
     display: flex;
     flex-direction: row;
     width: 100%;
     flex: auto;
 }
-.countryCode{
+.Account .countryCode{
     width:30%;
     margin-left: auto;
 }
-.phoneNumber{
+.Account .phoneNumber{
     width:40%;
 }
-#pCode{
+.Account #pCode{
     white-space: nowrap;
 }
 
@@ -57,11 +57,11 @@ a {
     grid-template-rows: 1fr 1fr;
 }
 
-.profileSide {
+.Account .profileSide {
     grid-column: 1;
 }
 
-.profileToolBar {
+.Account .profileToolBar {
     display: flex;
     justify-content: space-between;
     padding: 0 20px;
@@ -71,7 +71,7 @@ a {
     border-bottom: solid black 2px;
 }
 
-.standardLayout {
+.Account .standardLayout {
     display: grid;
     grid-template-columns: auto auto;
     grid-template-areas:
@@ -81,18 +81,18 @@ a {
     justify-content: space-between;
 }
 
-.standardLayout h2:first-of-type {
+.Account .standardLayout h2:first-of-type {
     grid-area: title;
     margin: 10px;
 }
 
-.required {
+.Account .required {
     grid-area: required;
     margin: 10px;
     color: gray;
 }
 
-.standardLayout input {
+.Account .standardLayout input {
     grid-area: input;
     background-color: lightgray;
     border: 0;
@@ -101,7 +101,7 @@ a {
     min-width: 0;
 }
 
-.twoLayout {
+.Account .twoLayout {
     display: grid;
     grid-template-columns: auto auto;
     grid-template-areas:
@@ -111,12 +111,12 @@ a {
     justify-content: space-between;
 }
 
-.twoLayout h2:first-of-type {
+.Account .twoLayout h2:first-of-type {
     grid-area: title;
     margin: 10px;
 }
 
-.twoLayout input {
+.Account .twoLayout input {
     grid-area: input;
     background-color: lightgray;
     border: 0;
@@ -124,13 +124,13 @@ a {
     margin-bottom: 10px;
 }
 
-.orderSide {
+.Account .orderSide {
     grid-column: 2;
     background-color: pink;
 }
 
 
-.ProfileInformation {
+.Account .ProfileInformation {
     display: grid;
     grid-template-areas:
         "FLName FLName FLName FLName FLName FLName"
@@ -143,50 +143,50 @@ a {
         
 }
 
-.province{
+.Account .province{
     width: 33%;
 }
-.postal{
+.Account .postal{
     width: 33%;
 }
-.country{
+.Account .country{
     width: 33%;
 }
 
-.firstName {
+.Account .firstName {
     width: 50%;
 }
 
-.lastName {
+.Account .lastName {
     width:50%;
 }
 
-.emailDiv {
+.Account .emailDiv {
     grid-area: email;
     min-width:0;
 }
 
 
-.streetAddress {
+.Account .streetAddress {
     grid-area: street;
     min-width:20vw;
 }
 
 
-.postal {
+.Account .postal {
     grid-area: postal;
 }
 
-.country {
+.Account .country {
     grid-area: country;
 }
 
-.deliveryLocation {
+.Account .deliveryLocation {
     grid-area: current;
     min-width:0;
 }
 
-#saveButton {
+.Account #saveButton {
     grid-area: save;
     margin-top: 20px;
     margin-right: 6px;
@@ -195,14 +195,14 @@ a {
     display:flex;
 }
 
-#saveButtonBtn{
+.Account #saveButtonBtn{
     width:200px;
     padding:0;
     margin-left: auto;
     height: 30px;
 }
 
-#cancelButton {
+.Account #cancelButton {
     grid-area: cancel;
     margin-top: 20px;
     margin-right: 6px;
@@ -211,7 +211,7 @@ a {
     display:flex;
 }
 
-#cancelButtonBtn{
+.Account #cancelButtonBtn{
     width:200px;
     padding:0;
     margin-left: auto;
@@ -219,7 +219,7 @@ a {
     text-align: center; 
 }
 
-#cancelButton {
+.Account #cancelButton {
     grid-area: cancel;
     margin-top: 20px;
     margin-right: 6px;
@@ -228,7 +228,7 @@ a {
     display:flex;
 }
 
-#cancelButtonBtn{
+.Account #cancelButtonBtn{
     width:200px;
     padding:0;
     margin-left: auto;
@@ -236,14 +236,14 @@ a {
     text-align: center; 
 }
 
-#OrderHistory {
+.Account #OrderHistory {
     font-size: 2rem;
     margin-right: auto;
     margin-left: 15px;
     display: flex;
 }
 
-.orderHistoryToolBar {
+.Account .orderHistoryToolBar {
     border-bottom: solid black 2px;
 }
 
@@ -258,7 +258,7 @@ a {
     h2 {
         font-size: .50em;
     }
-    .ProfileInformation {
+    .Account .ProfileInformation {
         display: grid;
         grid-template-areas:
             "FLName FLName FLName FLName FLName FLName"

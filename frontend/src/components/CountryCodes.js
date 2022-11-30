@@ -27,6 +27,7 @@ function CountryCodes(props){
     }
 
     if(props.isActive){
+        console.log("hello")
         return <Select options={options} value={value} onChange={changeHandler} placeholder={props.code}/>;
     }else{
         return <Select value={currCountryCode} placeholder={props.code} 
