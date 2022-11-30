@@ -35,7 +35,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     //Create user
     const user = await User.create({
-        id: 1,
+        id: id,
         firstname: firstname,
         lastname: lastname,
         delivery_loc: delivery_loc,
@@ -80,7 +80,7 @@ const registerUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
 
     const { email, password } = req.body;
-
+    
     //Check for user email
     const user = await User.findOne({ email });
     console.log(user)
@@ -199,43 +199,42 @@ const updateUser = asyncHandler(async (req, res) => {
 const generateToken = (id) => {
 
     return jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: '30d',
+        expiresIn: '1d',
     });
 
 }
 
-// @desc   Get all users
-// @route  GET /api/users
-// @access Private
-const getUsers = asyncHandler(async (req, res) => {
-    const users = await User.find();
+// // @desc   Get all users
+// // @route  GET /api/users
+// // @access Private
+// const getUsers = asyncHandler(async (req, res) => {
+//     const users = await User.find();
 
-    res.status(200).json(users);
-});
-/*
-// @desc   Get single user
-// @route  GET /api/users/:id
-// @access Private
-const getUserById = asyncHandler(async (req, res) => {
-    const users = await User.find();
+//     res.status(200).json(users);
+// });
 
-    res.status(200).json(users);
-});
+// // @desc   Get single user
+// // @route  GET /api/users/:id
+// // @access Private
+// const getUserById = asyncHandler(async (req, res) => {
+//     const users = await User.find({id: req.params.id});
+
+//     res.status(200).json(users);
+// });
 
 // @desc   Get all admins 
 // @route  GET /api/users/:isAdmin
 // @access Private
-const getAdmins = asyncHandler(async (req, res) => {
-    const users = await User.find();
-
-    res.status(200).json(users);
-}); */
+ const getAdmins = asyncHandler(async (req, res) => {
+     const users = await User.find({isAdmin: true});
+     res.status(200).json(users);
+ });
 
 module.exports = {
     registerUser,
     loginUser,
     updateUser,
     getUser,
-    //getAdmins,
+    getAdmins,
     //getUserById
 }

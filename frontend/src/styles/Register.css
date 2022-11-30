@@ -1,16 +1,19 @@
+body{
+    background-image: url(../images/signup-page.jpg);
+}
 .main-container {
-    min-height: 100vh;
+    display:flex;
+    margin-top: 30px;
+    justify-content: center;
 }
 
 .box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-
-    width: 50vw;
-    height: 60vh;
+    display:flex;
+    flex-direction: column;
+    min-height: 500px;
+    min-width: 70vw;
+    max-width: 75vw;
+    padding: 25px;
     border: 8px solid #033453;
     background-color: rgba(255, 255, 255, .8);
 }
@@ -56,16 +59,19 @@ form {
 }
 
 h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
     font-family: 'Unna', serif;
     font-weight: 700;
-    font-size: 2.5em;
+    font-size: 2em;
     line-height: 38px;
     color: #000000;
+    text-align: center;
 }
 
 #register-button {
     width: 185px;
-    height: 29px;
+    height: 40px;
     color: white;
     background: #033453;
     margin: 1em;
@@ -73,17 +79,22 @@ h3 {
 
 input {
     background: #d9d9d9;
-    width: 200px;
-    height: 20px;
+    height: 30px;
+    border: 1px solid #ccc;
+    width: 100%;
 }
 
 label {
-    font-weight: 400;
+    font-weight: 700;
     font-size: 20px;
     line-height: 25px;
     color: #000;
 }
 
+@media (max-width: 900px) {
+label{
+    font-size: 15px;
+}
 form {
     display: grid;
     grid-template-areas:
@@ -97,16 +108,4 @@ form {
     column-gap: 15px;
     row-gap: 10px;
 }
-
-label {
-    display: block;
-    margin-bottom: 6px;
-}
-
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 2px;
-    border: 1px solid #ccc;
 }

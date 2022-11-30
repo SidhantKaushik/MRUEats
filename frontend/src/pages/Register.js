@@ -9,8 +9,8 @@ import '../styles/Register.css';
 function Register() {
     //Add delivery_loc
     const [formData, setFormData] = useState({
-        first_name: '',
-        last_name: '',
+        firstname: '',
+        lastname: '',
         email: '',
         delivery_loc: '',
         password: '',
@@ -37,10 +37,7 @@ function Register() {
 
     }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-
-
     const onChange = (e) => {
-
         setFormData((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
@@ -67,13 +64,19 @@ function Register() {
         //password check
         if (password !== password_c) {
             toast.error('Password does not match');
-        } else {
+        }
+        if(password.length < 6)
+        {
+            toast.error('Your password length is not sufficient');
+        }
+        else {
             const userData = {
                 firstname,
                 lastname,
                 email,
                 delivery_loc,
                 password,
+                password_c
             }
             dispatch(register(userData));
         }
@@ -87,27 +90,27 @@ function Register() {
     return (
         <div class="main-container">
             <div class="box">
-
-                <h3>SIGN UP</h3>
-
+                <div className="title">
+                <h3>Register</h3>
+                </div>
                 <form onSubmit={onSubmit}>
-                    <div>
+                    <div className='fName'>
                         <label for="first-name">First Name</label>
                         <input type="text" id="firstname" name="firstname" value={firstname} placeholder='Enter your first name' onChange={onChange} />
                     </div>
-                    <div>
+                    <div className='lName'>
                         <label for="last-name">Last Name</label>
                         <input type="text" id="lastname" name="lastname" value={lastname} placeholder='Enter your last name' onChange={onChange} />
                     </div>
-                    <div>
+                    <div className='email'>
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" value={email} placeholder='Enter your email' onChange={onChange} />
                     </div>
-                    <div>
+                    <div className='pass1'>
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" value={password} placeholder='Enter password' onChange={onChange} />
                     </div>
-                    <div>
+                    <div className='pass2'>
                         <label for="confirm-password">Confirm Password</label>
                         <input type="password" id="password_c" name="password_c" value={password_c} placeholder='Confirm password' onChange={onChange} />
                     </div>

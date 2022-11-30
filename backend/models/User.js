@@ -7,10 +7,8 @@ const userSchema = new mongoose.Schema({
   lastname: String,
   delivery_loc: String,
   email: String,
-  //Maybe number
-  /*    phone_number: String,
-     postal_code: String, */
   isAdmin: Boolean,
+  isCourier: Boolean,
   password_bcrypt: String,
   
   details: {

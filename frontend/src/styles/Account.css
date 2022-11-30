@@ -5,7 +5,9 @@
 
 a {
     color: darkblue;
+    text-decoration: none;
 }
+
 
 .backgroundEffect {
     background-color: darkblue;
@@ -96,6 +98,7 @@ a {
     border: 0;
     height: 120%;
     margin-bottom: 10px;
+    min-width: 0;
 }
 
 .twoLayout {
@@ -126,14 +129,15 @@ a {
     background-color: pink;
 }
 
+
 .ProfileInformation {
     display: grid;
     grid-template-areas:
-        "fName fName fName lName lName lName"
+        "FLName FLName FLName FLName FLName FLName"
         "email email email email email email"
-        "countryCode phone phone phone phone phone"
+        "countryPhone countryPhone countryPhone countryPhone countryPhone countryPhone"
         "street street street street street street"
-        "province province postal postal country country"
+        "info info info info info info"
         "current current current current current current"
         ". . . . cancel save";
         
@@ -150,32 +154,24 @@ a {
 }
 
 .firstName {
-    grid-area: fName;
+    width: 50%;
 }
 
 .lastName {
-    grid-area: lName;
+    width:50%;
 }
 
 .emailDiv {
     grid-area: email;
+    min-width:0;
 }
 
-.countryCode {
-    grid-area: countryCode;
-}
-
-.phoneNumber {
-    grid-area: phone;
-}
 
 .streetAddress {
     grid-area: street;
+    min-width:20vw;
 }
 
-.province {
-    grid-area: province;
-}
 
 .postal {
     grid-area: postal;
@@ -187,12 +183,40 @@ a {
 
 .deliveryLocation {
     grid-area: current;
+    min-width:0;
 }
 
 #saveButton {
     grid-area: save;
-    margin-top: 15px;
-    margin-right: 10px;
+    margin-top: 20px;
+    margin-right: 6px;
+    height: 100%;
+    margin-bottom: 10px;
+    display:flex;
+}
+
+#saveButtonBtn{
+    width:200px;
+    padding:0;
+    margin-left: auto;
+    height: 30px;
+}
+
+#cancelButton {
+    grid-area: cancel;
+    margin-top: 20px;
+    margin-right: 6px;
+    height: 100%;
+    margin-bottom: 10px;
+    display:flex;
+}
+
+#cancelButtonBtn{
+    width:200px;
+    padding:0;
+    margin-left: auto;
+    height: 30px;
+    text-align: center; 
 }
 
 #cancelButton {
@@ -222,6 +246,8 @@ a {
 .orderHistoryToolBar {
     border-bottom: solid black 2px;
 }
+
+
 
 @media (max-width: 900px) {
     .AccountPage {
