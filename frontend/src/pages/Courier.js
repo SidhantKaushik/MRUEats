@@ -1,9 +1,69 @@
 import '../styles/Courier.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Courier = (props) => {
- 
 
+    const [orders, setOrders] = useState([]);
+    const [restaurants, setRestaurants] = useState([]);
+    const [menus, setMenus] = useState([]);
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        const getOrders = async () => {
+            try {
+              const url = "http://localhost:3000/api/orders/all";
+              const response = await fetch(url);
+              const data = await response.json();
+              setOrders(data);
+            } catch (err) {
+              console.error(err);
+            }
+          }
+    
+        getOrders();
+        console.log(orders);
+
+        const getRestaurants = async () => {
+          try {
+            const url = "api/restaurants";
+            const response = await fetch(url);
+            const data = await response.json();
+            setRestaurants(data);
+  
+          } catch (err) {
+            console.error(err);
+          }
+        }
+        getRestaurants();
+  
+        const getMenus = async () => {
+          try {
+            const url = "http://localhost:3000/api/menu/";
+            const response = await fetch(url);
+            const data = await response.json();
+            setMenus(data);
+          } catch (err) {
+            console.error(err);
+          }
+        }
+  
+        getMenus();
+
+        const getUsers = async () => {
+            try {
+              const url = "http://localhost:3000/api/users/";
+              const response = await fetch(url);
+              const data = await response.json();
+              setUsers(data);
+            } catch (err) {
+              console.error(err);
+            }
+          }
+    
+        getUsers();
+  
+      }, [])
+ 
     return (
         <div className="courier-page">
             <div className="active-orders">
