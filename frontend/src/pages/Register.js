@@ -60,14 +60,17 @@ function Register() {
         const regex = new RegExp("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
         if(!regex.test(email)){
             toast.error('Please enter a valid email address');
+            return;
         }
         //password check
         if (password !== password_c) {
             toast.error('Password does not match');
+            return;
         }
         if(password.length < 6)
         {
             toast.error('Your password length is not sufficient');
+            return;
         }
         else {
             const userData = {

@@ -4,15 +4,12 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import authSlice, { update, reset } from '../features/auth/authSlice';
+import { update, reset } from '../features/auth/authSlice';
 import CountryCodes from "../components/CountryCodes";
-import { InputPhoneNumber, FormatPhoneNum } from "../helpers/phone-format";
+import { InputPhoneNumber } from "../helpers/phone-format";
 import PostalCode from "../helpers/postal-code-format";
 import Spinner from '../components/Spinner';
-import axios from "axios";
-import Autocomplete from "react-google-autocomplete";
 import Collapsible from 'react-collapsible';
-const API_URL = '/api/users/';
 
 const EditAccount = (props) => {
     //Check if userInfo is logged in
@@ -113,22 +110,8 @@ const EditAccount = (props) => {
         }
     }
 
-    // function checkPhoneNumber (pNum){
-    //     if(pNum){
-    //         return setPhoneNum(pNum);
-    //     }else{
-    //         if(!pNum)
-    //         return setPhoneNum();
-    //     }
-    // }
-
     if (isLoading) {
         return <Spinner />;
-    }
-    console.log(phoneNum)
-    if(phoneNum){
-        console.log("hello")
-        console.log(phoneNum.length)
     }
 
     return (

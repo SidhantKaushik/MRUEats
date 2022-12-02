@@ -7,7 +7,9 @@ import {FormatPhoneNum} from '../helpers/phone-format';
 import '../styles/Account.css'
 import { toast } from 'react-toastify';
 import PostalCode from '../helpers/postal-code-format';
+import EditIcon from "../images/edit-icon.png";
 import CountryCodes from '../components/CountryCodes';
+import Collapsible from 'react-collapsible';
 
 const Account = (props) => {
     const [userInfo, setUserInfo] = useState({});
@@ -63,12 +65,27 @@ const Account = (props) => {
                 <div className="profileSide">
                     
                     <div className="profileToolBar">
+                        <div className="leftSideBar">
+                        <div className='profile'>   
                         <p>Profile</p>
-                        <p>* Required</p>
-                        <Link to='/order-history'>Order History</Link>
-                        <Link to='/account-edit' state={{userInfo: userInfo}}>Edit</Link>
+                        </div>
+                        <div className="edit-icon">
+                        <Link to='/account-edit' state={{userInfo: userInfo}}><img src={EditIcon}/></Link>
+                        </div>
+                        </div>
+                        <div className="rightSideBar">
+                        <div className='req'>
+                        <p id='reqFont'>Required</p><p id='reqFontSymb'>*</p>
+                        </div>
+                        <div className='ordHistory'> 
+                        <Link to='/order-history'><button className="myButton">Order History</button></Link>
+                        </div> 
+                        </div>
                     </div>
+                    
                         <div className="ProfileInformation">
+                        <div className="reqInfo">    
+                        <Collapsible className="reqInfo" trigger="Required User Information">      
                             <div className="FLName">
                                 <div className="firstName">
                                     <div className="standardLayout">
@@ -99,6 +116,10 @@ const Account = (props) => {
                                     <input type="text" id="dLocation" name="delivery_loc" value={userInfo.delivery_loc} placeholder={userInfo.delivery_loc} readOnly></input>
                                 </div>
                             </div>
+                            </Collapsible>
+                            </div>
+                            <div className="addInfo">
+                            <Collapsible className="addInfo" trigger="Additional Information">
                             <div className="countryPhone">
                                 <div className="countryCode">
                                     <h2>Country Code</h2> 
@@ -113,6 +134,10 @@ const Account = (props) => {
                                     </div>
                                 </div>
                             </div>
+                            </Collapsible>
+                            </div>
+                            <div className="billInfo">
+                            <Collapsible className="billInfo" trigger="Billing Information">
                             <div className="streetAddress">
                                 <div className="twoLayout">
                                     <h2>Street Address</h2>
@@ -146,6 +171,8 @@ const Account = (props) => {
                                     <input type="text" id="country" name="country" value={userInfo.details?.country} placeholder={userInfo.details?.country} readOnly></input>
                                 </div>
                             </div>
+                            </div>
+                            </Collapsible>
                             </div>
                             {/* <div id="saveButton">
                             <input type="submit" id="saveButtonBtn" value="Save"></input>

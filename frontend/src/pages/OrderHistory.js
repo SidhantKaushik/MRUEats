@@ -1,3 +1,6 @@
+import OrderHistoryComponent from "../components/OrderHistory";
+
+
 const OrderHistory = (props) => {
 
 
@@ -12,7 +15,7 @@ const OrderHistory = (props) => {
                         {/* Issue with rendering */}
                         {/* { orders?.map((p, index) => ( */}
                         
-                        <OrderHistory></OrderHistory>
+                        <OrderHistoryComponent></OrderHistoryComponent>
 
                     </div>
                 </div>
