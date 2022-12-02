@@ -150,4 +150,13 @@
 
 .menu-list .menu-item{
     margin: 20px;
+    padding: 30px;
+}
+
+.add-to-cart {
+    float: right;
+}
+
+.cart-item {
+    list-style: none;
 }

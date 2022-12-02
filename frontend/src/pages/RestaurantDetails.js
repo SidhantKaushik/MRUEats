@@ -4,12 +4,13 @@ import React, { useEffect, useState } from 'react'
 import { set } from 'mongoose'
 import Category from './Category'
 import MenuItem from './MenuItem'
+import CartItems from './CartItems'
 
 const RestaurantDetails = (props) => {
 
     const [menuItems, setMenuItems] = useState([])
     const [categories, setCategories] = useState([])
-    const [currItem, setCurrItem] = useState([{name:"Select menu items to show up here"}])
+    const [currItem, setCurrItem] = useState([])
 
     let currentItem = []
     let item = []
@@ -68,41 +69,16 @@ const RestaurantDetails = (props) => {
     }
 
     function menuSelect(props) {
-        currentItem = []
-        console.log(menuItems[0].name)
         console.log(props)
+        currentItem = [...currItem]
         for(let i = 0; i < menuItems.length; i++){    
             if (menuItems[i].name == props){
                 currentItem.push(menuItems[i])
             }
         }
-        console.log(currentItem)
+        console.log(currItem) 
         setCurrItem(currentItem)
     }
-
-    // let { id } = 1
-    // console.log(id);
-
-    // const [restaurant, setRestaurant] = useState([]);
-
-    // useEffect(() => {
-    //   const getRestaurantUsingID = async () => {
-    //     try {
-    //       const url = "http://localhost:3000/api/restaurants/"+id;
-    //       const response = await fetch(url);
-    //       const data = await response.json();
-    //       setRestaurant(data);
-    //     } catch (err) {
-    //       console.error(err);
-    //     }
-    //   }
-    //     getRestaurantUsingID();
-    // }, [])
-    // while(!restaurant[0]){
-    //     return;
-    // }
-    // const restaurantSelected = restaurant[0];
-    // console.log(restaurantSelected);
 
     // function ConvertTime(hour) {
         
@@ -183,12 +159,15 @@ const RestaurantDetails = (props) => {
                 </div>
                 <div className="addItem">
                     <h2>Menu Item Name</h2>
-                            {currItem.map((p, index) => {
-                                return (
-                                    <>{p.name}</>
-                                )
-                            })}
-                    <button>Add To Cart</button>
+                    <ol className='cart-list'>
+                            {currItem.map((p, index) => (
+                                <CartItems
+                                    name={p.name}
+                                /> 
+                            ))}
+                    </ol>
+                    <input></input>
+                    <button>Order</button>
                 </div>
             </div>
         </div>
