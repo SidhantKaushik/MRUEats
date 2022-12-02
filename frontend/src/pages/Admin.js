@@ -16,6 +16,7 @@ function Admin(props) {
     const [allMenuItems, setAllMenuItems] = useState([]);
     const [menu, setMenu] = useState([]);
     const [selectedRestaurant, setSelectedRestaurant] = useState([]);
+    const [selectedMenuItem, setSelectedMenuItem] = useState([]);
 
     const [restaurantFormData, setRestaurantFormData] = useState({
         logo: '',
@@ -90,6 +91,8 @@ function Admin(props) {
         return;
     }
 
+    //#region setting restaurants, menu items, and categories
+
     let restaurantCategories = [...new Set(restaurants.map(({category}) => (category)))];
     
     var categoryList = restaurantCategories.map((category) =>
@@ -112,7 +115,14 @@ function Admin(props) {
     <option value={category}>{category}</option>
     );
 
-    //helpers
+    const handleSelectedMenu = (e) => {
+        var menuItemId = e.target.id;
+        setSelectedMenuItem(menu.find(menu => menu.id == menuItemId && menu.restaurant_id == selectedRestaurant.id));
+    }
+
+    //#endregion
+
+    //#region helpers
 
     function ConvertTime(hour) {
         var ampm = hour >= 12 ? 'pm' : 'am';
@@ -129,9 +139,36 @@ function Admin(props) {
         else{
             return "Closed";
         }
+
     }
 
-    //Edit popups
+    //#endregion
+
+    //#region form on change logic
+
+    const onRestFormChange = (e) => {
+
+        setRestaurantFormData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+
+        }));
+
+    }
+
+    const onMenuFormChange = (e) => {
+
+        setMenuFormData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+
+        }));
+
+    }
+    //#endregion
+
+    //#region Edit popups
+
     const toggleRestoEditPopup = () => {
         setRestoEditIsOpen(!restoEditIsOpen);
     }
@@ -155,19 +192,9 @@ function Admin(props) {
     const toggleMenuDeletePopup = () => {
         setMenuDeleteIsOpen(!menuDeleteIsOpen);
     } 
+    //#endregion
 
-    //FORM 
-
-    const onChange = (e) => {
-
-        setRestaurantFormData((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value
-
-        }));
-    }
-
-    //API CALLS
+    //#region API CALLS and form handlers
 
     const createRestaurant = async (restaurantData) => {
 
@@ -236,8 +263,6 @@ function Admin(props) {
          return response.data;
 
     }
-
-    //Add restaurant
 
     const onAddRestSubmit = (e) =>{
 
@@ -344,7 +369,7 @@ function Admin(props) {
             menuCategory,
         }
 
-        updateRestaurant(menuData);
+        updateMenuItem(menuData);
     }
 
     const onDeleteMenuSubmit = (e) =>{
@@ -361,6 +386,8 @@ function Admin(props) {
         deleteMenuItem(menuData);
     }
 
+    //#endregion
+
     return (
         <div className="AdminPage">
             <div className="adminMainBody">
@@ -374,31 +401,31 @@ function Admin(props) {
                             <form className='restaurant-form' onSubmit={onAddRestSubmit}>            
                                 <div className='logo'>
                                     <label>Logo</label>
-                                    <input type="text" name="logo" value={logo} placeholder='enter url' onChange={onChange}/>
+                                    <input type="text" name="logo" value={logo} placeholder='enter url' onChange={onRestFormChange}/>
                                 </div>
                                 <div className='restNameInput'>
                                     <label>Name</label>
-                                    <input type="text" name="restaurantName" value={restaurantName} onChange={onChange}/>
+                                    <input type="text" name="restaurantName" value={restaurantName} onChange={onRestFormChange}/>
                                 </div>
                                 <div className='rating'>
                                     <label>Rating</label>
-                                    <input type="number" name="rating"  value={rating} min="1" max="5" onChange={onChange}/>
+                                    <input type="number" name="rating"  value={rating} min="1" max="5" onChange={onRestFormChange}/>
                                 </div>
                                 <div className='address'>
                                     <label>Address</label>
-                                    <input type="text" name="address"  value={address} onChange={onChange}/>
+                                    <input type="text" name="address"  value={address} onChange={onRestFormChange}/>
                                 </div>
                                 <div className='openTime'>
                                     <label>Opening Time</label>
-                                    <input type="time" name="open" value={open} onChange={onChange}/>
+                                    <input type="time" name="open" value={open} onChange={onRestFormChange}/>
                                 </div>
                                 <div className='closingTime'>
                                     <label>Closing Time</label>
-                                    <input type="time" name="close" value={close} onChange={onChange}/>
+                                    <input type="time" name="close" value={close} onChange={onRestFormChange}/>
                                 </div>
                                 <div className='category'>
                                     <label>Category</label>
-                                    <select name="category" value={category} onChange={onChange}>{categoryList}</select>
+                                    <select name="category" value={category} onChange={onRestFormChange}>{categoryList}</select>
                                 </div>
                                 <div className='submitButton'>
                                     <input className='popup-submit' type="submit" value="Save Changes"/>
@@ -422,17 +449,15 @@ function Admin(props) {
                         </div>
                         <div className="secondLine">
                             <span className="restaurantInfo">{selectedRestaurant.address} •</span>
-                            <span className="restaurantInfo">$3.09 Delivery</span>
+                            <span className="restaurantInfo">$2 Delivery</span>
                         </div>
                         <div className="thirdLine">
                             <span className="restaurantInfo">Delivery Hours: {ConvertTime(selectedRestaurant.open)} - {ConvertTime(selectedRestaurant.close)}  •</span>
                             <span className="openStatus restaurantInfo">{checkIfOpen()}</span>
                         </div>
                         <div className='restaurantButtons'>
-                            
-                                <button className='restaurantButton' onClick={toggleRestoEditPopup}><span className='buttonText'>Edit Information</span><FaEdit/></button>
-                                <button className='restaurantButton' onClick={toggleRestoDeletePopup}><span className='buttonText'>Remove Restaurant</span><FaTrash/></button>
-                          
+                            <button className='restaurantButton' onClick={toggleRestoEditPopup}><span className='buttonText'>Edit Information</span><FaEdit/></button>
+                            <button className='restaurantButton' onClick={toggleRestoDeletePopup}><span className='buttonText'>Remove Restaurant</span><FaTrash/></button>                       
 
                             {restoEditIsOpen && <Popup
                                 content={<>
@@ -440,31 +465,31 @@ function Admin(props) {
                                     <form className='restaurant-form' onSubmit={onUpdateRestSubmit}>
                                         <div className='logo'>
                                             <label>Logo</label>
-                                            <input type="text" name="logo" value={logo} placeholder='enter url' onChange={onChange}/>
+                                            <input type="text" name="logo" value={selectedRestaurant.logo} placeholder='enter url' onChange={onRestFormChange}/>
                                         </div>
                                         <div className='restNameInput'>
                                             <label>Name</label>
-                                            <input type="text" name="restaurantName" value={restaurantName} onChange={onChange}/>
+                                            <input type="text" name="restaurantName" value={selectedRestaurant.name} onChange={onRestFormChange}/>
                                         </div>
                                         <div className='rating'>
                                             <label>Rating</label>
-                                            <input type="number" name="rating"  value={rating} min="1" max="5" onChange={onChange}/>
+                                            <input type="number" name="rating"  value={selectedRestaurant.rating} min="1" max="5" onChange={onRestFormChange}/>
                                         </div>
                                         <div className='address'>
                                             <label>Address</label>
-                                            <input type="text" name="address"  value={address} onChange={onChange}/>
+                                            <input type="text" name="address"  value={selectedRestaurant.address} onChange={onRestFormChange}/>
                                         </div>
                                         <div className='openTime'>
                                             <label>Opening Time</label>
-                                            <input type="time" name="open" value={open} onChange={onChange}/>
+                                            <input type="time" name="open" value={selectedRestaurant.open} onChange={onRestFormChange}/>
                                         </div>
                                         <div className='closingTime'>
                                             <label>Closing Time</label>
-                                            <input type="time" name="close" value={close} onChange={onChange}/>
+                                            <input type="time" name="close" value={selectedRestaurant.close} onChange={onRestFormChange}/>
                                         </div>
                                         <div className='category'>
                                             <label>Category</label>
-                                            <select name="category" value={category} onChange={onChange}>{categoryList}</select>
+                                            <select name="category" value={selectedRestaurant.category} onChange={onRestFormChange}>{categoryList}</select>
                                         </div>
                                         <div className='submitButton'>
                                             <input className='popup-submit' type="submit" value="Save Changes"/>
@@ -491,7 +516,7 @@ function Admin(props) {
 
                     <div className='menuItems'>
                         {menu.map((menu) =>
-                            <div className='menuListItem' id={menu.id}>
+                            <div className='menuListItem' id={menu.id} onClick = {handleSelectedMenu}>
                                 <h5 className='menu-list-name'>{menu.name} • ${menu.price}</h5>
                                 <p>{menu.description}</p>
                             </div>
@@ -509,19 +534,19 @@ function Admin(props) {
                                     <form className='menu-form' onSubmit={onAddMenuSubmit}>
                                         <div className='menuName'>
                                             <label>Name</label>
-                                            <input type="text" name="menuName" value={menuName} onChange={onChange}/>
+                                            <input type="text" name="menuName" value={menuName} onChange={onMenuFormChange}/>
                                         </div>
                                         <div className='price'>
                                             <label>Price</label>
-                                            <input type="text" placeholder='$' name="price" value={price} onChange={onChange}/>
+                                            <input type="text" placeholder='$' name="price" value={price} onChange={onMenuFormChange}/>
                                         </div>
                                         <div className='description'>
                                             <label>Drescription</label>
-                                            <input type="text" name="description" value={description} onChange={onChange}/>
+                                            <input type="text" name="description" value={description} onChange={onMenuFormChange}/>
                                         </div>
                                         <div className='menuCategory'>
                                             <label>Category</label>
-                                            <select name="menuCategory" value={menuCategory} onChange={onChange}>{menuCategoryList}</select>
+                                            <select name="menuCategory" value={menuCategory} onChange={onMenuFormChange}>{menuCategoryList}</select>
                                         </div>
                                         <div className='submitButton'>
                                             <input className='popup-submit' type="submit" value="Save Changes"/>
@@ -534,26 +559,32 @@ function Admin(props) {
                         {menuEditIsOpen && <Popup
                                 content={<>
                                     <h4 className='popup-title'>Edit Menu Item</h4>
+                       
                                     <form className='menu-form' onSubmit={onUpdateMenuSubmit}>
-                                        <div className='menuName'>
-                                            <label>Name</label>
-                                            <input type="text" name="menuName" value={menuName} onChange={onChange}/>
-                                        </div>
-                                        <div className='price'>
-                                            <label>Price</label>
-                                            <input type="text" placeholder='$' name="price" value={price} onChange={onChange}/>
-                                        </div>
-                                        <div className='description'>
-                                            <label>Drescription</label>
-                                            <input type="text" name="description" value={description} onChange={onChange}/>
-                                        </div>
-                                        <div className='menuCategory'>
-                                            <label>Category</label>
-                                            <select name="menuCategory" value={menuCategory} onChange={onChange}>{menuCategoryList}</select>
-                                        </div>
-                                        <div className='submitButton'>
-                                            <input className='popup-submit' type="submit" value="Save Changes"/>
-                                        </div>
+                                        { selectedMenuItem &&
+                                            <>
+                                            <div className='menuName'>
+                                                <label>Name</label>
+                                                <input type="text" name="menuName" value={selectedMenuItem.name} onChange={onMenuFormChange} />
+                                            </div>
+                                            <div className='price'>
+                                                <label>Price</label>
+                                                <input type="text" placeholder='$' name="price" value={selectedMenuItem.price} onChange={onMenuFormChange} />
+                                            </div><div className='description'>
+                                                <label>Drescription</label>
+                                                <input type="text" name="description" value={selectedMenuItem.description} onChange={onMenuFormChange} />
+                                            </div><div className='menuCategory'>
+                                                <label>Category</label>
+                                                <select name="menuCategory" value={selectedMenuItem.category} onChange={onMenuFormChange}>{menuCategoryList}</select>
+                                            </div><div className='submitButton'>
+                                                <input className='popup-submit' type="submit" value="Save Changes" />
+                                            </div>
+                                        </>}
+
+                                        {!selectedMenuItem &&<>
+                                            <div>Please select a menu item to update.</div>
+                                        </>}
+
                                     </form>
                                 </>}
                                 handleClose={toggleMenuEditPopup}

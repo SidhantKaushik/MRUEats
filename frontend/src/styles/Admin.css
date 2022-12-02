@@ -202,11 +202,11 @@
     background-color: white;
     margin: 1em;
     padding: 1em;
-
     font-weight: 400;
     font-size: 1.35em;
     line-height: 23px;
     border-radius: 10px;
+    cursor:pointer;
 }
 
 /* popups/form css */
