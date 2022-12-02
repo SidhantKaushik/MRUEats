@@ -1,8 +1,9 @@
 const asyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-
 const User = require('../models/User');
+const mongoose = require('mongoose');
+
 
 // @desc   Register new user
 // @route  POST /api/users
@@ -47,10 +48,10 @@ const registerUser = asyncHandler(async (req, res) => {
         details:{
             address: "",
             country:"Canada",
-            country_code:1,
+            country_code: 1,
             phone_number: "",
             postal_code: "",
-            province:"Alberta",
+            province:"AB",
             city: "Calgary"
         }
     });
@@ -61,7 +62,7 @@ const registerUser = asyncHandler(async (req, res) => {
             id: user.id,
             firstname: user.firstname,
             lastname: user.lastname,
-            delivery_loc: user.deliver_loc,
+            delivery_loc: user.delivery_loc,
             email: user.email,
             isAdmin: user.isAdmin,
             isCourier: user.isCourier,
@@ -84,13 +85,13 @@ const loginUser = asyncHandler(async (req, res) => {
     //Check for user email
     const user = await User.findOne({ email });
     console.log(user)
-    if (user && (await bcrypt.compare(password, user.password_bcrypt))) {
+    if (user && (bcrypt.compare(password, user.password_bcrypt))) {
         res.json({
 
             id: user.id,
             firstname: user.firstname,
             lastname: user.lastname,
-            delivery_loc: user.deliver_loc,
+            delivery_loc: user.delivery_loc,
             email: user.email,
             isAdmin: user.isAdmin,
             isCourier: user.isCourier,
@@ -100,7 +101,7 @@ const loginUser = asyncHandler(async (req, res) => {
         });
     } else {
         res.status(400);
-        throw new Error('Invalid credentials')
+        throw new Error('Invalid credentials');
     }
 });
 
@@ -109,15 +110,14 @@ const loginUser = asyncHandler(async (req, res) => {
 // @access Private
 const getUser = asyncHandler(async (req, res) => {
     
-
+    const id = req.params.id
     //Check for user email
-    const user = await User.find({id: req.params.id});
-
+    const user = await User.findOne({id});
     if (user) {
         res.json({user});
     } else {
         res.status(400);
-        throw new Error('Invalid credentials')
+        throw new Error('Invalid credentials');
     }
 });
 
@@ -126,37 +126,57 @@ const getUser = asyncHandler(async (req, res) => {
 // @route  PUT /api/users/UPDATE
 // @access Private
 const updateUser = asyncHandler(async (req, res) => {
-    
+    console.log("update user")
+    const _id = mongoose.Types.ObjectId(req.body._id);
+    console.log(req.body);
     //Check for user email
-    const user = await User.findByIdAndUpdate(req.body.id, {
+    const user = await User.findByIdAndUpdate(_id, {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
+        delivery_loc: req.body.delivery_loc,
 
         details:{
             address: req.body.address,
-            delivery_loc: req.body.delivery_loc,
-            country_code: req.body.country_code,
             phone_number: req.body.phone_number,
             postal_code: req.body.postal_code,
-            province: req.body.province,
+            country_code: req.body.country_code,
             city: req.body.city,
+            province: req.body.province,
             country: req.body.country
         }
-    }, function (err, data){
-
-        if(err){console.log(err);}
-        else{
-            res.json({data})
-            console.log("Updated User: ", data);
-        }
-
-
-    });
-
-
-
     
-    console.log(user);
+    })
+    console.log(user)
+    if (user) {
+        res.status(201).json({
+            
+            id: user.id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            delivery_loc: user.delivery_loc,
+            email: user.email,
+            isAdmin: user.isAdmin,
+            isCourier: user.isCourier,
+            token: generateToken(user.id)
+        
+        
+        });
+    } else {
+        res.status(400);
+        throw new Error('Error updating user');
+    }
+});
+    
+        //}, function (err, data){
+
+    //     if(err){console.log(err);}
+    //     else{
+    //         res.json({data})
+    //         console.log("Updated User: ", data);
+    //     }
+
+
+
 
 
 
@@ -185,7 +205,7 @@ const updateUser = asyncHandler(async (req, res) => {
     //     res.status(400);
     //     throw new Error('Invalid credentials')
     // }
-});
+
 
 
 // // @desc   Get user data

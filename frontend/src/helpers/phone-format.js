@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 function InputPhoneNumber(props){
 
-    const [input, setInput] = useState('');
+    const [input, setInput] = useState(props.num);
     const handleInput = (e) => {
         const formattedPhoneNum = FormatPhoneNum(e.target.value);
         setInput(formattedPhoneNum);
