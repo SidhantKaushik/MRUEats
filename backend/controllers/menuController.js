@@ -14,8 +14,8 @@ const getMenu = asyncHandler(async (req, res) => {
 // @desc   Get menu items for single menu
 // @route  GET /api/menu/:id
 // @access Private
-const getMenuByMenu = asyncHandler(async (req, res) => {
-    const menu = await Menu.find();
+const getMenuByRestaurant = asyncHandler(async (req, res) => {
+    const menu = await Menu.find({ restaurant_id: req.restaurant_id });
 
     res.status(200).json(menu);
 });
@@ -85,7 +85,7 @@ const deleteMenu = asyncHandler(async (req, res) => {
 module.exports = {
 
     getMenu,
-    getMenuByMenu,
+    getMenuByRestaurant,
     addMenu,
     updateMenu,
     deleteMenu

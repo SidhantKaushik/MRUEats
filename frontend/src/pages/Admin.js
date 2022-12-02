@@ -10,11 +10,12 @@ import axios from 'axios';
 const RESTAURANTS_API_URL = '/api/restaurants/';
 const MENU_API_URL = '/api/restaurants/';
 
-function Admin() {
+function Admin(props) {
  
     const [restaurants, setRestaurants] = useState([]);
-    const [menus, setMenus] = useState([]);
+    const [allMenuItems, setAllMenuItems] = useState([]);
     const [menu, setMenu] = useState([]);
+    const [selectedRestaurant, setSelectedRestaurant] = useState([]);
 
     const [restaurantFormData, setRestaurantFormData] = useState({
         logo: '',
@@ -49,7 +50,7 @@ function Admin() {
           const response = await fetch(url);
           const data = await response.json();
           setRestaurants(data);
-
+          setSelectedRestaurant(data[0]);
         } catch (err) {
           console.error(err);
         }
@@ -58,16 +59,30 @@ function Admin() {
 
       const getMenus = async () => {
         try {
-          const url = "http://localhost:3000/api/menu/";
+          const url = "api/menu/";
           const response = await fetch(url);
           const data = await response.json();
-          setMenus(data);
+          setAllMenuItems(data);
         } catch (err) {
           console.error(err);
         }
       }
-
+    
       getMenus();
+
+
+      const getMenuUsingID = async () => {
+        try {
+          const url = "api/menu/" + 1;
+          const response = await fetch(url);
+          const data = await response.json();
+          setMenu(data.filter((item) => item.restaurant_id == 1));
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    
+      getMenuUsingID();
 
     }, [])
 
@@ -80,33 +95,18 @@ function Admin() {
     var categoryList = restaurantCategories.map((category) =>
     <option value={category}>{category}</option>
     );
-
-    let selectedRestaurant = restaurants[0];
       
-    const populateForm = async (e) => {
+    const populateRestaurant = (e) => {
         var restaurantId = e.target.id;
-        selectedRestaurant = restaurants.find(restaurant => restaurant.id === restaurantId);
-        
+        setSelectedRestaurant(restaurants.find(restaurant => restaurant.id == restaurantId));
+        setMenu(allMenuItems.filter((item) => item.restaurant_id == restaurantId));
     }
 
     var restaurantList = restaurants.map((restaurant) =>
-        <li key={restaurant.id} className='restaurantListItem' id={restaurant.id} onClick={populateForm}>{restaurant.name}</li>
+        <li key={restaurant.id} className='restaurantListItem' id={restaurant.id} onClick={populateRestaurant}>{restaurant.name}</li>
     );
 
-    const getMenuUsingID = async () => {
-        try {
-          const url = "http://localhost:3000/api/menu/" + selectedRestaurant.id;
-          const response = await fetch(url);
-          const data = await response.json();
-          setMenu(data);
-        } catch (err) {
-          console.error(err);
-        }
-    }
-    
-    getMenuUsingID();
-
-    let menuCategories = [...new Set(menus.map(({category}) => (category)))];
+    let menuCategories = [...new Set(menu.map(({category}) => (category)))];
     
     var menuCategoryList = menuCategories.map((category) =>
     <option value={category}>{category}</option>
@@ -409,7 +409,9 @@ function Admin() {
                         />}
                     </div>
                     <div className='restaurantsList'>
-                        <ul>{restaurantList}</ul>
+                        <ul>
+                            {restaurantList}
+                        </ul>
                     </div>     
                 </div>
                 <div className="restaurantSection">
@@ -489,10 +491,10 @@ function Admin() {
 
                     <div className='menuItems'>
                         {menu.map((menu) =>
-                        <div className='menuListItem' id={menu.id}>
-                            <h5 className='menu-list-name'>{menu.name} • ${menu.price}</h5>
-                            <p>{menu.description}</p>
-                        </div>
+                            <div className='menuListItem' id={menu.id}>
+                                <h5 className='menu-list-name'>{menu.name} • ${menu.price}</h5>
+                                <p>{menu.description}</p>
+                            </div>
                         )}
                     </div>
 
