@@ -48,15 +48,49 @@ const Home = (props) => {
         setRest(filterRest)
     }
 
+    let slideIndex = 1;
+    showSlide(slideIndex);
+
+    setInterval(function () {
+        plusSlides(1);
+      }, 10000);
+
+
+    function plusSlides(n) {
+        console.log("click");
+        showSlide(slideIndex += n);
+    }
+    function showSlide(n) {
+        let slides = document.getElementsByClassName("slide");
+        console.log(slides);
+        if (n > slides.length) {slideIndex = 1}    
+        if (n < 1) {slideIndex = slides.length}
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        while(!slides[slideIndex-1]){
+            return;
+        }
+        slides[slideIndex-1].style.display = "block";
+    }
+
     
     return (
         <div className="HomePage">
         <div className='home'>
             <div className="SplashScreen">
-                <img src='https://harbourcats.com/wp-content/uploads/2016/07/BoosterJ_MasterLogo_Rinkboards-002.jpg'></img>
+                <div class="slide">
+                    <img src='https://harbourcats.com/wp-content/uploads/2016/07/BoosterJ_MasterLogo_Rinkboards-002.jpg'></img>
+                </div>
+                <div class="slide hideInitally">
+                    <img src="https://images.squarespace-cdn.com/content/v1/589a30d2725e258996583851/1486999228841-X0ZTSTV7NP709CWNAQD6/tacobell_banner.jpg?format=2500w" alt="Image 2"/>
+                </div>
                 <div id="orderNow">
                     <p>Order Now</p>
                 </div>
+                <div class="prev" onClick={() => plusSlides(-1)}> &larr; </div>
+                <div class="next" onClick={() => plusSlides(1)}> &rarr; </div>
+                
             </div>
             <div className="categories">
                 Categories
