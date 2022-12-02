@@ -12,6 +12,7 @@ const Home = (props) => {
 
     let filterRest = []
     let allRest = [...props.restaurants.restaurants]
+    const [menu, setMenu] = useState([])
     console.log(allRest)
 
     const [rest, setRest] = useState([]);

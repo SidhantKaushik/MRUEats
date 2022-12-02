@@ -118,3 +118,45 @@
     background: #FCFCFC;
     margin: 1em;
 }
+
+.menuCategories h2{
+    font-size: 40px
+}
+
+.category-item:hover {
+    background-color: #033453;
+    color: white;
+    cursor:pointer;
+}
+
+.category-item {
+    font-size: 30px;
+}
+
+.menu-list{
+    list-style: none;
+}
+
+.menu-list .item-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.menu-list .menu-item:hover {
+    color: white;
+    cursor: pointer;
+    background-color: #033453;
+}
+
+.menu-list .menu-item{
+    margin: 20px;
+    padding: 30px;
+}
+
+.add-to-cart {
+    float: right;
+}
+
+.cart-item {
+    list-style: none;
+}
