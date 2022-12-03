@@ -64,26 +64,13 @@ function Admin(props) {
           const response = await fetch(url);
           const data = await response.json();
           setAllMenuItems(data);
+          setMenu(data.filter((item) => item.restaurant_id === 1));
         } catch (err) {
           console.error(err);
         }
       }
     
       getMenus();
-
-
-      const getMenuUsingID = async () => {
-        try {
-          const url = "api/menu/" + 1;
-          const response = await fetch(url);
-          const data = await response.json();
-          setMenu(data.filter((item) => item.restaurant_id == 1));
-        } catch (err) {
-          console.error(err);
-        }
-      }
-    
-      getMenuUsingID();
 
     }, [])
 
@@ -116,8 +103,9 @@ function Admin(props) {
     );
 
     const handleSelectedMenu = (e) => {
-        var menuItemId = e.target.id;
-        setSelectedMenuItem(menu.find(menu => menu.id == menuItemId && menu.restaurant_id == selectedRestaurant.id));
+        var menuItemId = e.currentTarget.id;
+        var selectedMenuItem = menu.find(menu => menu.id == menuItemId && menu.restaurant_id == selectedRestaurant.id);
+        setSelectedMenuItem(selectedMenuItem);
     }
 
     //#endregion
@@ -198,7 +186,6 @@ function Admin(props) {
 
     const createRestaurant = async (restaurantData) => {
 
-
         const response = await axios.post(RESTAURANTS_API_URL + 'ADD', restaurantData);
 
         if (response.data) {
@@ -232,11 +219,11 @@ function Admin(props) {
 
     const createMenuItem = async (menuItemData) => {
 
-
         const response = await axios.post(MENU_API_URL + 'ADD', menuItemData);
 
         if (response.data) {
             console.log(response.data);
+            toast.success('Successfully added menu item!');
         }
          return response.data;
 
@@ -341,10 +328,13 @@ function Admin(props) {
             return;
         }
 
+        let restaurantId = selectedRestaurant.id;
+
         const menuData = {
             menuName,
             price,
             description,
+            restaurantId,
             menuCategory,
         }
 
@@ -516,7 +506,7 @@ function Admin(props) {
 
                     <div className='menuItems'>
                         {menu.map((menu) =>
-                            <div className='menuListItem' id={menu.id} onClick = {handleSelectedMenu}>
+                            <div className='menuListItem' id={menu.id} onClick = { handleSelectedMenu}>
                                 <h5 className='menu-list-name'>{menu.name} • ${menu.price}</h5>
                                 <p>{menu.description}</p>
                             </div>
