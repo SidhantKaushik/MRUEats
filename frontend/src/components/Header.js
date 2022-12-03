@@ -45,7 +45,11 @@ function Header() {
             </div>
         </header>
         <div className="locationInfo">
+        {user ? (<>
                 <p>Current Address: Address</p>
+                </>) : (
+                    <p>Feeding hungry cougars one meal at a time.</p>
+                )}
             </div>
             <style jsx="true">{`
                 
