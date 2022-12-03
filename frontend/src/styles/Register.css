@@ -1,10 +1,10 @@
-.main-container {
+.RegisterPage .main-container {
     display:flex;
     margin-top: 30px;
     justify-content: center;
 }
 
-.box {
+.RegisterPage .box {
     display:flex;
     flex-direction: column;
     min-height: 500px;
@@ -15,7 +15,7 @@
     background-color: rgba(255, 255, 255, .8);
 }
 
-form {
+.RegisterPage form {
     display: grid;
     grid-template-areas:
         "fName lName"
@@ -27,16 +27,16 @@ form {
     row-gap: 10px;
 }
 
-.fName{
+.RegisterPage .fName{
     grid-area:fName;
 }
-.lName{
+.RegisterPage .lName{
     grid-area:lName;
 }
-.email{
+.RegisterPage .email{
     grid-area:email;
 }
-.pass1{
+.RegisterPage .pass1{
     grid-area:password;
     display:grid;
     grid-template-areas:
@@ -44,31 +44,31 @@ form {
     "passwordInput passwordInput";
     justify-content: space-between;
 }
-#passwordText{
+.RegisterPage #passwordText{
     grid-area: PasswordText;
 }
-#requirementsForPass{
+.RegisterPage #requirementsForPass{
     grid-area: infoAboutPassword;
     margin:0;
     color: #FFB703;
     font-family: 'Staatliches', cursive !important;
 }
-#password{
+.RegisterPage #password{
     grid-area: passwordInput;
 }
-.pass2{
+.RegisterPage .pass2{
     grid-area:confirm;
 }
-.submitbtn{
+.RegisterPage .submitbtn{
     margin-top: 30px;
     grid-area:submit;
     justify-self: center;
 }
-.title{
+.RegisterPage .title{
     grid-area: signup;
 }
 
-h3 {
+.RegisterPage h3 {
     margin-top: 20px;
     margin-bottom: 20px;
     font-family: 'Unna', serif;
@@ -79,7 +79,7 @@ h3 {
     text-align: center;
 }
 
-#register-button {
+.RegisterPage #register-button {
     width: 185px;
     height: 40px;
     color: #FFB703 !important;
@@ -89,14 +89,14 @@ h3 {
     font-family: 'Staatliches', cursive !important;
 }
 
-input {
+.RegisterPage input {
     background: #d9d9d9;
     height: 30px;
     border: 1px solid #ccc;
     width: 100%;
 }
 
-label {
+.RegisterPage label {
     font-weight: 700;
     font-size: 20px;
     line-height: 25px;
@@ -104,10 +104,10 @@ label {
 }
 
 @media (max-width: 900px) {
-label{
+    .RegisterPage label{
     font-size: 15px;
 }
-form {
+.RegisterPage form {
     display: grid;
     grid-template-areas:
         "fName fName"

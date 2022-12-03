@@ -56,6 +56,12 @@ body{
     height: 100px;
     object-fit: cover;
 }
+.HomePage input {
+    background: #d9d9d9;
+    height: 30px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
 .HomePage #orderNow{
     z-index: 2;
     position: absolute;
