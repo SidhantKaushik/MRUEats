@@ -21,12 +21,12 @@ const EditAccount = (props) => {
 
 
     const [formData, setFormData] = useState({
-        firstname: userInfo.firstname,
-        lastname: userInfo.lastname,
-        delivery_loc: userInfo.delivery_loc,
+        firstName: userInfo.firstName,
+        lastName: userInfo.lastName,
+        deliverTo: userInfo.deliverTo,
         address: userInfo.details?.address,
-        phone_number: userInfo.details?.phone_number,
-        postal_code: userInfo.details?.postal_code,
+        phoneNumber: userInfo.details?.phoneNumber,
+        postalCode: userInfo.details?.postalCode,
     });
 
     const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
@@ -59,7 +59,6 @@ const EditAccount = (props) => {
             [e.target.name]: e.target.value
         }));
 
-        console.log(formData);
 
     }
 
@@ -69,8 +68,8 @@ const EditAccount = (props) => {
         e.preventDefault();
         
         //Postal code input validation
-        const formattedPostalCode = PostalCode(formData.postal_code)?.toUpperCase().replace(/(.{3})/g, "$1 ");
-        if(formattedPostalCode === undefined && userInfo.details?.postal_code !== formData.postal_code && formData.postal_code){
+        const formattedPostalCode = PostalCode(formData.postalCode)?.toUpperCase().replace(/(.{3})/g, "$1 ");
+        if(formattedPostalCode === undefined && userInfo.details?.postalCode !== formData.postalCode && formData.postalCode){
             toast.error('Please input valid postal code');
             return;
         }
@@ -84,13 +83,13 @@ const EditAccount = (props) => {
             _id: userInfo._id,
             id: userInfo.id,
             email: userInfo.email,
-            firstname: formData.firstname,
-            lastname: formData.lastname,
-            delivery_loc: formData.delivery_loc,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            deliverTo: formData.deliverTo,
             address: formData.address,
-            country_code: userInfo.details?.country_code,
-            phone_number: phoneNum,
-            postal_code: checkPostalCode(formData.postal_code) ? formattedPostalCode : formData.postal_code,
+            countryCode: userInfo.details?.countryCode,
+            phoneNumber: phoneNum,
+            postalCode: checkPostalCode(formData.postalCode) ? formattedPostalCode : formData.postalCode,
             city: userInfo.details?.city,
             province: userInfo.details?.province,
             country: userInfo.details?.country
@@ -123,20 +122,20 @@ const EditAccount = (props) => {
                     </div>
                     <form onSubmit={onSubmit}>
                         <div className="ProfileInformation">
-                            {/* <Collapsible className="reqInfo" trigger="Required User Information"> */}
+                            <Collapsible className="reqInfo" trigger="Required User Information">
                                 <div className="FLName">
                                     <div className="firstName">
                                         <div className="standardLayout">
                                             <h2>First Name</h2>
                                             <h2 className="required">*</h2>
-                                            <input type="text" id="firstname" name="firstname" value={formData.firstname} placeholder={userInfo.firstname} onChange={onChange}></input>
+                                            <input type="text" id="firstName" name="firstName" value={formData.firstName} placeholder={userInfo.firstName} onChange={onChange}></input>
                                         </div>
                                     </div>
                                     <div className="lastName">
                                         <div className="standardLayout">
                                             <h2>Last Name</h2>
                                             <h2 className="required">*</h2>
-                                            <input type="text" id="lastname" name="lastname" value={formData.lastname} placeholder={userInfo.lastname} onChange={onChange}></input>
+                                            <input type="text" id="lastName" name="lastName" value={formData.lastName} placeholder={userInfo.lastName} onChange={onChange}></input>
                                         </div>
                                     </div>
                                 </div>
@@ -151,28 +150,28 @@ const EditAccount = (props) => {
                                     <div className="twoLayout">
                                         <h2>Delivery Location</h2>
                                         <h2 className="required">*</h2>
-                                        <input type="text" id="dLocation" name="delivery_loc" value={formData.delivery_loc} placeholder={userInfo.delivery_loc} onChange={onChange}></input>
+                                        <input type="text" id="dLocation" name="deliverTo" value={formData.deliverTo} placeholder={userInfo.deliverTo} onChange={onChange}></input>
                                     </div>
                                 </div>
-                            {/* </Collapsible> */}
-                            {/* <Collapsible className="addInfo" trigger="Additional Information"> */}
+                                </Collapsible>
+                                <Collapsible className="addInfo" trigger="Additional Information">
                                 <div className="countryPhone">
                                     <div className="countryCode">
                                         <h2>Country Code</h2>
                                         <div className="twoLayout">
-                                            <CountryCodes code={userInfo.details?.country_code} isActive={false}></CountryCodes>
+                                            <CountryCodes code={userInfo.details?.countryCode} isActive={false}></CountryCodes>
                                         </div>
                                     </div>
                                     <div className="phoneNumber">
                                         <div className="standardLayout">
                                             <h2>Phone Number</h2>
-                                            <InputPhoneNumber num={formData.phone_number} setPhoneNum={setPhoneNum}></InputPhoneNumber>
-                                            {/* <input type="number" id="phone_number" name="phone_number" value={phoneNum} placeholder={userInfo.details?.phone_number} onChange={onChange}></input> */}
+                                            <InputPhoneNumber num={formData.phoneNumber} setPhoneNum={setPhoneNum}></InputPhoneNumber>
+                                            {/* <input type="number" id="phoneNumber" name="phoneNumber" value={phoneNum} placeholder={userInfo.details?.phoneNumber} onChange={onChange}></input> */}
                                         </div>
                                     </div>
                                 </div>
-                            {/* </Collapsible> */}
-                            {/* <Collapsible className="billInfo" trigger="Billing Information"> */}
+                                </Collapsible>
+                                <Collapsible className="billInfo" trigger="Billing Information">
                                 <div className="streetAddress">
                                     <div className="twoLayout">
                                         <h2>Street Address</h2>
@@ -202,7 +201,7 @@ const EditAccount = (props) => {
                                     <div className="postal">
                                         <div className="twoLayout">
                                             <h2 id="pCode">Postal Code</h2>
-                                            <input type="text" id="postal_code" name="postal_code" value={formData.postal_code} placeholder={userInfo.details?.postal_code} onChange={onChange}></input>
+                                            <input type="text" id="postalCode" name="postalCode" value={formData.postalCode} placeholder={userInfo.details?.postalCode} onChange={onChange}></input>
                                         </div>
                                     </div>
                                     <div className="country">
@@ -212,7 +211,7 @@ const EditAccount = (props) => {
                                         </div>
                                     </div>
                                 </div>
-                            {/* </Collapsible> */}
+                                </Collapsible> 
                                 <div id="saveButton">
                                     <input type="submit" id="saveButtonBtn" value="Save"></input>
                                 </div>

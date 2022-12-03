@@ -4,9 +4,9 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
   id: Number,
-  firstname: String,
-  lastname: String,
-  delivery_loc: String,
+  firstName: String,
+  lastName: String,
+  deliverTo: String,
   email: String,
   isAdmin: Boolean,
   isCourier: Boolean,
@@ -15,9 +15,9 @@ const userSchema = new mongoose.Schema({
   details: {
     address: String,
     country: String,
-    country_code : Number,
-    phone_number: String,
-    postal_code: String,
+    countryCode : Number,
+    phoneNumber: String,
+    postalCode: String,
     province: String,
     city: String
   }

@@ -1,19 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector} from 'react-redux';
-import { update, reset } from '../features/auth/authSlice';
-import Spinner from '../components/Spinner';
-import {FormatPhoneNum} from '../helpers/phone-format';
-import '../styles/Account.css'
-import { toast } from 'react-toastify';
-import PostalCode from '../helpers/postal-code-format';
+import '../styles/Account.css';
 import EditIcon from "../images/edit-icon.png";
 import CountryCodes from '../components/CountryCodes';
 import Collapsible from 'react-collapsible';
 
-const Account = (props) => {
+const Account = () => {
     const [userInfo, setUserInfo] = useState({});
-    const [orders, setOrders] = useState({});
 
     const navigate = useNavigate();
     
@@ -21,18 +15,21 @@ const Account = (props) => {
     
     //Gets user info from local storage
     useEffect(() => {
-        // const localUser = JSON.parse(localStorage.getItem('user'));
-        // console.log(user.id)
         if (!user) {
             navigate('/login');
         }
         //Uses user info from local storage to search database
-    
             const getUser = async () => {
-
                 try{
+                    const token = user.token;
+                    const config = {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
+                    
                     const url = "api/users/" + user.id;
-                    const response = await fetch(url);
+                    const response = await fetch(url, config);
                     const data = await response.json();
                     setUserInfo(data.user);
                 } catch (err){
@@ -40,25 +37,9 @@ const Account = (props) => {
                 }
             } 
             getUser();
-            
-            const getOrders = async () => {
-                try{
-                    //Add props.user.id instead of 1
-                    const url = "api/orders/" + 1;
-                    const response = await fetch(url);
-                    const data = await response.json();
-                    setOrders(data);
-                    
         
-                } catch (err){
-                    console.error(err)
-                }
-            }
-            getOrders();
-        
-    }, [navigate, user, userInfo]);
+    }, [user, navigate]);
     
-
     return (
         <div className="backgroundEffect">
             <div className="AccountPage">
@@ -91,14 +72,14 @@ const Account = (props) => {
                                     <div className="standardLayout">
                                         <h2>First Name</h2>
                                         <h2 className="required">*</h2>
-                                        <input type="text" id="firstname" name="firstname" value={userInfo.firstname} placeholder={userInfo.firstname} readOnly></input>
+                                        <input type="text" id="firstName" name="firstName" value={userInfo.firstName} placeholder={userInfo.firstName} readOnly></input>
                                     </div>
                                 </div>
                                 <div className="lastName">
                                     <div className="standardLayout">
                                         <h2>Last Name</h2>
                                         <h2 className="required">*</h2>
-                                        <input type="text" id="lastname" name="lastname" value={userInfo.lastname} placeholder={userInfo.lastname} readOnly></input>
+                                        <input type="text" id="lastName" name="lastName" value={userInfo.lastName} placeholder={userInfo.lastName} readOnly></input>
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +94,7 @@ const Account = (props) => {
                                 <div className="twoLayout">
                                     <h2>Delivery Location</h2>
                                     <h2 className="required">*</h2>
-                                    <input type="text" id="dLocation" name="delivery_loc" value={userInfo.delivery_loc} placeholder={userInfo.delivery_loc} readOnly></input>
+                                    <input type="text" id="dLocation" name="deliverTo" value={userInfo.deliverTo} placeholder={userInfo.deliverTo} readOnly></input>
                                 </div>
                             </div>
                             </Collapsible>
@@ -124,13 +105,13 @@ const Account = (props) => {
                                 <div className="countryCode">
                                     <h2>Country Code</h2> 
                                     <div className="twoLayout">
-                                        <CountryCodes code={userInfo.details?.country_code}></CountryCodes>
+                                        <CountryCodes code={userInfo.details?.countryCode}></CountryCodes>
                                     </div>
                                 </div>
                                 <div className="phoneNumber">
                                     <div className="standardLayout">
                                         <h2>Phone Number</h2>
-                                        <input type="text" id="phone_number" name="phone_number" value={userInfo.details?.phone_number} placeholder={userInfo.details?.phone_number} readOnly></input>
+                                        <input type="text" id="phoneNumber" name="phoneNumber" value={userInfo.details?.phoneNumber} placeholder={userInfo.details?.phoneNumber} readOnly></input>
                                     </div>
                                 </div>
                             </div>
@@ -161,8 +142,8 @@ const Account = (props) => {
                             <div className="postal">
                                 <div className="twoLayout">
                                     <h2 id="pCode">Postal Code</h2>
-                                    {/* PostalCode(userInfo.details?.postal_code)?.toUpperCase().replace(/(.{3})/g, "$1 ") */}
-                                    <input type="text" id="postal_code" name="postal_code" value={userInfo.details?.postal_code} placeholder={userInfo.details?.postal_code} readOnly></input>
+                                    {/* PostalCode(userInfo.details?.postalCode)?.toUpperCase().replace(/(.{3})/g, "$1 ") */}
+                                    <input type="text" id="postalCode" name="postalCode" value={userInfo.details?.postalCode} placeholder={userInfo.details?.postalCode} readOnly></input>
                                 </div>
                             </div>
                             <div className="country">

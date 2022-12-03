@@ -7,17 +7,17 @@ import Spinner from '../components/Spinner';
 import '../styles/Register.css';
 
 function Register() {
-    //Add delivery_loc
+    //Add deliverTo
     const [formData, setFormData] = useState({
-        firstname: '',
-        lastname: '',
+        firstName: '',
+        lastName: '',
         email: '',
-        delivery_loc: '',
+        deliverTo: '',
         password: '',
         password_c: ''
     });
 
-    const { firstname, lastname, email, delivery_loc, password, password_c } = formData;
+    const { firstName, lastName, email, deliverTo, password, password_c } = formData;
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -50,7 +50,7 @@ function Register() {
         e.preventDefault();
 
         //if none inputed
-        if(!firstname && !lastname && !email && !delivery_loc && !password && !password_c)
+        if(!firstName && !lastName && !email && !deliverTo && !password && !password_c)
         {
             toast.error('Form not filled');
             return;
@@ -74,10 +74,10 @@ function Register() {
         }
         else {
             const userData = {
-                firstname,
-                lastname,
+                firstName,
+                lastName,
                 email,
-                delivery_loc,
+                deliverTo,
                 password,
                 password_c
             }
@@ -99,11 +99,11 @@ function Register() {
                 <form onSubmit={onSubmit}>
                     <div className='fName'>
                         <label for="first-name">First Name</label>
-                        <input type="text" id="firstname" name="firstname" value={firstname} placeholder='Enter your first name' onChange={onChange} />
+                        <input type="text" id="firstName" name="firstName" value={firstName} placeholder='Enter your first name' onChange={onChange} />
                     </div>
                     <div className='lName'>
                         <label for="last-name">Last Name</label>
-                        <input type="text" id="lastname" name="lastname" value={lastname} placeholder='Enter your last name' onChange={onChange} />
+                        <input type="text" id="lastName" name="lastName" value={lastName} placeholder='Enter your last name' onChange={onChange} />
                     </div>
                     <div className='email'>
                         <label for="email">Email</label>
@@ -119,7 +119,7 @@ function Register() {
                     </div>
                     <div className='dLocation'>
                         <label for="deliveryLoc">Delivery Location</label>
-                        <input type="text" id="dLocation" name="delivery_loc" value={delivery_loc} placeholder='Enter delivery location Ex.(B140 or 123 Street SE)' onChange={onChange} />
+                        <input type="text" id="dLocation" name="deliverTo" value={deliverTo} placeholder='Enter delivery location Ex.(B140 or 123 Street SE)' onChange={onChange} />
                     </div>
                     <div className='submitbtn'>
                         <input id="register-button" type="submit" value="Register" />

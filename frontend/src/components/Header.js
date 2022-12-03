@@ -45,7 +45,7 @@ function Header() {
             </div>
         </header>
         <div className="locationInfo">
-                <p>Current Address: Address</p>
+                <p>Delivery Address: {user?.deliverTo}</p>
             </div>
             <style jsx="true">{`
                 

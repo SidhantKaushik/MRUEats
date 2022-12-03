@@ -6,12 +6,8 @@ const { protect } = require('../middleware/authMiddleware');
 router.post('/', registerUser);
 router.post('/login', loginUser);
 //PUT to update profile
-router.put('/UPDATE', updateUser);
-router.route('/:id').get(getUser);
-//router.get('/me', getMe);
-//router.get('/', getUsers);
-//router.get('/admins', protect, getAdmins);
-//router.get('/:id', getUserById);
+router.put('/UPDATE', updateUser, protect);
+router.route('/:id').get(getUser, protect);
 
 
 module.exports = router;
