@@ -3,11 +3,12 @@
     font-weight: 400;
 }
 
-.RestaurantBanner {   
+.RestaurantPage .RestaurantBanner {   
     background-color: #033453;
     padding: 1em;
     border-top: 1px solid gray;
     display: grid;
+    justify-content: space-between;
     grid-template-areas:
         "firstline search"
         "secondline search"
@@ -16,11 +17,11 @@
     color: #FFFFFF;
 }
 
-.RestaurantBanner * {
+.RestaurantPage .RestaurantBanner * {
     margin: 0;
 }
 
-.restaurantImage {
+.RestaurantPage .restaurantImage {
     grid-area: image;
     height: 150px;
     width: 150px;
@@ -30,13 +31,10 @@
     padding-right: 20px;
 }
 
-.menuSearchBar {
+.RestaurantPage .menuSearchBar {
     grid-area: search;
     width: 30em;
     height: 3em;
-    position: relative;
-    top: 80%;
-    float: right;
     margin-right: 5em;
     background: rgba(255, 255, 255, 0.22);
     border: 1px solid #000000;
@@ -44,7 +42,7 @@
 
 }
 
-.menuSearchBar::placeholder {
+.RestaurantPage .menuSearchBar::placeholder {
     font-family: 'Unna';
     font-weight: 400;
     font-size: 1.5em;
@@ -52,15 +50,15 @@
     padding: 1em;
 }
 
-.restaurantInfo {
+.RestaurantPage .restaurantInfo {
     font-weight: 200;
 }
 
-.openStatus {
+.RestaurantPage .openStatus {
     color: #C3EC99;
 }
 
-.firstLine {
+.RestaurantPage .firstLine {
     font-style: italic;
     font-weight: 700;
     font-size: 20px;
@@ -70,14 +68,14 @@
     align-items: center;
 }
 
-.secondLine {
+.RestaurantPage .secondLine {
     grid-area: secondline;
     display: flex;
     grid-column-gap: 10px;
     align-items: center;
 }
 
-.thirdLine {
+.RestaurantPage .thirdLine {
     grid-area: thirdline;
     display: flex;
     grid-column-gap: 10px;
@@ -85,78 +83,154 @@
     padding-bottom: 10px;
 }
 
-.mainContentBody {
+.RestaurantPage .mainContentBody {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-areas:
         "categories menu addItem";
-    height: 100vh;
 }
 
-.menuCategories {
+.RestaurantPage .menuCategories {
     grid-area: categories;
     background: #FCFCFC;
-    margin: 1em;
+    margin: 10px;
 }
 
-.categoriesList {
+.RestaurantPage .categoriesList {
     list-style: none;
     font-family: 'Unna';
     font-weight: 500;
     font-size: 24px;
     color: #000000;
+    padding:0;
 }
 
-.restaurantMenu {
+.RestaurantPage .restaurantMenu {
     grid-area: menu;
     background: #FCFCFC;
-    margin: 1em;
+    margin: 10px;
+}
+.RestaurantPage h2{
+    padding-left: 10px;
+}
+.RestaurantPage .addItem h2{
+    font-family: 'Staatliches', cursive !important;
+}
+.RestaurantPage .restaurantMenu h2{
+    font-family: 'Staatliches', cursive !important;
+    padding-left: 15px;
 }
 
-.addItem {
+.RestaurantPage h3{
+    padding-left: 10px;
+    font-size: 24px;
+    font-family: 'Staatliches', cursive !important;
+}
+
+.RestaurantPage .addItem {
     grid-area: addItem;
     background: #FCFCFC;
-    margin: 1em;
+    margin: 10px;
 }
 
-.menuCategories h2{
-    font-size: 40px
+.RestaurantPage .menuCategories h2{
+    font-size: 40px;
+    font-family: 'Staatliches', cursive !important;
 }
 
-.category-item:hover {
+.RestaurantPage .category-item:hover {
     background-color: #033453;
     color: white;
     cursor:pointer;
 }
 
-.category-item {
-    font-size: 30px;
+.RestaurantPage .category-item {
+    font-size: 20px;
+    padding-left: 10px;
 }
 
-.menu-list{
+.RestaurantPage .menu-list{
     list-style: none;
 }
 
-.menu-list .item-name {
+.RestaurantPage .menu-list .item-name {
     font-size: 20px;
     font-weight: bold;
 }
 
-.menu-list .menu-item:hover {
+.RestaurantPage .menu-list .menu-item:hover {
     color: white;
     cursor: pointer;
     background-color: #033453;
 }
-
-.menu-list .menu-item{
+.RestaurantPage .menu-list .menu-item:hover .add-to-cart{
+    background-color: #ffb703;
+    color: #033453;
+}
+.RestaurantPage .menu-list .item-name{
+    justify-content: space-between;
+    display:flex;
+    padding-right: 30px;
+    font-size: 1.5em;
+}
+.RestaurantPage .menu-list .menu-item{
     margin: 20px;
     padding: 30px;
+    display: grid;
+    grid-template-columns: auto 50px;
 }
 
-.add-to-cart {
-    float: right;
+.RestaurantPage .menu-list .add-to-cart{
+    height: 40px;
+    align-self: center;
+    font-family: 'Staatliches', cursive !important;
+    background-color: #033453;
+    color: #ffb703;
+    border:none;
+    border-radius: 20%;
+}
+.RestaurantPage .cart-list {
+    padding: 0;
+    
+    font-size: 20px;
+}
+.RestaurantPage .addItem{
+    padding-left: 15px;
+}
+.RestaurantPage .addItem li{
+    padding-left: 15px;
 }
 
-.cart-item {
+.RestaurantPage .cart-item {
     list-style: none;
+}
+@media (max-width: 900px) {
+    .RestaurantPage .mainContentBody {
+        display: grid;
+        grid-template-areas:
+            "addItem"
+            "categories"
+            "menu";
+        grid-template-columns: auto;
+    }
+    .RestaurantPage .RestaurantBanner{
+        grid-template-areas:
+        "firstline"
+        "secondline"
+        "thirdline"
+        "search";
+    }
+    .RestaurantPage .RestaurantBanner h2{
+        font-size: 16px;
+    }
+    .RestaurantPage .RestaurantBanner h1{
+        font-size: 20px;
+    }
+    .RestaurantPage .addItem input{
+        margin-bottom: 15px;
+        width: 60%;
+    }
+    .RestaurantPage .menuSearchBar{
+        width: 90vw;
+    }
 }

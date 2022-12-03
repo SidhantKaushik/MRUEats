@@ -110,10 +110,9 @@ const RestaurantDetails = (props) => {
     return (
         <div className="RestaurantPage">
             <div className="RestaurantBanner">
-=
                 <div className="firstLine">
                     <h1 className="restaurant-name">{location.state.name}</h1>
-                    <div className="restaurantRating">XXXXX</div>
+                    <div className="restaurantRating">{"⭐".repeat(location.state.rating)}</div>
                 </div>
                 <div className="secondLine">
                     <h2 className="restaurantInfo">{location.state.address}</h2>
@@ -129,7 +128,7 @@ const RestaurantDetails = (props) => {
             </div>
             <div className="mainContentBody">
                 <div className="menuCategories">
-                <h3>Categorgies</h3>
+                <h3>Categories</h3>
                     <ol className='categoriesList'>
                     <li className='category-item' onClick={filter}>
                         All 
@@ -143,7 +142,7 @@ const RestaurantDetails = (props) => {
                     </ol>
                 </div>
                 <div className="restaurantMenu">
-                    <h2>Promotions</h2>
+                    <h2>Menu Items</h2>
 
                     <div className="menu-list">
                         {menuItems.map((p, index) => (
@@ -158,7 +157,7 @@ const RestaurantDetails = (props) => {
                     </div>
                 </div>
                 <div className="addItem">
-                    <h2>Menu Item Name</h2>
+                    <h2>Order Details</h2>
                     <ol className='cart-list'>
                             {currItem.map((p, index) => (
                                 <CartItems
