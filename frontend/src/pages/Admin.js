@@ -580,12 +580,12 @@ function Admin(props) {
                                                 <input className='popup-submit' type="submit" value="Save Changes" />
                                             </div>
                                         </>}
-
+                                    
                                         {!selectedMenuItem &&<>
                                             <div>Please select a menu item to update.</div>
                                         </>}
-
                                     </form>
+                                    
                                 </>}
                                 handleClose={toggleMenuEditPopup}
                         />}
@@ -593,12 +593,20 @@ function Admin(props) {
                         {menuDeleteIsOpen && <Popup
                                 content={<>
                                     <h4 className='popup-title'>Remove Menu Item</h4>
-                                    <p className='delete-confirmation'>Are you sure you want to remove this menu item? This action cannot be undone.</p>
+                                    
                                     <form onSubmit={onDeleteMenuSubmit}>
-                                        <div className='submitButton'>
-                                            <input className='popup-submit' type="submit" value="Remove Menu Item"/>
-                                        </div>
+                                        {selectedMenuItem &&<>
+                                            <p className='delete-confirmation'>Are you sure you want to remove this menu item? This action cannot be undone.</p>
+                                            <div className='submitButton'>
+                                                <input className='popup-submit' type="submit" value="Remove Menu Item"/>
+                                            </div>                                        
+                                        </>}
+
+                                        {!selectedMenuItem &&<>
+                                            <div className='delete-confirmation'>Please select a menu item to delete.</div>
+                                        </>}
                                     </form>
+                                    
                                 </>}
                                 handleClose={toggleMenuDeletePopup}
                             />}
