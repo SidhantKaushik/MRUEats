@@ -110,7 +110,7 @@ const Courier = (props) => {
   
       let selectedOrder = activeOrders.find((order) => order.id == id);
       let price = selectedOrder.price;
-      let isActive = false;
+      let isActive = selectedOrder.isActive;
       let dateOrdered = selectedOrder.dateOrdered;
       let restaurantId = selectedOrder.restaurantId;
       let userId = selectedOrder.userId;
@@ -135,11 +135,8 @@ const Courier = (props) => {
                 <div className='active-container'>
                 {activeOrders.map((order) =>
                   <div className='order-item'>
-                    {/* <div className='order-logo'>
-                      <img className='logo' alt="logo" src='https://cdn.statically.io/img/harbourcats.com/wp-content/uploads/2016/07/BoosterJ_MasterLogo_Rinkboards-002-970x624.jpg?quality=100&f=auto'></img>
-                    </div> */}
                     <div className='order-info'>
-                      <h4 className='order-resto-title'>Restaurant Name</h4> 
+                      <h4 className='order-resto-title'>Name</h4> 
                       {/* users.find(user => user.id = order.user_id); */}
                       {/* restaurants.find(rest => rest.id = order.restaurant_id); */}
                       <p>Date: {order.date_ordered}</p>

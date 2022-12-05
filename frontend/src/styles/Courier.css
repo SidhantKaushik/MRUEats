@@ -27,12 +27,14 @@
     height: 90%;
     overflow: auto;
     display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .courier-page .past-container {
     height: 80%;
     overflow: auto;
     display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .courier-page h3 {
@@ -54,7 +56,6 @@
         "order-info order-buttons";
     background-color: #F5F5F5;
     height: 200px;
-    width: 50vw;
     border-radius: 15px;
     margin: 1em;
 }
