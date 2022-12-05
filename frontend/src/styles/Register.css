@@ -20,6 +20,7 @@
     grid-template-areas:
         "fName lName"
         "email email"
+        "dLocation dLocation"
         "password password"
         "confirm confirm"
         "submit submit";
@@ -113,6 +114,7 @@
         "fName fName"
         "lName lName"
         "email email"
+        "dLocation dLocation"
         "password password"
         "confirm confirm"
         "submit submit";

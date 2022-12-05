@@ -8,7 +8,8 @@ const restaurantSchema = new mongoose.Schema({
   rating: Number,
   address: String,
   open: Number,
-  close: Number
+  close: Number,
+  category: String
 });
 
 module.exports = mongoose.model("Restaurant", restaurantSchema, "restaurants");
