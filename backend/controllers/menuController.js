@@ -15,7 +15,7 @@ const getMenu = asyncHandler(async (req, res) => {
 // @route  GET /api/menu/:id
 // @access Private
 const getMenuByRestaurant = asyncHandler(async (req, res) => {
-    const menu = await Menu.find({ restaurant_id: req.restaurant_id });
+    const menu = await Menu.find({ restaurantId: req.restaurant_id });
 
     res.status(200).json(menu);
 });

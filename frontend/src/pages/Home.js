@@ -13,8 +13,6 @@ const Home = (props) => {
     let filterRest = []
     let allRest = [...props.restaurants.restaurants]
     const [menu, setMenu] = useState([])
-    console.log(allRest)
-
     const [rest, setRest] = useState([]);
 
     useEffect(() => {
@@ -57,12 +55,10 @@ const Home = (props) => {
 
 
     function plusSlides(n) {
-        console.log("click");
         showSlide(slideIndex += n);
     }
     function showSlide(n) {
         let slides = document.getElementsByClassName("slide");
-        console.log(slides);
         if (n > slides.length) {slideIndex = 1}    
         if (n < 1) {slideIndex = slides.length}
         for (let i = 0; i < slides.length; i++) {

@@ -64,7 +64,7 @@ function Admin(props) {
           const response = await fetch(url);
           const data = await response.json();
           setAllMenuItems(data);
-          setMenu(data.filter((item) => item.restaurant_id === 1));
+          setMenu(data.filter((item) => item.restaurantId == 1));
         } catch (err) {
           console.error(err);
         }
@@ -89,7 +89,7 @@ function Admin(props) {
     const populateRestaurant = (e) => {
         var restaurantId = e.target.id;
         setSelectedRestaurant(restaurants.find(restaurant => restaurant.id == restaurantId));
-        setMenu(allMenuItems.filter((item) => item.restaurant_id == restaurantId));
+        setMenu(allMenuItems.filter((item) => item.restaurantId == restaurantId));
     }
 
     var restaurantList = restaurants.map((restaurant) =>

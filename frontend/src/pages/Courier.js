@@ -14,72 +14,76 @@ const Courier = (props) => {
     const [detailedViewIsOpen, setDetailedViewIsOpen] = useState(false);
 
     useEffect(() => {
-        const getActiveOrders = async () => {
-            try {
-              const url = "api/orders/active";
-              const response = await fetch(url);
-              const data = await response.json();
-              setActiveOrders(data);
-            } catch (err) {
-              console.error(err);
-            }
-          }
+      const getRestaurants = async () => {
+        try {
+          const url = "api/restaurants";
+          const response = await fetch(url);
+          const data = await response.json();
+          setRestaurants(data);
+
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      getRestaurants();
+
+      const getMenus = async () => {
+        try {
+          const url = "api/menu/";
+          const response = await fetch(url);
+          const data = await response.json();
+          setMenus(data);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
+    getMenus();
+
+    const getUsers = async () => {
+      try {
+        const url = "api/users/";
+        const response = await fetch(url);
+        const data = await response.json();
+        setUsers(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  
+    getUsers();
+
+    const getActiveOrders = async () => {
+      try {
+        const url = "api/orders/active";
+        const response = await fetch(url);
+        const data = await response.json();
+        setActiveOrders(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
     
-        getActiveOrders();
+    getActiveOrders();
 
-        const getCompleteOrders = async () => {
-          try {
-            const url = "api/orders/complete";
-            const response = await fetch(url);
-            const data = await response.json();
-            setCompleteOrders(data);
-          } catch (err) {
-            console.error(err);
-          }
-        }
+    const getCompleteOrders = async () => {
+      try {
+        const url = "api/orders/complete";
+        const response = await fetch(url);
+        const data = await response.json();
+        setCompleteOrders(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
   
-        getCompleteOrders();
-
-        const getRestaurants = async () => {
-          try {
-            const url = "api/restaurants";
-            const response = await fetch(url);
-            const data = await response.json();
-            setRestaurants(data);
-  
-          } catch (err) {
-            console.error(err);
-          }
-        }
-        getRestaurants();
-  
-        const getMenus = async () => {
-          try {
-            const url = "api/menu/";
-            const response = await fetch(url);
-            const data = await response.json();
-            setMenus(data);
-          } catch (err) {
-            console.error(err);
-          }
-        }
-  
-        getMenus();
-
-        const getUsers = async () => {
-            try {
-              const url = "api/users/";
-              const response = await fetch(url);
-              const data = await response.json();
-              setUsers(data);
-            } catch (err) {
-              console.error(err);
-            }
-          }
-    
-        getUsers();
+    getCompleteOrders();
   
     }, [])
+
+    while(!restaurants[0] && !users[0]){
+      return;
+  }
 
     //#region popups
 
@@ -126,24 +130,54 @@ const Courier = (props) => {
       
       updateOrder(orderData);
   }
-    //#endregion
+  //#endregion
+  
+  //#region reformatting order item (grab linked restautant/user)
+  function reformatActiveOrders() {
+
+    var activeOrdersData = activeOrders.map((order) => ({
+      RestaurantName: restaurants.find(rest => rest.id = order.restaurantId).name,
+      Date: order.dateOrdered,
+      Price: order.price,
+      User: `${users.find(user => user.id = order.userId).firstName} ${users.find(user => user.id = order.userId).lastName}`,
+      Location: users.find(user => user.id = order.userId).deliverTo
+    }));
+
+    return activeOrdersData;
+  }
+
+  let reformattedActiveOrders = reformatActiveOrders();
+
+  function reformatCompleteOrders() {
+
+    var completeOrdersData = completeOrders.map((order) => ({
+      RestaurantName: restaurants.find(rest => rest.id = order.restaurantId).name,
+      Date: order.dateOrdered,
+      Price: order.price,
+      User: `${users.find(user => user.id = order.userId).firstName} ${users.find(user => user.id = order.userId).lastName}`,
+      Location: users.find(user => user.id = order.userId).deliverTo
+    }));
+
+    return completeOrdersData;
+  }
+
+  let reformattedCompleteOrders = reformatCompleteOrders();
+
+  //#endregion
  
     return (
         <div className="courier-page">
             <div className="active-orders">
                 <h3>Active Orders</h3>
                 <div className='active-container'>
-                {activeOrders.map((order) =>
+                {reformattedActiveOrders.map((order) =>
                   <div className='order-item'>
                     <div className='order-info'>
-                      <h4 className='order-resto-title'>Name</h4> 
-                      {/* users.find(user => user.id = order.user_id); */}
-                      {/* restaurants.find(rest => rest.id = order.restaurant_id); */}
-                      <p>Date: {order.date_ordered}</p>
-                      <p>Total Price: ${order.price}</p>
-                      <p>Number of Items:</p>
-                      <p>User:</p>
-                      <p>Location:</p>
+                      <h4 className='order-resto-title'>{order.RestaurantName}</h4> 
+                      <p>Date: {order.Date}</p>
+                      <p>Total Price: ${order.Price}</p>
+                      <p>User: {order.User}</p>
+                      <p>Location: {order.Location}</p>
                     </div>
                     <div className='order-buttons'>
                       <button className='status-button' id = {order.id} onClick={onMarkAsComplete}>Mark As Complete</button>
@@ -171,21 +205,16 @@ const Courier = (props) => {
             <div  className="past-orders">
                 <h3>Past Orders</h3>
                 <div className='past-container'>
-                  {completeOrders.map((order) =>
+                  {reformattedCompleteOrders.map((order) =>
                     <div className='order-item'>
-                      {/* <div className='order-logo'>
-                        <img className='logo' alt="logo" src='https://cdn.statically.io/img/harbourcats.com/wp-content/uploads/2016/07/BoosterJ_MasterLogo_Rinkboards-002-970x624.jpg?quality=100&f=auto'></img>
-                      </div> */}
                       <div className='order-info'>
-                        <h4 className='order-resto-title'>Title</h4>
-                        <p>Date:</p>
-                        <p>Total Price:</p>
-                        <p>Number of Items:</p>
-                        <p>User:</p>
-                        <p>Address:</p>
+                        <h4 className='order-resto-title'>{order.RestaurantName}</h4> 
+                        <p>Date: {order.Date}</p>
+                        <p>Total Price: ${order.Price}</p>
+                        <p>User: {order.User}</p>
+                        <p>Location: {order.Location}</p>
                       </div>
                       <div className='order-buttons'>
-                        <button className='status-button'>Mark As Complete</button>
                         <button className='expand-button' onClick={toggleDetailedViewPopup}>View Order Details</button>
                       </div>
                                       
