@@ -75,7 +75,7 @@ const deactivateOrder = asyncHandler(async (req, res) => {
     //         }
     // });
 
-    let orderToUpdate = await Order.findById({_id: req.body.id});
+    let orderToUpdate = await Order.findById({_id: req.body._id});
 
     if (!orderToUpdate) {
         throw new NotFoundError();

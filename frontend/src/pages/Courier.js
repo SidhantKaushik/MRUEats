@@ -111,24 +111,32 @@ const Courier = (props) => {
       e.preventDefault();
 
       let id = e.target.id;
-  
-      let selectedOrder = activeOrders.find((order) => order.id == id);
+      let selectedOrder = activeOrders.find((order) => order.id = id);
+
+      console.log(selectedOrder);
+
+      let _id = selectedOrder._id;
       let price = selectedOrder.price;
       let isActive = selectedOrder.isActive;
       let dateOrdered = selectedOrder.dateOrdered;
       let restaurantId = selectedOrder.restaurantId;
       let userId = selectedOrder.userId;
+      let user = users.find(user => user.id = id);
+      console.log(user);
 
       const orderData = {
+        _id,
         id,
         price,
         isActive,
         dateOrdered,
         restaurantId,
         userId,
+        user
       }
       
       updateOrder(orderData);
+
   }
   //#endregion
   
@@ -136,6 +144,7 @@ const Courier = (props) => {
   function reformatActiveOrders() {
 
     var activeOrdersData = activeOrders.map((order) => ({
+      id: order.id,
       RestaurantName: restaurants.find(rest => rest.id = order.restaurantId).name,
       Date: order.dateOrdered,
       Price: order.price,
@@ -151,6 +160,7 @@ const Courier = (props) => {
   function reformatCompleteOrders() {
 
     var completeOrdersData = completeOrders.map((order) => ({
+      id: order.id,
       RestaurantName: restaurants.find(rest => rest.id = order.restaurantId).name,
       Date: order.dateOrdered,
       Price: order.price,
