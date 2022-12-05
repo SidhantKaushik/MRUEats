@@ -14,3 +14,9 @@
     font-family: 'Staatliches', cursive !important;
     font-size: 1.5em;
 }
+.Login input {
+    background: #d9d9d9;
+    height: 30px;
+    border: 1px solid #ccc;
+    width: 100%;
+}

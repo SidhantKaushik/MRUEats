@@ -89,6 +89,7 @@ function Register() {
 
 
     return (
+        <div class="RegisterPage">
         <div class="main-container">
             <div class="box">
                 <div className="title">
@@ -121,6 +122,7 @@ function Register() {
                     </div>
                 </form>
             </div>
+        </div>          
         </div>
     )
 }
