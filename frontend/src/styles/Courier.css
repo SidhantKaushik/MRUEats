@@ -49,9 +49,9 @@
 
 .courier-page .order-item {
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-columns: 4fr 1fr;
     grid-template-areas:
-        "order-logo order-info order-buttons";
+        "order-info order-buttons";
     background-color: #F5F5F5;
     height: 200px;
     width: 50vw;
@@ -70,6 +70,7 @@
     border-radius: 50px;
 }
 .courier-page .order-info {
+    margin-left: 2em;
     grid-area: order-info;
     line-height: 10px;
 }
@@ -124,22 +125,22 @@
 @media (max-width:425px) {
     .courier-page .order-item {
         display: grid;
-        grid-template-columns: 1fr 4fr 1fr;
         grid-template-areas:
-            "order-logo order-info status-info";
+            "order-info"
+            "order-buttons";
         background-color: #F5F5F5;
-        height: 200px;
+        height: 350px;
         width: 95%;
         border-radius: 15px;
-        margin: 0;
+        margin: 0 0 1em 0;
     }
 
-    .courier-page .order-logo {
+    /* .courier-page .order-logo {
         display: none;
-    }
+    } */
 
-    .courier-page .status-info {
-        align-self: flex-start;
+    .courier-page .order-buttons {
+        align-self: flex-end;
         margin: 1em;
     }
 }

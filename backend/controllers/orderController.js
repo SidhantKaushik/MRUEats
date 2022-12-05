@@ -11,6 +11,24 @@ const getOrders = asyncHandler(async (req, res) => {
     res.status(200).json(orders);
 });
 
+// @desc   Get all active orders
+// @route  GET /api/orders/active
+// @access Private
+const getActiveOrders = asyncHandler(async (req, res) => {
+    const activeOrders = await Order.find({ isActive: true });
+
+    res.status(200).json(activeOrders);
+});
+
+// @desc   Get all complete orders
+// @route  GET /api/orders/complete
+// @access Private
+const getCompleteOrders = asyncHandler(async (req, res) => {
+    const completeOrders = await Order.find({ isActive: false });
+
+    res.status(200).json(completeOrders);
+});
+
 // @desc   Get orders for single user
 // @route  GET /api/orders/:id
 // @access Private
@@ -35,13 +53,38 @@ const setOrder = asyncHandler(async (req, res) => {
     })
 });
 
+// @desc   sets orders "isActive" to false
+// @route  PUT /api/orders/DEACTIVATE
+// @access Private
+const deactivateOrder = asyncHandler(async (req, res) => {
 
+    await Order.findByIdAndUpdate(req.body.id, { 
+        id: req.body.id,
+        name: req.body.name,
+        price: req.body.price,
+        isActive: req.body.isActive,
+        dateOrdered: req.body.dateOrdered,
+        restaurantId: req.body.restaurantId,
+        userId: req.body.userId },
+        function (err, docs) {
+            if (err){
+                console.log(err)
+            }
+            else{
+                console.log("Updated Order : ", docs);
+            }
+    });
+    
+});
 
 module.exports = {
 
     getOrders,
     getOrderByUser,
-    setOrder
+    setOrder,
+    getActiveOrders,
+    getCompleteOrders,
+    deactivateOrder
     //getOrderByRestaurant
     //setOrder
     //getActiveOrders

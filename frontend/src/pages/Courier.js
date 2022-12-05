@@ -1,6 +1,7 @@
 import '../styles/Courier.css'
 import { useState, useEffect } from 'react';
 import Popup from '../components/Popup';
+import axios from 'axios';
 
 const Courier = (props) => {
 
@@ -13,19 +14,31 @@ const Courier = (props) => {
     const [detailedViewIsOpen, setDetailedViewIsOpen] = useState(false);
 
     useEffect(() => {
-        const getOrders = async () => {
+        const getActiveOrders = async () => {
             try {
-              const url = "api/orders/all";
+              const url = "api/orders/active";
               const response = await fetch(url);
               const data = await response.json();
-              setActiveOrders(data.filter(order => order.isActive = "true"));
-              setCompleteOrders(data.filter(order => order.isActive = "false"));
+              setActiveOrders(data);
             } catch (err) {
               console.error(err);
             }
           }
     
-        getOrders();
+        getActiveOrders();
+
+        const getCompleteOrders = async () => {
+          try {
+            const url = "api/orders/complete";
+            const response = await fetch(url);
+            const data = await response.json();
+            setCompleteOrders(data);
+          } catch (err) {
+            console.error(err);
+          }
+        }
+  
+        getCompleteOrders();
 
         const getRestaurants = async () => {
           try {
@@ -66,7 +79,7 @@ const Courier = (props) => {
     
         getUsers();
   
-      }, [])
+    }, [])
 
     //#region popups
 
@@ -74,6 +87,45 @@ const Courier = (props) => {
         setDetailedViewIsOpen(!detailedViewIsOpen);
       }
 
+    //#endregion
+
+    //#region API calls
+
+    const updateOrder = async (orderData) => {
+
+      const response = await axios.put('api/orders/DEACTIVATE', orderData);
+
+      if (response.data) {
+          console.log(response.data);
+      }
+       return response.data;
+
+    }
+
+    const onMarkAsComplete = (e) =>{
+
+      e.preventDefault();
+
+      let id = e.target.id;
+  
+      let selectedOrder = activeOrders.find((order) => order.id == id);
+      let price = selectedOrder.price;
+      let isActive = false;
+      let dateOrdered = selectedOrder.dateOrdered;
+      let restaurantId = selectedOrder.restaurantId;
+      let userId = selectedOrder.userId;
+
+      const orderData = {
+        id,
+        price,
+        isActive,
+        dateOrdered,
+        restaurantId,
+        userId,
+      }
+      
+      updateOrder(orderData);
+  }
     //#endregion
  
     return (
@@ -83,9 +135,9 @@ const Courier = (props) => {
                 <div className='active-container'>
                 {activeOrders.map((order) =>
                   <div className='order-item'>
-                    <div className='order-logo'>
+                    {/* <div className='order-logo'>
                       <img className='logo' alt="logo" src='https://cdn.statically.io/img/harbourcats.com/wp-content/uploads/2016/07/BoosterJ_MasterLogo_Rinkboards-002-970x624.jpg?quality=100&f=auto'></img>
-                    </div>
+                    </div> */}
                     <div className='order-info'>
                       <h4 className='order-resto-title'>Restaurant Name</h4> 
                       {/* users.find(user => user.id = order.user_id); */}
@@ -97,7 +149,7 @@ const Courier = (props) => {
                       <p>Location:</p>
                     </div>
                     <div className='order-buttons'>
-                      <button className='status-button'>Mark As Complete</button>
+                      <button className='status-button' id = {order.id} onClick={onMarkAsComplete}>Mark As Complete</button>
                       <button className='expand-button' onClick={toggleDetailedViewPopup}>View Order Details</button>
                     </div>
                                     
@@ -124,9 +176,9 @@ const Courier = (props) => {
                 <div className='past-container'>
                   {completeOrders.map((order) =>
                     <div className='order-item'>
-                      <div className='order-logo'>
+                      {/* <div className='order-logo'>
                         <img className='logo' alt="logo" src='https://cdn.statically.io/img/harbourcats.com/wp-content/uploads/2016/07/BoosterJ_MasterLogo_Rinkboards-002-970x624.jpg?quality=100&f=auto'></img>
-                      </div>
+                      </div> */}
                       <div className='order-info'>
                         <h4 className='order-resto-title'>Title</h4>
                         <p>Date:</p>
