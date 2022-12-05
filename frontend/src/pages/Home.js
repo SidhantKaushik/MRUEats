@@ -12,6 +12,7 @@ const Home = (props) => {
 
     let filterRest = []
     let allRest = [...props.restaurants.restaurants]
+    const [menu, setMenu] = useState([])
     console.log(allRest)
 
     const [rest, setRest] = useState([]);
@@ -47,33 +48,58 @@ const Home = (props) => {
         setRest(filterRest)
     }
 
+    let slideIndex = 1;
+    showSlide(slideIndex);
+
+    setInterval(function () {
+        plusSlides(1);
+      }, 10000);
+
+
+    function plusSlides(n) {
+        console.log("click");
+        showSlide(slideIndex += n);
+    }
+    function showSlide(n) {
+        let slides = document.getElementsByClassName("slide");
+        console.log(slides);
+        if (n > slides.length) {slideIndex = 1}    
+        if (n < 1) {slideIndex = slides.length}
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        while(!slides[slideIndex-1]){
+            return;
+        }
+        slides[slideIndex-1].style.display = "block";
+    }
+
     
     return (
+        <div className="HomePage">
         <div className='home'>
-            <div id="categories">
-                <div className='category'>
-                    <img src='https://s3-alpha-sig.figma.com/img/a0b8/0422/fd559af13d71934c3b91f69958c34688?Expires=1668988800&Signature=aGsNRa-rfNsJXX1KZxtiGYJ~0~~q7vE4kFvFm7eBAiBv53s5IpjFn6bMgsUwRh1Mx9g4YDMagNLpYPCR6Tq3qZ2Uoi6GLyS52zElbfjaCRl7YKG07aWKHV6NtiUPnHxfRtlVHcxC9xp9zE92e5V2wa2J0Qnt~T7DSC-5HKFCwFFR~GBAVJya-D8CAJkCcvChKsjHP95E~LIUpDYO-legg9Nq3qifLSfB4VNaD2JtHEZVMVyz3dCH-I3Px3xL8jSdQTtVkzPwo7FM5~BnB-opcEarTntCNXB1y2YGN1kvIktPEsQD9cyovJ~Bsk63GiqjJc7~gO~4OKFJm3kbLfiiGg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA'></img>
+            <div className="SplashScreen">
+                <div class="slide">
+                    <img src='https://harbourcats.com/wp-content/uploads/2016/07/BoosterJ_MasterLogo_Rinkboards-002.jpg'></img>
                 </div>
-                <div className='category'>
-                    <img src='https://s3-alpha-sig.figma.com/img/143e/7b9c/69bf3bc848f9963fdd8c5ed570c27e1c?Expires=1668988800&Signature=S02I~kmfzmKuL4ZwUVA4rOO~XYzd1TTxtLA1YptA~9HJoCjvqpwPlUcAsgIXc~s3CCpZ9i~ZQGzrhhsVbyNw-lkLQi-lmLF9TqURA3-jeDXdoQkeNQtzqFmKe9SSTVXJ3lbZ3DMWME1HW7ZdyG2r54-njocNXGnlCJy-DzAOlHmkawmrFzbdVejYqdT0G-iSjyPMsgp1mjqPoflv4bR8H9xSPP1-4TdjXVmK2CZUKx46NgXucKaJekG0pPLkxmwyNvAaYt-H7U8IQIO3StY-jIe0gG3c~5zrXnLH8~5TT3mhvDfMi6Q4fQwN1UOsIKbdum36YL1aL7FPnv32wKbQjw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA'></img>
+                <div class="slide hideInitally">
+                    <img src="https://images.squarespace-cdn.com/content/v1/589a30d2725e258996583851/1486999228841-X0ZTSTV7NP709CWNAQD6/tacobell_banner.jpg?format=2500w" alt="Image 2"/>
                 </div>
-                <div className='category'>
+                <div id="orderNow">
+                    <p>Order Now</p>
                 </div>
-                <div className='category'></div>
+                <div class="prev" onClick={() => plusSlides(-1)}> &larr; </div>
+                <div class="next" onClick={() => plusSlides(1)}> &rarr; </div>
+                
             </div>
-            <div id="search-box">
-                <h2>Restaurants</h2>
-                {/* <div id="tags">
-                            <select>
-                                <option value="Pizza">Pizza</option>
-                                <option value="Midnight Snack">Midnight Snack</option>
-                                <option value="Hot Drinks">Hot Drinks</option>
-                                <option value="Energy">Energy</option>
-                            </select>
-                        </div> */}
-
+            <div className="categories">
+                Categories
+            </div>
+            <div className="restaurantList">
+                <div className="SearchBar">
                 <input type='text' placeholder='Search Restaurants' onChange={filter}></input>
-
+                </div>
+                <div className="list">
                 {rest.map((p, index) => (
                     <RestaurantItem
                         name={p.name}
@@ -86,7 +112,7 @@ const Home = (props) => {
                         address={p.address}
                     />
                 ))}
-
+                </div>
                 {/* <Link to='/RestaurantDetails'>
                     <div className='restaurants'>
                         <div className='logo'><img src='https://s3-alpha-sig.figma.com/img/fb70/ca6a/4b1bd450f3bb83cd16c2f3630170ce1e?Expires=1668988800&Signature=ZwsU8Fs3DeUXBXeut9bogfDxEvWaRDvxHF~py5GT6Vy8lr5lTwA0AeObdCT8zdVf-zvMy8WKTRzsOb4ckglEoyJwGun0dvmlGdRY32YPVmNF83CyzWGul2diG1DPBimVhz1plbDlIFddQ4t9nqh9p8O4mKcT8isp09tLt6uFdd1uf-4-J5gs1ykHXqU3dNc2Bg8AI3U1ykye21i47XaWDpsUDJU3HMXlQ8G2J1-PHgeh9GpDrebnQQ8MGOirjY8PI4y90zrBlgL3EPk-mfai1hGlmZbs4fA~qGBDE8lY6A2Aby~U26EwyTM3aRy46GF8BQRNL6C89aCFNgBjL2ICXw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA'></img></div>
@@ -95,6 +121,7 @@ const Home = (props) => {
                     </div>
                 </Link> */}
             </div>
+        </div>           
         </div>
 
     )

@@ -1,4 +1,4 @@
-header{
+.header{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -8,19 +8,22 @@ header{
     width: 100%;
     height: 56px;
     background-color: #033453;
-    border-bottom: solid gray 1px;
+    border-bottom: solid #FFB703 1px;
 }
 
 h1{
     flex: 0 1 auto;
     width: fit-content;
     white-space: nowrap;
-    color: white;
     padding-left: 10px;
+}
+.header li a{
+    cursor: pointer;
 }
 
 h1 a{
-    color: white;
+    font-family: 'Staatliches', cursive !important;
+    color: #FFB703 !important;
     text-decoration: none;
 }
 

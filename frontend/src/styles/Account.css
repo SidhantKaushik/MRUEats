@@ -1,18 +1,5 @@
-
-
-#reqFontSymb{
-
-    color: red;
-    margin:0;
-
-}
-
-#reqFont{
-    margin:0;
-    font-size: 20px;
-    letter-spacing: 0px;
-    word-spacing: 0px;
-    color: #000000;
+.AccountPage {
+    font-family: 'Unna', serif;
     font-weight: 400;
     text-decoration: none solid rgb(68, 68, 68);
     font-style: italic;
@@ -21,27 +8,230 @@
 
 }
 
-.myButton {
-	box-shadow: 0px 0px 0px 2px #ffb803;
-	background:linear-gradient(to bottom, #a87f2d 5%, #ffb803 100%);
-	background-color:#a87f2d;
-	border-radius:10px;
-	border:1px solid #debf71;
-	display:inline-block;
-	cursor:pointer;
-	color:#003345;
-	font-family:Arial;
-	font-size:19px;
-	padding:12px 37px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #fadd9b;
-}
-.myButton:hover {
-	background:linear-gradient(to bottom, #ffb803 5%, #a87f2d 100%);
-	background-color:#ffb803;
-}
-.myButton:active {
-	position:relative;
-	top:1px;
+.AccountPage a {
+    color: darkblue;
+    text-decoration: none;
 }
 
+
+.AccountPage .backgroundEffect {
+    background-color: darkblue;
+    display: flex;
+}
+.AccountPage .info {
+    grid-area: info;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: auto;
+}
+
+.AccountPage .countryPhone{
+    grid-area: countryPhone;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: auto;
+}
+.AccountPage .FLName{
+    grid-area: FLName;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: auto;
+}
+.AccountPage .countryCode{
+    width:50%;
+}
+.AccountPage .phoneNumber{
+    width:50%;
+}
+.AccountPage #pCode{
+    white-space: nowrap;
+}
+
+.AccountPage {
+    background-color: white;
+    width: 95%;
+    height: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.AccountPage .profileSide {
+    grid-column: 1;
+}
+
+.AccountPage .profileToolBar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    align-items: center;
+    font-size: 2rem;
+    overflow: hidden;
+    border-bottom: solid black 2px;
+}
+
+.AccountPage .standardLayout {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-areas:
+        "title required"
+        "input input";
+    margin: 0px 10px;
+    justify-content: space-between;
+}
+
+.AccountPage .standardLayout h2:first-of-type {
+    grid-area: title;
+    margin: 10px;
+}
+
+.AccountPage .required {
+    grid-area: required;
+    margin: 10px;
+    color: gray;
+}
+
+.AccountPage .standardLayout input {
+    grid-area: input;
+    background-color: lightgray;
+    border: 0;
+    height: 120%;
+    margin-bottom: 10px;
+    min-width: 0;
+}
+
+.AccountPage .twoLayout {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-areas:
+        "title required"
+        "input input";
+    margin: 0px 10px;
+    justify-content: space-between;
+}
+
+.AccountPage .twoLayout h2:first-of-type {
+    grid-area: title;
+    margin: 10px;
+}
+
+.AccountPage .twoLayout input {
+    grid-area: input;
+    background-color: lightgray;
+    border: 0;
+    height: 120%;
+    margin-bottom: 10px;
+}
+
+.AccountPage .orderSide {
+    grid-column: 2;
+    background-color: pink;
+}
+
+
+.AccountPage .ProfileInformation {
+    display: grid;
+    grid-template-areas:
+        "FLName FLName FLName FLName FLName FLName"
+        "email email email email email email"
+        "countryPhone countryPhone countryPhone countryPhone countryPhone countryPhone"
+        "street street street street street street"
+        "info info info info info info"
+        "current current current current current current"
+        ". . . . . save";
+        
+}
+
+.AccountPage .province{
+    width: 33%;
+}
+.AccountPage .postal{
+    width: 33%;
+}
+.AccountPage .country{
+    width: 33%;
+}
+
+.AccountPage .firstName {
+    width: 50%;
+}
+
+.AccountPage .lastName {
+    width:50%;
+}
+
+.AccountPage .emailDiv {
+    grid-area: email;
+    min-width:0;
+}
+
+
+.AccountPage .streetAddress {
+    grid-area: street;
+    min-width:20vw;
+}
+
+
+.AccountPage .currentLocation {
+    grid-area: current;
+    min-width:0;
+}
+
+.AccountPage #saveButton {
+    grid-area: save;
+    margin-top: 20px;
+    margin-right: 6px;
+    height: 100%;
+    margin-bottom: 10px;
+    display:flex;
+}
+
+.AccountPage #saveButtonBtn{
+    width:200px;
+    padding:0;
+    margin-left: auto;
+    height: 30px;
+}
+
+.AccountPage #OrderHistory {
+    font-size: 2rem;
+    margin-right: auto;
+    margin-left: 15px;
+    display: flex;
+}
+
+.AccountPage .orderHistoryToolBar {
+    border-bottom: solid black 2px;
+}
+
+
+
+@media (max-width: 900px) {
+    .AccountPage {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .AccountPage h2 {
+        font-size: .50em;
+    }
+    .AccountPage .ProfileInformation {
+        display: grid;
+        grid-template-areas:
+            "FLName FLName FLName FLName FLName FLName"
+            "email email email email email email"
+            "countryPhone countryPhone countryPhone countryPhone countryPhone countryPhone"
+            "street street street street street street"
+            "info info info info info info"
+            "current current current current current current"
+            ". . . save save save";
+    }
+    .AccountPage #changePassword{
+        font-size: .6em;
+    }
+}
