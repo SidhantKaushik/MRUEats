@@ -128,7 +128,6 @@ function Admin(props) {
         else{
             return "Closed";
         }
-
     }
 
     function getLatestMenuId() {
@@ -366,7 +365,8 @@ function Admin(props) {
             category: menuCategory,
             restaurantId: restaurantId,
         }
-
+        
+        console.log(menuData);
         createMenuItem(menuData);
     }
 
@@ -388,6 +388,10 @@ function Admin(props) {
     const onUpdateMenuSubmit = (e) =>{
 
         e.preventDefault();
+
+        if (!selectedMenuItem.length) {
+            toast.error('No Menu Item Selected!');
+        }
 
         //if none inputed 
         if(!name && !price && !description && !menuCategory)
@@ -411,7 +415,7 @@ function Admin(props) {
             restaurantId,
         }
 
-        updateMenuItem(menuData);
+        //updateMenuItem(menuData);
     }
     //#endregion
 
@@ -431,6 +435,10 @@ function Admin(props) {
     const onDeleteMenuSubmit = (e) =>{
 
         e.preventDefault();
+
+        if (!selectedMenuItem.length) {
+            toast.error('No Menu Item Selected!');
+        }
 
         let id = selectedMenuItem.id;
         let _id = selectedMenuItem._id;
@@ -658,10 +666,7 @@ function Admin(props) {
                                                 <input className='popup-submit' type="submit" value="Save Changes" />
                                             </div>
                                         </>}
-                                    
-                                        {!selectedMenuItem &&<>
-                                            <div>Please select a menu item to update.</div>
-                                        </>}
+
                                     </form>
                                     
                                 </>}
@@ -680,9 +685,6 @@ function Admin(props) {
                                             </div>                                        
                                         </>}
 
-                                        {!selectedMenuItem &&<>
-                                            <div className='delete-confirmation'>Please select a menu item to delete.</div>
-                                        </>}
                                     </form>
                                     
                                 </>}

@@ -12,8 +12,6 @@ const Courier = (props) => {
     const [menus, setMenus] = useState([]);
     const [users, setUsers] = useState([]);
 
-    const [detailedViewIsOpen, setDetailedViewIsOpen] = useState(false);
-
     useEffect(() => {
       const getRestaurants = async () => {
         try {
@@ -86,14 +84,6 @@ const Courier = (props) => {
       return;
   }
 
-    //#region popups
-
-      const toggleDetailedViewPopup = () => {
-        setDetailedViewIsOpen(!detailedViewIsOpen);
-      }
-
-    //#endregion
-
     //#region API calls
 
     const updateOrder = async (orderData) => {
@@ -137,14 +127,25 @@ const Courier = (props) => {
   }
   //#endregion
   
-  //#region reformatting order item (grab linked restautant/user)
+  //#region reformatting order item (grab linked restaurant/user)
   function getMenuItemsByOrder(orderedItems) {
-    
+    if(!orderedItems) {
+      return "";
+    } 
+    else {
+      let matchedMenuNames = orderedItems.map(id => {
+        let menuItem = menus.find(menu => menu.id === id);
+        return menuItem.name;
+      });
+      let menuItems = matchedMenuNames.join(', ');
+
+      return menuItems;
+    }
   }
 
   function reformatOrders(orders) {
 
-    var activeOrdersData = orders.map((order) => ({
+    var ordersData = orders.map((order) => ({
       id: order.id,
       RestaurantName: restaurants.find(rest => rest.id = order.restaurantId).name,
       Date: order.dateOrdered,
@@ -155,7 +156,7 @@ const Courier = (props) => {
       SpecialInst: order.specialInstructions
     }));
 
-    return activeOrdersData;
+    return ordersData;
   }
 
   let reformattedActiveOrders = reformatOrders(activeOrders);
@@ -176,30 +177,16 @@ const Courier = (props) => {
                       <p>Total Price: ${order.Price}</p>
                       <p>User: {order.User}</p>
                       <p>Deliver to: {order.Location}</p>
-                      <p>Menu Items: {order.Location}</p>
+                      <p>Menu Items: {getMenuItemsByOrder(order.menuItems)}</p>
                       <p>Special Instructions: {order.SpecialInst}</p>
                     </div>
                     <div className='order-buttons'>
                       <button className='status-button' id = {order.id} onClick={onMarkAsComplete}>Mark As Complete</button>
-                      <button className='expand-button' onClick={toggleDetailedViewPopup}>View Order Details</button>
                     </div>
                                     
                   </div>                                    
                 )}
                     
-                {detailedViewIsOpen && <Popup
-                  content={<>
-                    <h4 className='popup-title'>Ordered Items</h4>
-                    <div className='menuItems'>
-                      {/* {menu.map((menu) => */}
-                      <div className='menuListItem' id=''>
-                        <h5 className='menu-list-name'>name • $price</h5>
-                      </div>
-                      {/* )} */}
-                    </div>
-                  </>}
-                    handleClose={toggleDetailedViewPopup}
-                />}
               </div>
             </div>
             <div  className="past-orders">
@@ -213,13 +200,9 @@ const Courier = (props) => {
                         <p>Total Price: ${order.Price}</p>
                         <p>User: {order.User}</p>
                         <p>Location: {order.Location}</p>
-                        <p>Menu Items: {order.Location}</p>
+                        <p>Menu Items: {getMenuItemsByOrder(order.menuItems)}</p>
                         <p>Special Instructions: {order.SpecialInst}</p>
-                      </div>
-                      <div className='order-buttons'>
-                        <button className='expand-button' onClick={toggleDetailedViewPopup}>View Order Details</button>
-                      </div>
-                                      
+                      </div>            
                     </div>                                    
                   )}
                 </div>
