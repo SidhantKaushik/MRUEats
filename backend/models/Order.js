@@ -9,11 +9,13 @@ const orderSchema = new mongoose.Schema({
   //   ref: 'User',
   // },
   id: Number,
-  restaurant_id: Number,
-  user_id: Number,
+  restaurantId: Number,
+  userId: Number,
   price: Number,
-  date_ordered: String,
-  isActive: Boolean
+  dateOrdered: String,
+  isActive: Boolean,
+  specialInstructions: String,
+  menuItems: Array
 });
 
 module.exports = mongoose.model("Order", orderSchema, "orders");

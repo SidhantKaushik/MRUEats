@@ -58,23 +58,6 @@ const setOrder = asyncHandler(async (req, res) => {
 // @access Private
 const deactivateOrder = asyncHandler(async (req, res) => {
 
-    // await Order.findByIdAndUpdate(req.body.id, { 
-    //     id: req.body.id,
-    //     name: req.body.name,
-    //     price: req.body.price,
-    //     isActive: req.body.isActive,
-    //     dateOrdered: req.body.dateOrdered,
-    //     restaurantId: req.body.restaurantId,
-    //     userId: req.body.userId },
-    //     function (err, docs) {
-    //         if (err){
-    //             console.log(err)
-    //         }
-    //         else{
-    //             console.log("Updated Order : ", docs);
-    //         }
-    // });
-
     let orderToUpdate = await Order.findById({_id: req.body._id});
 
     if (!orderToUpdate) {
@@ -84,8 +67,6 @@ const deactivateOrder = asyncHandler(async (req, res) => {
     orderToUpdate.set({isActive:"false"});
     await orderToUpdate.save();
 
-    console.log(orderToUpdate);
-    
 });
 
 module.exports = {

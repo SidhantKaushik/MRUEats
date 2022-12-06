@@ -5,7 +5,7 @@ const { getMenu, getMenuByRestaurant, addMenu, updateMenu, deleteMenu} = require
 router.get('/', getMenu);
 router.get('/:restaurant_id', getMenuByRestaurant);
 router.post('/ADD', addMenu);
-router.put('/UPDATE', updateMenu);
-router.delete('/DELETE', deleteMenu);
+router.route('/UPDATE').put(updateMenu);
+router.route('/DELETE').delete(deleteMenu);
 
 module.exports = router;

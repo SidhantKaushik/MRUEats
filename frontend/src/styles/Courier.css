@@ -55,7 +55,7 @@
     grid-template-areas:
         "order-info order-buttons";
     background-color: #F5F5F5;
-    height: 200px;
+    height: 230px;
     border-radius: 15px;
     margin: 1em;
 }

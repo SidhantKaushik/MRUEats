@@ -30,12 +30,12 @@ function Admin(props) {
     const { logo, restaurantName, rating, address, open, close, category } = restaurantFormData;
 
     const [menuFormData, setMenuFormData] = useState({
-        menuName: '',
+        name: '',
         price: '',
         description: '',
         menuCategory: ''
     });
-    const { menuName, price, description, menuCategory } = menuFormData;
+    const { name, price, description, menuCategory } = menuFormData;
 
     //#region popup dialogs
     const [restoEditIsOpen, setRestoEditIsOpen] = useState(false);
@@ -104,12 +104,6 @@ function Admin(props) {
     <option value={category}>{category}</option>
     );
 
-    const handleSelectedMenu = (e) => {
-        var menuItemId = e.currentTarget.id;
-        var selectedMenuItem = menu.find(menu => menu.id == menuItemId && menu.restaurant_id == selectedRestaurant.id);
-        setSelectedMenuItem(selectedMenuItem);
-    }
-
     //#endregion
 
     //#region helpers
@@ -145,6 +139,12 @@ function Admin(props) {
     //#endregion
 
     //#region form on change logic
+
+    const handleSelectedMenu = (e) => {
+        var menuItemId = e.currentTarget.id;
+        var selectedMenuItem = menu.find(menu => menu.id == menuItemId && menu.restaurantId == selectedRestaurant.id);
+        setSelectedMenuItem(selectedMenuItem);
+    }
 
     const onRestFormChange = (e) => {
 
@@ -316,7 +316,7 @@ function Admin(props) {
         e.preventDefault();
 
         //if none inputed 
-        if(!menuName && !price && !description && !menuCategory)
+        if(!name && !price && !description && !menuCategory)
         {
             toast.error('Form not filled');
             return;
@@ -327,7 +327,7 @@ function Admin(props) {
 
         const menuData = {
             id: id,
-            name: menuName,
+            name: name,
             price: price,
             description: description,
             category: menuCategory,
@@ -348,27 +348,36 @@ function Admin(props) {
 
         if (response.data) {
             console.log(response.data);
+            toast.success('Successfully updated menu item!');
         }
          return response.data;
 
     }
-
+            
     const onUpdateMenuSubmit = (e) =>{
 
         e.preventDefault();
 
         //if none inputed 
-        if(!menuName && !price && !description && !menuCategory)
+        if(!name && !price && !description && !menuCategory)
         {
             toast.error('Form not filled');
             return;
         }
 
+        let id = selectedMenuItem.id;
+        let _id = selectedMenuItem._id;
+        let restaurantId = selectedMenuItem.restaurantId;
+        let category = selectedMenuItem.category;
+
         const menuData = {
-            menuName,
+            _id,
+            id,
+            name,
             price,
             description,
-            menuCategory,
+            category,
+            restaurantId,
         }
 
         updateMenuItem(menuData);
@@ -392,7 +401,7 @@ function Admin(props) {
         e.preventDefault();
 
         const menuData = {
-            menuName,
+            name,
             price,
             description,
             menuCategory,
@@ -554,7 +563,7 @@ function Admin(props) {
                                     <form className='menu-form' onSubmit={onAddMenuSubmit}>
                                         <div className='menuName'>
                                             <label>Name</label>
-                                            <input type="text" name="menuName" value={menuName} onChange={onMenuFormChange}/>
+                                            <input type="text" name="name" value={name} onChange={onMenuFormChange}/>
                                         </div>
                                         <div className='price'>
                                             <label>Price</label>
@@ -588,17 +597,17 @@ function Admin(props) {
                                             <>
                                             <div className='menuName'>
                                                 <label>Name</label>
-                                                <input type="text" name="menuName" value={selectedMenuItem.name} onChange={onMenuFormChange} />
+                                                <input type="text" name="name" placeholder={selectedMenuItem.name} value={name} onChange={onMenuFormChange} />
                                             </div>
                                             <div className='price'>
                                                 <label>Price</label>
-                                                <input type="text" placeholder='$' name="price" value={selectedMenuItem.price} onChange={onMenuFormChange} />
+                                                <input type="text" name="price" placeholder={selectedMenuItem.price} value={price} onChange={onMenuFormChange} />
                                             </div><div className='description'>
                                                 <label>Drescription</label>
-                                                <input type="text" name="description" value={selectedMenuItem.description} onChange={onMenuFormChange} />
+                                                <input type="text" name="description" placeholder={selectedMenuItem.description} value={description} onChange={onMenuFormChange} />
                                             </div><div className='menuCategory'>
                                                 <label>Category</label>
-                                                <select name="menuCategory" value={selectedMenuItem.category} onChange={onMenuFormChange}>
+                                                <select name="menuCategory" placeholder={selectedMenuItem.category} value={menuCategory} onChange={onMenuFormChange}>
                                                     <option value="value" selected>Select a Category</option>
                                                     {menuCategoryList}
                                                 </select>

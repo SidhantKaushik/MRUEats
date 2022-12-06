@@ -2,6 +2,7 @@ import '../styles/Courier.css'
 import { useState, useEffect } from 'react';
 import Popup from '../components/Popup';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Courier = (props) => {
 
@@ -101,6 +102,7 @@ const Courier = (props) => {
 
       if (response.data) {
           console.log(response.data);
+          toast.success('Successfully deactivated order!');
       }
        return response.data;
 
@@ -113,17 +115,13 @@ const Courier = (props) => {
       let id = e.target.id;
       let selectedOrder = activeOrders.find((order) => order.id = id);
 
-      console.log(selectedOrder);
-
       let _id = selectedOrder._id;
       let price = selectedOrder.price;
       let isActive = selectedOrder.isActive;
       let dateOrdered = selectedOrder.dateOrdered;
       let restaurantId = selectedOrder.restaurantId;
       let userId = selectedOrder.userId;
-      let user = users.find(user => user.id = id);
-      console.log(user);
-
+      
       const orderData = {
         _id,
         id,
@@ -131,8 +129,7 @@ const Courier = (props) => {
         isActive,
         dateOrdered,
         restaurantId,
-        userId,
-        user
+        userId
       }
       
       updateOrder(orderData);
@@ -141,37 +138,28 @@ const Courier = (props) => {
   //#endregion
   
   //#region reformatting order item (grab linked restautant/user)
-  function reformatActiveOrders() {
+  function getMenuItemsByOrder(orderedItems) {
+    
+  }
 
-    var activeOrdersData = activeOrders.map((order) => ({
+  function reformatOrders(orders) {
+
+    var activeOrdersData = orders.map((order) => ({
       id: order.id,
       RestaurantName: restaurants.find(rest => rest.id = order.restaurantId).name,
       Date: order.dateOrdered,
       Price: order.price,
       User: `${users.find(user => user.id = order.userId).firstName} ${users.find(user => user.id = order.userId).lastName}`,
-      Location: users.find(user => user.id = order.userId).deliverTo
+      Location: users.find(user => user.id = order.userId).deliverTo,
+      MenuItems: order.menuItems,
+      SpecialInst: order.specialInstructions
     }));
 
     return activeOrdersData;
   }
 
-  let reformattedActiveOrders = reformatActiveOrders();
-
-  function reformatCompleteOrders() {
-
-    var completeOrdersData = completeOrders.map((order) => ({
-      id: order.id,
-      RestaurantName: restaurants.find(rest => rest.id = order.restaurantId).name,
-      Date: order.dateOrdered,
-      Price: order.price,
-      User: `${users.find(user => user.id = order.userId).firstName} ${users.find(user => user.id = order.userId).lastName}`,
-      Location: users.find(user => user.id = order.userId).deliverTo
-    }));
-
-    return completeOrdersData;
-  }
-
-  let reformattedCompleteOrders = reformatCompleteOrders();
+  let reformattedActiveOrders = reformatOrders(activeOrders);
+  let reformattedCompleteOrders = reformatOrders(completeOrders);
 
   //#endregion
  
@@ -187,7 +175,9 @@ const Courier = (props) => {
                       <p>Date: {order.Date}</p>
                       <p>Total Price: ${order.Price}</p>
                       <p>User: {order.User}</p>
-                      <p>Location: {order.Location}</p>
+                      <p>Deliver to: {order.Location}</p>
+                      <p>Menu Items: {order.Location}</p>
+                      <p>Special Instructions: {order.SpecialInst}</p>
                     </div>
                     <div className='order-buttons'>
                       <button className='status-button' id = {order.id} onClick={onMarkAsComplete}>Mark As Complete</button>
@@ -223,6 +213,8 @@ const Courier = (props) => {
                         <p>Total Price: ${order.Price}</p>
                         <p>User: {order.User}</p>
                         <p>Location: {order.Location}</p>
+                        <p>Menu Items: {order.Location}</p>
+                        <p>Special Instructions: {order.SpecialInst}</p>
                       </div>
                       <div className='order-buttons'>
                         <button className='expand-button' onClick={toggleDetailedViewPopup}>View Order Details</button>
