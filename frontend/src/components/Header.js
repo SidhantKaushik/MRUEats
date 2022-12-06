@@ -29,8 +29,6 @@ function Header() {
         <h1><Link to='/'>MRU EATS</Link></h1>
             <ul className="menu-header">
                 {user ? (<>
-                    <li><Link to='/order'>Order</Link></li>
-                    <li><Link to='/cart'>Cart</Link></li>
                     <li><Link to='/account'>Account</Link></li>
                     <li><Link to='/admin'>Admin</Link></li>
                     <li><a className='btn' onClick={onLogout}>Logout</a></li>
@@ -46,7 +44,7 @@ function Header() {
         </header>
         <div className="locationInfo">
         {user ? (<>
-                <p>Delivering to: {user?.deliverTo}</p>
+                <p>Delivering to: {user.deliverTo == null ? ("Please set a delivery location") : user.deliverTo}</p>
                 </>) : (
                     <p>Feeding hungry cougars one meal at a time.</p>
                 )}
@@ -60,6 +58,7 @@ function Header() {
                     margin: 0px;
                     padding: 0px;
                     overflow: hidden;
+                    z-index: 20;
                 }
                 .menu-header li{
                     list-style-type: none;
