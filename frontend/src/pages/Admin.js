@@ -8,7 +8,7 @@ import Popup from '../components/Popup';
 import axios from 'axios';
 
 const RESTAURANTS_API_URL = '/api/restaurants/';
-const MENU_API_URL = '/api/restaurants/';
+const MENU_API_URL = '/api/menu/';
 
 function Admin(props) {
  
@@ -37,12 +37,14 @@ function Admin(props) {
     });
     const { menuName, price, description, menuCategory } = menuFormData;
 
+    //#region popup dialogs
     const [restoEditIsOpen, setRestoEditIsOpen] = useState(false);
     const [restoAddIsOpen, setRestoAddIsOpen] = useState(false);
     const [restoDeleteIsOpen, setRestoDeleteIsOpen] = useState(false);
     const [menuAddIsOpen, setMenuAddIsOpen] = useState(false);
     const [menuEditIsOpen, setMenuEditIsOpen] = useState(false);
     const [menuDeleteIsOpen, setMenuDeleteIsOpen] = useState(false);
+    //#endregion
 
     useEffect(() => {
       const getRestaurants = async () => {
@@ -118,6 +120,11 @@ function Admin(props) {
         return hour + ampm;
     }
 
+    function ConvertTimeString(time) {
+        time = time.replace(":","");
+        return parseInt(time);
+    }
+
     function checkIfOpen() {
         const d = new Date();
         let time = d.getHours() +""+ d.getMinutes();
@@ -128,6 +135,11 @@ function Admin(props) {
             return "Closed";
         }
 
+    }
+
+    function getLatestMenuId() {
+        let latestId = menu.slice(-1)[0].id;
+        return parseInt(latestId) + 1 ;
     }
 
     //#endregion
@@ -182,67 +194,10 @@ function Admin(props) {
     } 
     //#endregion
 
-    //#region API CALLS and form handlers
-
+    //#region Add restaurant
     const createRestaurant = async (restaurantData) => {
 
         const response = await axios.post(RESTAURANTS_API_URL + 'ADD', restaurantData);
-
-        if (response.data) {
-            console.log(response.data);
-        }
-         return response.data;
-
-    }
-
-    const updateRestaurant = async (restaurantData) => {
-
-        const response = await axios.put(RESTAURANTS_API_URL + 'UPDATE', restaurantData);
-
-        if (response.data) {
-            console.log(response.data);
-        }
-         return response.data;
-
-    }
-
-    const deleteRestaurant = async (restaurantData) => {
-
-        const response = await axios.delete(RESTAURANTS_API_URL + 'DELETE', restaurantData);
-
-        if (response.data) {
-            console.log(response.data);
-        }
-         return response.data;
-
-    }
-
-    const createMenuItem = async (menuItemData) => {
-
-        const response = await axios.post(MENU_API_URL + 'ADD', menuItemData);
-
-        if (response.data) {
-            console.log(response.data);
-            toast.success('Successfully added menu item!');
-        }
-         return response.data;
-
-    }
-
-    const updateMenuItem = async (menuItemData) => {
-
-        const response = await axios.put(MENU_API_URL + 'UPDATE', menuItemData);
-
-        if (response.data) {
-            console.log(response.data);
-        }
-         return response.data;
-
-    }
-
-    const deleteMenuItem = async (menuItemData) => {
-
-        const response = await axios.delete(MENU_API_URL + 'DELETE', menuItemData);
 
         if (response.data) {
             console.log(response.data);
@@ -274,8 +229,20 @@ function Admin(props) {
 
         createRestaurant(restaurantData);
     }
+    //#endregion 
 
-    
+    //#region Update Restaurant
+    const updateRestaurant = async (restaurantData) => {
+
+        const response = await axios.put(RESTAURANTS_API_URL + 'UPDATE', restaurantData);
+
+        if (response.data) {
+            console.log(response.data);
+        }
+         return response.data;
+
+    }
+
     const onUpdateRestSubmit = (e) =>{
 
         e.preventDefault();
@@ -299,7 +266,20 @@ function Admin(props) {
 
         updateRestaurant(restaurantData);
     }
+    //#endregion
 
+    //#region Delete Restaurant
+    const deleteRestaurant = async (restaurantData) => {
+
+        const response = await axios.delete(RESTAURANTS_API_URL + 'DELETE', restaurantData);
+
+        if (response.data) {
+            console.log(response.data);
+        }
+         return response.data;
+
+    }
+    
     const onDeleteRestSubmit = (e) =>{
 
         e.preventDefault();
@@ -316,6 +296,20 @@ function Admin(props) {
 
         deleteRestaurant(restaurantData);
     }
+    //#endregion
+
+    //#region Create Menu Item
+    const createMenuItem = async (menuItemData) => {
+
+        const response = await axios.post(MENU_API_URL + 'ADD', menuItemData);
+
+        if (response.data) {
+            console.log(response.data);
+            toast.success('Successfully added menu item!');
+        }
+         return response.data;
+
+    }
 
     const onAddMenuSubmit = (e) =>{
 
@@ -329,16 +323,34 @@ function Admin(props) {
         }
 
         let restaurantId = selectedRestaurant.id;
+        let id = getLatestMenuId();
 
         const menuData = {
-            menuName,
-            price,
-            description,
-            restaurantId,
-            menuCategory,
+            id: id,
+            name: menuName,
+            price: price,
+            description: description,
+            category: menuCategory,
+            restaurantId: restaurantId,
         }
 
+        console.log(menuData);
+
         createMenuItem(menuData);
+    }
+
+    //#endregion
+
+    //#region Update Menu Item
+    const updateMenuItem = async (menuItemData) => {
+
+        const response = await axios.put(MENU_API_URL + 'UPDATE', menuItemData);
+
+        if (response.data) {
+            console.log(response.data);
+        }
+         return response.data;
+
     }
 
     const onUpdateMenuSubmit = (e) =>{
@@ -361,6 +373,19 @@ function Admin(props) {
 
         updateMenuItem(menuData);
     }
+    //#endregion
+
+    //#region Delete Menu Item
+    const deleteMenuItem = async (menuItemData) => {
+
+        const response = await axios.delete(MENU_API_URL + 'DELETE', menuItemData);
+
+        if (response.data) {
+            console.log(response.data);
+        }
+         return response.data;
+
+    }
 
     const onDeleteMenuSubmit = (e) =>{
 
@@ -375,7 +400,6 @@ function Admin(props) {
 
         deleteMenuItem(menuData);
     }
-
     //#endregion
 
     return (
@@ -415,7 +439,10 @@ function Admin(props) {
                                 </div>
                                 <div className='category'>
                                     <label>Category</label>
-                                    <select name="category" value={category} onChange={onRestFormChange}>{categoryList}</select>
+                                    <select name="category" value={category} onChange={onRestFormChange}>
+                                        <option value="value" selected>Select a Category</option>
+                                        {categoryList}
+                                    </select>
                                 </div>
                                 <div className='submitButton'>
                                     <input className='popup-submit' type="submit" value="Save Changes"/>
@@ -479,7 +506,10 @@ function Admin(props) {
                                         </div>
                                         <div className='category'>
                                             <label>Category</label>
-                                            <select name="category" value={selectedRestaurant.category} onChange={onRestFormChange}>{categoryList}</select>
+                                            <select name="category" value={selectedRestaurant.category} onChange={onRestFormChange}>
+                                                <option value="value" selected>Select a Category</option>
+                                                {categoryList}
+                                            </select>
                                         </div>
                                         <div className='submitButton'>
                                             <input className='popup-submit' type="submit" value="Save Changes"/>
@@ -536,7 +566,10 @@ function Admin(props) {
                                         </div>
                                         <div className='menuCategory'>
                                             <label>Category</label>
-                                            <select name="menuCategory" value={menuCategory} onChange={onMenuFormChange}>{menuCategoryList}</select>
+                                            <select name="menuCategory" value={menuCategory} onChange={onMenuFormChange}>
+                                                <option value="value" selected>Select a Category</option>
+                                                {menuCategoryList}
+                                            </select>
                                         </div>
                                         <div className='submitButton'>
                                             <input className='popup-submit' type="submit" value="Save Changes"/>
@@ -565,7 +598,10 @@ function Admin(props) {
                                                 <input type="text" name="description" value={selectedMenuItem.description} onChange={onMenuFormChange} />
                                             </div><div className='menuCategory'>
                                                 <label>Category</label>
-                                                <select name="menuCategory" value={selectedMenuItem.category} onChange={onMenuFormChange}>{menuCategoryList}</select>
+                                                <select name="menuCategory" value={selectedMenuItem.category} onChange={onMenuFormChange}>
+                                                    <option value="value" selected>Select a Category</option>
+                                                    {menuCategoryList}
+                                                </select>
                                             </div><div className='submitButton'>
                                                 <input className='popup-submit' type="submit" value="Save Changes" />
                                             </div>

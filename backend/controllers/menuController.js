@@ -25,12 +25,14 @@ const getMenuByRestaurant = asyncHandler(async (req, res) => {
 // @access Private
 const addMenu = asyncHandler(async (req, res) => {
 
+    console.log(req.body);
+
     const menu = await Menu.create({
         id: req.body.id,
         name: req.body.name,
         price: req.body.price,
-        description: req.body.address,
-        restaurant_id: req.body.restaurant_id,
+        description: req.body.description,
+        restaurantId: req.body.restaurantId,
         category: req.body.category
     });
 
@@ -50,8 +52,8 @@ const updateMenu = asyncHandler(async (req, res) => {
         id: req.body.id,
         name: req.body.name,
         price: req.body.price,
-        description: req.body.address,
-        restaurant_id: req.body.restaurant_id,
+        description: req.body.description,
+        restaurant_id: req.body.restaurantId,
         category: req.body.category },
         function (err, docs) {
             if (err){
