@@ -22,7 +22,6 @@ const RestaurantDetails = (props) => {
         if(location.state) {
             item = []
             for(let i = 0; i < props.menu.menu.length; i++){    
-                console.log("props menu: " + props.menu.menu[i].restaurant_id)            
                 if (location.state.id === props.menu.menu[i].restaurantId){
                     item.push(props.menu.menu[i]) 
                     
