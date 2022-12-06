@@ -1,18 +1,23 @@
 .RegisterPage .main-container {
     display:flex;
-    margin-top: 30px;
+    padding-top: 30px;
     justify-content: center;
+}
+.RegisterPage{
+    min-height: calc(100vh - 96.67px);
+    background-color: #FFB703;
 }
 
 .RegisterPage .box {
-    display:flex;
+    display: flex;
     flex-direction: column;
     min-height: 500px;
     min-width: 70vw;
     max-width: 75vw;
     padding: 25px;
     border: 8px solid #033453;
-    background-color: rgba(255, 255, 255, .8);
+    background-color: white;
+    border-radius: 30px;
 }
 
 .RegisterPage form {
@@ -28,6 +33,9 @@
     row-gap: 10px;
 }
 
+.RegisterPage .dLocation{
+    grid-area: dLocation;
+}
 .RegisterPage .fName{
     grid-area:fName;
 }
@@ -76,7 +84,7 @@
     font-weight: 700;
     font-size: 2em;
     line-height: 38px;
-    color: #000000;
+    color: #FF8F00 !important;
     text-align: center;
 }
 
@@ -91,7 +99,7 @@
 }
 
 .RegisterPage input {
-    background: #d9d9d9;
+    background: #f8f7f7;
     height: 30px;
     border: 1px solid #ccc;
     width: 100%;

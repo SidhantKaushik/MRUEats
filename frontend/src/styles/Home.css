@@ -23,6 +23,12 @@
     .HomePage h2{
         font-size: 1em;
     }
+    .HomePage .SearchBar{
+        margin-top: 5px;
+    }
+    .HomePage .categories{
+        margin-right: 0 !important;
+    }
 }
 body{
     background-color: #E5E5E5;
@@ -31,6 +37,8 @@ body{
 
 .HomePage .categories{
     grid-area: categories;
+    border-radius: 5px;
+    margin-right: 5px;
 }
 .HomePage .SplashScreen{
     position: relative;
@@ -67,11 +75,39 @@ body{
     position: absolute;
     right:0px;
     font-size: 24px;
+    color: #FFB703 !important;
     bottom: 0px;
     color: white;
     background-color: #033453;
+    background: rgba(3, 52, 83, .95);
     padding-left: 10px;
     padding-right:10px;
+}
+.HomePage .category-item{
+    font-size: 20px;
+    padding-left:10px;
+}
+.HomePage #catTitle{
+    padding-left: 10px;
+    font-family: 'Unna';
+    margin-bottom: 5px;
+}
+.HomePage .categoriesList{
+    margin-top: 10px;
+    list-style: none;
+font-family: 'Unna';
+font-weight: 500;
+font-size: 24px;
+color: #000000;
+padding:0;
+}
+.HomePage .categories{
+    background-color: #f0f1f1;
+}
+.HomePage .category-item:hover {
+    background-color: #033453;
+    color: white;
+    cursor:pointer;
 }
 .HomePage .prev{
     position: absolute;

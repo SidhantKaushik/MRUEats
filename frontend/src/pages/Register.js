@@ -110,6 +110,10 @@ function Register() {
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" value={email} placeholder='Enter your email' onChange={onChange} />
                     </div>
+                    <div className='dLocation'>
+                        <label for="deliveryLoc">Delivery Location</label>
+                        <input type="text" id="dLocation" name="deliverTo" value={deliverTo} placeholder='Enter delivery location Ex.(B140 or 123 Street SE)' onChange={onChange} />
+                    </div>
                     <div className='pass1'>
                         <label id="passwordText" for="password">Password</label>
                         <p id="requirementsForPass">Minimum 6 Characters</p>
@@ -118,10 +122,6 @@ function Register() {
                     <div className='pass2'>
                         <label for="confirm-password">Confirm Password</label>
                         <input type="password" id="password_c" name="password_c" value={password_c} placeholder='Confirm password' onChange={onChange} />
-                    </div>
-                    <div className='dLocation'>
-                        <label for="deliveryLoc">Delivery Location</label>
-                        <input type="text" id="dLocation" name="deliverTo" value={deliverTo} placeholder='Enter delivery location Ex.(B140 or 123 Street SE)' onChange={onChange} />
                     </div>
                     <div className='submitbtn'>
                         <input id="register-button" type="submit" value="Register" />
