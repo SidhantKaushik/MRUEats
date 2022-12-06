@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import { register, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 import '../styles/Register.css';
+import PizzaImg from '../images/pizza.jpg'
+
 
 function Register() {
     //Add deliverTo
@@ -92,11 +94,10 @@ function Register() {
 
     return (
         <div class="RegisterPage">
-        <div class="main-container">
+            <div className="left">
+            <img src={PizzaImg} alt="Image of Pizza"/>
+            </div>
             <div class="box">
-                <div className="title">
-                <h3>Register</h3>
-                </div>
                 <form onSubmit={onSubmit}>
                     <div className='fName'>
                         <label for="first-name">First Name</label>
@@ -129,7 +130,6 @@ function Register() {
                 </form>
             </div>
         </div>          
-        </div>
     )
 }
 
