@@ -272,18 +272,26 @@ function Admin(props) {
             return;
         }
 
+
+        let _id = selectedRestaurant._id;
+        let id = selectedRestaurant.id;
         let open = openTime.replace(":", "");
         let close = closeTime.replace(":", "");
+        let name = restaurantName;
 
         const restaurantData = {
+            _id,
+            id,
             logo,
-            restaurantName,
+            name,
             rating,
             address,
             open,
             close,
             category,
         }
+
+        console.log(restaurantData);
 
         updateRestaurant(restaurantData);
     }
@@ -526,31 +534,31 @@ function Admin(props) {
                                     <form className='restaurant-form' onSubmit={onUpdateRestSubmit}>
                                         <div className='logo'>
                                             <label>Logo</label>
-                                            <input type="text" name="logo" value={selectedRestaurant.logo} placeholder='enter url' onChange={onRestFormChange}/>
+                                            <input type="text" name="logo" placeholder={selectedRestaurant.logo} value={logo} onChange={onRestFormChange}/>
                                         </div>
                                         <div className='restNameInput'>
                                             <label>Name</label>
-                                            <input type="text" name="restaurantName" value={selectedRestaurant.name} onChange={onRestFormChange}/>
+                                            <input type="text" name="restaurantName" placeholder={selectedRestaurant.name} value={restaurantName} onChange={onRestFormChange}/>
                                         </div>
                                         <div className='rating'>
                                             <label>Rating</label>
-                                            <input type="number" name="rating"  value={selectedRestaurant.rating} min="1" max="5" onChange={onRestFormChange}/>
+                                            <input type="number" name="rating"  placeholder={selectedRestaurant.rating} value={rating} min="1" max="5" onChange={onRestFormChange}/>
                                         </div>
                                         <div className='address'>
                                             <label>Address</label>
-                                            <input type="text" name="address"  value={selectedRestaurant.address} onChange={onRestFormChange}/>
+                                            <input type="text" name="address"  placeholder={selectedRestaurant.address} value={address} onChange={onRestFormChange}/>
                                         </div>
                                         <div className='open'>
                                             <label>Opening Time</label>
-                                            <input type="time" name="openTime" value={selectedRestaurant.open} onChange={onRestFormChange}/>
+                                            <input type="time" name="openTime" placeholder={selectedRestaurant.open} value={openTime} onChange={onRestFormChange}/>
                                         </div>
                                         <div className='closingTime'>
                                             <label>Closing Time</label>
-                                            <input type="time" name="closeTime" value={selectedRestaurant.close} onChange={onRestFormChange}/>
+                                            <input type="time" name="closeTime" placeholder={selectedRestaurant.close} value={closeTime} onChange={onRestFormChange}/>
                                         </div>
                                         <div className='category'>
                                             <label>Category</label>
-                                            <select name="category" value={selectedRestaurant.category} onChange={onRestFormChange}>
+                                            <select name="category" placeholder={selectedRestaurant.category} value={category} onChange={onRestFormChange}>
                                                 <option value="value" selected>Select a Category</option>
                                                 {categoryList}
                                             </select>

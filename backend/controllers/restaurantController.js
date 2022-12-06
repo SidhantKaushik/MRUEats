@@ -48,22 +48,17 @@ const addRestaurant = asyncHandler(async (req, res) => {
 // @access Private
 const updateRestaurant = asyncHandler(async (req, res) => {
 
-    await Restaurant.findByIdAndUpdate(req.body.id, { 
-        id: req.body.id,
-        name: req.body.name,
-        rating: req.body.rating,
-        address: req.body.address,
-        open: req.body.open,
-        close: req.body.close,
-        category: req.body.category },
-        function (err, docs) {
-            if (err){
-                console.log(err)
-            }
-            else{
-                console.log("Updated Restaurant : ", docs);
-            }
-    });
+    let restToUpdate = await Restaurant.findById({_id: req.body._id});
+
+    if (!restToUpdate) {
+        throw new NotFoundError();
+    }
+
+    restToUpdate.set({name:req.body.name, logo:req.body.logo, rating:req.body.rating, address:req.body.address, open:req.body.open, close:req.body.close, category:req.body.category});
+
+    await restToUpdate.save();
+
+    res.status(201).json({restToUpdate});
     
 });
 
