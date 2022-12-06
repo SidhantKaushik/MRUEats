@@ -23,11 +23,11 @@ function Admin(props) {
         restaurantName: '',
         rating: '',
         address: '',
-        open: '',
-        close: '',
+        openTime: '',
+        closeTime: '',
         category: ''
     });
-    const { logo, restaurantName, rating, address, open, close, category } = restaurantFormData;
+    const { logo, restaurantName, rating, address, openTime, closeTime, category } = restaurantFormData;
 
     const [menuFormData, setMenuFormData] = useState({
         name: '',
@@ -122,7 +122,7 @@ function Admin(props) {
     function checkIfOpen() {
         const d = new Date();
         let time = d.getHours() +""+ d.getMinutes();
-        if ( time > selectedRestaurant.open && time < selectedRestaurant.close ){
+        if ( time > selectedRestaurant.open && time < selectedRestaurant.close){
              return "Open";
         }
         else{
@@ -134,6 +134,13 @@ function Admin(props) {
     function getLatestMenuId() {
         let latestId = menu.slice(-1)[0].id;
         return parseInt(latestId) + 1 ;
+    }
+
+    function getLatestRestaurantId() {
+        const ids = restaurants.map((rest) => rest.id);
+        const onlyNumbers = ids.filter(value => /^-?\d+\.?\d*$/.test(value));
+        const max = Math.max(...onlyNumbers);
+        return max + 1;
     }
 
     //#endregion
@@ -165,6 +172,7 @@ function Admin(props) {
         }));
 
     }
+
     //#endregion
 
     //#region Edit popups
@@ -201,6 +209,7 @@ function Admin(props) {
 
         if (response.data) {
             console.log(response.data);
+            toast.success('Successfully added restaurant!');
         }
          return response.data;
 
@@ -211,15 +220,23 @@ function Admin(props) {
         e.preventDefault();
 
         //if none inputed 
-        if(!logo && !restaurantName && !rating && !address && !open && !close && !category)
+        if(!logo && !restaurantName && !rating && !address && !openTime && !closeTime && !category)
         {
             toast.error('Form not filled');
             return;
         }
 
+        getLatestRestaurantId();
+
+        let id = getLatestRestaurantId();
+        let open = openTime.replace(":", "");
+        let close = closeTime.replace(":", "");
+        let name = restaurantName;
+
         const restaurantData = {
+            id,
             logo,
-            restaurantName,
+            name,
             rating,
             address,
             open,
@@ -238,6 +255,7 @@ function Admin(props) {
 
         if (response.data) {
             console.log(response.data);
+            toast.success('Successfully updated restaurant!');
         }
          return response.data;
 
@@ -248,11 +266,14 @@ function Admin(props) {
         e.preventDefault();
 
         //if none inputed 
-        if(!logo && !restaurantName && !rating && !address && !open && !close && !category)
+        if(!logo && !restaurantName && !rating && !address && !openTime && !closeTime && !category)
         {
             toast.error('Form not filled');
             return;
         }
+
+        let open = openTime.replace(":", "");
+        let close = closeTime.replace(":", "");
 
         const restaurantData = {
             logo,
@@ -275,6 +296,7 @@ function Admin(props) {
 
         if (response.data) {
             console.log(response.data);
+            toast.success('Successfully deleted restaurant!');
         }
          return response.data;
 
@@ -283,6 +305,9 @@ function Admin(props) {
     const onDeleteRestSubmit = (e) =>{
 
         e.preventDefault();
+
+        let open = openTime.replace(":", "");
+        let close = closeTime.replace(":", "");
 
         const restaurantData = {
             logo,
@@ -333,8 +358,6 @@ function Admin(props) {
             category: menuCategory,
             restaurantId: restaurantId,
         }
-
-        console.log(menuData);
 
         createMenuItem(menuData);
     }
@@ -450,13 +473,13 @@ function Admin(props) {
                                     <label>Address</label>
                                     <input type="text" name="address"  value={address} onChange={onRestFormChange}/>
                                 </div>
-                                <div className='openTime'>
+                                <div className='open'>
                                     <label>Opening Time</label>
-                                    <input type="time" name="open" value={open} onChange={onRestFormChange}/>
+                                    <input type="time" name="openTime" value={openTime} onChange={onRestFormChange}/>
                                 </div>
                                 <div className='closingTime'>
                                     <label>Closing Time</label>
-                                    <input type="time" name="close" value={close} onChange={onRestFormChange}/>
+                                    <input type="time" name="closeTime" value={closeTime} onChange={onRestFormChange}/>
                                 </div>
                                 <div className='category'>
                                     <label>Category</label>
@@ -517,13 +540,13 @@ function Admin(props) {
                                             <label>Address</label>
                                             <input type="text" name="address"  value={selectedRestaurant.address} onChange={onRestFormChange}/>
                                         </div>
-                                        <div className='openTime'>
+                                        <div className='open'>
                                             <label>Opening Time</label>
-                                            <input type="time" name="open" value={selectedRestaurant.open} onChange={onRestFormChange}/>
+                                            <input type="time" name="openTime" value={selectedRestaurant.open} onChange={onRestFormChange}/>
                                         </div>
                                         <div className='closingTime'>
                                             <label>Closing Time</label>
-                                            <input type="time" name="close" value={selectedRestaurant.close} onChange={onRestFormChange}/>
+                                            <input type="time" name="closeTime" value={selectedRestaurant.close} onChange={onRestFormChange}/>
                                         </div>
                                         <div className='category'>
                                             <label>Category</label>

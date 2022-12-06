@@ -28,6 +28,7 @@ const addRestaurant = asyncHandler(async (req, res) => {
     const restaurant = await Restaurant.create({
         id: req.body.id,
         name: req.body.name,
+        logo: req.body.logo,
         rating: req.body.rating,
         address: req.body.address,
         open: req.body.open,
