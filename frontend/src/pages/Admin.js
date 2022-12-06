@@ -391,6 +391,7 @@ function Admin(props) {
 
         if (response.data) {
             console.log(response.data);
+            toast.success('Successfully deleted menu item!');
         }
          return response.data;
 
@@ -400,15 +401,26 @@ function Admin(props) {
 
         e.preventDefault();
 
+        let id = selectedMenuItem.id;
+        let _id = selectedMenuItem._id;
+        let restaurantId = selectedMenuItem.restaurantId;
+        let category = selectedMenuItem.category;
+
         const menuData = {
+            _id,
+            id,
             name,
             price,
             description,
-            menuCategory,
+            category,
+            restaurantId,
         }
+
+        console.log(menuData);
 
         deleteMenuItem(menuData);
     }
+
     //#endregion
 
     return (
