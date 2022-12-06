@@ -172,6 +172,7 @@ function Admin(props) {
 
     }
 
+
     //#endregion
 
     //#region Edit popups
@@ -206,11 +207,12 @@ function Admin(props) {
 
         const response = await axios.post(RESTAURANTS_API_URL + 'ADD', restaurantData);
 
-        if (response.data) {
+        if (response.status === 201) {
             console.log(response.data);
             toast.success('Successfully added restaurant!');
+        } else {
+            toast.error('Error: Could not add restaurant');
         }
-         return response.data;
 
     }
 
@@ -218,32 +220,49 @@ function Admin(props) {
 
         e.preventDefault();
 
-        //if none inputed 
-        if(!logo && !restaurantName && !rating && !address && !openTime && !closeTime && !category)
-        {
-            toast.error('Form not filled');
-            return;
+        if (!logo) {
+            toast.error('Logo is required');
+        } 
+        else if (!restaurantName) {
+            toast.error('Name is required');
+        } 
+        else if (!rating) {
+            toast.error('Rating is required');
+        }
+        else if (!address) {
+            toast.error('Address is required');
+        }
+        else if (!openTime) {
+            toast.error('Opening time is required');
+        }
+        else if (!closeTime) {
+            toast.error('Closing time is required');
+        }
+        else if (!category) {
+            toast.error('Category is required');
+        }
+        else {
+            getLatestRestaurantId();
+
+            let id = getLatestRestaurantId();
+            let open = openTime.replace(":", "");
+            let close = closeTime.replace(":", "");
+            let name = restaurantName;
+    
+            const restaurantData = {
+                id,
+                logo,
+                name,
+                rating,
+                address,
+                open,
+                close,
+                category,
+            }
+    
+            createRestaurant(restaurantData);
         }
 
-        getLatestRestaurantId();
-
-        let id = getLatestRestaurantId();
-        let open = openTime.replace(":", "");
-        let close = closeTime.replace(":", "");
-        let name = restaurantName;
-
-        const restaurantData = {
-            id,
-            logo,
-            name,
-            rating,
-            address,
-            open,
-            close,
-            category,
-        }
-
-        createRestaurant(restaurantData);
     }
     //#endregion 
 
@@ -252,11 +271,12 @@ function Admin(props) {
 
         const response = await axios.put(RESTAURANTS_API_URL + 'UPDATE', restaurantData);
 
-        if (response.data) {
+        if (response.status === 201) {
             console.log(response.data);
             toast.success('Successfully updated restaurant!');
+        } else {
+            toast.error('Error: Could not update restaurant');
         }
-         return response.data;
 
     }
 
@@ -264,35 +284,49 @@ function Admin(props) {
 
         e.preventDefault();
 
-        //if none inputed 
-        if(!logo && !restaurantName && !rating && !address && !openTime && !closeTime && !category)
-        {
-            toast.error('Form not filled');
-            return;
+        if (!logo) {
+            toast.error('Logo is required');
+        } 
+        else if (!restaurantName) {
+            toast.error('Name is required');
+        } 
+        else if (!rating) {
+            toast.error('Rating is required');
+        }
+        else if (!address) {
+            toast.error('Address is required');
+        }
+        else if (!openTime) {
+            toast.error('Opening time is required');
+        }
+        else if (!closeTime) {
+            toast.error('Closing time is required');
+        }
+        else if (!category) {
+            toast.error('Category is required');
+        }
+        else {
+            let _id = selectedRestaurant._id;
+            let id = selectedRestaurant.id;
+            let open = openTime.replace(":", "");
+            let close = closeTime.replace(":", "");
+            let name = restaurantName;
+    
+            const restaurantData = {
+                _id,
+                id,
+                logo,
+                name,
+                rating,
+                address,
+                open,
+                close,
+                category,
+            }
+    
+            updateRestaurant(restaurantData);
         }
 
-
-        let _id = selectedRestaurant._id;
-        let id = selectedRestaurant.id;
-        let open = openTime.replace(":", "");
-        let close = closeTime.replace(":", "");
-        let name = restaurantName;
-
-        const restaurantData = {
-            _id,
-            id,
-            logo,
-            name,
-            rating,
-            address,
-            open,
-            close,
-            category,
-        }
-
-        console.log(restaurantData);
-
-        updateRestaurant(restaurantData);
     }
     //#endregion
 
@@ -301,11 +335,12 @@ function Admin(props) {
 
         const response = await axios.delete(RESTAURANTS_API_URL + 'DELETE', restaurantData);
 
-        if (response.data) {
+        if (response.status === 201) {
             console.log(response.data);
             toast.success('Successfully deleted restaurant!');
+        } else {
+            toast.error('Error: Could not delete restaurant');
         }
-         return response.data;
 
     }
     
@@ -335,39 +370,51 @@ function Admin(props) {
 
         const response = await axios.post(MENU_API_URL + 'ADD', menuItemData);
 
-        if (response.data) {
+        if (response.status === 200) {
             console.log(response.data);
             toast.success('Successfully added menu item!');
+        } else {
+            toast.error('Error: Could not add menu item');
         }
-         return response.data;
-
     }
 
     const onAddMenuSubmit = (e) =>{
 
         e.preventDefault();
 
-        //if none inputed 
-        if(!name && !price && !description && !menuCategory)
-        {
-            toast.error('Form not filled');
-            return;
+        var regex  = /^[0-9]+(\.[0-9]+)?$/;
+
+        if (!name) {
+            toast.error('Name is required');
+        } 
+        else if (!price) {
+            toast.error('Price is required');
+        } 
+        else if (!description) {
+            toast.error('Description is required');
+        }
+        else if (!menuCategory) {
+            toast.error('Category is required');
+        }
+        else if (!regex.test(price) ) {
+            toast.error('Price can only contain numbers and decimals. Example: 3.49');
+        }
+        else {
+            let restaurantId = selectedRestaurant.id;
+            let id = getLatestMenuId();
+    
+            const menuData = {
+                id: id,
+                name: name,
+                price: price,
+                description: description,
+                category: menuCategory,
+                restaurantId: restaurantId,
+            }
+            
+            createMenuItem(menuData);
         }
 
-        let restaurantId = selectedRestaurant.id;
-        let id = getLatestMenuId();
-
-        const menuData = {
-            id: id,
-            name: name,
-            price: price,
-            description: description,
-            category: menuCategory,
-            restaurantId: restaurantId,
-        }
-        
-        console.log(menuData);
-        createMenuItem(menuData);
     }
 
     //#endregion
@@ -377,11 +424,12 @@ function Admin(props) {
 
         const response = await axios.put(MENU_API_URL + 'UPDATE', menuItemData);
 
-        if (response.data) {
+        if (response.status === 201) {
             console.log(response.data);
             toast.success('Successfully updated menu item!');
+        } else {
+            toast.error('Error: Could not update menu item');
         }
-         return response.data;
 
     }
             
@@ -389,33 +437,47 @@ function Admin(props) {
 
         e.preventDefault();
 
-        if (!selectedMenuItem.length) {
+        if (Object.keys(selectedMenuItem).length === 0) {
             toast.error('No Menu Item Selected!');
-        }
-
-        //if none inputed 
-        if(!name && !price && !description && !menuCategory)
-        {
-            toast.error('Form not filled');
             return;
         }
 
-        let id = selectedMenuItem.id;
-        let _id = selectedMenuItem._id;
-        let restaurantId = selectedMenuItem.restaurantId;
-        let category = selectedMenuItem.category;
+        var regex  = /^[0-9]+(\.[0-9]+)?$/; //price regex
 
-        const menuData = {
-            _id,
-            id,
-            name,
-            price,
-            description,
-            category,
-            restaurantId,
+        if (!name) {
+            toast.error('Name is required');
+        } 
+        else if (!price) {
+            toast.error('Price is required');
+        } 
+        else if (!description) {
+            toast.error('Description is required');
+        }
+        else if (!menuCategory) {
+            toast.error('Category is required');
+        }
+        else if (!regex.test(price) ) {
+            toast.error('Price can only contain numbers and decimals. Example: 3.49');
+        }
+        else {
+            let id = selectedMenuItem.id;
+            let _id = selectedMenuItem._id;
+            let restaurantId = selectedMenuItem.restaurantId;
+            let category = selectedMenuItem.category;
+    
+            const menuData = {
+                _id,
+                id,
+                name,
+                price,
+                description,
+                category,
+                restaurantId,
+            }
+    
+            updateMenuItem(menuData);
         }
 
-        //updateMenuItem(menuData);
     }
     //#endregion
 
@@ -424,10 +486,13 @@ function Admin(props) {
 
         const response = await axios.delete(MENU_API_URL + 'DELETE', menuItemData);
 
-        if (response.data) {
+        if (response.status === 201) {
             console.log(response.data);
             toast.success('Successfully deleted menu item!');
+        } else {
+            toast.error('Error: Could not delete menu item');
         }
+            
          return response.data;
 
     }
@@ -436,7 +501,7 @@ function Admin(props) {
 
         e.preventDefault();
 
-        if (!selectedMenuItem.length) {
+        if (Object.keys(selectedMenuItem).length === 0) {
             toast.error('No Menu Item Selected!');
         }
 
@@ -444,6 +509,9 @@ function Admin(props) {
         let _id = selectedMenuItem._id;
         let restaurantId = selectedMenuItem.restaurantId;
         let category = selectedMenuItem.category;
+        let price = selectedMenuItem.price;
+        let description = selectedMenuItem.description;
+        let name = selectedMenuItem.name;
 
         const menuData = {
             _id,

@@ -66,9 +66,20 @@ const updateMenu = asyncHandler(async (req, res) => {
 // @access Private
 const deleteMenu = asyncHandler(async (req, res) => {
 
-    // await Menu.findById({_id:req.body._id}).remove(function(err){
-    //     if(err) throw err;
-    // });
+
+    let menuToDelete = await Menu.findById({_id: req.body._id});
+
+    let id = menuToDelete._id;
+
+    await Menu.findByIdAndRemove(id, function (err, docs) {
+        if (err){
+            console.log(err);
+        }
+        else{
+            console.log("Deleted Menu Item: ", docs);
+            res.status(201).json({menuToDelete});
+        }
+    });
     
 });
 

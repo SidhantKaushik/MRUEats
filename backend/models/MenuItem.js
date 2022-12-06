@@ -6,7 +6,6 @@ const menuItemSchema = new mongoose.Schema({
   name: String,
   price: Number,
   description: String,
-  image: String,
   restaurantId: Number,
   category: String
 });
