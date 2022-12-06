@@ -261,6 +261,7 @@ function Admin(props) {
             }
     
             createRestaurant(restaurantData);
+            window.location.reload(false);
         }
 
     }
@@ -325,6 +326,7 @@ function Admin(props) {
             }
     
             updateRestaurant(restaurantData);
+            window.location.reload(false);
         }
 
     }
@@ -362,6 +364,7 @@ function Admin(props) {
         }
 
         deleteRestaurant(restaurantData);
+        window.location.reload(false);
     }
     //#endregion
 
@@ -413,6 +416,7 @@ function Admin(props) {
             }
             
             createMenuItem(menuData);
+            window.location.reload(false);
         }
 
     }
@@ -476,6 +480,7 @@ function Admin(props) {
             }
     
             updateMenuItem(menuData);
+            window.location.reload(false);
         }
 
     }
@@ -526,6 +531,7 @@ function Admin(props) {
         console.log(menuData);
 
         deleteMenuItem(menuData);
+        window.location.reload(false);
     }
 
     //#endregion

@@ -123,12 +123,14 @@ const Courier = (props) => {
       }
       
       updateOrder(orderData);
+      window.location.reload(false);
 
   }
   //#endregion
   
   //#region reformatting order item (grab linked restaurant/user)
   function getMenuItemsByOrder(orderedItems) {
+
     if(!orderedItems) {
       return "";
     } 
