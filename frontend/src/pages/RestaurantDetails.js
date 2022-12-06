@@ -21,14 +21,17 @@ const RestaurantDetails = (props) => {
     useEffect(() => {
         if(location.state) {
             item = []
-            for(let i = 0; i < props.menu.menu.length; i++){                
-                if (location.state.id === props.menu.menu[i].restaurant_id){
+            for(let i = 0; i < props.menu.menu.length; i++){    
+                console.log("props menu: " + props.menu.menu[i].restaurant_id)            
+                if (location.state.id === props.menu.menu[i].restaurantId){
                     item.push(props.menu.menu[i]) 
+                    
                }
             }
+            console.log("location: " + location.state.id)
+            
         }
         if(item.length != 0){
-            console.log('test')
             localStorage.setItem('itemsArray', JSON.stringify(item))
             setMenuItems(JSON.parse(localStorage.getItem('itemsArray')))
             item = item.filter((value, index, self) => 
