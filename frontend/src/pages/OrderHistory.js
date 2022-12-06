@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate} from 'react-router-dom';
 import { useSelector} from 'react-redux';
 import OrderHistoryComponent from "../components/OrderHistory";
+import authHeader from "../features/auth/authHeader";
 
 const OrderHistory = (props) => {
 
@@ -20,15 +21,8 @@ const OrderHistory = (props) => {
 
         const getOrders = async () => {
             try{
-                const token = user.token;
-                const config = {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-                
                 const url = "api/orders/" + user.id;
-                const response = await fetch(url, config);
+                const response = await fetch(url, authHeader);
                 const data = await response.json();
                 setOrders(data);
             
@@ -45,7 +39,6 @@ const OrderHistory = (props) => {
     function seperateByActivity(orders, isValid){
         return orders.reduce(([active, inActive], obj) => {
             return isValid(obj) ? [[...active, obj], inActive] : [active, [...inActive, obj]];
-
         },[[], []]);
     }
 
@@ -108,7 +101,7 @@ const OrderHistory = (props) => {
                     <div className="orderHistoryToolBar">
                         <p id="OrderHistory">Order History</p>
                         {sortedOrders.map((order, index) => (
-                           <OrderHistoryComponent order={order} menu={props?.menu} restaurants={props?.restaurants}/>
+                           <OrderHistoryComponent order={order} menu={props?.menu} restaurants={props?.restaurants}  user={user}/>
                         ))}
                     </div>
                 </div>
