@@ -92,6 +92,8 @@ function Admin(props) {
         var restaurantId = e.target.id;
         setSelectedRestaurant(restaurants.find(restaurant => restaurant.id == restaurantId));
         setMenu(allMenuItems.filter((item) => item.restaurantId == restaurantId));
+        console.log(menu);
+        console.log(selectedRestaurant);
     }
 
     var restaurantList = restaurants.map((restaurant) =>
@@ -131,6 +133,9 @@ function Admin(props) {
     }
 
     function getLatestMenuId() {
+        if(Object.keys(menu).length === 0) {
+            return 1;
+        }
         let latestId = menu.slice(-1)[0].id;
         return parseInt(latestId) + 1 ;
     }
@@ -350,17 +355,12 @@ function Admin(props) {
 
         e.preventDefault();
 
-        let open = openTime.replace(":", "");
-        let close = closeTime.replace(":", "");
+        let _id = selectedRestaurant._id;
+        let id = selectedRestaurant.id;
 
         const restaurantData = {
-            logo,
-            restaurantName,
-            rating,
-            address,
-            open,
-            close,
-            category,
+            _id,
+            id,
         }
 
         deleteRestaurant(restaurantData);
@@ -396,22 +396,23 @@ function Admin(props) {
         else if (!description) {
             toast.error('Description is required');
         }
-        else if (!menuCategory) {
-            toast.error('Category is required');
-        }
+        // else if (!menuCategory) {
+        //     toast.error('Category is required');
+        // }
         else if (!regex.test(price) ) {
             toast.error('Price can only contain numbers and decimals. Example: 3.49');
         }
         else {
             let restaurantId = selectedRestaurant.id;
             let id = getLatestMenuId();
-    
+            let hardCodedCategory = "Sides";
+
             const menuData = {
                 id: id,
                 name: name,
                 price: price,
                 description: description,
-                category: menuCategory,
+                category: hardCodedCategory,
                 restaurantId: restaurantId,
             }
             
@@ -489,7 +490,7 @@ function Admin(props) {
     //#region Delete Menu Item
 
     const deleteMenuItem = async (menuItemData) => {
-        console.log(menuItemData);
+
         const response = await axios.delete(MENU_API_URL + 'DELETE', { data: menuItemData });
 
         if (response.status === 204) {
