@@ -109,9 +109,17 @@ function Admin(props) {
     //#region helpers
 
     function ConvertTime(hour) {
-        var ampm = hour >= 12 ? 'pm' : 'am';
-        hour = (hour % 12) || 12;
-        return hour + ampm;
+        let hours = Math.floor(hour / 100);
+        let minutes = hour % 100;
+        let amPm = hours >= 12 ? 'pm' : 'am';
+
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+
+        let strTime = hours + ':' + minutes + ' ' + amPm;
+
+        return strTime;
     }
 
     function checkIfOpen() {
