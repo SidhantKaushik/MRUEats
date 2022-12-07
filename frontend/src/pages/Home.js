@@ -108,7 +108,7 @@ const Home = (props) => {
         <div className="HomePage">
         <div className='home'>
             <div className="SplashScreen">
-                <div class="slide">
+                <div className="slide">
                     <img src='https://harbourcats.com/wp-content/uploads/2016/07/BoosterJ_MasterLogo_Rinkboards-002.jpg'></img>
                 </div>
                 <div class="slide hideInitally">
