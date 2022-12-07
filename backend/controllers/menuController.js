@@ -71,6 +71,7 @@ const deleteMenu = asyncHandler(async (req, res) => {
 
     let id = menuToDelete._id;
 
+
     await Menu.findByIdAndRemove(id, function (err, docs) {
         if (err){
             console.log(err);
@@ -82,6 +83,26 @@ const deleteMenu = asyncHandler(async (req, res) => {
     });
     
 });
+// const deleteMenu = asyncHandler(async (req, res) => {
+//     if (!req.body || !req.body._id) {
+//         return res.status(400).json({error: "Invalid request: missing '_id' in request body"});
+//     }
+
+//     let menuToDelete = await Menu.findById({_id: req.body._id});
+
+//     let id = menuToDelete._id;
+
+//     await Menu.findByIdAndRemove(id, function (err, docs) {
+//         if (err){
+//             console.log(err);
+//         }
+//         else{
+//             console.log("Deleted Menu Item: ", docs);
+//             res.status(201).json({menuToDelete});
+//         }
+//     });
+// });
+
 
 module.exports = {
 
