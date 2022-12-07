@@ -27,6 +27,9 @@ function backgroundImage(item){
         // code for Chicken category
         backgroundImage = "https://s.yimg.com/ny/api/res/1.2/jgd1gM2FAfXfSCe3rSN1Qw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NDY-/https://s.yimg.com/os/creatr-uploaded-images/2020-08/08691890-e2fd-11ea-bfdd-9831f8ae35fd"
         break;
+        case "Smoothies":
+        backgroundImage = "https://cookingformysoul.com/wp-content/uploads/2022/05/triple-berry-smoothie-feat-min.jpg"
+        break;
         default:
         // code for any other category
         backgroundImage = ""

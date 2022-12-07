@@ -53,7 +53,7 @@ const Home = (props) => {
             setRest(allRest);
             return; 
         }
-        for(let i = 0; i < allRest.length-2; i++){  
+        for(let i = 0; i < allRest.length; i++){  
             if(allRest[i].category){
                 if(allRest[i].category.includes(props))
                 {
