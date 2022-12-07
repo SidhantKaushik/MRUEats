@@ -124,10 +124,6 @@
     font-weight: 200;
 }
 
-.AdminPage .openStatus {
-    color: #C3EC99;
-}
-
 .AdminPage .firstLine {
     font-style: italic;
     font-weight: 700;
@@ -256,6 +252,7 @@
         "menuName price"
         "description description"
         "menuCategory menuCategory"
+        "newMenuCategory newMenuCategory" 
         "submitButton submitButton";
     column-gap: 15px;
     row-gap: 10px;
@@ -300,6 +297,10 @@
 .AdminPage .menuCategory{
     grid-area:menuCategory;
 }
+.AdminPage .newMenuCategory{
+    grid-area:newMenuCategory;
+}
+
 
 .AdminPage .popup-submit {
     margin: 2em 0 2em 0;
@@ -336,11 +337,6 @@
 
     .AdminPage .restaurantSection {
         border-top: 1px solid grey;
-    }
-
-    .AdminPage .restaurantsList {
-        height: 20vh;
-        padding-bottom: 1em;
     }
 
     .AdminPage .restaurantsList ul {

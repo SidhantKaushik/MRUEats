@@ -33,9 +33,10 @@ function Admin(props) {
         name: '',
         price: '',
         description: '',
-        menuCategory: ''
+        menuCategory: '',
+        newMenuCategory: '',
     });
-    const { name, price, description, menuCategory } = menuFormData;
+    const { name, price, description, menuCategory, newMenuCategory } = menuFormData;
 
     //#region popup dialogs
     const [restoEditIsOpen, setRestoEditIsOpen] = useState(false);
@@ -148,6 +149,12 @@ function Admin(props) {
         return max + 1;
     }
 
+    function isDuplicateMenuCategory(newCategory) {
+        return menuCategories.some(category => {
+            return newCategory.toLowerCase() === category.toLowerCase();
+        });
+    }
+
     //#endregion
 
     //#region form on change logic
@@ -254,7 +261,7 @@ function Admin(props) {
             let open = openTime.replace(":", "");
             let close = closeTime.replace(":", "");
             let name = restaurantName;
-    
+
             const restaurantData = {
                 id,
                 logo,
@@ -397,8 +404,17 @@ function Admin(props) {
         else if (!description) {
             toast.error('Description is required');
         }
-        else if (!menuCategory) {
+        else if (!menuCategory && menu.length > 0 && !newMenuCategory) { 
             toast.error('Category is required');
+        }
+        else if (!newMenuCategory && menu.length === 0) {
+            toast.error('Category is required');
+        }
+        else if (newMenuCategory && menuCategory) {
+            toast.error('Either select a category OR add a new one');
+        }
+        else if (isDuplicateMenuCategory(newMenuCategory)) {
+            toast.error('The entered category already exists. Please try again');
         }
         else if (!regex.test(price) ) {
             toast.error('Price can only contain numbers and decimals. Example: 3.49');
@@ -406,13 +422,27 @@ function Admin(props) {
         else {
             let restaurantId = selectedRestaurant.id;
             let id = getLatestMenuId();
+            let category = "";
+
+            //if the menu is empty 
+            if (menu.length === 0) {
+                category = newMenuCategory;
+            } 
+            //if the menu is not empty or the user did not input a menu category
+            else if (menu.length > 0 && !menuCategory) {
+                category = newMenuCategory;
+            } 
+            //if the menu is not empty or the user did not input a new menu category
+            else if (menu.length > 0 && !newMenuCategory) {
+                category = menuCategory;
+            }
 
             const menuData = {
                 id: id,
                 name: name,
                 price: price,
                 description: description,
-                category: menuCategory,
+                category: category,
                 restaurantId: restaurantId,
             }
             
@@ -603,8 +633,7 @@ function Admin(props) {
                             <span className="restaurantInfo">$2 Delivery</span>
                         </div>
                         <div className="thirdLine">
-                            <span className="restaurantInfo">Delivery Hours: {ConvertTime(selectedRestaurant.open)} - {ConvertTime(selectedRestaurant.close)}  •</span>
-                            <span className="openStatus restaurantInfo">{checkIfOpen()}</span>
+                            <span className="restaurantInfo">Delivery Hours: {ConvertTime(selectedRestaurant.open)} - {ConvertTime(selectedRestaurant.close)}</span>
                         </div>
                         <div className='restaurantButtons'>
                             <button className='restaurantButton' onClick={toggleRestoEditPopup}><span className='buttonText'>Edit Information</span><FaEdit/></button>
@@ -698,13 +727,28 @@ function Admin(props) {
                                             <label>Drescription</label>
                                             <input type="text" name="description" value={description} onChange={onMenuFormChange}/>
                                         </div>
-                                        <div className='menuCategory'>
-                                            <label>Category</label>
-                                            <select name="menuCategory" value={menuCategory} onChange={onMenuFormChange}>
-                                                <option value="value" selected>Select a Category</option>
-                                                {menuCategoryList}
-                                            </select>
-                                        </div>
+                                        {menu.length > 0 &&<>
+                                            <div className='menuCategory'>
+                                                <label>Category</label>
+                                                <select name="menuCategory" value={menuCategory} onChange={onMenuFormChange}>
+                                                    <option value="" selected>Select a Category</option>
+                                                    {menuCategoryList}
+                                                </select>
+                                            </div>
+
+                                            <div className='newMenuCategory'>
+                                                <label>Don't see your category on the list? Add a new one.</label>
+                                                <input type="text" name="newMenuCategory" value={newMenuCategory} onChange={onMenuFormChange}/>
+                                            </div>
+                                        </>}
+
+                                        {menu.length === 0 &&<>
+                                            <div className='newMenuCategory'>
+                                                <label>Category</label>
+                                                <input type="text" name="newMenuCategory" value={newMenuCategory} onChange={onMenuFormChange}/>
+                                            </div>
+                                        </>}
+                                        
                                         <div className='submitButton'>
                                             <input className='popup-submit' type="submit" value="Save Changes"/>
                                         </div>
