@@ -5,17 +5,21 @@ import { toast } from 'react-toastify';
 import { register, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 import '../styles/Register.css';
+import PizzaImg from '../images/pizza.jpg'
+
 
 function Register() {
+    //Add deliverTo
     const [formData, setFormData] = useState({
-        first_name: '',
-        last_name: '',
+        firstName: '',
+        lastName: '',
         email: '',
+        deliverTo: '',
         password: '',
         password_c: ''
     });
 
-    const { firstname, lastname, email, password, password_c } = formData;
+    const { firstName, lastName, email, deliverTo, password, password_c } = formData;
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -35,10 +39,7 @@ function Register() {
 
     }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-
-
     const onChange = (e) => {
-
         setFormData((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
@@ -51,7 +52,7 @@ function Register() {
         e.preventDefault();
 
         //if none inputed
-        if(!firstname && !lastname && !email && !password && !password_c)
+        if(!firstName && !lastName && !email && !deliverTo && !password && !password_c)
         {
             toast.error('Form not filled');
             return;
@@ -61,23 +62,26 @@ function Register() {
         const regex = new RegExp("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
         if(!regex.test(email)){
             toast.error('Please enter a valid email address');
+            return;
         }
         //password check
-        console.log(password);
-        console.log(password_c);
         if (password !== password_c) {
             toast.error('Password does not match');
+            return;
         }
         if(password.length < 6)
         {
             toast.error('Your password length is not sufficient');
+            return;
         }
         else {
             const userData = {
-                firstname,
-                lastname,
+                firstName,
+                lastName,
                 email,
+                deliverTo,
                 password,
+                password_c
             }
             dispatch(register(userData));
         }
@@ -90,23 +94,26 @@ function Register() {
 
     return (
         <div class="RegisterPage">
-        <div class="main-container">
+            <div className="left">
+            <img src={PizzaImg} alt="Image of Pizza"/>
+            </div>
             <div class="box">
-                <div className="title">
-                <h3>SIGN UP</h3>
-                </div>
                 <form onSubmit={onSubmit}>
                     <div className='fName'>
                         <label for="first-name">First Name</label>
-                        <input type="text" id="firstname" name="firstname" value={firstname} placeholder='Enter your first name' onChange={onChange} />
+                        <input type="text" id="firstName" name="firstName" value={firstName} placeholder='Enter your first name' onChange={onChange} />
                     </div>
                     <div className='lName'>
                         <label for="last-name">Last Name</label>
-                        <input type="text" id="lastname" name="lastname" value={lastname} placeholder='Enter your last name' onChange={onChange} />
+                        <input type="text" id="lastName" name="lastName" value={lastName} placeholder='Enter your last name' onChange={onChange} />
                     </div>
                     <div className='email'>
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" value={email} placeholder='Enter your email' onChange={onChange} />
+                    </div>
+                    <div className='dLocation'>
+                        <label for="deliveryLoc">Delivery Location</label>
+                        <input type="text" id="dLocation" name="deliverTo" value={deliverTo} placeholder='Enter delivery location Ex.(B140 or 123 Street SE)' onChange={onChange} />
                     </div>
                     <div className='pass1'>
                         <label id="passwordText" for="password">Password</label>
@@ -123,7 +130,6 @@ function Register() {
                 </form>
             </div>
         </div>          
-        </div>
     )
 }
 

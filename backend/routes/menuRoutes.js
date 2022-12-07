@@ -3,7 +3,7 @@ const router = express.Router();
 const { getMenu, getMenuByRestaurant, addMenu, updateMenu, deleteMenu} = require('../controllers/menuController');
 
 router.get('/', getMenu);
-router.get('/:restaurant_id', getMenuByRestaurant);
+router.get('/:restaurantId', getMenuByRestaurant);
 router.post('/ADD', addMenu);
 router.route('/UPDATE').put(updateMenu);
 router.route('/DELETE').delete(deleteMenu);

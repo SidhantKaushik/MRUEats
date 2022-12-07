@@ -1,6 +1,11 @@
 .AccountPage {
     font-family: 'Unna', serif;
     font-weight: 400;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: italic;
+    font-variant: normal;
+    text-transform: none;
+
 }
 
 .AccountPage a {

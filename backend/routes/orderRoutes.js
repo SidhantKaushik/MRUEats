@@ -12,7 +12,7 @@ router.route('/active').get(getActiveOrders);
 router.route('/complete').get(getCompleteOrders);
 router.route('/DEACTIVATE').put(deactivateOrder);
 router.route('/').get(protect, getOrders).post(protect, setOrder);
-router.get('/:id', protect, getOrderByUser);
+router.get('/:id', getOrderByUser, protect);
 
 
 module.exports = router;

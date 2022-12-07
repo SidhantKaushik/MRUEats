@@ -11,7 +11,11 @@ import Cart from './pages/Cart';
 import Admin from './pages/Admin';
 import Courier from './pages/Courier';
 import RestaurantOrder from './pages/RestaurantOrder';
+import OrderHistory from './pages/OrderHistory';
 import RestaurantDetails from './pages/RestaurantDetails';
+import EditAccount from './pages/EditAccount';
+
+
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -57,7 +61,9 @@ function App() {
             <Route exact path='/login' element={<Login />}></Route>
             <Route exact path='/register' element={<Register />}></Route>
             <Route exact path='/account' element={<Account />}></Route>
+            <Route exact path='/account-edit' element={<EditAccount />}></Route>
             <Route exact path='/order' element={<Order />}></Route>
+            <Route exact path='/order-history' element={<OrderHistory restaurants={{restaurants}} menu={{menu}}/>}></Route>
             <Route exact path='/cart' element={<Cart />}></Route>
             <Route exact path='/admin' element={<Admin />}></Route>
             <Route exact path='/courier' element={<Courier />}></Route>

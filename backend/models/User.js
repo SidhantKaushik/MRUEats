@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 //Define the schema that maps the structure of the data in mongoDB
+
 const userSchema = new mongoose.Schema({
   id: Number,
   firstName: String,
@@ -20,6 +21,7 @@ const userSchema = new mongoose.Schema({
     province: String,
     city: String
   }
+  
 });
 
 module.exports = mongoose.model("User", userSchema, "users");
