@@ -57,6 +57,7 @@ const Courier = (props) => {
         const url = "api/orders/active";
         const response = await fetch(url);
         const data = await response.json();
+        console.log(data);
         setActiveOrders(data);
       } catch (err) {
         console.error(err);
@@ -129,27 +130,37 @@ const Courier = (props) => {
   //#endregion
   
   //#region reformatting order item (grab linked restaurant/user)
-  function getMenuItemsByOrder(orderedItems) {
-
+  function getMenuItemsByOrder(orderedItems, restId) {
+    let namesOfItems = [];
     if(!orderedItems) {
       return "";
     } 
     else {
-      let matchedMenuNames = orderedItems.map(id => {
-        let menuItem = menus.find(menu => menu.id === id);
-        return menuItem.name;
+      menus.forEach(RestaurantMenu => {
+        if(RestaurantMenu.restaurantId === restId)
+          orderedItems.forEach(menuItemID => {
+            if(menuItemID.id === RestaurantMenu.id){
+              namesOfItems.push(RestaurantMenu.name)
+            }
+          })
       });
-      let menuItems = matchedMenuNames.join(', ');
-
-      return menuItems;
+      const listItems = namesOfItems.map((d) => <ol className={d}>{d}</ol>);
+      return (
+        <div className='menuItemsOrdered'>
+        {listItems}
+        </div>
+      );
     }
   }
-
+  //this function grabs the list of orders (active or inactive) and maps out the linked restraunt and the linked user
   function reformatOrders(orders) {
-
+    while(!restaurants || !users){
+      return false;
+    }
     var ordersData = orders.map((order) => ({
       id: order.id,
-      RestaurantName: restaurants.find(rest => rest.id = order.restaurantId).name,
+      RestaurantId: order.restaurantId,
+      RestaurantName: restaurants.find(rest => rest.id == order.restaurantId).name,
       Date: order.dateOrdered,
       Price: order.price,
       User: `${users.find(user => user.id = order.userId).firstName} ${users.find(user => user.id = order.userId).lastName}`,
@@ -179,7 +190,8 @@ const Courier = (props) => {
                       <p>Total Price: ${order.Price}</p>
                       <p>User: {order.User}</p>
                       <p>Deliver to: {order.Location}</p>
-                      <p>Menu Items: {getMenuItemsByOrder(order.menuItems)}</p>
+                      <p>Menu Items: {getMenuItemsByOrder(order.MenuItems, order.RestaurantId)}</p>
+                      
                       <p>Special Instructions: {order.SpecialInst}</p>
                     </div>
                     <div className='order-buttons'>
@@ -202,7 +214,7 @@ const Courier = (props) => {
                         <p>Total Price: ${order.Price}</p>
                         <p>User: {order.User}</p>
                         <p>Location: {order.Location}</p>
-                        <p>Menu Items: {getMenuItemsByOrder(order.menuItems)}</p>
+                        <p>Menu Items: {getMenuItemsByOrder(order.MenuItems, order.RestaurantId)}</p>
                         <p>Special Instructions: {order.SpecialInst}</p>
                       </div>            
                     </div>                                    
