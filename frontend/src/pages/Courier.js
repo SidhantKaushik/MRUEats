@@ -183,6 +183,9 @@ const Courier = (props) => {
             <div className="active-orders">
                 <h3>Active Orders</h3>
                 <div className='active-container'>
+                {reformattedActiveOrders.length === 0 &&<>
+                  <div className='no-active-orders'>There are currently no active orders.</div>
+                </>}
                 {reformattedActiveOrders.map((order) =>
                   <div className='order-item'>
                     <div className='order-info'>
@@ -202,86 +205,6 @@ const Courier = (props) => {
                   </div>                                    
                 )}
 
-                  <div className='order-item'>
-                    <div className='order-info'>
-                      <h4 className='order-resto-title'>Name</h4> 
-                      <p>Date: </p>
-                      <p>Total Price: </p>
-                      <p>User: </p>
-                      <p>Deliver to: </p>
-                      <p>Menu Items: </p>
-                      
-                      <p>Special Instructions: </p>
-                    </div>
-                    <div className='order-buttons'>
-                      <button className='status-button' id = {1} >Mark As Complete</button>
-                    </div>
-                                    
-                  </div>  
-                  <div className='order-item'>
-                    <div className='order-info'>
-                      <h4 className='order-resto-title'>Name</h4> 
-                      <p>Date: </p>
-                      <p>Total Price: </p>
-                      <p>User: </p>
-                      <p>Deliver to: </p>
-                      <p>Menu Items: </p>
-                      
-                      <p>Special Instructions: </p>
-                    </div>
-                    <div className='order-buttons'>
-                      <button className='status-button' id = {1} >Mark As Complete</button>
-                    </div>
-                                    
-                  </div> 
-                  <div className='order-item'>
-                    <div className='order-info'>
-                      <h4 className='order-resto-title'>Name</h4> 
-                      <p>Date: </p>
-                      <p>Total Price: </p>
-                      <p>User: </p>
-                      <p>Deliver to: </p>
-                      <p>Menu Items: </p>
-                      
-                      <p>Special Instructions: </p>
-                    </div>
-                    <div className='order-buttons'>
-                      <button className='status-button' id = {1} >Mark As Complete</button>
-                    </div>
-                                    
-                  </div> 
-                  <div className='order-item'>
-                    <div className='order-info'>
-                      <h4 className='order-resto-title'>Name</h4> 
-                      <p>Date: </p>
-                      <p>Total Price: </p>
-                      <p>User: </p>
-                      <p>Deliver to: </p>
-                      <p>Menu Items: </p>
-                      
-                      <p>Special Instructions: </p>
-                    </div>
-                    <div className='order-buttons'>
-                      <button className='status-button' id = {1} >Mark As Complete</button>
-                    </div>
-                                    
-                  </div> 
-                  <div className='order-item'>
-                    <div className='order-info'>
-                      <h4 className='order-resto-title'>Name</h4> 
-                      <p>Date: </p>
-                      <p>Total Price: </p>
-                      <p>User: </p>
-                      <p>Deliver to: </p>
-                      <p>Menu Items: </p>
-                      
-                      <p>Special Instructions: </p>
-                    </div>
-                    <div className='order-buttons'>
-                      <button className='status-button' id = {1} >Mark As Complete</button>
-                    </div>
-                                    
-                  </div>  
               </div>
             </div>
             <div  className="past-orders">
