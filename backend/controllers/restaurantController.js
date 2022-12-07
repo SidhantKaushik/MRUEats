@@ -68,17 +68,22 @@ const updateRestaurant = asyncHandler(async (req, res) => {
 // @access Private
 const deleteRestaurant = asyncHandler(async (req, res) => {
 
-    await Restaurant.findByIdAndDelete(req.body.id,
-        function (err, docs) {
-            if (err){
-                console.log(err)
+    let id = req.body._id;
+        try {
+            const deleted = await Restaurant.deleteOne({
+                _id: id,
+            });
+            if (deleted.deletedCount === 0) {
+              return res.status(404).send({
+                message: 'Could not find the specified resource to delete.',
+              });
             }
-            else{
-                console.log("Deleted Restaurant : ", docs);
-            }
-    });
-    
-});
+            return res.sendStatus(204);
+          } catch (error) {
+            return res.status(500).send({
+              message: error.message,
+            });
+}});
 
 module.exports = {
 

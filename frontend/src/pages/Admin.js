@@ -335,9 +335,9 @@ function Admin(props) {
     //#region Delete Restaurant
     const deleteRestaurant = async (restaurantData) => {
 
-        const response = await axios.delete(RESTAURANTS_API_URL + 'DELETE', restaurantData);
+        const response = await axios.delete(RESTAURANTS_API_URL + 'DELETE', { data: restaurantData });
 
-        if (response.status === 201) {
+        if (response.status === 204) {
             console.log(response.data);
             toast.success('Successfully deleted restaurant!');
         } else {
@@ -492,7 +492,7 @@ function Admin(props) {
         console.log(menuItemData);
         const response = await axios.delete(MENU_API_URL + 'DELETE', { data: menuItemData });
 
-        if (response.status === 201) {
+        if (response.status === 204) {
             console.log(response.data);
             toast.success('Successfully deleted menu item!');
         } else {
@@ -529,10 +529,8 @@ function Admin(props) {
             restaurantId,
         }
 
-        console.log(menuData);
-
         deleteMenuItem(menuData);
-        //window.location.reload(false);
+        window.location.reload(false);
     }
 
     //#endregion
