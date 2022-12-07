@@ -20,6 +20,11 @@
         "list";
         grid-template-columns: 1fr;
     }
+    .HomePage .categoriesList{
+        grid-template-columns: 1fr 1fr 1fr !important;
+        padding: 0 5px 0 5px !important;
+        gap: 1px !important;
+    }
     .HomePage h2{
         font-size: 1em;
     }
@@ -86,6 +91,9 @@ body{
 .HomePage .category-item{
     font-size: 20px;
     padding-left:10px;
+    background-color: #033453;
+    color: white;
+    cursor:pointer;
 }
 .HomePage #catTitle{
     padding-left: 10px;
@@ -100,15 +108,29 @@ font-weight: 500;
 font-size: 24px;
 color: #000000;
 padding:0;
+display:grid;
+grid-template-columns: 1fr 1fr 1fr;
+gap: 2px;
+padding: 5px;
 }
 .HomePage .categories{
     background-color: #f0f1f1;
 }
-.HomePage .category-item:hover {
-    background-color: #033453;
-    color: white;
-    cursor:pointer;
+.HomePage .categories #all{
+    background-Image: url("https://bcdairy.ca/wp-content/uploads/2021/08/Variety_Image_747px.jpg")
 }
+
+.HomePage .category-item:hover {
+    color: #033453;
+    background-color: white;
+}
+.HomePage .categories .item{
+    cursor: pointer;
+}
+.HomePage .categories .item:hover .category-item {
+    color: #033453;
+    background-color: white;
+    }
 .HomePage .prev{
     position: absolute;
     left:0px;
@@ -165,6 +187,15 @@ padding:0;
 .restaurantsHomePage .name{
     grid-area: name;
     
+}
+.restaurantsHomePage .name h2{
+    margin:0;
+    
+}
+.HomePage .categories .item{
+    width: 100%;
+    padding-top: 75%;
+    background-size: cover;
 }
 .restaurantsHomePage .rating{
     grid-area: rating;

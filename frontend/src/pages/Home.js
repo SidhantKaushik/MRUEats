@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import '../styles/Home.css';
 import RestaurantItem from './RestaurantItem';
-import Category from './Category';
+import HomepageCategories from './HomepageCategories';
 
 const Home = (props) => {
 
@@ -53,7 +53,7 @@ const Home = (props) => {
             setRest(allRest);
             return; 
         }
-        for(let i = 0; i < allRest.length-2; i++){  
+        for(let i = 0; i < allRest.length; i++){  
             if(allRest[i].category){
                 if(allRest[i].category.includes(props))
                 {
@@ -108,7 +108,7 @@ const Home = (props) => {
         <div className="HomePage">
         <div className='home'>
             <div className="SplashScreen">
-                <div class="slide">
+                <div className="slide">
                     <img src='https://harbourcats.com/wp-content/uploads/2016/07/BoosterJ_MasterLogo_Rinkboards-002.jpg'></img>
                 </div>
                 <div class="slide hideInitally">
@@ -124,12 +124,15 @@ const Home = (props) => {
             <div className="categories">
                 <h3 id="catTitle">Categories</h3>
             <ol className='categoriesList'>
+                <div className="item" id="all">
                     <li className='category-item' onClick={filterClick}>
                         All 
                     </li>
+                </div>
+                    
                     
                         {categories.map((p, index) => (
-                            <Category
+                            <HomepageCategories
                                 category={p}
                                 filter={filterClick}
                             />
