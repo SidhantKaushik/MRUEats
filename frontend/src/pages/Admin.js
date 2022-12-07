@@ -381,7 +381,7 @@ function Admin(props) {
 
         const response = await axios.post(MENU_API_URL + 'ADD', menuItemData);
 
-        if (response.status === 200) {
+        if (response.status === 201) {
             console.log(response.data);
             toast.success('Successfully added menu item!');
         } else {

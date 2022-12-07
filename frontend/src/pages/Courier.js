@@ -179,6 +179,7 @@ const Courier = (props) => {
  
     return (
         <div className="courier-page">
+          <div className='order-container'>
             <div className="active-orders">
                 <h3>Active Orders</h3>
                 <div className='active-container'>
@@ -200,7 +201,87 @@ const Courier = (props) => {
                                     
                   </div>                                    
                 )}
-                    
+
+                  <div className='order-item'>
+                    <div className='order-info'>
+                      <h4 className='order-resto-title'>Name</h4> 
+                      <p>Date: </p>
+                      <p>Total Price: </p>
+                      <p>User: </p>
+                      <p>Deliver to: </p>
+                      <p>Menu Items: </p>
+                      
+                      <p>Special Instructions: </p>
+                    </div>
+                    <div className='order-buttons'>
+                      <button className='status-button' id = {1} >Mark As Complete</button>
+                    </div>
+                                    
+                  </div>  
+                  <div className='order-item'>
+                    <div className='order-info'>
+                      <h4 className='order-resto-title'>Name</h4> 
+                      <p>Date: </p>
+                      <p>Total Price: </p>
+                      <p>User: </p>
+                      <p>Deliver to: </p>
+                      <p>Menu Items: </p>
+                      
+                      <p>Special Instructions: </p>
+                    </div>
+                    <div className='order-buttons'>
+                      <button className='status-button' id = {1} >Mark As Complete</button>
+                    </div>
+                                    
+                  </div> 
+                  <div className='order-item'>
+                    <div className='order-info'>
+                      <h4 className='order-resto-title'>Name</h4> 
+                      <p>Date: </p>
+                      <p>Total Price: </p>
+                      <p>User: </p>
+                      <p>Deliver to: </p>
+                      <p>Menu Items: </p>
+                      
+                      <p>Special Instructions: </p>
+                    </div>
+                    <div className='order-buttons'>
+                      <button className='status-button' id = {1} >Mark As Complete</button>
+                    </div>
+                                    
+                  </div> 
+                  <div className='order-item'>
+                    <div className='order-info'>
+                      <h4 className='order-resto-title'>Name</h4> 
+                      <p>Date: </p>
+                      <p>Total Price: </p>
+                      <p>User: </p>
+                      <p>Deliver to: </p>
+                      <p>Menu Items: </p>
+                      
+                      <p>Special Instructions: </p>
+                    </div>
+                    <div className='order-buttons'>
+                      <button className='status-button' id = {1} >Mark As Complete</button>
+                    </div>
+                                    
+                  </div> 
+                  <div className='order-item'>
+                    <div className='order-info'>
+                      <h4 className='order-resto-title'>Name</h4> 
+                      <p>Date: </p>
+                      <p>Total Price: </p>
+                      <p>User: </p>
+                      <p>Deliver to: </p>
+                      <p>Menu Items: </p>
+                      
+                      <p>Special Instructions: </p>
+                    </div>
+                    <div className='order-buttons'>
+                      <button className='status-button' id = {1} >Mark As Complete</button>
+                    </div>
+                                    
+                  </div>  
               </div>
             </div>
             <div  className="past-orders">
@@ -221,6 +302,7 @@ const Courier = (props) => {
                   )}
                 </div>
             </div>
+          </div>  
         </div>
     );
 }

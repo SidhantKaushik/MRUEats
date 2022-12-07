@@ -3,18 +3,22 @@
     font-weight: 400;
 }
 
+.AdminPage {
+    background-color: #033453;
+}
+
 .AdminPage .adminMainBody {
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-template-areas:
         "restaurants restaurantInfo";
-    height: 100vh;
 }
 
 .AdminPage .restaurants {
     grid-area: restaurants;
-    background: #FCFCFC;
+    background: #f4f4f4;
     margin: 1em;
+    border-radius: 15px;
 }
 
 .AdminPage .restaurantsList ul {
@@ -28,7 +32,7 @@
 
 .AdminPage .restaurantSection {
     grid-area: restaurantInfo;
-    background: #FCFCFC;
+    background: #efefef;
     margin: 1em;
     display: grid;
     grid-template-rows: 1fr 10fr 1fr;
@@ -37,6 +41,7 @@
         "menuItems"
         "menuButtons";
     height: 100vh;
+    border-radius: 15px;
 }
 
 .AdminPage .menuItems {
@@ -56,7 +61,7 @@
 .AdminPage .adminRestaurantBanner {
     padding: 2em;
     grid-area: adminRestaurantBanner;
-    background-color: #FCFCFC;
+    background-color: #f4f4f4;
     display: grid;
     grid-template-areas:
         "firstline buttons"
@@ -64,6 +69,8 @@
         "thirdline buttons";
     color: #000000;
     border-bottom: 1px solid #B4B2AF;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
 }
 
 .AdminPage .adminRestaurantBanner {
@@ -356,6 +363,7 @@
     .AdminPage .restaurantButtons {
         width: 100vw;
         margin: 0;
+        font-size: 13px;
     }
 
     .AdminPage .firstLine, .AdminPage .secondLine, .AdminPage .thirdLine {
@@ -367,4 +375,13 @@
     .AdminPage .restaurantSection {
         grid-template-rows: 1fr 6fr 1fr;
     }
+
+    .AdminPage .restaurants {
+        border-radius: 0px;
+    }
+
+    .AdminPage .restaurantSection {
+        border-radius: 0px;
+    }
+
 }
