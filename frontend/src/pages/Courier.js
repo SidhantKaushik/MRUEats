@@ -46,7 +46,7 @@ const Courier = (props) => {
         const data = await response.json();
         setUsers(data);
       } catch (err) {
-        console.error(err);
+        //console.error(err);
       }
     }
   
