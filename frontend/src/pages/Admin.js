@@ -92,8 +92,6 @@ function Admin(props) {
         var restaurantId = e.target.id;
         setSelectedRestaurant(restaurants.find(restaurant => restaurant.id == restaurantId));
         setMenu(allMenuItems.filter((item) => item.restaurantId == restaurantId));
-        console.log(menu);
-        console.log(selectedRestaurant);
     }
 
     var restaurantList = restaurants.map((restaurant) =>
@@ -114,11 +112,6 @@ function Admin(props) {
         var ampm = hour >= 12 ? 'pm' : 'am';
         hour = (hour % 12) || 12;
         return hour + ampm;
-    }
-
-    function ConvertTimeString(time) {
-        time = time.replace(":","");
-        return parseInt(time);
     }
 
     function checkIfOpen() {
@@ -396,23 +389,22 @@ function Admin(props) {
         else if (!description) {
             toast.error('Description is required');
         }
-        // else if (!menuCategory) {
-        //     toast.error('Category is required');
-        // }
+        else if (!menuCategory) {
+            toast.error('Category is required');
+        }
         else if (!regex.test(price) ) {
             toast.error('Price can only contain numbers and decimals. Example: 3.49');
         }
         else {
             let restaurantId = selectedRestaurant.id;
             let id = getLatestMenuId();
-            let hardCodedCategory = "Sides";
 
             const menuData = {
                 id: id,
                 name: name,
                 price: price,
                 description: description,
-                category: hardCodedCategory,
+                category: menuCategory,
                 restaurantId: restaurantId,
             }
             
