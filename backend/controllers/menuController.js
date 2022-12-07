@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler');
+const { deleteModel } = require('mongoose');
 
 const Menu = require('../models/MenuItem');
 
@@ -64,25 +65,50 @@ const updateMenu = asyncHandler(async (req, res) => {
 // @desc   Deletes a menu
 // @route  DELETE /api/menu/DELETE
 // @access Private
+// const deleteMenu = asyncHandler(async (req, res) => {
+
+//     let id = req._id;
+//         try {
+//             const deleted = await Menu.deleteOne({
+//                 _id: id,
+//             });
+//             if (deleted.deletedCount === 0) {
+//               return res.status(404).send({
+//                 message: 'Could not find the specified resource to delete.',
+//               });
+//             }
+//             return res.sendStatus(204);
+//           } catch (error) {
+//             return res.status(500).send({
+//               message: error.message,
+//             });
+//     }});
 const deleteMenu = asyncHandler(async (req, res) => {
-
-
-    let menuToDelete = await Menu.findById({_id: req.body._id});
-
-    let id = menuToDelete._id;
-
-
-    await Menu.findByIdAndRemove(id, function (err, docs) {
-        if (err){
-            console.log(err);
-        }
-        else{
-            console.log("Deleted Menu Item: ", docs);
-            res.status(201).json({menuToDelete});
-        }
-    });
-    
-});
+    let id = req.id;
+    console.log("hola");
+    console.log(id);
+    let ids = req.params._id;
+    console.log(ids);
+    let restid = req.restaurantId;
+    res.status(201).json(req.body);
+    // try {
+    //   const deleted = await Menu.findOneAndDelete({
+    //     id: id,
+    //     restaurantId: restid,
+    //   });
+    //   if (!deleted) {
+    //     return res.status(404).send({
+    //       message: 'Could not find the specified resource to delete.',
+    //     });
+    //   }
+    //   return res.sendStatus(204);
+    // } catch (error) {
+    //   return res.status(500).send({
+    //     message: error.message,
+    //   });
+    // }
+  });
+  
 // const deleteMenu = asyncHandler(async (req, res) => {
 //     if (!req.body || !req.body._id) {
 //         return res.status(400).json({error: "Invalid request: missing '_id' in request body"});
