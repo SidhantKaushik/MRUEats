@@ -487,21 +487,10 @@ function Admin(props) {
     //#endregion
 
     //#region Delete Menu Item
-    //     const updateMenuItem = async (menuItemData) => {
 
-    //     const response = await axios.put(MENU_API_URL + 'UPDATE', menuItemData);
-
-    //     if (response.status === 201) {
-    //         console.log(response.data);
-    //         toast.success('Successfully updated menu item!');
-    //     } else {
-    //         toast.error('Error: Could not update menu item');
-    //     }
-
-    // }
     const deleteMenuItem = async (menuItemData) => {
         console.log(menuItemData);
-        const response = await axios.delete(MENU_API_URL + 'DELETE', {menuItemData});
+        const response = await axios.delete(MENU_API_URL + 'DELETE', { data: menuItemData });
 
         if (response.status === 201) {
             console.log(response.data);

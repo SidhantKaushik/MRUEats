@@ -67,6 +67,53 @@ const updateMenu = asyncHandler(async (req, res) => {
 // @access Private
 // const deleteMenu = asyncHandler(async (req, res) => {
 
+//     console.log("CHANGE ====================");
+//     console.log(req.body._id);
+
+
+//     if (!req.body || !req.body._id) {
+//         return res.status(400).json({error: "Invalid request: missing '_id' in request body"});
+//     }
+
+//     let menuToDelete = await Menu.findById({_id: req.body._id});
+
+//     let id = menuToDelete._id;
+
+//     await Menu.deleteOne(id, function (err, docs) {
+//         if (err){
+//             console.log(err);
+//         }
+//         else{
+//             console.log("Deleted Menu Item: ", docs);
+//             res.status(201).json({menuToDelete});
+//         }
+//     });
+// });
+const deleteMenu = asyncHandler(async (req, res) => {
+
+    let id = req.body._id;
+    console.log("CHANGE ====================");
+    console.log(req.body);
+    console.log("CHANGE 2 ===============");
+    console.log(req.body._id);
+
+        try {
+            const deleted = await Menu.deleteOne({
+                _id: id,
+            });
+            if (deleted.deletedCount === 0) {
+              return res.status(404).send({
+                message: 'Could not find the specified resource to delete.',
+              });
+            }
+            return res.sendStatus(204);
+          } catch (error) {
+            return res.status(500).send({
+              message: error.message,
+            });
+    }});
+// const deleteMenu = asyncHandler(async (req, res) => {
+
 //     let id = req._id;
 //         try {
 //             const deleted = await Menu.deleteOne({
@@ -83,52 +130,29 @@ const updateMenu = asyncHandler(async (req, res) => {
 //               message: error.message,
 //             });
 //     }});
-const deleteMenu = asyncHandler(async (req, res) => {
-    let id = req.id;
-    console.log("hola");
-    console.log(id);
-    let ids = req.params._id;
-    console.log(ids);
-    let restid = req.restaurantId;
-    res.status(201).json(req.body);
-    // try {
-    //   const deleted = await Menu.findOneAndDelete({
-    //     id: id,
-    //     restaurantId: restid,
-    //   });
-    //   if (!deleted) {
-    //     return res.status(404).send({
-    //       message: 'Could not find the specified resource to delete.',
-    //     });
-    //   }
-    //   return res.sendStatus(204);
-    // } catch (error) {
-    //   return res.status(500).send({
-    //     message: error.message,
-    //   });
-    // }
-  });
-  
 // const deleteMenu = asyncHandler(async (req, res) => {
-//     if (!req.body || !req.body._id) {
-//         return res.status(400).json({error: "Invalid request: missing '_id' in request body"});
-//     }
 
-//     let menuToDelete = await Menu.findById({_id: req.body._id});
+//     console.log("hola");
+//     console.log(req);
+//     console.log(req.body._id);
 
-//     let id = menuToDelete._id;
-
-//     await Menu.findByIdAndRemove(id, function (err, docs) {
-//         if (err){
-//             console.log(err);
-//         }
-//         else{
-//             console.log("Deleted Menu Item: ", docs);
-//             res.status(201).json({menuToDelete});
-//         }
-//     });
-// });
-
+//     // try {
+//     //   const deleted = await Menu.findOneAndDelete({
+//     //     id: id,
+//     //     restaurantId: restid,
+//     //   });
+//     //   if (!deleted) {
+//     //     return res.status(404).send({
+//     //       message: 'Could not find the specified resource to delete.',
+//     //     });
+//     //   }
+//     //   return res.sendStatus(204);
+//     // } catch (error) {
+//     //   return res.status(500).send({
+//     //     message: error.message,
+//     //   });
+//     // }
+//   });
 
 module.exports = {
 
