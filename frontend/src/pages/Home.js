@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import '../styles/Home.css';
 import RestaurantItem from './RestaurantItem';
-import Category from './Category';
+import HomepageCategories from './HomepageCategories';
 
 const Home = (props) => {
 
@@ -124,12 +124,15 @@ const Home = (props) => {
             <div className="categories">
                 <h3 id="catTitle">Categories</h3>
             <ol className='categoriesList'>
+                <div className="item" id="all">
                     <li className='category-item' onClick={filterClick}>
                         All 
                     </li>
+                </div>
+                    
                     
                         {categories.map((p, index) => (
-                            <Category
+                            <HomepageCategories
                                 category={p}
                                 filter={filterClick}
                             />
