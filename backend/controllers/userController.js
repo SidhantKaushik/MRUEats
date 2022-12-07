@@ -11,7 +11,7 @@ const mongoose = require('mongoose');
 const registerUser = asyncHandler(async (req, res) => {
 
     let id = 1;
-    const { firstName, lastName, email, deliverTo, password, password_c } = req.body;
+    const { firstName, lastName, email, deliverTo, checked, password, password_c } = req.body;
 
     if (!firstName || !lastName || !email || !deliverTo || !password || !password_c) {
         res.status(400);
@@ -42,7 +42,7 @@ const registerUser = asyncHandler(async (req, res) => {
         deliverTo: deliverTo,
         email: email,
         isAdmin: true,
-        isCourier: false,
+        isCourier: checked,
         password_bcrypt: hashedPassword,
 
         details:{

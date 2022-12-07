@@ -41,10 +41,11 @@ const Account = () => {
                     <div className="profileToolBar">
                         <div className="leftSideBar">
                             <div className='profile'>
-                                <p>Profile</p>
+                                <div><h2>Profile</h2></div>
+                                <div><Link to='/account-edit' state={{ userInfo: userInfo }}><img src={EditIcon} /></Link></div>
                             </div>
                             <div className="edit-icon">
-                                <Link to='/account-edit' state={{ userInfo: userInfo }}><img src={EditIcon} /></Link>
+                                
                             </div>
                         </div>
                         <div className="rightSideBar">

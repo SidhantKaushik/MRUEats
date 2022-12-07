@@ -31,7 +31,7 @@ const logout = () => {
 }
 
 //Update user info
-const update = async (userData, token) => {
+const update = async (userData) => {
     
     const response = await axios.put(API_URL + "UPDATE", userData, authHeader);
     if (response.data) {
