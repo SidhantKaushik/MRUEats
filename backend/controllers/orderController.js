@@ -57,7 +57,7 @@ const setOrder = asyncHandler(async (req, res) => {
         id: id,
         restaurantId: restaurantId,
         price: price,
-        dateOrdered: "05/07/2000",
+        dateOrdered: "12/08/2022",
         isActive: true,
         specialInstructions: specialInstructions,
         menuItems: menuItems,
