@@ -97,9 +97,9 @@ const OrderHistory = (props) => {
             }
         }
         //Change value to fit in area
-        if(itemList.length > 35){
+        if(itemList.length > 65){
             
-            var newList = itemList.substring(0, 35);
+            var newList = itemList.substring(0, 65);
             newList += '...';
             return newList;
 
@@ -111,9 +111,7 @@ const OrderHistory = (props) => {
     function getPrices(orderItems){
         const itemCounts = [{}];
         for(const item of orderItems){
-            console.log(item);
             itemCounts[item] = itemCounts[item] ? itemCounts[item] + 1 : 1
-            console.log(itemCounts)
         }
     }
 
@@ -126,18 +124,21 @@ const OrderHistory = (props) => {
                 // const menuItems = order.menuItems.forEach(menu.find(e => e.id === order));
                 return( <>
                  
-                    <div className="orderWrapper">
+                    <div className="orderWrapper" id={order.isActive?.toString()}>
                         <div className="orderHeader">
-                           {currentRestaurant.name} ({currentRestaurant.address}) {isActive(order.isActive)}
+                            <div>
+                            <div className="restaurantInfo">{currentRestaurant.name} ({currentRestaurant.address})</div> <div className="isActive">{isActive(order.isActive)}</div>
+                            </div>
                         </div>
-                        <div className="orderDetails">
+                        <div className="orderDetailsWrapper">
+                            <div className="orderDetails"></div>
                             <div>
                                 {formatDate(order?.dateOrdered, false)} - {formatPrice(order?.price)} - {order.menuItems?.length} Items
                             </div>
                             <div>
                                 {showItems(currentMenuItems)} 
                             </div>
-                            <div>
+                            <div className="buttonWrapper">
                                 <button id="myButton" onClick={() =>{toast.error('Coming soon!');}}>Reorder</button>
                                 <Receipt order={order} restaurant={currentRestaurant} menu={currentMenuItems}  user={props.user}></Receipt>
                             </div>
@@ -149,7 +150,7 @@ const OrderHistory = (props) => {
             }
             
     return (
-        <div>
+        <div className="outputComponent">
             {outputComponent(order)}
         </div>
     )
