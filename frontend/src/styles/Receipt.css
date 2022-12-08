@@ -57,7 +57,7 @@
     border: 1px solid #cfcece;
   }
 
-  #myButton {
+  .modal #myButton {
 	box-shadow: 0px 0px 0px 2px #ffb803;
 	background:linear-gradient(to bottom, #a87f2d 5%, #ffb803 100%);
 	background-color:#a87f2d;
@@ -72,11 +72,11 @@
 	text-decoration:none;
 	text-shadow:0px 1px 0px #fadd9b;
 }
-#myButton:hover {
+.modal #myButton:hover {
 	background:linear-gradient(to bottom, #ffb803 5%, #a87f2d 100%);
 	background-color:#ffb803;
 }
-#myButton:active {
+.modal #myButton:active {
 	position:relative;
 	top:1px;
 }

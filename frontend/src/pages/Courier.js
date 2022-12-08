@@ -163,8 +163,8 @@ const Courier = (props) => {
       RestaurantName: restaurants.find(rest => rest.id == order.restaurantId).name,
       Date: order.dateOrdered,
       Price: order.price,
-      User: `${users.find(user => user.id = order.userId)?.firstName} ${users.find(user => user.id = order.userId)?.lastName}`,
-      Location: users.find(user => user.id = order.userId)?.deliverTo,
+      User: `${users.find(user => user.id == order.userId)?.firstName} ${users.find(user => user.id == order.userId)?.lastName}`,
+      Location: users.find(user => user.id == order.userId)?.deliverTo,
       MenuItems: order.menuItems,
       SpecialInst: order.specialInstructions
     }));
@@ -191,7 +191,7 @@ const Courier = (props) => {
                     <div className='order-info'>
                       <h4 className='order-resto-title'>{order.RestaurantName}</h4> 
                       <p>Date: {order.Date}</p>
-                      <p>Total Price: ${order.Price}</p>
+                      <p>Total Price: {order.Price}</p>
                       <p>User: {order.User}</p>
                       <p>Deliver to: {order.Location}</p>
                       <p>Menu Items: {getMenuItemsByOrder(order.MenuItems, order.RestaurantId)}</p>
@@ -215,7 +215,7 @@ const Courier = (props) => {
                       <div className='order-info'>
                         <h4 className='order-resto-title'>{order.RestaurantName}</h4> 
                         <p>Date: {order.Date}</p>
-                        <p>Total Price: ${order.Price}</p>
+                        <p>Total Price: {order.Price}</p>
                         <p>User: {order.User}</p>
                         <p>Location: {order.Location}</p>
                         <p>Menu Items: {getMenuItemsByOrder(order.MenuItems, order.RestaurantId)}</p>

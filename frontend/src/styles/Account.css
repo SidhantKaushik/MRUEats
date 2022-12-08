@@ -293,3 +293,26 @@
 	top:1px;
 }
 
+@media (max-width: 900px) {
+    .AccountPage .profileSide{
+        margin: 0;
+        width: 100%;
+    }
+    .AccountPage .ProfileInformation{
+        margin: 0;
+        padding:0;
+        padding-top: 5px;
+    }
+    .AccountPage .reqInfo{
+        margin: 10px;
+    }
+    .AccountPage .addInfo{
+        margin: 10px;
+    }
+    .AccountPage .billInfo{
+        margin: 10px;
+    }
+    .AccountPage .Collapsible{
+        margin:10px;
+    }
+    }
