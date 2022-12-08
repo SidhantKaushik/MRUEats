@@ -114,7 +114,7 @@
     border: none;
     border-radius: 20%;
     margin: 1em 1em 1em 0;
-    float: right;
+    cursor: pointer;
 }
 
 .RestaurantPage .restaurantMenu {
