@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import '../styles/Home.css';
 import RestaurantItem from './RestaurantItem';
+import HomepageCategories from './HomepageCategories';
 
 const Home = (props) => {
 
@@ -13,8 +14,7 @@ const Home = (props) => {
     let filterRest = []
     let allRest = [...props.restaurants.restaurants]
     const [menu, setMenu] = useState([])
-    console.log(allRest)
-
+    const [categories, setCategories] = useState([]);
     const [rest, setRest] = useState([]);
 
     useEffect(() => {
@@ -31,6 +31,14 @@ const Home = (props) => {
         getRestaurants();
       }, [])
     
+      useEffect(() => {
+        const uniqueCategories = new Set();
+        {rest.map((p, index) => {
+            uniqueCategories.add(p.category);
+        })};
+        const categoriesArray = Array.from(uniqueCategories.values());
+        setCategories(categoriesArray);
+      }, [rest]);
 
     useEffect(() => {
         if (!user) {
@@ -38,12 +46,33 @@ const Home = (props) => {
         }
     }, [user, navigate]);
 
+    function filterClick(props){
+        filterRest = []
+        if(typeof props !== 'string')
+        {
+            setRest(allRest);
+            return; 
+        }
+        for(let i = 0; i < allRest.length; i++){  
+            if(allRest[i].category){
+                if(allRest[i].category.includes(props))
+                {
+                    filterRest.push(allRest[i])
+                }
+            }
+            
+        }
+        setRest(filterRest)
+    }
     function filter(e) {
         filterRest = []
-        for(let i = 0; i < allRest.length; i++){    
-            if (allRest[i].name.includes(e.target.value) || allRest[i].name.toLowerCase().includes(e.target.value.toLowerCase())){
-                filterRest.push(allRest[i])
+        for(let i = 0; i < allRest.length; i++){
+            if(allRest[i].name){
+                if (allRest[i].name.includes(e.target.value) || allRest[i].name.toLowerCase().includes(e.target.value.toLowerCase())){
+                    filterRest.push(allRest[i])
+                }
             }
+            
         }
         setRest(filterRest)
     }
@@ -57,12 +86,10 @@ const Home = (props) => {
 
 
     function plusSlides(n) {
-        console.log("click");
         showSlide(slideIndex += n);
     }
     function showSlide(n) {
         let slides = document.getElementsByClassName("slide");
-        console.log(slides);
         if (n > slides.length) {slideIndex = 1}    
         if (n < 1) {slideIndex = slides.length}
         for (let i = 0; i < slides.length; i++) {
@@ -75,25 +102,42 @@ const Home = (props) => {
     }
 
     
+
+    
     return (
         <div className="HomePage">
         <div className='home'>
             <div className="SplashScreen">
-                <div class="slide">
+                <div className="slide">
                     <img src='https://harbourcats.com/wp-content/uploads/2016/07/BoosterJ_MasterLogo_Rinkboards-002.jpg'></img>
                 </div>
                 <div class="slide hideInitally">
                     <img src="https://images.squarespace-cdn.com/content/v1/589a30d2725e258996583851/1486999228841-X0ZTSTV7NP709CWNAQD6/tacobell_banner.jpg?format=2500w" alt="Image 2"/>
                 </div>
-                <div id="orderNow">
-                    <p>Order Now</p>
+                <div class="slide hideInitally">
+                    <img src="https://play-lh.googleusercontent.com/IBOv3AqPhvvk7nOgRTJ2VBfOmgO8313X-SGrxolqqv4xjDah5pHukPsgbrzYxCUChQ=h500"></img>
                 </div>
-                <div class="prev" onClick={() => plusSlides(-1)}> &larr; </div>
-                <div class="next" onClick={() => plusSlides(1)}> &rarr; </div>
+                {/* <div class="prev" onClick={() => plusSlides(-1)}> &larr; </div>
+                <div class="next" onClick={() => plusSlides(1)}> &rarr; </div> */}
                 
             </div>
             <div className="categories">
-                Categories
+                <h3 id="catTitle">Categories</h3>
+            <ol className='categoriesList'>
+                <div className="item" id="all" onClick={filterClick}>
+                    <li className='category-item'>
+                        All 
+                    </li>
+                </div>
+                    
+                    
+                        {categories.map((p, index) => (
+                            <HomepageCategories
+                                category={p}
+                                filter={filterClick}
+                            />
+                        ))} 
+                    </ol>
             </div>
             <div className="restaurantList">
                 <div className="SearchBar">

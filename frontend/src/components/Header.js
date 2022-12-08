@@ -9,6 +9,7 @@ function Header() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth);
+
     const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
     const toggleHamburger = () =>{
@@ -29,12 +30,11 @@ function Header() {
         <h1><Link to='/'>MRU EATS</Link></h1>
             <ul className="menu-header">
                 {user ? (<>
-                    <li><Link to='/order'>Order</Link></li>
-                    <li><Link to='/cart'>Cart</Link></li>
                     <li><Link to='/account'>Account</Link></li>
-                    <li><Link to='/admin'>Admin</Link></li>
+                    {user.isAdmin ? (<li><Link to='/admin'>Admin</Link></li>) : ""}
+                    {user.isCourier ? (<li><Link to='/courier'>Courier</Link></li>) : ""}
                     <li><a className='btn' onClick={onLogout}>Logout</a></li>
-
+                    
                 </>) : (<>
                     <li><Link to='/login'>Login</Link></li>
                     <li><Link to='/register'>Register</Link></li>
@@ -46,7 +46,7 @@ function Header() {
         </header>
         <div className="locationInfo">
         {user ? (<>
-                <p>Delivering to: {user?.deliverTo}</p>
+                <p>Delivering to: {user.deliverTo == null ? ("Please set a delivery location") : user.deliverTo}</p>
                 </>) : (
                     <p>Feeding hungry cougars one meal at a time.</p>
                 )}
@@ -56,10 +56,11 @@ function Header() {
                 .menu-header{
                     display:flex;
                     flex-wrap: wrap;
-                    justify-content: ${user ? 'space-evenly' : 'flex-end'};
+                    justify-content: flex-end;
                     margin: 0px;
                     padding: 0px;
                     overflow: hidden;
+                    z-index: 20;
                 }
                 .menu-header li{
                     list-style-type: none;
@@ -76,9 +77,9 @@ function Header() {
                         margin-right: 10px;
                         align-self: center;
                         display:flex;
-                        position:fixed;
+                        position:absolute;
                         right: 0;
-                        top: 13px;
+                        top: 6px;
                         width:30px;
                         height:30px;
                     }
@@ -94,7 +95,7 @@ function Header() {
                         top: 96px;
                         right: 0;
                         justify-content: flex-start;
-                        position: fixed;
+                        position: absolute;
                         
                     }
                     

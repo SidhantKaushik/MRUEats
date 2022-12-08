@@ -4,7 +4,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { login, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
-import '../styles/Login.css'
+import '../styles/Login.css';
+import RestImg from '../images/foodSignIn.jpg';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -60,20 +61,25 @@ function Login() {
   
   return (
     <div className='Login'>
-    <form onSubmit={onSubmit}>
-      <label>
-        <p>Email Address</p>
-        <input type="text" name="email" value={email} onChange={onChange} />
-      </label>
-      <label>
-        <p>Password</p>
-        <input type="password" name="password" value={password} onChange={onChange} />
-      </label>
-      <p>Don't have an account? <Link to='/register'>Register</Link></p>
-      <div>
-        <button className="submitButton" type="submit">Login</button>
+      <div className="left">
+      <img src={RestImg} alt="Image 2"/>
       </div>
-    </form>
+      <div className="box">
+          <form onSubmit={onSubmit}>
+          <label>
+            <p>Email Address</p>
+            <input type="text" name="email" value={email} placeholder='Enter your email' onChange={onChange} />
+          </label>
+          <label>
+            <p>Password</p>
+            <input type="password" name="password" value={password} placeholder='Enter your password' onChange={onChange} />
+          </label>
+          <p>Don't have an account? <Link to='/register'>Register</Link></p>
+          <div>
+            <button className="submitButton" type="submit">Login</button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

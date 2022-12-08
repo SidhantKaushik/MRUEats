@@ -5,30 +5,67 @@ import { set } from 'mongoose'
 import Category from './Category'
 import MenuItem from './MenuItem'
 import CartItems from './CartItems'
+import {useSelector, useDispatch} from 'react-redux'
+import {createOrder} from '../features/orders/orderSlice'
+import formatPrice from '../helpers/price-format';
 
 const RestaurantDetails = (props) => {
 
     const [menuItems, setMenuItems] = useState([])
     const [categories, setCategories] = useState([])
     const [currItem, setCurrItem] = useState([])
+    const [priceItem, setPriceItem] = useState([])
+    const [finalPrice, setFinalPrice] = useState()
+    const [formData, setFormData] = useState({
+        specialInstructions: ''
+      });
 
     let currentItem = []
     let item = []
-    let filterItem = []
+    let filterItem = [];
+    const { user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth);
     // let oldItems = JSON.parse(localStorage.getItem('itemsArray')) || [];
 
+   const dispatch = useDispatch()
+
+   
+
+   const onSubmit = e => {
+        e.preventDefault()
+        console.log("current item" + currItem)
+       // let result = currItem.map(a => a.id)
+        const menuID = []
+        currItem.forEach(e => menuID.push({id: e.id}))
+        const menuPrice = []
+        currItem.forEach(e => menuPrice.push({price: e.price}))
+        const orderData = {
+            menuItems: menuID,
+            userId: user.id,
+            specialInstructions: formData?.specialInstructions,
+            restaurantId: location.state.id,
+            price: finalPrice,
+            deliverTo: user.deliverTo
+        }
+        dispatch(createOrder(orderData))
+        setCurrItem([])
+        setPriceItem([])
+        setFinalPrice()
+   }
+    
     const location = useLocation()
     useEffect(() => {
         if(location.state) {
             item = []
-            for(let i = 0; i < props.menu.menu.length; i++){                
-                if (location.state.id === props.menu.menu[i].restaurant_id){
+            for(let i = 0; i < props.menu.menu.length; i++){    
+                if (location.state.id === props.menu.menu[i].restaurantId){
                     item.push(props.menu.menu[i]) 
+                    
                }
             }
+            console.log("location: " + location.state.id)
+            
         }
         if(item.length != 0){
-            console.log('test')
             localStorage.setItem('itemsArray', JSON.stringify(item))
             setMenuItems(JSON.parse(localStorage.getItem('itemsArray')))
             item = item.filter((value, index, self) => 
@@ -46,6 +83,15 @@ const RestaurantDetails = (props) => {
         setMenuItems(JSON.parse(localStorage.getItem('itemsArray')))
         setCategories(JSON.parse(localStorage.getItem('categories')))
     }, [])
+
+    useEffect(() => {
+        console.log(priceItem)
+        let sum = priceItem.reduce((a, b) => a + b ,0)
+        sum += 3.09
+        sum = sum * 1.05
+        setFinalPrice(formatPrice(sum))
+        console.log(formatPrice(sum))
+    }, [priceItem])
 
     console.log(menuItems)
 
@@ -71,14 +117,28 @@ const RestaurantDetails = (props) => {
     function menuSelect(props) {
         console.log(props)
         currentItem = [...currItem]
+        //finalP = 0
         for(let i = 0; i < menuItems.length; i++){    
             if (menuItems[i].name == props){
                 currentItem.push(menuItems[i])
+                //price.push(menuItems[i].price)
+                setPriceItem([...priceItem, menuItems[i].price])
             }
         }
+
         console.log(currItem) 
         setCurrItem(currentItem)
+        //setPriceItem([..priceItem, menuItems[i].price])
     }
+
+    const onChange = (e) => {
+
+        setFormData((prevState) => ({
+          ...prevState,
+          [e.target.name]: e.target.value
+    
+        }));
+      }
 
     // function ConvertTime(hour) {
         
@@ -123,7 +183,7 @@ const RestaurantDetails = (props) => {
                     <h2 className="openStatus restaurantInfo">OPEN</h2>
                 </div>
                 <div>
-                    <input type="text" id="menuSearch" className="menuSearchBar" onKeyUp="myFunction()" placeholder="Search for items" title="Type in a menu name"></input>
+                    {/* <input type="text" id="menuSearch" className="menuSearchBar" onKeyUp="myFunction()" placeholder="Search for items" title="Type in a menu name"></input> */}
                 </div>
             </div>
             <div className="mainContentBody">
@@ -157,6 +217,7 @@ const RestaurantDetails = (props) => {
                     </div>
                 </div>
                 <div className="addItem">
+                <form onSubmit={onSubmit}>
                     <h2>Order Details</h2>
                     <ol className='cart-list'>
                             {currItem.map((p, index) => (
@@ -165,8 +226,12 @@ const RestaurantDetails = (props) => {
                                 /> 
                             ))}
                     </ol>
-                    <input></input>
-                    <button>Order</button>
+                    <div className='order-notes'>
+                        <p>Special Instructions</p>
+                        <input name="specialInstructions" value={formData.specialInstructions} onChange={onChange}></input>
+                    </div>
+                    <button type='submit'>Order</button>
+                </form>
                 </div>
             </div>
         </div>

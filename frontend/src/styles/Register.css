@@ -1,33 +1,53 @@
-.RegisterPage .main-container {
-    display:flex;
-    margin-top: 30px;
-    justify-content: center;
+.RegisterPage {
+    display:grid;
+    grid-template-columns: 2fr 1fr;
+    height: 100%;
+    width: 100%;
+    min-height: calc(100vh - 96.67px);
+    overflow:hidden;
 }
-
-.RegisterPage .box {
-    display:flex;
-    flex-direction: column;
-    min-height: 500px;
-    min-width: 70vw;
-    max-width: 75vw;
-    padding: 25px;
-    border: 8px solid #033453;
-    background-color: rgba(255, 255, 255, .8);
+.RegisterPage .box{
+    background: #f1ecdc;
+    padding-top: 15px;
+}
+.RegisterPage .box input {
+    background: #d9d2bc;
+    height: 30px;
+    width: 100%;
+    border:none;
+}
+.RegisterPage .box input::placeholder{
+    font-size: .8em;
+    padding-left:5px;
+}
+.RegisterPage .left{
+    width: 100%;
+    height: 100%;
+}
+.RegisterPage .left img{
+    object-fit: cover;
+width: 100%;
+height: 100%;
 }
 
 .RegisterPage form {
     display: grid;
     grid-template-areas:
-        "fName lName"
-        "email email"
-        "dLocation dLocation"
-        "password password"
-        "confirm confirm"
-        "submit submit";
+        "fName"
+        "lName"
+        "email"
+        "dLocation"
+        "password"
+        "confirm"
+        "submit";
     column-gap: 15px;
     row-gap: 10px;
+    padding: 0 10px 0 10px;
 }
 
+.RegisterPage .dLocation{
+    grid-area: dLocation;
+}
 .RegisterPage .fName{
     grid-area:fName;
 }
@@ -51,7 +71,7 @@
 .RegisterPage #requirementsForPass{
     grid-area: infoAboutPassword;
     margin:0;
-    color: #FFB703;
+    color: #C93939;
     font-family: 'Staatliches', cursive !important;
 }
 .RegisterPage #password{
@@ -61,9 +81,8 @@
     grid-area:confirm;
 }
 .RegisterPage .submitbtn{
-    margin-top: 30px;
     grid-area:submit;
-    justify-self: center;
+    margin-bottom: 20px;
 }
 .RegisterPage .title{
     grid-area: signup;
@@ -76,26 +95,76 @@
     font-weight: 700;
     font-size: 2em;
     line-height: 38px;
-    color: #000000;
+    color: black !important;
     text-align: center;
 }
-
+.RegisterPage form label{
+    font-family: 'Staatliches', cursive !important;
+    color: #233c65;
+margin-bottom: 8px;
+font-size:1.1em;
+}
 .RegisterPage #register-button {
     width: 185px;
     height: 40px;
     color: #FFB703 !important;
     font-size: 1.5em;
     background: #033453;
-    margin: 1em;
+    margin-top:5px;
     font-family: 'Staatliches', cursive !important;
 }
 
 .RegisterPage input {
-    background: #d9d9d9;
+    /* background: #f8f7f7;
     height: 30px;
     border: 1px solid #ccc;
-    width: 100%;
+    width: 100%; */
 }
+.RegisterPage input[type="text"] {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 18px;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #000000;
+  }
+  .RegisterPage input[type="email"] {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 18px;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #000000;
+  }
+  .RegisterPage input[type="password"] {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 18px;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #000000;
+  }
 
 .RegisterPage label {
     font-weight: 700;
@@ -105,20 +174,13 @@
 }
 
 @media (max-width: 900px) {
-    .RegisterPage label{
-    font-size: 15px;
+.RegisterPage{
+    grid-template-columns: auto;
+    grid-template-rows: max-content auto;
 }
-.RegisterPage form {
-    display: grid;
-    grid-template-areas:
-        "fName fName"
-        "lName lName"
-        "email email"
-        "dLocation dLocation"
-        "password password"
-        "confirm confirm"
-        "submit submit";
-    column-gap: 15px;
-    row-gap: 10px;
+.RegisterPage .left img{
+    object-fit: cover;
+width: 100%;
+max-height: 300px;
 }
 }
