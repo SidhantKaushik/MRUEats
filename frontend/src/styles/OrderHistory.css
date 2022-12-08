@@ -89,7 +89,7 @@
 .OrderHistoryPage .restaurantInfo{
     justify-content: left;
     display: flex;
-
+    align-items: center;
 }
 
 .OrderHistoryPage .orderWrapper#false{
@@ -124,3 +124,42 @@
 .OrderHistoryPage .emptyDiv{
     flex: 1;
 }
+.OrderHistoryPage #myButton{
+    height: 40px;
+    align-self: center;
+    font-family: 'Staatliches', cursive !important;
+    background-color: #033453;
+    color: #ffb703;
+    border: none;
+}
+.OrderHistoryPage .isActive{
+    height: 40px;
+align-self: center;
+font-family: 'Staatliches', cursive !important;
+background-color: #033453;
+color: #ffb703;
+border: none;
+align-items: center;
+padding: 0 10px;
+}
+@media (max-width: 900px) {
+    .OrderHistoryPage .orderSide {
+    margin: 0;
+    }
+    .OrderHistoryPage{
+        display:flex;
+        justify-content: center;
+    }
+    .OrderHistoryPage .orderWrapper{
+        margin: 0;
+        width: 100%;
+    }
+    .OrderHistoryPage #myButton{
+        padding: 5px;
+    }
+    .OrderHistoryPage .buttonWrapper{
+        justify-content: flex-start;
+        gap: 10px;
+    }
+}
+    
