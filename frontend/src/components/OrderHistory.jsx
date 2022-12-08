@@ -97,9 +97,9 @@ const OrderHistory = (props) => {
             }
         }
         //Change value to fit in area
-        if(itemList.length > 65){
+        if(itemList.length > 95){
             
-            var newList = itemList.substring(0, 65);
+            var newList = itemList.substring(0, 95);
             newList += '...';
             return newList;
 
@@ -133,7 +133,7 @@ const OrderHistory = (props) => {
                         <div className="orderDetailsWrapper">
                             <div className="orderDetails"></div>
                             <div>
-                                {formatDate(order?.dateOrdered, false)} - {formatPrice(order?.price)} - {order.menuItems?.length} Items
+                                {formatDate(order?.dateOrdered, false)} - {order?.price} - {order.menuItems?.length} Items
                             </div>
                             <div>
                                 {showItems(currentMenuItems)} 
