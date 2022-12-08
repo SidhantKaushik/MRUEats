@@ -11,6 +11,24 @@ const getOrders = asyncHandler(async (req, res) => {
     res.status(200).json(orders);
 });
 
+// @desc   Get all active orders
+// @route  GET /api/orders/active
+// @access Private
+const getActiveOrders = asyncHandler(async (req, res) => {
+    const activeOrders = await Order.find({ isActive: true });
+
+    res.status(200).json(activeOrders);
+});
+
+// @desc   Get all complete orders
+// @route  GET /api/orders/complete
+// @access Private
+const getCompleteOrders = asyncHandler(async (req, res) => {
+    const completeOrders = await Order.find({ isActive: false });
+
+    res.status(200).json(completeOrders);
+});
+
 // @desc   Get orders for single user
 // @route  GET /api/orders/:id
 // @access Private
@@ -24,24 +42,55 @@ const getOrderByUser = asyncHandler(async (req, res) => {
 // @route  POST /api/orders
 // @access Private
 const setOrder = asyncHandler(async (req, res) => {
-    if (!req.body.text) {
+    let id = 1;
+    const { menuItems, userId, restaurantId , price, specialInstructions, deliverTo} = req.body;
+    console.log(req.body)
+    if (!menuItems) {
         res.status(400);
         throw new Error('Please add a text field');
     }
 
+    const idCheck = await Order.find({});
+    id += idCheck.length;
+
     const order = await Order.create({
-        text: req.body.text,
-        user: req.user.id
+        id: id,
+        restaurantId: restaurantId,
+        price: price,
+        dateOrdered: "05/07/2000",
+        isActive: true,
+        specialInstructions: specialInstructions,
+        menuItems: menuItems,
+        userId: userId,
+        deliverTo: deliverTo
     })
+    res.status(200).json(order);
 });
 
+// @desc   sets orders "isActive" to false
+// @route  PUT /api/orders/DEACTIVATE
+// @access Private
+const deactivateOrder = asyncHandler(async (req, res) => {
 
+    let orderToUpdate = await Order.findById({_id: req.body._id});
+
+    if (!orderToUpdate) {
+        throw new NotFoundError();
+    }
+
+    orderToUpdate.set({isActive:"false"});
+    await orderToUpdate.save();
+
+});
 
 module.exports = {
 
     getOrders,
     getOrderByUser,
-    setOrder
+    setOrder,
+    getActiveOrders,
+    getCompleteOrders,
+    deactivateOrder
     //getOrderByRestaurant
     //setOrder
     //getActiveOrders
