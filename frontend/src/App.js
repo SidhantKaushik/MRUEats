@@ -9,6 +9,7 @@ import Order from './pages/Order';
 import Account from './pages/Account';
 import Cart from './pages/Cart';
 import Admin from './pages/Admin';
+import Courier from './pages/Courier';
 import RestaurantOrder from './pages/RestaurantOrder';
 import OrderHistory from './pages/OrderHistory';
 import RestaurantDetails from './pages/RestaurantDetails';
@@ -65,6 +66,7 @@ function App() {
             <Route exact path='/order-history' element={<OrderHistory restaurants={{restaurants}} menu={{menu}}/>}></Route>
             <Route exact path='/cart' element={<Cart />}></Route>
             <Route exact path='/admin' element={<Admin />}></Route>
+            <Route exact path='/courier' element={<Courier />}></Route>
             <Route exact path='/restaurantDetails' element={<RestaurantDetails menu={{menu}}/>}></Route>
           </Routes>
         </div>

@@ -84,7 +84,7 @@ const loginUser = asyncHandler(async (req, res) => {
     
     //Check for user email
     const user = await User.findOne({ email });
-    if (user && (bcrypt.compare(password, user.password_bcrypt))) {
+    if (user && await(bcrypt.compare(password, user.password_bcrypt))) {
         res.json({
 
             id: user.id,
@@ -119,6 +119,14 @@ const getUser = asyncHandler(async (req, res) => {
     }
 });
 
+// @desc   Get all users
+// @route  GET /api/users
+// @access Private
+const getUsers = asyncHandler(async (req, res) => {
+    const users = await User.find();
+
+    res.status(200).json(users);
+});
 
 // @desc   Updates user information
 // @route  PUT /api/users/UPDATE
@@ -186,4 +194,5 @@ module.exports = {
     updateUser,
     getUser,
     getAdmins,
+    getUsers,
 }
