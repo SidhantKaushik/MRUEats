@@ -5,18 +5,29 @@ import { set } from 'mongoose'
 import Category from './Category'
 import MenuItem from './MenuItem'
 import CartItems from './CartItems'
+import {useDispatch} from 'react-redux'
+import {createOrder} from '../features/orders/orderSlice'
 
 const RestaurantDetails = (props) => {
 
     const [menuItems, setMenuItems] = useState([])
     const [categories, setCategories] = useState([])
-    const [currItem, setCurrItem] = useState([])
+    const [currItem, setCurrItem] = useState('test')
 
     let currentItem = []
     let item = []
     let filterItem = []
     // let oldItems = JSON.parse(localStorage.getItem('itemsArray')) || [];
 
+    const dispatch = useDispatch()
+
+   const onSubmit = e => {
+        e.preventDefault()
+        console.log("current item" + currItem)
+        dispatch(createOrder({currItem}))
+        setCurrItem('')
+   }
+    
     const location = useLocation()
     useEffect(() => {
         if(location.state) {
@@ -159,16 +170,21 @@ const RestaurantDetails = (props) => {
                     </div>
                 </div>
                 <div className="addItem">
+                <form onSubmit={onSubmit}>
                     <h2>Order Details</h2>
                     <ol className='cart-list'>
-                            {currItem.map((p, index) => (
+                            {/* {currItem.map((p, index) => (
                                 <CartItems
                                     name={p.name}
                                 /> 
-                            ))}
+                            ))} */}
                     </ol>
-                    <input></input>
-                    <button>Order</button>
+                    <div className='order-notes'>
+                        <p>Order Notes</p>
+                        <input ></input>
+                    </div>
+                    <button type='submit'>Order</button>
+                </form>
                 </div>
             </div>
         </div>
