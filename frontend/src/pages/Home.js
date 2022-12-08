@@ -124,8 +124,8 @@ const Home = (props) => {
             <div className="categories">
                 <h3 id="catTitle">Categories</h3>
             <ol className='categoriesList'>
-                <div className="item" id="all">
-                    <li className='category-item' onClick={filterClick}>
+                <div className="item" id="all" onClick={filterClick}>
+                    <li className='category-item'>
                         All 
                     </li>
                 </div>
