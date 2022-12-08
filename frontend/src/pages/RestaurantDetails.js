@@ -24,16 +24,12 @@ const RestaurantDetails = (props) => {
     let item = []
     let filterItem = [];
     const { user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth);
-    console.log(user.id)
-    // let oldItems = JSON.parse(localStorage.getItem('itemsArray')) || [];
-
    const dispatch = useDispatch()
 
    
 
    const onSubmit = e => {
         e.preventDefault()
-       // let result = currItem.map(a => a.id)
         const menuID = []
         currItem.forEach(e => menuID.push({id: e.id}))
         const menuPrice = []
@@ -159,11 +155,8 @@ const RestaurantDetails = (props) => {
                     <h2 className="restaurantInfo">$3.09 Delivery</h2>
                 </div>
                 <div className="thirdLine">
-                    <h2 className="restaurantInfo">Delivery Hours: {ConvertTime(location.state.open)} - {ConvertTime(location.state.close)} •</h2>
+                    <h2 className="restaurantInfo">Delivery Hours: {ConvertTime(location.state.open)} - {ConvertTime(location.state.close)}</h2>
                     <h2 className="openStatus restaurantInfo">OPEN</h2>
-                </div>
-                <div>
-                    {/* <input type="text" id="menuSearch" className="menuSearchBar" onKeyUp="myFunction()" placeholder="Search for items" title="Type in a menu name"></input> */}
                 </div>
             </div>
             <div className="mainContentBody">
