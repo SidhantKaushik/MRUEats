@@ -115,7 +115,7 @@ const Home = (props) => {
                     <img src="https://images.squarespace-cdn.com/content/v1/589a30d2725e258996583851/1486999228841-X0ZTSTV7NP709CWNAQD6/tacobell_banner.jpg?format=2500w" alt="Image 2"/>
                 </div>
                 <div class="slide hideInitally">
-                    <img src="https://www.essentialimpact.com/wp-content/uploads/2018/10/Pizza-Hut-Logo.jpg"></img>
+                    <img src="https://play-lh.googleusercontent.com/IBOv3AqPhvvk7nOgRTJ2VBfOmgO8313X-SGrxolqqv4xjDah5pHukPsgbrzYxCUChQ=h500"></img>
                 </div>
                 {/* <div class="prev" onClick={() => plusSlides(-1)}> &larr; </div>
                 <div class="next" onClick={() => plusSlides(1)}> &rarr; </div> */}
