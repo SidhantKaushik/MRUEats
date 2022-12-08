@@ -130,12 +130,11 @@ font-size:1.1em;
     font-family: 'Staatliches', cursive !important;
 }
 
-.RegisterPage input {
-    /* background: #f8f7f7;
-    height: 30px;
-    border: 1px solid #ccc;
-    width: 100%; */
+.RegisterPage a {
+    color: #033453;
+    font-weight: bold;
 }
+
 .RegisterPage input[type="text"] {
     border: none;
     outline: none;

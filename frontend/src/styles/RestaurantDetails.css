@@ -6,7 +6,7 @@
 .RestaurantPage .RestaurantBanner {   
     background-color: #033453;
     padding: 1em;
-    border-top: 1px solid gray;
+    border-top: 1px solid #ffb703;
     display: grid;
     justify-content: space-between;
     grid-template-areas:
@@ -103,6 +103,18 @@
     font-size: 24px;
     color: #000000;
     padding:0;
+}
+
+.RestaurantPage .orderButton {
+    height: 40px;
+    align-self: center;
+    font-family: 'Staatliches', cursive !important;
+    background-color: #033453;
+    color: #ffb703;
+    border: none;
+    border-radius: 20%;
+    margin: 1em 1em 1em 0;
+    float: right;
 }
 
 .RestaurantPage .restaurantMenu {

@@ -209,7 +209,7 @@ const RestaurantDetails = (props) => {
                         <p>Special Instructions</p>
                         <input name="specialInstructions" value={formData.specialInstructions} onChange={onChange}></input>
                     </div>
-                    <button type='submit'>Order</button>
+                    <button type='submit' className='orderButton'>Order</button>
                 </form>
                 </div>
             </div>
