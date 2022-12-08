@@ -1,0 +1,77 @@
+.profileToolBar{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    outline: 1px solid #cccccc;
+}
+
+.profileToolBar > h2 {
+    display: flex;
+    flex: 1;
+    justify-content: left;
+    padding-left: 3em;
+}
+
+.profileToolBar > p {
+    flex: 1;
+    justify-content: right;
+    align-items: center;
+    padding-right: 5em;
+}
+
+.requiredHead{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding-right: 5em;
+}
+
+.reqStar{
+
+    color: red;
+
+}
+
+.firstNameHeader{
+    display: flex;
+    
+}
+
+.lastNameHeader{
+    display: flex;
+}
+
+.emailHeader{
+    display: flex;
+}
+
+.emailTitle{
+    flex: 1;
+}
+
+
+.emailBox{
+    opacity: 0.6;
+}
+
+.deliveryLocHeader{
+    display: flex;
+}
+
+.cityBox{
+    opacity: 0.6;
+
+}
+
+.provinceBox{
+    opacity: 0.6; 
+}
+
+.countryBox{
+    opacity: 0.6;  
+}
+
+.buttonWrapper{
+    display: flex;
+    justify-content: space-evenly;
+}

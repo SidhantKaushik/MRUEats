@@ -1,4 +1,4 @@
-.backgroundEffect{
+.Account .backgroundEffect{
     justify-content: center;
     align-items: center;
 
@@ -46,11 +46,18 @@
     padding-left: 3em;
 }
 
-.editIcon{
+.editIconWrapper{
+    display: flex;
+    justify-content: right;
+    padding-right: 2em;
+    padding-bottom: 0;
+}
 
+.editIcon{
     width: 22px;
     height: auto;
 }
+
 
 .leftSideBar > .profileTitle{
     justify-content: center;
@@ -104,7 +111,7 @@ input {
     border-radius:19px;
     width: fit-content;
     height: 32px;
-    text-indent: .2em; 
+    text-indent: .5em; 
     border-style:double; 
     text-shadow:0px 0px 0px rgba(42,42,42,.75); 
     box-shadow: 0px 0px 6px 0px rgba(42,42,42,.75);  

@@ -42,7 +42,6 @@ const Account = () => {
                         <div className="profileToolBar">
                             <div className="leftSideBar">
                                 <h2>Profile&nbsp;</h2>
-                                <Link to='/account-edit' state={{ userInfo: userInfo }}><img className='editIcon' src={EditIcon} /></Link>
                             </div>
                             <div className="rightSideBar">
                                 <div className='ordHistory'>
@@ -51,6 +50,9 @@ const Account = () => {
                             </div>
                         </div>
                         <div className="ProfileInformation">
+                            <div className="editIconWrapper">
+                            <Link to='/account-edit' state={{ userInfo: userInfo }}><img className='editIcon' src={EditIcon} /></Link>
+                            </div>
                             <div className="reqInfo">
                                 <Collapsible open="true" trigger="Required User Information">
                                     <div className="reqInfoWrapper">
