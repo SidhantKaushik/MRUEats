@@ -1,237 +1,288 @@
-.AccountPage {
-    font-family: 'Unna', serif;
-    font-weight: 400;
-    text-decoration: none solid rgb(68, 68, 68);
-    font-style: italic;
-    font-variant: normal;
-    text-transform: none;
-
-}
-
-.AccountPage a {
-    color: darkblue;
-    text-decoration: none;
-}
-
-
-.AccountPage .backgroundEffect {
-    background-color: darkblue;
-    display: flex;
-}
-.AccountPage .info {
-    grid-area: info;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    flex: auto;
-}
-
-.AccountPage .countryPhone{
-    grid-area: countryPhone;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    flex: auto;
-}
-.AccountPage .FLName{
-    grid-area: FLName;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    flex: auto;
-}
-.AccountPage .countryCode{
-    width:50%;
-}
-.AccountPage .phoneNumber{
-    width:50%;
-}
-.AccountPage #pCode{
-    white-space: nowrap;
-}
-
-.AccountPage {
-    background-color: white;
-    width: 95%;
-    height: 95%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-}
-
-.AccountPage .profileSide {
-    grid-column: 1;
-}
-
-.AccountPage .profileToolBar {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
+.backgroundEffect{
+    justify-content: center;
     align-items: center;
-    font-size: 2rem;
-    overflow: hidden;
-    border-bottom: solid black 2px;
+
 }
 
-.AccountPage .standardLayout {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-areas:
-        "title required"
-        "input input";
-    margin: 0px 10px;
-    justify-content: space-between;
-}
-
-.AccountPage .standardLayout h2:first-of-type {
-    grid-area: title;
-    margin: 10px;
-}
-
-.AccountPage .required {
-    grid-area: required;
-    margin: 10px;
-    color: gray;
-}
-
-.AccountPage .standardLayout input {
-    grid-area: input;
-    background-color: lightgray;
-    border: 0;
-    height: 120%;
-    margin-bottom: 10px;
-    min-width: 0;
-}
-
-.AccountPage .twoLayout {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-areas:
-        "title required"
-        "input input";
-    margin: 0px 10px;
-    justify-content: space-between;
-}
-
-.AccountPage .twoLayout h2:first-of-type {
-    grid-area: title;
-    margin: 10px;
-}
-
-.AccountPage .twoLayout input {
-    grid-area: input;
-    background-color: lightgray;
-    border: 0;
-    height: 120%;
-    margin-bottom: 10px;
-}
-
-.AccountPage .orderSide {
-    grid-column: 2;
-    background-color: pink;
-}
-
-
-.AccountPage .ProfileInformation {
-    display: grid;
-    grid-template-areas:
-        "FLName FLName FLName FLName FLName FLName"
-        "email email email email email email"
-        "countryPhone countryPhone countryPhone countryPhone countryPhone countryPhone"
-        "street street street street street street"
-        "info info info info info info"
-        "current current current current current current"
-        ". . . . . save";
-        
-}
-
-.AccountPage .province{
-    width: 33%;
-}
-.AccountPage .postal{
-    width: 33%;
-}
-.AccountPage .country{
-    width: 33%;
-}
-
-.AccountPage .firstName {
-    width: 50%;
-}
-
-.AccountPage .lastName {
-    width:50%;
-}
-
-.AccountPage .emailDiv {
-    grid-area: email;
-    min-width:0;
-}
-
-
-.AccountPage .streetAddress {
-    grid-area: street;
-    min-width:20vw;
-}
-
-
-.AccountPage .currentLocation {
-    grid-area: current;
-    min-width:0;
-}
-
-.AccountPage #saveButton {
-    grid-area: save;
-    margin-top: 20px;
-    margin-right: 6px;
-    height: 100%;
-    margin-bottom: 10px;
-    display:flex;
-}
-
-.AccountPage #saveButtonBtn{
-    width:200px;
-    padding:0;
-    margin-left: auto;
-    height: 30px;
-}
-
-.AccountPage #OrderHistory {
-    font-size: 2rem;
-    margin-right: auto;
-    margin-left: 15px;
+.profileSide{
     display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 80%;
+    padding: 15px;
+    box-sizing: border-box;
+    background: white;
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
 }
 
-.AccountPage .orderHistoryToolBar {
-    border-bottom: solid black 2px;
+.wrapper{
+    outline: 1px solid #cccccc;
+}
+
+.ProfileInformation{
+    
+    background-color: white;
+    margin: 1em;
+    padding: 0.5em;
+    border-radius: 10px;
+    flex: 1;
+    
+}
+
+.profileToolBar{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    outline: 1px solid #cccccc;
+}
+
+.leftSideBar{
+    display: flex;
+    flex: 1;
+    justify-content: left;
+    align-items: center;
+    padding-left: 3em;
+}
+
+.editIcon{
+
+    width: 22px;
+    height: auto;
+}
+
+.leftSideBar > .profileTitle{
+    justify-content: center;
+    align-items: center;
+
+    flex: 1;
+}
+
+.leftSideBar > .editIcon{
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.leftSideBar > .editIcon > img{
+    width: 100%;
+    height: 100%;
+}
+
+.rightSideBar{
+    display: flex;
+    flex: 1;
+    justify-content: right;
+    align-items: center;
+    padding-right: 1em;
 }
 
 
 
-@media (max-width: 900px) {
-    .AccountPage {
-        display: flex;
-        flex-direction: column;
-    }
 
-    .AccountPage h2 {
-        font-size: .50em;
-    }
-    .AccountPage .ProfileInformation {
-        display: grid;
-        grid-template-areas:
-            "FLName FLName FLName FLName FLName FLName"
-            "email email email email email email"
-            "countryPhone countryPhone countryPhone countryPhone countryPhone countryPhone"
-            "street street street street street street"
-            "info info info info info info"
-            "current current current current current current"
-            ". . . save save save";
-    }
-    .AccountPage #changePassword{
-        font-size: .6em;
-    }
+.standardLayout{
+
+    padding: 1em;
 }
+
+.standardLayout > h3{
+    display: block;
+    font-size: 1.17em;
+    margin-left: .25em;
+    margin-right: 0em;
+
+    font-weight: bold;
+}
+
+input { 
+    border-color:#cccccc; 
+    padding: 1px; 
+    font-size:19px; 
+    text-align:left;
+    border-width:3px; 
+    border-radius:19px;
+    width: fit-content;
+    height: 32px;
+    text-indent: .2em; 
+    border-style:double; 
+    text-shadow:0px 0px 0px rgba(42,42,42,.75); 
+    box-shadow: 0px 0px 6px 0px rgba(42,42,42,.75);  
+}
+
+input:focus { outline:none; }
+
+
+.leftSidebar{
+    background-color: white;
+    margin: 1em;
+    padding: 0.25em;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 23px;
+    border-radius: 10px;
+    cursor:pointer;
+}
+
+.Collapsible{
+    background-color: #d9d9d9;
+    margin: 1em;
+    padding: 0.25em;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 23px;
+    border-radius: 10px;
+    cursor:pointer;
+}
+
+.reqInfo{
+    background-color: #d9d9d9;
+    margin: 1em;
+    padding: 0.1em;
+    border-radius: 10px;
+
+}
+
+
+.reqInfoWrapper{
+    display:flex;
+    flex-wrap: wrap;
+    border-top: solid 1px black;
+}
+
+.firstName{
+    flex: 1;
+    width: fit-content;
+}
+
+.lastName{
+    flex: 1;
+    width: fit-content;
+}
+
+.emailDiv{
+    flex: 1;
+    width: fit-content;
+}
+
+.deliveryLocation{
+    flex: 1;
+    width: fit-content;
+}
+
+.addInfo{
+    background-color: #d9d9d9;
+    margin: 1em;
+    padding: 0.1em;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 23px;
+    border-radius: 10px;
+    cursor:pointer;
+
+}
+
+.addInfoWrapper{
+    flex-wrap: wrap;
+    border-top: solid 1px black;
+    
+}
+
+.countryPhone{
+    display: flex;
+    
+}
+
+.countryCode{
+    flex: 1;
+    justify-items: center;
+    align-items: center;
+    max-width: fit-content;
+}
+
+.countryCode > .standardLayout{
+    width: fit-content;
+    height: auto;
+}
+
+.countryCode > h4{
+    margin-bottom: .5em;
+}
+
+.phoneNumber{
+    flex: 1;
+    width: fit-content;
+
+}
+
+.billInfo{
+    background-color: #d9d9d9;
+    margin: 1em;
+    padding: 0.1em;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 23px;
+    border-radius: 10px;
+    cursor:pointer;
+
+}
+
+.billInfoWrapper{
+    display:flex;
+    flex-wrap: wrap;
+    border-top: solid 1px black;
+    
+}
+
+.streetAddress{
+    flex: 1;
+}
+
+.city{
+    flex: 1;
+
+
+}
+
+.province{
+    flex: 1;
+
+
+}
+
+.postal{
+    flex: 1;
+
+}
+
+.country{
+    flex: 1;
+
+}
+
+
+#myButton {
+	box-shadow: 0px 0px 0px 2px #ffb803;
+	background:linear-gradient(to bottom, #a87f2d 5%, #ffb803 100%);
+	background-color:#a87f2d;
+	border-radius:10px;
+	border:1px solid #debf71;
+	display:inline-block;
+	cursor:pointer;
+	color:#003345;
+	font-family:Arial;
+	font-size:19px;
+	padding:12px 37px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #fadd9b;
+
+}
+#myButton:hover {
+	background:linear-gradient(to bottom, #ffb803 5%, #a87f2d 100%);
+	background-color:#ffb803;
+}
+#myButton:active {
+	position:relative;
+	top:1px;
+}
+

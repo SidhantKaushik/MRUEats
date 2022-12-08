@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
 import Select from 'react-select';
+import '../styles/CountryCode.css';
+
 
 //Link to flag icons
 //http://purecatamphetamine.github.io/country-flag-icons/3x2/
@@ -12,12 +13,13 @@ function CountryCodes(props){
     
     const currCountryCode = options.find(code => code.value === props.code);
  
-    return <Select value={currCountryCode} placeholder={props.code} 
+    return <Select className="countryCodeSelect" value={currCountryCode} placeholder={props.code} 
         components={{
         Menu: () => null,
         MenuList: () => null,
         DropdownIndicator: () => null,
-        IndicatorSeparator: () => null
+        IndicatorSeparator: () => null,
+        Input: () => null,
         }}/>;
     
 }
