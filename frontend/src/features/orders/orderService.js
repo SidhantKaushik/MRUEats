@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = '/api/orders/'
+const API_URL = '/api/orders/post'
 
 //create new order
 const createOrder = async (orderData, token) => {
@@ -11,7 +11,7 @@ const createOrder = async (orderData, token) => {
             Authorization: `Bearer ${token}`
         }
     }
-    const response = await axios.post(API_URL, JSON.stringify({dateOrdered:"2354234"}), config)
+    const response = await axios.post(API_URL, orderData, config)
 
     return response.data
 }

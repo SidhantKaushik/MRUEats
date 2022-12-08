@@ -15,7 +15,8 @@ const orderSchema = new mongoose.Schema({
   dateOrdered: String,
   isActive: Boolean,
   specialInstructions: String,
-  menuItems: Array
+  menuItems: Array,
+  deliverTo: String
 });
 
 module.exports = mongoose.model("Order", orderSchema, "orders");

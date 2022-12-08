@@ -11,7 +11,8 @@ router.route('/all').get(getOrders);
 router.route('/active').get(getActiveOrders);
 router.route('/complete').get(getCompleteOrders);
 router.route('/DEACTIVATE').put(deactivateOrder);
-router.route('/').get( protect, getOrders).post(protect, setOrder);
+router.route('/').get( protect, getOrders)
+router.post('/post' , protect, setOrder);
 router.get('/:id', getOrderByUser, protect);
 
 

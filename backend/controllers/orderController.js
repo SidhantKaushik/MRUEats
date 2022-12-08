@@ -42,13 +42,27 @@ const getOrderByUser = asyncHandler(async (req, res) => {
 // @route  POST /api/orders
 // @access Private
 const setOrder = asyncHandler(async (req, res) => {
-    if (!req.body.text) {
+    let id = 1;
+    const { menuItems, userId, restaurantId , price, specialInstructions, deliverTo} = req.body;
+    console.log(req.body)
+    if (!menuItems) {
         res.status(400);
         throw new Error('Please add a text field');
     }
+
+    const idCheck = await Order.find({});
+    id += idCheck.length;
+
     const order = await Order.create({
-        text: req.body.text,
-        user: req.user.id
+        id: id,
+        restaurantId: restaurantId,
+        price: price,
+        dateOrdered: "05/07/2000",
+        isActive: true,
+        specialInstructions: specialInstructions,
+        menuItems: menuItems,
+        userId: userId,
+        deliverTo: deliverTo
     })
     res.status(200).json(order);
 });
