@@ -11,7 +11,7 @@ const orderSchema = new mongoose.Schema({
   id: Number,
   restaurantId: Number,
   userId: Number,
-  price: Number,
+  price: String,
   dateOrdered: String,
   deliverTo: String,
   isActive: Boolean,

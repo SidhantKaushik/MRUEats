@@ -140,33 +140,20 @@ const RestaurantDetails = (props) => {
         }));
       }
 
-    // function ConvertTime(hour) {
-        
-    //     if(hour <= 1200){
-    //         var hourString = hour.toString();
-    //         hourString = hourString.substring(0,2) + ':' + hourString.substring(2,4);
-    //         return hourString+"AM";
-    //     }
-    //     else{
-    //         hour = hour - 1200;
-    //         var hourString = hour.toString();
-    //         hourString = hourString.substring(0,2) + ':' + hourString.substring(2,4);
-    //         return hourString+"PM";
-    //     }
-    // }
-    // function checkIfOpen() {
-    //     const d = new Date();
-    //     let time = d.getHours() +""+ d.getMinutes();
-    //     console.log(time);
-    //     // console.log(restaurantSelected.open);
-    //     // console.log(restaurantSelected.close);
-    //     if ( time > restaurantSelected.open && time < restaurantSelected.close ){
-    //          return "Open";
-    //     }
-    //     else{
-    //         return "Closed";
-    //     }
-    // }
+      function ConvertTime(hour) {
+        let hours = Math.floor(hour / 100);
+        let minutes = hour % 100;
+        let amPm = hours >= 12 ? 'pm' : 'am';
+
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+
+        let strTime = hours + ':' + minutes + ' ' + amPm;
+
+        return strTime;
+    }
+
     return (
         <div className="RestaurantPage">
             <div className="RestaurantBanner">
@@ -179,7 +166,7 @@ const RestaurantDetails = (props) => {
                     <h2 className="restaurantInfo">$3.09 Delivery</h2>
                 </div>
                 <div className="thirdLine">
-                    <h2 className="restaurantInfo">Delivery Hours: {location.state.open} - {location.state.close} •</h2>
+                    <h2 className="restaurantInfo">Delivery Hours: {ConvertTime(location.state.open)} - {ConvertTime(location.state.close)} •</h2>
                     <h2 className="openStatus restaurantInfo">OPEN</h2>
                 </div>
                 <div>
