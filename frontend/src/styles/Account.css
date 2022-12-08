@@ -4,7 +4,7 @@
 
 }
 
-.profileSide{
+.AccountPage .profileSide{
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -17,11 +17,11 @@
     margin-bottom: 2em;
 }
 
-.wrapper{
+.AccountPage .wrapper{
     outline: 1px solid #cccccc;
 }
 
-.ProfileInformation{
+.AccountPage .ProfileInformation{
     
     background-color: white;
     margin: 1em;
@@ -31,14 +31,14 @@
     
 }
 
-.profileToolBar{
+.AccountPage .profileToolBar{
     display: flex;
     flex-direction: row;
     width: 100%;
     outline: 1px solid #cccccc;
 }
 
-.leftSideBar{
+.AccountPage .leftSideBar{
     display: flex;
     flex: 1;
     justify-content: left;
@@ -46,38 +46,38 @@
     padding-left: 3em;
 }
 
-.editIconWrapper{
+.AccountPage .editIconWrapper{
     display: flex;
     justify-content: right;
     padding-right: 2em;
     padding-bottom: 0;
 }
 
-.editIcon{
+.AccountPage .editIcon{
     width: 22px;
     height: auto;
 }
 
 
-.leftSideBar > .profileTitle{
+.AccountPage .leftSideBar > .profileTitle{
     justify-content: center;
     align-items: center;
 
     flex: 1;
 }
 
-.leftSideBar > .editIcon{
+.AccountPage .leftSideBar > .editIcon{
     justify-content: center;
     align-items: center;
     flex: 1;
 }
 
-.leftSideBar > .editIcon > img{
+.AccountPage .leftSideBar > .editIcon > img{
     width: 100%;
     height: 100%;
 }
 
-.rightSideBar{
+.AccountPage .rightSideBar{
     display: flex;
     flex: 1;
     justify-content: right;
@@ -88,12 +88,12 @@
 
 
 
-.standardLayout{
+.AccountPage .standardLayout{
 
     padding: 1em;
 }
 
-.standardLayout > h3{
+.AccountPage .standardLayout > h3{
     display: block;
     font-size: 1.17em;
     margin-left: .25em;
@@ -102,7 +102,7 @@
     font-weight: bold;
 }
 
-input { 
+.AccountPage input { 
     border-color:#cccccc; 
     padding: 1px; 
     font-size:19px; 
@@ -117,10 +117,10 @@ input {
     box-shadow: 0px 0px 6px 0px rgba(42,42,42,.75);  
 }
 
-input:focus { outline:none; }
+.AccountPage input:focus { outline:none; }
 
 
-.leftSidebar{
+.AccountPage .leftSidebar{
     background-color: white;
     margin: 1em;
     padding: 0.25em;
@@ -131,7 +131,7 @@ input:focus { outline:none; }
     cursor:pointer;
 }
 
-.Collapsible{
+.AccountPage .Collapsible{
     background-color: #d9d9d9;
     margin: 1em;
     padding: 0.25em;
@@ -142,7 +142,7 @@ input:focus { outline:none; }
     cursor:pointer;
 }
 
-.reqInfo{
+.AccountPage .reqInfo{
     background-color: #d9d9d9;
     margin: 1em;
     padding: 0.1em;
@@ -151,33 +151,33 @@ input:focus { outline:none; }
 }
 
 
-.reqInfoWrapper{
+.AccountPage .reqInfoWrapper{
     display:flex;
     flex-wrap: wrap;
     border-top: solid 1px black;
 }
 
-.firstName{
+.AccountPage .firstName{
     flex: 1;
     width: fit-content;
 }
 
-.lastName{
+.AccountPage .lastName{
     flex: 1;
     width: fit-content;
 }
 
-.emailDiv{
+.AccountPage .emailDiv{
     flex: 1;
     width: fit-content;
 }
 
-.deliveryLocation{
+.AccountPage .deliveryLocation{
     flex: 1;
     width: fit-content;
 }
 
-.addInfo{
+.AccountPage .addInfo{
     background-color: #d9d9d9;
     margin: 1em;
     padding: 0.1em;
@@ -189,40 +189,40 @@ input:focus { outline:none; }
 
 }
 
-.addInfoWrapper{
+.AccountPage .addInfoWrapper{
     flex-wrap: wrap;
     border-top: solid 1px black;
     
 }
 
-.countryPhone{
+.AccountPage .countryPhone{
     display: flex;
     
 }
 
-.countryCode{
+.AccountPage .countryCode{
     flex: 1;
     justify-items: center;
     align-items: center;
     max-width: fit-content;
 }
 
-.countryCode > .standardLayout{
+.AccountPage .countryCode > .standardLayout{
     width: fit-content;
     height: auto;
 }
 
-.countryCode > h4{
+.AccountPage .countryCode > h4{
     margin-bottom: .5em;
 }
 
-.phoneNumber{
+.AccountPage .phoneNumber{
     flex: 1;
     width: fit-content;
 
 }
 
-.billInfo{
+.AccountPage .billInfo{
     background-color: #d9d9d9;
     margin: 1em;
     padding: 0.1em;
@@ -234,41 +234,41 @@ input:focus { outline:none; }
 
 }
 
-.billInfoWrapper{
+.AccountPage .billInfoWrapper{
     display:flex;
     flex-wrap: wrap;
     border-top: solid 1px black;
     
 }
 
-.streetAddress{
+.AccountPage .streetAddress{
     flex: 1;
 }
 
-.city{
-    flex: 1;
-
-
-}
-
-.province{
+.AccountPage .city{
     flex: 1;
 
 
 }
 
-.postal{
+.AccountPage .province{
+    flex: 1;
+
+
+}
+
+.AccountPage .postal{
     flex: 1;
 
 }
 
-.country{
+.AccountPage .country{
     flex: 1;
 
 }
 
 
-#myButton {
+.AccountPage #myButton {
 	box-shadow: 0px 0px 0px 2px #ffb803;
 	background:linear-gradient(to bottom, #a87f2d 5%, #ffb803 100%);
 	background-color:#a87f2d;
@@ -284,11 +284,11 @@ input:focus { outline:none; }
 	text-shadow:0px 1px 0px #fadd9b;
 
 }
-#myButton:hover {
+.AccountPage #myButton:hover {
 	background:linear-gradient(to bottom, #ffb803 5%, #a87f2d 100%);
 	background-color:#ffb803;
 }
-#myButton:active {
+.AccountPage #myButton:active {
 	position:relative;
 	top:1px;
 }

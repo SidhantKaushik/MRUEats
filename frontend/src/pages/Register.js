@@ -135,7 +135,7 @@ function Register() {
                         <label for="courierLabe">Courier account?</label><br/>
                         <input type="checkbox" id="courierBox" name="isCourier" checked={checked} onChange={(e) => setChecked(e.target.checked)}/>
                     </div>  
-                    <p>Already have an account? <Link to='/login'>Login</Link></p>
+                    <p id="Login">Already have an account? <Link to='/login'>Login</Link></p>
                     <div className='submitbtn'>
                         <input id="register-button" type="submit" value="Register" />
                     </div>

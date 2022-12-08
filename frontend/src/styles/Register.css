@@ -20,6 +20,20 @@
     font-size: .8em;
     padding-left:5px;
 }
+.RegisterPage .courier{
+    grid-area: courier;
+    display:flex;
+    align-items: center;
+}
+.RegisterPage .courier input[type="checkbox"]{
+    width: initial;
+}
+.RegisterPage .courier label{
+    margin: 0;
+}
+.RegisterPage #Login{
+    grid-area: alreadyAccount;
+}
 .RegisterPage .left{
     width: 100%;
     height: 100%;
@@ -33,13 +47,15 @@ height: 100%;
 .RegisterPage form {
     display: grid;
     grid-template-areas:
-        "fName"
-        "lName"
-        "email"
-        "dLocation"
-        "password"
-        "confirm"
-        "submit";
+        "fName fName"
+        "lName lName"
+        "email email"
+        "dLocation dLocation"
+        "password password"
+        "confirm confirm"
+        "courier courier"
+        "submit submit"
+        "alreadyAccount alreadyAccount";
     column-gap: 15px;
     row-gap: 10px;
     padding: 0 10px 0 10px;
