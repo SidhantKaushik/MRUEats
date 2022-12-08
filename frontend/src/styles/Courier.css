@@ -11,6 +11,7 @@
         "past-orders";
     height: 110vh;
     background-color: #033453;
+    border-top: 1px solid #ffb703;
 }
 
 .courier-page .order-container {

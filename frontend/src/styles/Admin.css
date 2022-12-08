@@ -5,6 +5,7 @@
 
 .AdminPage {
     background-color: #033453;
+    border-top: 1px solid #ffb703;
 }
 
 .AdminPage .adminMainBody {
