@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import '../styles/EditAccount.css'
+import '../styles/EditAccount.css';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -19,7 +19,6 @@ const EditAccount = (props) => {
 
     const [phoneNum, setPhoneNum] = useState('');
 
-
     const [formData, setFormData] = useState({
         firstName: userInfo.firstName,
         lastName: userInfo.lastName,
@@ -35,8 +34,8 @@ const EditAccount = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        
-        if (!user){
+
+        if (!user) {
             navigate('/login');
         }
 
@@ -58,23 +57,21 @@ const EditAccount = (props) => {
             ...prevState,
             [e.target.name]: e.target.value
         }));
-
-
     }
 
     //Need to add wrong inputs
     const onSubmit = (e) => {
 
         e.preventDefault();
-        
+
         //Postal code input validation
         const formattedPostalCode = PostalCode(formData.postalCode)?.toUpperCase().replace(/(.{3})/g, "$1 ");
-        if(formattedPostalCode === undefined && userInfo.details?.postalCode !== formData.postalCode && formData.postalCode){
+        if (formattedPostalCode === undefined && userInfo.details?.postalCode !== formData.postalCode && formData.postalCode) {
             toast.error('Please input valid postal code');
             return;
         }
 
-        if(phoneNum && phoneNum.length !== 14){
+        if (phoneNum && phoneNum.length !== 14) {
             toast.error('Please input valid phone number');
             return;
         }
@@ -98,12 +95,12 @@ const EditAccount = (props) => {
     }
 
     //Check if entered postal code is valid format
-    function checkPostalCode (pCode){
-        if(pCode){
+    function checkPostalCode(pCode) {
+        if (pCode) {
             const validPostalCode = PostalCode(pCode)?.toUpperCase().replace(/(.{3})/g, "$1 ");
-            if(validPostalCode){
+            if (validPostalCode) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
@@ -116,114 +113,134 @@ const EditAccount = (props) => {
     return (
         <div className="backgroundEffect">
             <div className="EditAccountPage">
-                    <div className="profileToolBar">
-                        <p>Profile</p>
-                        <p>* Required</p>
+            <div className="profileSide">
+                    <div className="wrapper">
+                <div className="profileToolBar">
+                    <h2>Profile&nbsp;</h2>
+                    <div className="requiredHead">
+                        <p className="reqStar">*&nbsp;</p>
+                        <p>Required</p>
                     </div>
-                    <form onSubmit={onSubmit}>
-                        <div className="ProfileInformation">
-                            <Collapsible className="reqInfo" trigger="Required User Information">
-                                <div className="FLName">
+                </div>
+                <form onSubmit={onSubmit}>
+                    <div className="ProfileInformation">
+                        <div className="reqInfo">
+                            <Collapsible open="true" trigger="Required User Information">
+                                <div className="reqInfoWrapper">
                                     <div className="firstName">
                                         <div className="standardLayout">
-                                            <h2>First Name</h2>
-                                            <h2 className="required">*</h2>
+                                            <div className="firstNameHeader">
+                                            <h4>First Name&nbsp;</h4>
+                                            <h4 className="reqStar">*</h4>
+                                            </div>
                                             <input type="text" id="firstName" name="firstName" value={formData.firstName} placeholder={userInfo.firstName} onChange={onChange}></input>
                                         </div>
                                     </div>
                                     <div className="lastName">
                                         <div className="standardLayout">
-                                            <h2>Last Name</h2>
-                                            <h2 className="required">*</h2>
+                                            <div className="lastNameHeader">
+                                            <h4>Last Name&nbsp;</h4>
+                                            <h4 className="reqStar">*</h4>
+                                            </div>
                                             <input type="text" id="lastName" name="lastName" value={formData.lastName} placeholder={userInfo.lastName} onChange={onChange}></input>
                                         </div>
                                     </div>
-                                </div>
+                                
                                 <div className="emailDiv">
                                     <div className="standardLayout">
-                                        <h2>Email</h2>
-                                        <h2 className="required">Permanent</h2>
-                                        <input type="text" id="email" name="email" value={userInfo.email} placeholder={userInfo.email} readOnly></input>
+                                        <div className="emailHeader">
+                                        <h4 className="emailTitle">Email</h4>
+                                        </div>
+                                        <input type="text" className="emailBox" id="email" name="email" value={userInfo.email} placeholder={userInfo.email} readOnly></input>
                                     </div>
                                 </div>
                                 <div className="deliveryLocation">
-                                    <div className="twoLayout">
-                                        <h2>Delivery Location</h2>
-                                        <h2 className="required">*</h2>
+                                    <div className="standardLayout">
+                                        <div className="deliveryLocHeader">
+                                        <h4>Delivery Location&nbsp;</h4>
+                                        <h4 className="reqStar">*</h4>
+                                        </div>
                                         <input type="text" id="dLocation" name="deliverTo" value={formData.deliverTo} placeholder={userInfo.deliverTo} onChange={onChange}></input>
                                     </div>
                                 </div>
-                                </Collapsible>
-                                <Collapsible className="addInfo" trigger="Additional Information">
-                                <div className="countryPhone">
-                                    <div className="countryCode">
-                                        <h2>Country Code</h2>
-                                        <div className="twoLayout">
-                                            <CountryCodes code={userInfo.details?.countryCode} isActive={false}></CountryCodes>
+                                </div>
+                            </Collapsible>
+                        </div>
+                        <div className="addInfo">
+                            <Collapsible className="addInfo" trigger="Additional Information">
+                                <div className="addInfoWrapper">
+                                    <div className="countryPhone">
+                                        <div className="countryCode">
+                                            <div className="standardLayout">
+                                                <h4>Country</h4>
+                                                <div className="countryCodeComp">
+                                                <CountryCodes code={userInfo.details?.countryCode} isActive={false}></CountryCodes>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div className="phoneNumber">
+                                            <div className="standardLayout">
+                                                <h4>Phone Number</h4>
+                                                <InputPhoneNumber num={formData.phoneNumber} setPhoneNum={setPhoneNum}></InputPhoneNumber>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="phoneNumber">
+                                </div>
+                            </Collapsible>
+                        </div>
+                        <div className="billInfo">
+                            <Collapsible className="billInfo" trigger="Billing Information">
+                                <div className="billInfoWrapper">
+                                    <div className="streetAddress">
                                         <div className="standardLayout">
-                                            <h2>Phone Number</h2>
-                                            <InputPhoneNumber num={formData.phoneNumber} setPhoneNum={setPhoneNum}></InputPhoneNumber>
-                                            {/* <input type="number" id="phoneNumber" name="phoneNumber" value={phoneNum} placeholder={userInfo.details?.phoneNumber} onChange={onChange}></input> */}
-                                        </div>
-                                    </div>
-                                </div>
-                                </Collapsible>
-                                <Collapsible className="billInfo" trigger="Billing Information">
-                                <div className="streetAddress">
-                                    <div className="twoLayout">
-                                        <h2>Street Address</h2>
-                                        <input type="text" id="address" name="address" value={formData.address} placeholder={userInfo.details?.address} onChange={onChange}></input>
-                                    </div>
-                                </div>
-
-                                <div className="info">
-                                    <div className="city">
-                                        <div className="twoLayout">
-                                            <h2 id="city">City</h2>
-                                            {/* Add API key to .env?
-                                            <Autocomplete apiKey={'AIzaSyDfqQTDbhIl14z0v12wC0xvdRPr7abl_Ww'} onPlaceSelected={(place) => {
-                                                console.log(place);
-                                                setCity(place.address_components[0]);
-                                                setProvince(place.address_components[(place.address_components.length - 2)])
-                                            }} options={{ types: ["(cities)"], componentRestrictions: { country: "ca" } }} /> */}
-                                            <input type="text" id="city" name="city" value={userInfo.details?.city} placeholder={userInfo.details?.city} readOnly></input>
-                                        </div>
-                                    </div>
-                                    <div className="province">
-                                        <h2>Province</h2>
-                                        <div className="twoLayout">
-                                            <input type="text" id="province" name="province" value={userInfo.details?.province} placeholder={userInfo.details?.province} readOnly></input>
+                                            <h4>Street Address</h4>
+                                            <input type="text" id="address" name="address" value={formData.address} placeholder={userInfo.details?.address} onChange={onChange}></input>
                                         </div>
                                     </div>
                                     <div className="postal">
-                                        <div className="twoLayout">
-                                            <h2 id="pCode">Postal Code</h2>
-                                            <input type="text" id="postalCode" name="postalCode" value={formData.postalCode} placeholder={userInfo.details?.postalCode} onChange={onChange}></input>
+                                            <div className="standardLayout">
+                                                <h4 id="pCode">Postal Code</h4>
+                                                <input type="text" id="postalCode" name="postalCode" value={formData.postalCode} placeholder={userInfo.details?.postalCode} onChange={onChange}></input>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="country">
-                                        <div className="twoLayout">
-                                            <h2>Country</h2>
-                                            <input type="text" id="country" name="country" value={userInfo.details?.country} placeholder={userInfo.details?.country} readOnly></input>
+                                    
+                                        <div className="city">
+                                            <div className="standardLayout">
+                                                <h4 id="city">City</h4>
+                                                <input type="text" className="cityBox" id="city" name="city" value={userInfo.details?.city} placeholder={userInfo.details?.city} readOnly></input>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div className="province">
+                                            <div className="standardLayout">
+                                                <h4>Province</h4>
+                                                <input type="text" className="provinceBox" id="province" name="province" value={userInfo.details?.province} placeholder={userInfo.details?.province} readOnly></input>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="country">
+                                            <div className="standardLayout">
+                                                <h4>Country</h4>
+                                                <input type="text" className="countryBox" id="country" name="country" value={userInfo.details?.country} placeholder={userInfo.details?.country} readOnly></input>
+                                            </div>
+                                        </div>
                                 </div>
-                                </Collapsible> 
-                                <div id="saveButton">
-                                    <input type="submit" id="saveButtonBtn" value="Save"></input>
-                                </div>
-
-                                <Link to='/account'>
-                                    <div id="cancelButton">
-                                        <input type="submit" id="cancelButtonBtn" value="Cancel"></input>
-                                    </div>
-                                </Link>
-
+                            </Collapsible>
                         </div>
-                    </form>
+                        <div className="buttonWrapper">
+                        <div id="saveButton">
+                            <button type="submit" id="myButton">Save</button>
+                        </div>
+
+                        <Link to='/account'>
+                            <div id="cancelButton">
+                                <button type="submit" id="myButton">Cancel</button>
+                            </div>
+                        </Link>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                </div>
             </div>
         </div>
     );

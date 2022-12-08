@@ -13,6 +13,7 @@ const orderSchema = new mongoose.Schema({
   userId: Number,
   price: Number,
   dateOrdered: String,
+  deliverTo: String,
   isActive: Boolean,
   specialInstructions: String,
   menuItems: Array,

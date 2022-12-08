@@ -1,10 +1,17 @@
 .modal {
     font-size: 12px;
+    margin: auto;
+    width:100%;
+    height: auto;
+    background-color: #ffffff;
   }
   .modal > .header {
     width: 100%;
+    height: auto;
+    display: block;
     border-bottom: 1px solid gray;
-    font-size: 18px;
+    background: #ffffff;
+    font-size: 12px;
     text-align: center;
     padding: 5px;
   }
@@ -27,8 +34,26 @@
     right: -10px;
     top: -10px;
     font-size: 24px;
-    background: #ffffff;
+    background:linear-gradient(to bottom, #a87f2d 5%, #ffb803 100%);
+	  background-color:#a87f2d;
     border-radius: 18px;
+    border: 1px solid #cfcece;
+  }
+
+  .modal > .close:hover{
+    background:linear-gradient(to bottom, #ffb803 5%, #a87f2d 100%);
+	  background-color:#ffb803;
+  }
+
+  .modal > .orderWrapper{
+    width: 100%;
+    padding: 2px;
+    border: 1px solid #cfcece;
+  }
+
+  .modal > .orderDetailWrapper{
+    width: 100%;
+    padding: 2px;
     border: 1px solid #cfcece;
   }
 

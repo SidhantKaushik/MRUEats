@@ -1,4 +1,5 @@
 import axios from 'axios';
+import authHeader from "./authHeader";
 
 const API_URL = '/api/users/';
 
@@ -30,14 +31,9 @@ const logout = () => {
 }
 
 //Update user info
-const update = async (userData, token) => {
+const update = async (userData) => {
     
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }
-    const response = await axios.put(API_URL + "UPDATE", userData, config);
+    const response = await axios.put(API_URL + "UPDATE", userData, authHeader);
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
     }

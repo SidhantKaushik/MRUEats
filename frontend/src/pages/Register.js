@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { register, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
@@ -10,6 +10,7 @@ import PizzaImg from '../images/pizza.jpg'
 
 function Register() {
     //Add deliverTo
+    const [checked, setChecked] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -42,7 +43,8 @@ function Register() {
     const onChange = (e) => {
         setFormData((prevState) => ({
             ...prevState,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            
 
         }));
     }
@@ -54,7 +56,7 @@ function Register() {
         //if none inputed
         if(!firstName && !lastName && !email && !deliverTo && !password && !password_c)
         {
-            toast.error('Form not filled');
+            toast.error('Please fill all text fields');
             return;
         }
 
@@ -80,6 +82,7 @@ function Register() {
                 lastName,
                 email,
                 deliverTo,
+                checked,
                 password,
                 password_c
             }
@@ -124,6 +127,15 @@ function Register() {
                         <label for="confirm-password">Confirm Password</label>
                         <input type="password" id="password_c" name="password_c" value={password_c} placeholder='Confirm password' onChange={onChange} />
                     </div>
+                    <div className='dLocation'>
+                        <label for="deliveryLoc">Delivery Location</label>
+                        <input type="text" id="dLocation" name="deliverTo" value={deliverTo} placeholder='Enter delivery location Ex.(B140 or 123 Street SE)' onChange={onChange} />
+                    </div>
+                    <div className="courier">
+                        <label for="courierLabe">Courier account?</label><br/>
+                        <input type="checkbox" id="courierBox" name="isCourier" checked={checked} onChange={(e) => setChecked(e.target.checked)}/>
+                    </div>  
+                    <p>Already have an account? <Link to='/login'>Login</Link></p>
                     <div className='submitbtn'>
                         <input id="register-button" type="submit" value="Register" />
                     </div>

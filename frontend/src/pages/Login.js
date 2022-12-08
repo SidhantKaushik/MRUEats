@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { login, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
@@ -58,7 +58,7 @@ function Login() {
   if (isLoading) {
     return <Spinner />;
   }
-
+  
   return (
     <div className='Login'>
       <div className="left">
@@ -74,6 +74,7 @@ function Login() {
             <p>Password</p>
             <input type="password" name="password" value={password} placeholder='Enter your password' onChange={onChange} />
           </label>
+          <p>Don't have an account? <Link to='/register'>Register</Link></p>
           <div>
             <button className="submitButton" type="submit">Login</button>
           </div>
