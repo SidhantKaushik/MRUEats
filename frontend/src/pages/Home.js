@@ -114,18 +114,18 @@ const Home = (props) => {
                 <div class="slide hideInitally">
                     <img src="https://images.squarespace-cdn.com/content/v1/589a30d2725e258996583851/1486999228841-X0ZTSTV7NP709CWNAQD6/tacobell_banner.jpg?format=2500w" alt="Image 2"/>
                 </div>
-                <div id="orderNow">
-                    <p>Perfect for Hungry Cougars!</p>
+                <div class="slide hideInitally">
+                    <img src="https://play-lh.googleusercontent.com/IBOv3AqPhvvk7nOgRTJ2VBfOmgO8313X-SGrxolqqv4xjDah5pHukPsgbrzYxCUChQ=h500"></img>
                 </div>
-                <div class="prev" onClick={() => plusSlides(-1)}> &larr; </div>
-                <div class="next" onClick={() => plusSlides(1)}> &rarr; </div>
+                {/* <div class="prev" onClick={() => plusSlides(-1)}> &larr; </div>
+                <div class="next" onClick={() => plusSlides(1)}> &rarr; </div> */}
                 
             </div>
             <div className="categories">
                 <h3 id="catTitle">Categories</h3>
             <ol className='categoriesList'>
-                <div className="item" id="all">
-                    <li className='category-item' onClick={filterClick}>
+                <div className="item" id="all" onClick={filterClick}>
+                    <li className='category-item'>
                         All 
                     </li>
                 </div>

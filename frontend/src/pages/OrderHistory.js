@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useSelector} from 'react-redux';
 import OrderHistoryComponent from "../components/OrderHistory";
+import authHeader from "../features/auth/authHeader";
+import '../styles/OrderHistory.css';
+import { FaArrowLeft } from "react-icons/fa";
+
+
 
 const OrderHistory = (props) => {
 
@@ -20,15 +25,8 @@ const OrderHistory = (props) => {
 
         const getOrders = async () => {
             try{
-                const token = user.token;
-                const config = {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-                
                 const url = "api/orders/" + user.id;
-                const response = await fetch(url, config);
+                const response = await fetch(url, authHeader);
                 const data = await response.json();
                 setOrders(data);
             
@@ -45,7 +43,6 @@ const OrderHistory = (props) => {
     function seperateByActivity(orders, isValid){
         return orders.reduce(([active, inActive], obj) => {
             return isValid(obj) ? [[...active, obj], inActive] : [active, [...inActive, obj]];
-
         },[[], []]);
     }
 
@@ -106,12 +103,15 @@ const OrderHistory = (props) => {
 
         <div className="orderSide">
                     <div className="orderHistoryToolBar">
-                        <p id="OrderHistory">Order History</p>
+                        <div id="OrderHistory">
+                        <div className="backArrow"><Link to='/account'><FaArrowLeft /></Link></div>    
+                        <div className="orderHistoryTitle"><h3>Order History</h3></div>
+                        </div>
                         {sortedOrders.map((order, index) => (
-                           <OrderHistoryComponent order={order} menu={props?.menu} restaurants={props?.restaurants}/>
+                           <OrderHistoryComponent order={order} menu={props?.menu} restaurants={props?.restaurants}  user={user}/>
                         ))}
                     </div>
-                </div>
+        </div>
 
 
     );}
