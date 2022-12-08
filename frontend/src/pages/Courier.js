@@ -163,8 +163,8 @@ const Courier = (props) => {
       RestaurantName: restaurants.find(rest => rest.id == order.restaurantId).name,
       Date: order.dateOrdered,
       Price: order.price,
-      User: `${users.find(user => user.id = order.userId)?.firstName} ${users.find(user => user.id = order.userId)?.lastName}`,
-      Location: users.find(user => user.id = order.userId)?.deliverTo,
+      User: `${users.find(user => user.id == order.userId)?.firstName} ${users.find(user => user.id == order.userId)?.lastName}`,
+      Location: users.find(user => user.id == order.userId)?.deliverTo,
       MenuItems: order.menuItems,
       SpecialInst: order.specialInstructions
     }));

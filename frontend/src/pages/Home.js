@@ -117,8 +117,6 @@ const Home = (props) => {
                 <div class="slide hideInitally">
                     <img src="https://play-lh.googleusercontent.com/IBOv3AqPhvvk7nOgRTJ2VBfOmgO8313X-SGrxolqqv4xjDah5pHukPsgbrzYxCUChQ=h500"></img>
                 </div>
-                {/* <div class="prev" onClick={() => plusSlides(-1)}> &larr; </div>
-                <div class="next" onClick={() => plusSlides(1)}> &rarr; </div> */}
                 
             </div>
             <div className="categories">
@@ -157,13 +155,6 @@ const Home = (props) => {
                     />
                 ))}
                 </div>
-                {/* <Link to='/RestaurantDetails'>
-                    <div className='restaurants'>
-                        <div className='logo'><img src='https://s3-alpha-sig.figma.com/img/fb70/ca6a/4b1bd450f3bb83cd16c2f3630170ce1e?Expires=1668988800&Signature=ZwsU8Fs3DeUXBXeut9bogfDxEvWaRDvxHF~py5GT6Vy8lr5lTwA0AeObdCT8zdVf-zvMy8WKTRzsOb4ckglEoyJwGun0dvmlGdRY32YPVmNF83CyzWGul2diG1DPBimVhz1plbDlIFddQ4t9nqh9p8O4mKcT8isp09tLt6uFdd1uf-4-J5gs1ykHXqU3dNc2Bg8AI3U1ykye21i47XaWDpsUDJU3HMXlQ8G2J1-PHgeh9GpDrebnQQ8MGOirjY8PI4y90zrBlgL3EPk-mfai1hGlmZbs4fA~qGBDE8lY6A2Aby~U26EwyTM3aRy46GF8BQRNL6C89aCFNgBjL2ICXw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA'></img></div>
-                        <div className='info'> <h2>Booster Juice</h2>
-                            <p>Smoothie place that sells some smoothies</p></div>
-                    </div>
-                </Link> */}
             </div>
         </div>           
         </div>

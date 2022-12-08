@@ -32,7 +32,6 @@ const RestaurantDetails = (props) => {
 
    const onSubmit = e => {
         e.preventDefault()
-        console.log("current item" + currItem)
        // let result = currItem.map(a => a.id)
         const menuID = []
         currItem.forEach(e => menuID.push({id: e.id}))
@@ -62,7 +61,6 @@ const RestaurantDetails = (props) => {
                     
                }
             }
-            console.log("location: " + location.state.id)
             
         }
         if(item.length != 0){
@@ -85,15 +83,11 @@ const RestaurantDetails = (props) => {
     }, [])
 
     useEffect(() => {
-        console.log(priceItem)
         let sum = priceItem.reduce((a, b) => a + b ,0)
         sum += 3.09
         sum = sum * 1.05
         setFinalPrice(formatPrice(sum))
-        console.log(formatPrice(sum))
     }, [priceItem])
-
-    console.log(menuItems)
 
     function filter(props){
         item = []
@@ -115,7 +109,6 @@ const RestaurantDetails = (props) => {
     }
 
     function menuSelect(props) {
-        console.log(props)
         currentItem = [...currItem]
         //finalP = 0
         for(let i = 0; i < menuItems.length; i++){    
@@ -126,7 +119,6 @@ const RestaurantDetails = (props) => {
             }
         }
 
-        console.log(currItem) 
         setCurrItem(currentItem)
         //setPriceItem([..priceItem, menuItems[i].price])
     }
