@@ -40,11 +40,11 @@ const Home = (props) => {
         setCategories(categoriesArray);
       }, [rest]);
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/login');
-        }
-    }, [user, navigate]);
+    // useEffect(() => {
+    //     if (!user) {
+    //         navigate('/login');
+    //     }
+    // }, [user, navigate]);
 
     function filterClick(props){
         filterRest = []
