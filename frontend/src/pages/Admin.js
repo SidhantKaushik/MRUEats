@@ -4,6 +4,10 @@ import { FaEdit } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+//Passing JWT
+import authHeader from "../features/auth/authHeader";
 import Popup from '../components/Popup';
 import axios from 'axios';
 
@@ -11,12 +15,15 @@ const RESTAURANTS_API_URL = '/api/restaurants/';
 const MENU_API_URL = '/api/menu/';
 
 function Admin(props) {
- 
+
     const [restaurants, setRestaurants] = useState([]);
     const [allMenuItems, setAllMenuItems] = useState([]);
     const [menu, setMenu] = useState([]);
     const [selectedRestaurant, setSelectedRestaurant] = useState([]);
     const [selectedMenuItem, setSelectedMenuItem] = useState([]);
+
+    const navigate = useNavigate();
+    const { user } = useSelector((state) => state.auth);
 
     const [restaurantFormData, setRestaurantFormData] = useState({
         logo: '',
@@ -47,62 +54,70 @@ function Admin(props) {
     const [menuDeleteIsOpen, setMenuDeleteIsOpen] = useState(false);
     //#endregion
 
-    useEffect(() => {
-      const getRestaurants = async () => {
-        try {
-          const url = "api/restaurants";
-          const response = await fetch(url);
-          const data = await response.json();
-          setRestaurants(data);
-          setSelectedRestaurant(data[0]);
-        } catch (err) {
-          console.error(err);
-        }
-      }
-      getRestaurants();
 
-      const getMenus = async () => {
-        try {
-          const url = "api/menu/";
-          const response = await fetch(url);
-          const data = await response.json();
-          setAllMenuItems(data);
-          setMenu(data.filter((item) => item.restaurantId === 1));
-        } catch (err) {
-          console.error(err);
+    //Checks React Redux user state
+    useEffect(() => {
+        if (!user) {
+            navigate('/login');
         }
-      }
-    
-      getMenus();
+    }, [user, navigate]);
+
+    useEffect(() => {
+        const getRestaurants = async () => {
+            try {
+                const url = "api/restaurants";
+                const response = await fetch(url);
+                const data = await response.json();
+                setRestaurants(data);
+                setSelectedRestaurant(data[0]);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+        getRestaurants();
+
+        const getMenus = async () => {
+            try {
+                const url = "api/menu/";
+                const response = await fetch(url);
+                const data = await response.json();
+                setAllMenuItems(data);
+                setMenu(data.filter((item) => item.restaurantId == 1));
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        getMenus();
 
     }, [])
 
-    while(!restaurants[0]){
+    while (!restaurants[0]) {
         return;
     }
 
     //#region setting restaurants, menu items, and categories
 
-    let restaurantCategories = [...new Set(restaurants.map(({category}) => (category)))];
-    
+    let restaurantCategories = [...new Set(restaurants.map(({ category }) => (category)))];
+
     var categoryList = restaurantCategories.map((category) =>
-    <option value={category}>{category}</option>
+        <option value={category}>{category}</option>
     );
-      
+
     const populateRestaurant = (e) => {
         var restaurantId = e.target.id;
-        setSelectedRestaurant(restaurants.find(restaurant => restaurant.id === restaurantId));
-        setMenu(allMenuItems.filter((item) => item.restaurantId === restaurantId));
+        setSelectedRestaurant(restaurants.find(restaurant => restaurant.id == restaurantId));
+        setMenu(allMenuItems.filter((item) => item.restaurantId == restaurantId));
     }
 
     var restaurantList = restaurants.map((restaurant) =>
         <li key={restaurant.id} className='restaurantListItem' id={restaurant.id} onClick={populateRestaurant}>{restaurant.name}</li>
     );
 
-    let menuCategories = [...new Set(menu.map(({category}) => (category)))];
-    
+    let menuCategories = [...new Set(menu.map(({ category }) => (category)))];
+
     var menuCategoryList = menuCategories.map((category) =>
-    <option value={category}>{category}</option>
+        <option value={category}>{category}</option>
     );
 
     //#endregion
@@ -124,11 +139,11 @@ function Admin(props) {
     }
 
     function getLatestMenuId() {
-        if(Object.keys(menu).length === 0) {
+        if (Object.keys(menu).length === 0) {
             return 1;
         }
         let latestId = menu.slice(-1)[0].id;
-        return parseInt(latestId) + 1 ;
+        return parseInt(latestId) + 1;
     }
 
     function getLatestRestaurantId() {
@@ -150,7 +165,7 @@ function Admin(props) {
 
     const handleSelectedMenu = (e) => {
         var menuItemId = e.currentTarget.id;
-        var selectedMenuItem = menu.find(menu => menu.id === menuItemId && menu.restaurantId === selectedRestaurant.id);
+        var selectedMenuItem = menu.find(menu => menu.id == menuItemId && menu.restaurantId == selectedRestaurant.id);
         setSelectedMenuItem(selectedMenuItem);
     }
 
@@ -185,23 +200,23 @@ function Admin(props) {
 
     const toggleRestoAddPopup = () => {
         setRestoAddIsOpen(!restoAddIsOpen);
-    } 
+    }
 
     const toggleRestoDeletePopup = () => {
         setRestoDeleteIsOpen(!restoDeleteIsOpen);
-    } 
+    }
 
     const toggleMenuAddPopup = () => {
         setMenuAddIsOpen(!menuAddIsOpen);
-    } 
+    }
 
     const toggleMenuEditPopup = () => {
         setMenuEditIsOpen(!menuEditIsOpen);
-    } 
+    }
 
     const toggleMenuDeletePopup = () => {
         setMenuDeleteIsOpen(!menuDeleteIsOpen);
-    } 
+    }
     //#endregion
 
     //#region Add restaurant
@@ -217,16 +232,16 @@ function Admin(props) {
 
     }
 
-    const onAddRestSubmit = (e) =>{
+    const onAddRestSubmit = (e) => {
 
         e.preventDefault();
 
         if (!logo) {
             toast.error('Logo is required');
-        } 
+        }
         else if (!restaurantName) {
             toast.error('Name is required');
-        } 
+        }
         else if (!rating) {
             toast.error('Rating is required');
         }
@@ -260,7 +275,7 @@ function Admin(props) {
                 close,
                 category,
             }
-    
+
             createRestaurant(restaurantData);
             window.location.reload(false);
         }
@@ -271,7 +286,7 @@ function Admin(props) {
     //#region Update Restaurant
     const updateRestaurant = async (restaurantData) => {
 
-        const response = await axios.put(RESTAURANTS_API_URL + 'UPDATE', restaurantData);
+        const response = await axios.put(RESTAURANTS_API_URL + 'UPDATE', restaurantData, authHeader);
 
         if (response.status === 201) {
             toast.success('Successfully updated restaurant!');
@@ -281,16 +296,16 @@ function Admin(props) {
 
     }
 
-    const onUpdateRestSubmit = (e) =>{
+    const onUpdateRestSubmit = (e) => {
 
         e.preventDefault();
 
         if (!logo) {
             toast.error('Logo is required');
-        } 
+        }
         else if (!restaurantName) {
             toast.error('Name is required');
-        } 
+        }
         else if (!rating) {
             toast.error('Rating is required');
         }
@@ -312,7 +327,7 @@ function Admin(props) {
             let open = openTime.replace(":", "");
             let close = closeTime.replace(":", "");
             let name = restaurantName;
-    
+
             const restaurantData = {
                 _id,
                 id,
@@ -324,7 +339,7 @@ function Admin(props) {
                 close,
                 category,
             }
-    
+
             updateRestaurant(restaurantData);
             window.location.reload(false);
         }
@@ -335,7 +350,7 @@ function Admin(props) {
     //#region Delete Restaurant
     const deleteRestaurant = async (restaurantData) => {
 
-        const response = await axios.delete(RESTAURANTS_API_URL + 'DELETE', { data: restaurantData });
+        const response = await axios.delete(RESTAURANTS_API_URL + 'DELETE', { data: restaurantData }, authHeader);
 
         if (response.status === 204) {
             toast.success('Successfully deleted restaurant!');
@@ -344,8 +359,8 @@ function Admin(props) {
         }
 
     }
-    
-    const onDeleteRestSubmit = (e) =>{
+
+    const onDeleteRestSubmit = (e) => {
 
         e.preventDefault();
 
@@ -365,7 +380,7 @@ function Admin(props) {
     //#region Create Menu Item
     const createMenuItem = async (menuItemData) => {
 
-        const response = await axios.post(MENU_API_URL + 'ADD', menuItemData);
+        const response = await axios.post(MENU_API_URL + 'ADD', menuItemData, authHeader);
 
         if (response.status === 201) {
             toast.success('Successfully added menu item!');
@@ -374,22 +389,22 @@ function Admin(props) {
         }
     }
 
-    const onAddMenuSubmit = (e) =>{
+    const onAddMenuSubmit = (e) => {
 
         e.preventDefault();
 
-        var regex  = /^[0-9]+(\.[0-9]+)?$/;
+        var regex = /^[0-9]+(\.[0-9]+)?$/;
 
         if (!name) {
             toast.error('Name is required');
-        } 
+        }
         else if (!price) {
             toast.error('Price is required');
-        } 
+        }
         else if (!description) {
             toast.error('Description is required');
         }
-        else if (!menuCategory && menu.length > 0 && !newMenuCategory) { 
+        else if (!menuCategory && menu.length > 0 && !newMenuCategory) {
             toast.error('Category is required');
         }
         else if (!newMenuCategory && menu.length === 0) {
@@ -401,7 +416,7 @@ function Admin(props) {
         else if (isDuplicateMenuCategory(newMenuCategory)) {
             toast.error('The entered category already exists. Please try again');
         }
-        else if (!regex.test(price) ) {
+        else if (!regex.test(price)) {
             toast.error('Price can only contain numbers and decimals. Example: 3.49');
         }
         else {
@@ -412,11 +427,11 @@ function Admin(props) {
             //if the menu is empty 
             if (menu.length === 0) {
                 category = newMenuCategory;
-            } 
+            }
             //if the menu is not empty or the user did not input a menu category
             else if (menu.length > 0 && !menuCategory) {
                 category = newMenuCategory;
-            } 
+            }
             //if the menu is not empty or the user did not input a new menu category
             else if (menu.length > 0 && !newMenuCategory) {
                 category = menuCategory;
@@ -430,7 +445,7 @@ function Admin(props) {
                 category: category,
                 restaurantId: restaurantId,
             }
-            
+
             createMenuItem(menuData);
             window.location.reload(false);
         }
@@ -442,7 +457,7 @@ function Admin(props) {
     //#region Update Menu Item
     const updateMenuItem = async (menuItemData) => {
 
-        const response = await axios.put(MENU_API_URL + 'UPDATE', menuItemData);
+        const response = await axios.put(MENU_API_URL + 'UPDATE', menuItemData, authHeader);
 
         if (response.status === 201) {
             toast.success('Successfully updated menu item!');
@@ -451,8 +466,8 @@ function Admin(props) {
         }
 
     }
-            
-    const onUpdateMenuSubmit = (e) =>{
+
+    const onUpdateMenuSubmit = (e) => {
 
         e.preventDefault();
 
@@ -461,21 +476,21 @@ function Admin(props) {
             return;
         }
 
-        var regex  = /^[0-9]+(\.[0-9]+)?$/; //price regex
+        var regex = /^[0-9]+(\.[0-9]+)?$/; //price regex
 
         if (!name) {
             toast.error('Name is required');
-        } 
+        }
         else if (!price) {
             toast.error('Price is required');
-        } 
+        }
         else if (!description) {
             toast.error('Description is required');
         }
         else if (!menuCategory) {
             toast.error('Category is required');
         }
-        else if (!regex.test(price) ) {
+        else if (!regex.test(price)) {
             toast.error('Price can only contain numbers and decimals. Example: 3.49');
         }
         else {
@@ -483,7 +498,7 @@ function Admin(props) {
             let _id = selectedMenuItem._id;
             let restaurantId = selectedMenuItem.restaurantId;
             let category = selectedMenuItem.category;
-    
+
             const menuData = {
                 _id,
                 id,
@@ -493,7 +508,7 @@ function Admin(props) {
                 category,
                 restaurantId,
             }
-    
+
             updateMenuItem(menuData);
             window.location.reload(false);
         }
@@ -505,19 +520,19 @@ function Admin(props) {
 
     const deleteMenuItem = async (menuItemData) => {
 
-        const response = await axios.delete(MENU_API_URL + 'DELETE', { data: menuItemData });
+        const response = await axios.delete(MENU_API_URL + 'DELETE', { data: menuItemData }, authHeader);
 
         if (response.status === 204) {
             toast.success('Successfully deleted menu item!');
         } else {
             toast.error('Error: Could not delete menu item');
         }
-            
-         return response.data;
+
+        return response.data;
 
     }
 
-    const onDeleteMenuSubmit = (e) =>{
+    const onDeleteMenuSubmit = (e) => {
 
         e.preventDefault();
 
@@ -555,55 +570,55 @@ function Admin(props) {
                 <div className="restaurants">
                     <div className='restaurantHeader'>
                         <h2 id='restaurantTitle'>Restaurants</h2>
-                        <button className="addRestoButton" onClick={toggleRestoAddPopup}><FaPlus/></button>
+                        <button className="addRestoButton" onClick={toggleRestoAddPopup}><FaPlus /></button>
                         {restoAddIsOpen && <Popup
-                        content={<>
-                            <h4 className='popup-title'>Add Restaurant</h4>
-                            <form className='restaurant-form' onSubmit={onAddRestSubmit}>            
-                                <div className='logo'>
-                                    <label>Logo</label>
-                                    <input type="text" name="logo" value={logo} placeholder='enter url' onChange={onRestFormChange}/>
-                                </div>
-                                <div className='restNameInput'>
-                                    <label>Name</label>
-                                    <input type="text" name="restaurantName" value={restaurantName} onChange={onRestFormChange}/>
-                                </div>
-                                <div className='rating'>
-                                    <label>Rating</label>
-                                    <input type="number" name="rating"  value={rating} min="1" max="5" onChange={onRestFormChange}/>
-                                </div>
-                                <div className='address'>
-                                    <label>Address</label>
-                                    <input type="text" name="address"  value={address} onChange={onRestFormChange}/>
-                                </div>
-                                <div className='open'>
-                                    <label>Opening Time</label>
-                                    <input type="time" name="openTime" value={openTime} onChange={onRestFormChange}/>
-                                </div>
-                                <div className='closingTime'>
-                                    <label>Closing Time</label>
-                                    <input type="time" name="closeTime" value={closeTime} onChange={onRestFormChange}/>
-                                </div>
-                                <div className='category'>
-                                    <label>Category</label>
-                                    <select name="category" value={category} onChange={onRestFormChange}>
-                                        <option value="value" selected>Select a Category</option>
-                                        {categoryList}
-                                    </select>
-                                </div>
-                                <div className='submitButton'>
-                                    <input className='popup-submit' type="submit" value="Save Changes"/>
-                                </div>
-                            </form>
-                        </>}
-                        handleClose={toggleRestoAddPopup}
+                            content={<>
+                                <h4 className='popup-title'>Add Restaurant</h4>
+                                <form className='restaurant-form' onSubmit={onAddRestSubmit}>
+                                    <div className='logo'>
+                                        <label>Logo</label>
+                                        <input type="text" name="logo" value={logo} placeholder='enter url' onChange={onRestFormChange} />
+                                    </div>
+                                    <div className='restNameInput'>
+                                        <label>Name</label>
+                                        <input type="text" name="restaurantName" value={restaurantName} onChange={onRestFormChange} />
+                                    </div>
+                                    <div className='rating'>
+                                        <label>Rating</label>
+                                        <input type="number" name="rating" value={rating} min="1" max="5" onChange={onRestFormChange} />
+                                    </div>
+                                    <div className='address'>
+                                        <label>Address</label>
+                                        <input type="text" name="address" value={address} onChange={onRestFormChange} />
+                                    </div>
+                                    <div className='open'>
+                                        <label>Opening Time</label>
+                                        <input type="time" name="openTime" value={openTime} onChange={onRestFormChange} />
+                                    </div>
+                                    <div className='closingTime'>
+                                        <label>Closing Time</label>
+                                        <input type="time" name="closeTime" value={closeTime} onChange={onRestFormChange} />
+                                    </div>
+                                    <div className='category'>
+                                        <label>Category</label>
+                                        <select name="category" value={category} onChange={onRestFormChange}>
+                                            <option value="value" selected>Select a Category</option>
+                                            {categoryList}
+                                        </select>
+                                    </div>
+                                    <div className='submitButton'>
+                                        <input className='popup-submit' type="submit" value="Save Changes" />
+                                    </div>
+                                </form>
+                            </>}
+                            handleClose={toggleRestoAddPopup}
                         />}
                     </div>
                     <div className='restaurantsList'>
                         <ul>
                             {restaurantList}
                         </ul>
-                    </div>     
+                    </div>
                 </div>
                 <div className="restaurantSection">
                     <div className="adminRestaurantBanner">
@@ -619,8 +634,8 @@ function Admin(props) {
                             <span className="restaurantInfo">Delivery Hours: {ConvertTime(selectedRestaurant.open)} - {ConvertTime(selectedRestaurant.close)}</span>
                         </div>
                         <div className='restaurantButtons'>
-                            <button className='restaurantButton' onClick={toggleRestoEditPopup}><span className='buttonText'>Edit Information</span><FaEdit/></button>
-                            <button className='restaurantButton' onClick={toggleRestoDeletePopup}><span className='buttonText'>Remove Restaurant</span><FaTrash/></button>                       
+                            <button className='restaurantButton' onClick={toggleRestoEditPopup}><span className='buttonText'>Edit Information</span><FaEdit /></button>
+                            <button className='restaurantButton' onClick={toggleRestoDeletePopup}><span className='buttonText'>Remove Restaurant</span><FaTrash /></button>
 
                             {restoEditIsOpen && <Popup
                                 content={<>
@@ -628,27 +643,27 @@ function Admin(props) {
                                     <form className='restaurant-form' onSubmit={onUpdateRestSubmit}>
                                         <div className='logo'>
                                             <label>Logo</label>
-                                            <input type="text" name="logo" placeholder={selectedRestaurant.logo} value={logo} onChange={onRestFormChange}/>
+                                            <input type="text" name="logo" placeholder={selectedRestaurant.logo} value={logo} onChange={onRestFormChange} />
                                         </div>
                                         <div className='restNameInput'>
                                             <label>Name</label>
-                                            <input type="text" name="restaurantName" placeholder={selectedRestaurant.name} value={restaurantName} onChange={onRestFormChange}/>
+                                            <input type="text" name="restaurantName" placeholder={selectedRestaurant.name} value={restaurantName} onChange={onRestFormChange} />
                                         </div>
                                         <div className='rating'>
                                             <label>Rating</label>
-                                            <input type="number" name="rating"  placeholder={selectedRestaurant.rating} value={rating} min="1" max="5" onChange={onRestFormChange}/>
+                                            <input type="number" name="rating" placeholder={selectedRestaurant.rating} value={rating} min="1" max="5" onChange={onRestFormChange} />
                                         </div>
                                         <div className='address'>
                                             <label>Address</label>
-                                            <input type="text" name="address"  placeholder={selectedRestaurant.address} value={address} onChange={onRestFormChange}/>
+                                            <input type="text" name="address" placeholder={selectedRestaurant.address} value={address} onChange={onRestFormChange} />
                                         </div>
                                         <div className='open'>
                                             <label>Opening Time</label>
-                                            <input type="time" name="openTime" placeholder={selectedRestaurant.open} value={openTime} onChange={onRestFormChange}/>
+                                            <input type="time" name="openTime" placeholder={selectedRestaurant.open} value={openTime} onChange={onRestFormChange} />
                                         </div>
                                         <div className='closingTime'>
                                             <label>Closing Time</label>
-                                            <input type="time" name="closeTime" placeholder={selectedRestaurant.close} value={closeTime} onChange={onRestFormChange}/>
+                                            <input type="time" name="closeTime" placeholder={selectedRestaurant.close} value={closeTime} onChange={onRestFormChange} />
                                         </div>
                                         <div className='category'>
                                             <label>Category</label>
@@ -658,7 +673,7 @@ function Admin(props) {
                                             </select>
                                         </div>
                                         <div className='submitButton'>
-                                            <input className='popup-submit' type="submit" value="Save Changes"/>
+                                            <input className='popup-submit' type="submit" value="Save Changes" />
                                         </div>
                                     </form>
                                 </>}
@@ -671,7 +686,7 @@ function Admin(props) {
                                     <p className='delete-confirmation'>Are you sure you want to remove this restaurant? This action cannot be undone.</p>
                                     <form onSubmit={onDeleteRestSubmit}>
                                         <div className='submitButton'>
-                                            <input className='popup-submit' type="submit" value="Remove Restaurant"/>
+                                            <input className='popup-submit' type="submit" value="Remove Restaurant" />
                                         </div>
                                     </form>
                                 </>}
@@ -682,7 +697,7 @@ function Admin(props) {
 
                     <div className='menuItems'>
                         {menu.map((menu) =>
-                            <div className='menuListItem' id={menu.id} onClick = { handleSelectedMenu}>
+                            <div className='menuListItem' id={menu.id} onClick={handleSelectedMenu}>
                                 <h5 className='menu-list-name'>{menu.name} • ${menu.price}</h5>
                                 <p>{menu.description}</p>
                             </div>
@@ -695,58 +710,58 @@ function Admin(props) {
                         <button className='menuButton' onClick={toggleMenuDeletePopup}>Delete</button>
 
                         {menuAddIsOpen && <Popup
-                                content={<>
-                                    <h4 className='popup-title'>Add Menu Item</h4>
-                                    <form className='menu-form' onSubmit={onAddMenuSubmit}>
-                                        <div className='menuName'>
-                                            <label>Name</label>
-                                            <input type="text" name="name" value={name} onChange={onMenuFormChange}/>
+                            content={<>
+                                <h4 className='popup-title'>Add Menu Item</h4>
+                                <form className='menu-form' onSubmit={onAddMenuSubmit}>
+                                    <div className='menuName'>
+                                        <label>Name</label>
+                                        <input type="text" name="name" value={name} onChange={onMenuFormChange} />
+                                    </div>
+                                    <div className='price'>
+                                        <label>Price</label>
+                                        <input type="text" placeholder='$' name="price" value={price} onChange={onMenuFormChange} />
+                                    </div>
+                                    <div className='description'>
+                                        <label>Drescription</label>
+                                        <input type="text" name="description" value={description} onChange={onMenuFormChange} />
+                                    </div>
+                                    {menu.length > 0 && <>
+                                        <div className='menuCategory'>
+                                            <label>Category</label>
+                                            <select name="menuCategory" value={menuCategory} onChange={onMenuFormChange}>
+                                                <option value="" selected>Select a Category</option>
+                                                {menuCategoryList}
+                                            </select>
                                         </div>
-                                        <div className='price'>
-                                            <label>Price</label>
-                                            <input type="text" placeholder='$' name="price" value={price} onChange={onMenuFormChange}/>
-                                        </div>
-                                        <div className='description'>
-                                            <label>Drescription</label>
-                                            <input type="text" name="description" value={description} onChange={onMenuFormChange}/>
-                                        </div>
-                                        {menu.length > 0 &&<>
-                                            <div className='menuCategory'>
-                                                <label>Category</label>
-                                                <select name="menuCategory" value={menuCategory} onChange={onMenuFormChange}>
-                                                    <option value="" selected>Select a Category</option>
-                                                    {menuCategoryList}
-                                                </select>
-                                            </div>
 
-                                            <div className='newMenuCategory'>
-                                                <label>Don't see your category on the list? Add a new one.</label>
-                                                <input type="text" name="newMenuCategory" value={newMenuCategory} onChange={onMenuFormChange}/>
-                                            </div>
-                                        </>}
-
-                                        {menu.length === 0 &&<>
-                                            <div className='newMenuCategory'>
-                                                <label>Category</label>
-                                                <input type="text" name="newMenuCategory" value={newMenuCategory} onChange={onMenuFormChange}/>
-                                            </div>
-                                        </>}
-                                        
-                                        <div className='submitButton'>
-                                            <input className='popup-submit' type="submit" value="Save Changes"/>
+                                        <div className='newMenuCategory'>
+                                            <label>Don't see your category on the list? Add a new one.</label>
+                                            <input type="text" name="newMenuCategory" value={newMenuCategory} onChange={onMenuFormChange} />
                                         </div>
-                                    </form>
-                                </>}
-                                handleClose={toggleMenuAddPopup}
+                                    </>}
+
+                                    {menu.length === 0 && <>
+                                        <div className='newMenuCategory'>
+                                            <label>Category</label>
+                                            <input type="text" name="newMenuCategory" value={newMenuCategory} onChange={onMenuFormChange} />
+                                        </div>
+                                    </>}
+
+                                    <div className='submitButton'>
+                                        <input className='popup-submit' type="submit" value="Save Changes" />
+                                    </div>
+                                </form>
+                            </>}
+                            handleClose={toggleMenuAddPopup}
                         />}
 
                         {menuEditIsOpen && <Popup
-                                content={<>
-                                    <h4 className='popup-title'>Edit Menu Item</h4>
-                       
-                                    <form className='menu-form' onSubmit={onUpdateMenuSubmit}>
-                                        { selectedMenuItem &&
-                                            <>
+                            content={<>
+                                <h4 className='popup-title'>Edit Menu Item</h4>
+
+                                <form className='menu-form' onSubmit={onUpdateMenuSubmit}>
+                                    {selectedMenuItem &&
+                                        <>
                                             <div className='menuName'>
                                                 <label>Name</label>
                                                 <input type="text" name="name" placeholder={selectedMenuItem.name} value={name} onChange={onMenuFormChange} />
@@ -768,29 +783,29 @@ function Admin(props) {
                                             </div>
                                         </>}
 
-                                    </form>
-                                    
-                                </>}
-                                handleClose={toggleMenuEditPopup}
+                                </form>
+
+                            </>}
+                            handleClose={toggleMenuEditPopup}
                         />}
 
                         {menuDeleteIsOpen && <Popup
-                                content={<>
-                                    <h4 className='popup-title'>Remove Menu Item</h4>
-                                    
-                                    <form onSubmit={onDeleteMenuSubmit}>
-                                        {selectedMenuItem &&<>
-                                            <p className='delete-confirmation'>Are you sure you want to remove this menu item? This action cannot be undone.</p>
-                                            <div className='submitButton'>
-                                                <input className='popup-submit' type="submit" value="Remove Menu Item"/>
-                                            </div>                                        
-                                        </>}
+                            content={<>
+                                <h4 className='popup-title'>Remove Menu Item</h4>
 
-                                    </form>
-                                    
-                                </>}
-                                handleClose={toggleMenuDeletePopup}
-                            />}
+                                <form onSubmit={onDeleteMenuSubmit}>
+                                    {selectedMenuItem && <>
+                                        <p className='delete-confirmation'>Are you sure you want to remove this menu item? This action cannot be undone.</p>
+                                        <div className='submitButton'>
+                                            <input className='popup-submit' type="submit" value="Remove Menu Item" />
+                                        </div>
+                                    </>}
+
+                                </form>
+
+                            </>}
+                            handleClose={toggleMenuDeletePopup}
+                        />}
                     </div>
                 </div>
             </div>
