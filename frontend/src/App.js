@@ -34,7 +34,7 @@ function App() {
     }
     getRestaurants();
   }, [])
-
+//gets all menu items from all restaurants
   useEffect(() => {
     const getMenu = async () => {
       try {

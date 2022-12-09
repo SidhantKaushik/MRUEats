@@ -197,6 +197,12 @@
 .RestaurantPage .cart-item {
     list-style: none;
 }
+.remove {
+    height: 20px
+}
+.remove:hover {
+    cursor: pointer;
+}
 @media (max-width: 900px) {
     .RestaurantPage .mainContentBody {
         display: grid;

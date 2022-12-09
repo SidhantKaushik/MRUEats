@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 
 const RestaurantDetails = (props) => {
 
+    //states
     const [menuItems, setMenuItems] = useState([])
     const [categories, setCategories] = useState([])
     const [currItem, setCurrItem] = useState([])
@@ -51,8 +52,20 @@ const RestaurantDetails = (props) => {
         }
         
    }
-    
+   //removes menu items from the cart 
+   function removeSelect(props) {
+        console.log(props)
+        currentItem = [...currItem]
+        const index = currentItem.map(e => e.name).indexOf(props)
+        if (index > -1){
+            currentItem.splice(index, 1)
+        }
+
+        setCurrItem(currentItem)
+    }
+
     const location = useLocation()
+    //checks what restaurant ID is selected and selects all menu items with that id
     useEffect(() => {
         if(location.state) {
             item = []
@@ -90,6 +103,7 @@ const RestaurantDetails = (props) => {
         setFinalPrice(formatPrice(sum))
     }, [priceItem])
 
+    //displays menu items based on categories users selects 
     function filter(props){
         item = []
         filterItem = []
@@ -99,7 +113,7 @@ const RestaurantDetails = (props) => {
                 filterItem.push(x[i])
             }
         }
-        
+        //will show all menu items if "ALL" categories is presssed
         if (props.target !== undefined){
             setMenuItems(x)
         }
@@ -108,7 +122,8 @@ const RestaurantDetails = (props) => {
         }
         
     }
-
+    //users selects menu items and gets added to cart
+    //also prices are collected
     function menuSelect(props) {
         currentItem = [...currItem]
         
@@ -201,6 +216,7 @@ const RestaurantDetails = (props) => {
                             {currItem.map((p, index) => (
                                 <CartItems
                                     name={p.name}
+                                    remove={removeSelect}
                                 /> 
                             ))}
                     </ol>
