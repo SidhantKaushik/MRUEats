@@ -27,6 +27,12 @@ Go to the project directory
   cd MRUEats
 ```
 
+Edit .env File
+```bash
+   Create a copy of .env_template
+   Rename to .env
+```
+
 Install dependencies
 
 ```bash
