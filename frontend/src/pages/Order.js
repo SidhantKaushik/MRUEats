@@ -4,7 +4,6 @@ function Order() {
     return (
         <div className="OrderPage">
             <div className="OrderBanner">
-                {/* <img src={logo} className="restrauntImage" alt="logo" />*/}
                 <div className="firstLine">
                     <h1 className="restrauntName">Booster Juice</h1>
                     <div className="stars">XXXXX</div>

@@ -13,7 +13,7 @@ import Collapsible from 'react-collapsible';
 
 const EditAccount = (props) => {
     //Check if userInfo is logged in
-    //Needed for passing state through <Link>s
+    //Needed for passing state through <Link>
     const location = useLocation();
     const { userInfo } = location.state;
 

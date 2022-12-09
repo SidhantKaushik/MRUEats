@@ -98,7 +98,7 @@ function Register() {
     return (
         <div class="RegisterPage">
             <div className="left">
-            <img src={PizzaImg} alt="Image of Pizza"/>
+            <img src={PizzaImg} alt="Pizza"/>
             </div>
             <div class="box">
                 <form onSubmit={onSubmit}>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import '../styles/Home.css';
 import RestaurantItem from './RestaurantItem';
@@ -13,7 +13,6 @@ const Home = (props) => {
 
     let filterRest = []
     let allRest = [...props.restaurants.restaurants]
-    const [menu, setMenu] = useState([])
     const [categories, setCategories] = useState([]);
     const [rest, setRest] = useState([]);
 
@@ -109,13 +108,13 @@ const Home = (props) => {
         <div className='home'>
             <div className="SplashScreen">
                 <div className="slide">
-                    <img src='https://harbourcats.com/wp-content/uploads/2016/07/BoosterJ_MasterLogo_Rinkboards-002.jpg'></img>
+                    <img alt="logo" src='https://harbourcats.com/wp-content/uploads/2016/07/BoosterJ_MasterLogo_Rinkboards-002.jpg'></img>
                 </div>
                 <div class="slide hideInitally">
-                    <img src="https://images.squarespace-cdn.com/content/v1/589a30d2725e258996583851/1486999228841-X0ZTSTV7NP709CWNAQD6/tacobell_banner.jpg?format=2500w" alt="Image 2"/>
+                    <img alt="logo" src="https://images.squarespace-cdn.com/content/v1/589a30d2725e258996583851/1486999228841-X0ZTSTV7NP709CWNAQD6/tacobell_banner.jpg?format=2500w"/>
                 </div>
                 <div class="slide hideInitally">
-                    <img src="https://play-lh.googleusercontent.com/IBOv3AqPhvvk7nOgRTJ2VBfOmgO8313X-SGrxolqqv4xjDah5pHukPsgbrzYxCUChQ=h500"></img>
+                    <img alt="logo" src="https://play-lh.googleusercontent.com/IBOv3AqPhvvk7nOgRTJ2VBfOmgO8313X-SGrxolqqv4xjDah5pHukPsgbrzYxCUChQ=h500"></img>
                 </div>
                 
             </div>

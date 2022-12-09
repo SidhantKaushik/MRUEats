@@ -67,7 +67,7 @@ function Admin(props) {
           const response = await fetch(url);
           const data = await response.json();
           setAllMenuItems(data);
-          setMenu(data.filter((item) => item.restaurantId == 1));
+          setMenu(data.filter((item) => item.restaurantId === 1));
         } catch (err) {
           console.error(err);
         }
@@ -91,8 +91,8 @@ function Admin(props) {
       
     const populateRestaurant = (e) => {
         var restaurantId = e.target.id;
-        setSelectedRestaurant(restaurants.find(restaurant => restaurant.id == restaurantId));
-        setMenu(allMenuItems.filter((item) => item.restaurantId == restaurantId));
+        setSelectedRestaurant(restaurants.find(restaurant => restaurant.id === restaurantId));
+        setMenu(allMenuItems.filter((item) => item.restaurantId === restaurantId));
     }
 
     var restaurantList = restaurants.map((restaurant) =>
@@ -123,17 +123,6 @@ function Admin(props) {
         return strTime;
     }
 
-    function checkIfOpen() {
-        const d = new Date();
-        let time = d.getHours() +""+ d.getMinutes();
-        if ( time > selectedRestaurant.open && time < selectedRestaurant.close){
-             return "Open";
-        }
-        else{
-            return "Closed";
-        }
-    }
-
     function getLatestMenuId() {
         if(Object.keys(menu).length === 0) {
             return 1;
@@ -161,7 +150,7 @@ function Admin(props) {
 
     const handleSelectedMenu = (e) => {
         var menuItemId = e.currentTarget.id;
-        var selectedMenuItem = menu.find(menu => menu.id == menuItemId && menu.restaurantId == selectedRestaurant.id);
+        var selectedMenuItem = menu.find(menu => menu.id === menuItemId && menu.restaurantId === selectedRestaurant.id);
         setSelectedMenuItem(selectedMenuItem);
     }
 
@@ -221,7 +210,6 @@ function Admin(props) {
         const response = await axios.post(RESTAURANTS_API_URL + 'ADD', restaurantData);
 
         if (response.status === 201) {
-            console.log(response.data);
             toast.success('Successfully added restaurant!');
         } else {
             toast.error('Error: Could not add restaurant');
@@ -286,7 +274,6 @@ function Admin(props) {
         const response = await axios.put(RESTAURANTS_API_URL + 'UPDATE', restaurantData);
 
         if (response.status === 201) {
-            console.log(response.data);
             toast.success('Successfully updated restaurant!');
         } else {
             toast.error('Error: Could not update restaurant');
@@ -351,7 +338,6 @@ function Admin(props) {
         const response = await axios.delete(RESTAURANTS_API_URL + 'DELETE', { data: restaurantData });
 
         if (response.status === 204) {
-            console.log(response.data);
             toast.success('Successfully deleted restaurant!');
         } else {
             toast.error('Error: Could not delete restaurant');
@@ -382,7 +368,6 @@ function Admin(props) {
         const response = await axios.post(MENU_API_URL + 'ADD', menuItemData);
 
         if (response.status === 201) {
-            console.log(response.data);
             toast.success('Successfully added menu item!');
         } else {
             toast.error('Error: Could not add menu item');
@@ -460,7 +445,6 @@ function Admin(props) {
         const response = await axios.put(MENU_API_URL + 'UPDATE', menuItemData);
 
         if (response.status === 201) {
-            console.log(response.data);
             toast.success('Successfully updated menu item!');
         } else {
             toast.error('Error: Could not update menu item');
@@ -524,7 +508,6 @@ function Admin(props) {
         const response = await axios.delete(MENU_API_URL + 'DELETE', { data: menuItemData });
 
         if (response.status === 204) {
-            console.log(response.data);
             toast.success('Successfully deleted menu item!');
         } else {
             toast.error('Error: Could not delete menu item');
