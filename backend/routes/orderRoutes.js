@@ -5,8 +5,6 @@ const { getOrders, getOrderByUser, setOrder, getActiveOrders, getCompleteOrders,
 //Auth middleware to only let authorized users access
 const { protect } = require('../middleware/authMiddleware');
 
-//Get all orders
-router.route('/').get(getOrders, protect)
 //Get a single user's order
 router.get('/:id', getOrderByUser, protect);
 //Get active orders
@@ -17,7 +15,8 @@ router.route('/complete').get(getCompleteOrders, protect);
 router.route('/DEACTIVATE').put(deactivateOrder, protect);
 //Post a new order to the database
 router.post('/post', setOrder, protect);
-
+//Get all orders
+router.route('/').get(getOrders, protect)
 
 
 module.exports = router;
