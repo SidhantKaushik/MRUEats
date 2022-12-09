@@ -51,7 +51,7 @@ const RestaurantDetails = (props) => {
             userId: user?.id,
             specialInstructions: formData?.specialInstructions,
             restaurantId: location.state.id,
-            dateOrdered: createDate(),
+            //dateOrdered: createDate(),
             price: finalPrice,
             deliverTo: user?.deliverTo
         }
