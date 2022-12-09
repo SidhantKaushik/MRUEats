@@ -173,7 +173,7 @@ const Courier = (props) => {
     var ordersData = orders?.map((order) => ({
       id: order.id,
       RestaurantId: order.restaurantId,
-      RestaurantName: restaurants.find(rest => rest.id == order.restaurantId).name,
+      RestaurantName: restaurants.find(rest => rest.id == order.restaurantId)?.name,
       Date: order.dateOrdered,
       Price: order.price,
       User: `${users.find(user => user.id == order.userId)?.firstName} ${users.find(user => user.id == order.userId)?.lastName}`,
