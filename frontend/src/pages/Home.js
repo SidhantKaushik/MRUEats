@@ -10,6 +10,7 @@ const Home = (props) => {
     const [categories, setCategories] = useState([]);
     const [rest, setRest] = useState([]);
 
+    //gets all restaurants
     useEffect(() => {
         const getRestaurants = async () => {
             try {

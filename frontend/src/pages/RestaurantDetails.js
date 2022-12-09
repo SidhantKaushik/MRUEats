@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 
 const RestaurantDetails = (props) => {
 
+    //states
     const [menuItems, setMenuItems] = useState([])
     const [categories, setCategories] = useState([])
     const [currItem, setCurrItem] = useState([])
@@ -50,7 +51,7 @@ const RestaurantDetails = (props) => {
             userId: user?.id,
             specialInstructions: formData?.specialInstructions,
             restaurantId: location.state.id,
-            dateOrdered: createDate(),
+            //dateOrdered: createDate(),
             price: finalPrice,
             deliverTo: user?.deliverTo
         }
@@ -61,10 +62,22 @@ const RestaurantDetails = (props) => {
         if (menuID.length > 0) {
             toast.success('Successfully ordered!');
         }
+        
+   }
+   //removes menu items from the cart 
+   function removeSelect(props) {
+        console.log(props)
+        currentItem = [...currItem]
+        const index = currentItem.map(e => e.name).indexOf(props)
+        if (index > -1){
+            currentItem.splice(index, 1)
+        }
 
+        setCurrItem(currentItem)
     }
 
     const location = useLocation()
+    //checks what restaurant ID is selected and selects all menu items with that id
     useEffect(() => {
         if (location.state) {
             item = []
@@ -102,7 +115,8 @@ const RestaurantDetails = (props) => {
         setFinalPrice(formatPrice(sum))
     }, [priceItem])
 
-    function filter(props) {
+    //displays menu items based on categories users selects 
+    function filter(props){
         item = []
         filterItem = []
         let x = JSON.parse(localStorage.getItem('itemsArray'))
@@ -111,8 +125,8 @@ const RestaurantDetails = (props) => {
                 filterItem.push(x[i])
             }
         }
-
-        if (props.target !== undefined) {
+        //will show all menu items if "ALL" categories is presssed
+        if (props.target !== undefined){
             setMenuItems(x)
         }
         else {
@@ -120,24 +134,8 @@ const RestaurantDetails = (props) => {
         }
 
     }
-
-    function createDate() {
-
-        const date = new Date();
-
-        const year = date.getFullYear();
-
-        let month = (1 + date.getMonth()).toString();
-        month = month.length > 1 ? month : '0' + month;
-
-        let day = date.getDate().toString();
-        day = day.length > 1 ? day : '0' + day;
-
-        return month + '/' + day + '/' + year;
-    }
-
-
-
+    //users selects menu items and gets added to cart
+    //also prices are collected
     function menuSelect(props) {
         currentItem = [...currItem]
 
@@ -230,7 +228,8 @@ const RestaurantDetails = (props) => {
                             {currItem.map((p, index) => (
                                 <CartItems
                                     name={p.name}
-                                />
+                                    remove={removeSelect}
+                                /> 
                             ))}
                         </ol>
                         <div className='order-notes'>
