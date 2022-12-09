@@ -5,23 +5,23 @@ const Menu = require('../models/MenuItem');
 
 // @desc   Get menu items
 // @route  GET /api/menu
-// @access Public
+// @access Private
 const getMenu = asyncHandler(async (req, res) => {
     const menu = await Menu.find();
 
     res.status(200).json(menu);
 });
 
-// @desc   Get menu items for single restaurant
+// @desc   Get menu items for single menu
 // @route  GET /api/menu/:id
-// @access Public
+// @access Private
 const getMenuByRestaurant = asyncHandler(async (req, res) => {
     const menu = await Menu.find({ restaurantId: req.restaurant_id });
 
     res.status(200).json(menu);
 });
 
-// @desc   Add a new menu item
+// @desc   Adds a new menu item
 // @route  POST /api/menu/ADD
 // @access Private
 const addMenu = asyncHandler(async (req, res) => {
@@ -35,29 +35,29 @@ const addMenu = asyncHandler(async (req, res) => {
         category: req.body.category
     });
 
-    if (menu) {
+    if(menu){
 
-        res.status(201).json({ menu });
+        res.status(201).json({menu});
 
     }
 });
 
-// @desc   Update a menu item
+// @desc   Updates a menu item
 // @route  PUT /api/menu/UPDATE
 // @access Private
 const updateMenu = asyncHandler(async (req, res) => {
 
-    let menuToUpdate = await Menu.findById({ _id: req.body._id });
+    let menuToUpdate = await Menu.findById({_id: req.body._id});
 
     if (!menuToUpdate) {
         throw new NotFoundError();
     }
 
-    menuToUpdate.set({ name: req.body.name, price: req.body.price, description: req.body.description, category: req.body.category });
+    menuToUpdate.set({name:req.body.name, price:req.body.price, description:req.body.description, category:req.body.category});
 
     await menuToUpdate.save();
 
-    res.status(201).json({ menuToUpdate });
+    res.status(201).json({menuToUpdate});
 
 });
 
@@ -68,22 +68,21 @@ const updateMenu = asyncHandler(async (req, res) => {
 const deleteMenu = asyncHandler(async (req, res) => {
 
     let id = req.body._id;
-    try {
-        const deleted = await Menu.deleteOne({
-            _id: id,
-        });
-        if (deleted.deletedCount === 0) {
-            return res.status(404).send({
-                message: 'Could not find the specified resource to delete.',
+        try {
+            const deleted = await Menu.deleteOne({
+                _id: id,
             });
-        }
-        return res.sendStatus(204);
-    } catch (error) {
-        return res.status(500).send({
-            message: error.message,
-        });
-    }
-});
+            if (deleted.deletedCount === 0) {
+              return res.status(404).send({
+                message: 'Could not find the specified resource to delete.',
+              });
+            }
+            return res.sendStatus(204);
+          } catch (error) {
+            return res.status(500).send({
+              message: error.message,
+            });
+}});
 
 module.exports = {
 

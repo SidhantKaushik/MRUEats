@@ -1,7 +1,7 @@
 import "../styles/Hamburger.css"
 
 const Hamburger = (props) => {
-    return (
+    return ( 
         <div className="hamburger">
             <div className="burger 1Line"></div>
             <div className="burger 2Line"></div>

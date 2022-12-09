@@ -1,6 +1,5 @@
-//Formats price to have a '$' and to two decimal places
-export default function formatPrice(value) {
-    if (!value) {
+export default function formatPrice(value){
+    if (!value){
         return null;
     }
 

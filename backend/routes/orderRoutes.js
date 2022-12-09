@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { getOrders, getOrderByUser, setOrder, getActiveOrders, getCompleteOrders, deactivateOrder } = require('../controllers/orderController');
 
-//Auth middleware to only let authorized users access
+//Add admin protection for all orders
 const { protect } = require('../middleware/authMiddleware');
 
 //Get active orders
@@ -17,6 +17,5 @@ router.route('/DEACTIVATE').put(deactivateOrder, protect);
 router.post('/post', setOrder, protect);
 //Get all orders
 router.route('/').get(getOrders, protect)
-
 
 module.exports = router;
