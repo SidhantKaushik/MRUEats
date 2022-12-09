@@ -96,11 +96,11 @@ function Register() {
 
 
     return (
-        <div class="RegisterPage">
+        <div className="RegisterPage">
             <div className="left">
             <img src={PizzaImg} alt="Pizza"/>
             </div>
-            <div class="box">
+            <div className="box">
                 <form onSubmit={onSubmit}>
                     <div className='fName'>
                         <label for="first-name">First Name</label>
