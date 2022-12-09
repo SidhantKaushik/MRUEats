@@ -8,6 +8,7 @@ import CartItems from './CartItems'
 import {useSelector, useDispatch} from 'react-redux'
 import {createOrder} from '../features/orders/orderSlice'
 import formatPrice from '../helpers/price-format';
+import { toast } from 'react-toastify';
 
 const RestaurantDetails = (props) => {
 
@@ -46,6 +47,10 @@ const RestaurantDetails = (props) => {
         setCurrItem([])
         setPriceItem([])
         setFinalPrice()
+        if(menuID.length > 0){
+            toast.success('Successfully ordered!');
+        }
+        
    }
     
     const location = useLocation()
@@ -107,17 +112,17 @@ const RestaurantDetails = (props) => {
 
     function menuSelect(props) {
         currentItem = [...currItem]
-        //finalP = 0
+        
         for(let i = 0; i < menuItems.length; i++){    
             if (menuItems[i].name == props){
                 currentItem.push(menuItems[i])
-                //price.push(menuItems[i].price)
+                
                 setPriceItem([...priceItem, menuItems[i].price])
             }
         }
 
         setCurrItem(currentItem)
-        //setPriceItem([..priceItem, menuItems[i].price])
+        
     }
 
     const onChange = (e) => {
@@ -163,11 +168,12 @@ const RestaurantDetails = (props) => {
                 <div className="menuCategories">
                 <h3>Categories</h3>
                     <ol className='categoriesList'>
-                    <li className='category-item' onClick={filter}>
+                    <li key="SDFSDF" className='category-item' onClick={filter}>
                         All 
                     </li>
                         {categories.map((p, index) => (
                             <Category
+                                debug={index}
                                 category={p.category}
                                 filter={filter}
                             />

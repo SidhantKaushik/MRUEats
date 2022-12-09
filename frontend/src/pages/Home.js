@@ -111,10 +111,10 @@ const Home = (props) => {
                 <div className="slide">
                     <img src='https://harbourcats.com/wp-content/uploads/2016/07/BoosterJ_MasterLogo_Rinkboards-002.jpg'></img>
                 </div>
-                <div class="slide hideInitally">
+                <div className="slide hideInitally">
                     <img src="https://images.squarespace-cdn.com/content/v1/589a30d2725e258996583851/1486999228841-X0ZTSTV7NP709CWNAQD6/tacobell_banner.jpg?format=2500w" alt="Image 2"/>
                 </div>
-                <div class="slide hideInitally">
+                <div className="slide hideInitally">
                     <img src="https://play-lh.googleusercontent.com/IBOv3AqPhvvk7nOgRTJ2VBfOmgO8313X-SGrxolqqv4xjDah5pHukPsgbrzYxCUChQ=h500"></img>
                 </div>
                 
