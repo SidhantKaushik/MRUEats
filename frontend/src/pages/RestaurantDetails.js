@@ -8,6 +8,7 @@ import CartItems from './CartItems'
 import {useSelector, useDispatch} from 'react-redux'
 import {createOrder} from '../features/orders/orderSlice'
 import formatPrice from '../helpers/price-format';
+import { toast } from 'react-toastify';
 
 const RestaurantDetails = (props) => {
 
@@ -50,6 +51,10 @@ const RestaurantDetails = (props) => {
         setCurrItem([])
         setPriceItem([])
         setFinalPrice()
+        if(menuID.length > 0){
+            toast.success('Successfully ordered!');
+        }
+        
    }
     
     const location = useLocation()

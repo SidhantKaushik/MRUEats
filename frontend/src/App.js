@@ -5,9 +5,7 @@ import Header from './components/Header';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
-import Order from './pages/Order';
 import Account from './pages/Account';
-import Cart from './pages/Cart';
 import Admin from './pages/Admin';
 import Courier from './pages/Courier';
 import RestaurantOrder from './pages/RestaurantOrder';
@@ -62,9 +60,7 @@ function App() {
             <Route exact path='/register' element={<Register />}></Route>
             <Route exact path='/account' element={<Account />}></Route>
             <Route exact path='/account-edit' element={<EditAccount />}></Route>
-            <Route exact path='/order' element={<Order />}></Route>
             <Route exact path='/order-history' element={<OrderHistory restaurants={{restaurants}} menu={{menu}}/>}></Route>
-            <Route exact path='/cart' element={<Cart />}></Route>
             <Route exact path='/admin' element={<Admin />}></Route>
             <Route exact path='/courier' element={<Courier />}></Route>
             <Route exact path='/restaurantDetails' element={<RestaurantDetails menu={{menu}}/>}></Route>
