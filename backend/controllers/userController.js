@@ -41,7 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
         lastName: lastName,
         deliverTo: deliverTo,
         email: email,
-        isAdmin: true,
+        isAdmin: false,
         isCourier: checked,
         password_bcrypt: hashedPassword,
 
