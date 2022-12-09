@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import '../styles/Home.css';
-import RestaurantItem from './RestaurantItem';
-import HomepageCategories from './HomepageCategories';
+import RestaurantItem from '../components/RestaurantItem';
+import HomepageCategories from '../components/HomepageCategories';
 
 const Home = (props) => {
 

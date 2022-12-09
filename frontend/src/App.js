@@ -8,7 +8,7 @@ import Home from './pages/Home';
 import Account from './pages/Account';
 import Admin from './pages/Admin';
 import Courier from './pages/Courier';
-import RestaurantOrder from './pages/RestaurantOrder';
+import RestaurantOrder from './components/RestaurantOrder';
 import OrderHistory from './pages/OrderHistory';
 import RestaurantDetails from './pages/RestaurantDetails';
 import EditAccount from './pages/EditAccount';

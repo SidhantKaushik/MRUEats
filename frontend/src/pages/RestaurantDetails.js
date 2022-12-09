@@ -1,9 +1,9 @@
 import '../styles/RestaurantDetails.css'
 import {useLocation} from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
-import Category from './Category'
-import MenuItem from './MenuItem'
-import CartItems from './CartItems'
+import Category from '../components/Category'
+import MenuItem from '../components/MenuItem'
+import CartItems from '../components/CartItems'
 import {useSelector, useDispatch} from 'react-redux'
 import {createOrder} from '../features/orders/orderSlice'
 import formatPrice from '../helpers/price-format';
@@ -127,6 +127,24 @@ const RestaurantDetails = (props) => {
         setCurrItem(currentItem)
     }
 
+    function removeSelect(props) {
+        console.log(props)
+        currentItem = [...currItem]
+        const index = currentItem.map(e => e.name).indexOf(props)
+        if (index > -1){
+            currentItem.splice(index, 1)
+        }
+        // for(let i = 0; i < menuItems.length; i++){    
+        //     if (menuItems[i].name === props){
+        //         currentItem.pop(menuItems[i])
+        //         //menu price stacks on top of current menu items in cart
+        //         setPriceItem([...priceItem, menuItems[i].price])
+        //     }
+        // }
+
+        setCurrItem(currentItem)
+    }
+
     const onChange = (e) => {
 
         setFormData((prevState) => ({
@@ -204,6 +222,7 @@ const RestaurantDetails = (props) => {
                             {currItem.map((p, index) => (
                                 <CartItems
                                     name={p.name}
+                                    remove={removeSelect}
                                 /> 
                             ))}
                     </ol>
