@@ -1,4 +1,4 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import orderService from './orderService'
 
 const initialState = {
@@ -12,9 +12,8 @@ const initialState = {
 //create new order
 export const createOrder = createAsyncThunk('orders/create', async(orderData, thunkAPI) => {
     try {
-        const token = thunkAPI.getState().auth.user.token
-        return await orderService.createOrder(orderData, token)
-    } catch (error){
+        return await orderService.createOrder(orderData)
+    } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
         return thunkAPI.rejectWithValue(message);
     }
@@ -45,5 +44,5 @@ export const orderSlice = createSlice({
     }
 })
 
-export const {reset} = orderSlice.actions
+export const { reset } = orderSlice.actions
 export default orderSlice.reducer

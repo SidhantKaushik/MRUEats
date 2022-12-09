@@ -4,7 +4,7 @@ const Restaurant = require('../models/Restaurant');
 
 // @desc   Get restaurants
 // @route  GET /api/restaurants
-// @access Private
+// @access Public
 const getAllRestaurants = asyncHandler(async (req, res) => {
     const restaurants = await Restaurant.find();
 
@@ -13,14 +13,14 @@ const getAllRestaurants = asyncHandler(async (req, res) => {
 
 // @desc   Get restaurant by id
 // @route  GET /api/restaurants/:id
-// @access Private
+// @access Public
 const getRestaurantById = asyncHandler(async (req, res) => {
-    const restaurants = await Restaurant.find({id: req.params.id});
+    const restaurants = await Restaurant.find({ id: req.params.id });
 
     res.status(200).json(restaurants);
 });
 
-// @desc   Adds a new restaurant
+// @desc   Add a new restaurant
 // @route  POST /api/restaurants/ADD
 // @access Private
 const addRestaurant = asyncHandler(async (req, res) => {
@@ -36,54 +36,55 @@ const addRestaurant = asyncHandler(async (req, res) => {
         category: req.body.category
     });
 
-    if(restaurant){
+    if (restaurant) {
 
-        res.status(201).json({restaurant});
+        res.status(201).json({ restaurant });
 
     }
 });
 
-// @desc   Updates a restaurant
+// @desc   Update a restaurant
 // @route  PUT /api/restaurants/UPDATE
 // @access Private
 const updateRestaurant = asyncHandler(async (req, res) => {
 
-    let restToUpdate = await Restaurant.findById({_id: req.body._id});
+    let restToUpdate = await Restaurant.findById({ _id: req.body._id });
 
     if (!restToUpdate) {
         throw new NotFoundError();
     }
 
-    restToUpdate.set({name:req.body.name, logo:req.body.logo, rating:req.body.rating, address:req.body.address, open:req.body.open, close:req.body.close, category:req.body.category});
+    restToUpdate.set({ name: req.body.name, logo: req.body.logo, rating: req.body.rating, address: req.body.address, open: req.body.open, close: req.body.close, category: req.body.category });
 
     await restToUpdate.save();
 
-    res.status(201).json({restToUpdate});
-    
+    res.status(201).json({ restToUpdate });
+
 });
 
 
-// @desc   Deletes a restaurant
+// @desc   Delete a restaurant
 // @route  DELETE /api/restaurants/DELETE
 // @access Private
 const deleteRestaurant = asyncHandler(async (req, res) => {
 
     let id = req.body._id;
-        try {
-            const deleted = await Restaurant.deleteOne({
-                _id: id,
-            });
-            if (deleted.deletedCount === 0) {
-              return res.status(404).send({
+    try {
+        const deleted = await Restaurant.deleteOne({
+            _id: id,
+        });
+        if (deleted.deletedCount === 0) {
+            return res.status(404).send({
                 message: 'Could not find the specified resource to delete.',
-              });
-            }
-            return res.sendStatus(204);
-          } catch (error) {
-            return res.status(500).send({
-              message: error.message,
             });
-}});
+        }
+        return res.sendStatus(204);
+    } catch (error) {
+        return res.status(500).send({
+            message: error.message,
+        });
+    }
+});
 
 module.exports = {
 
