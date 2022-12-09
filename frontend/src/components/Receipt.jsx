@@ -6,7 +6,6 @@ import formatDate from '../helpers/date-format';
 
 
 export default (props) => (
-  console.log(props),
   <Popup
     trigger={<button className="button" id="myButton"> View Receipt </button>}
     modal

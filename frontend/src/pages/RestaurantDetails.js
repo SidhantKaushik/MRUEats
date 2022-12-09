@@ -1,7 +1,6 @@
 import '../styles/RestaurantDetails.css'
-import {Link, useLocation} from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
-import { set } from 'mongoose'
 import Category from './Category'
 import MenuItem from './MenuItem'
 import CartItems from './CartItems'
@@ -24,7 +23,7 @@ const RestaurantDetails = (props) => {
     let currentItem = []
     let item = []
     let filterItem = [];
-    const { user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth);
+    const { user} = useSelector((state) => state.auth);
    const dispatch = useDispatch()
 
    
@@ -65,7 +64,7 @@ const RestaurantDetails = (props) => {
             }
             
         }
-        if(item.length != 0){
+        if(item.length !== 0){
             localStorage.setItem('itemsArray', JSON.stringify(item))
             setMenuItems(JSON.parse(localStorage.getItem('itemsArray')))
             item = item.filter((value, index, self) => 
@@ -96,12 +95,12 @@ const RestaurantDetails = (props) => {
         filterItem = []
         let x = JSON.parse(localStorage.getItem('itemsArray'))
         for(let i = 0; i < x.length; i++){    
-            if (x[i].category == props){
+            if (x[i].category === props){
                 filterItem.push(x[i])
             }
         }
         
-        if (props.target != undefined){
+        if (props.target !== undefined){
             setMenuItems(x)
         }
         else {
@@ -114,7 +113,7 @@ const RestaurantDetails = (props) => {
         currentItem = [...currItem]
         
         for(let i = 0; i < menuItems.length; i++){    
-            if (menuItems[i].name == props){
+            if (menuItems[i].name === props){
                 currentItem.push(menuItems[i])
                 
                 setPriceItem([...priceItem, menuItems[i].price])

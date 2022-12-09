@@ -1,6 +1,5 @@
 import '../styles/Courier.css'
 import { useState, useEffect } from 'react';
-import Popup from '../components/Popup';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -57,7 +56,6 @@ const Courier = (props) => {
         const url = "api/orders/active";
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
         setActiveOrders(data);
       } catch (err) {
         console.error(err);
@@ -92,7 +90,6 @@ const Courier = (props) => {
       const response = await axios.put('api/orders/DEACTIVATE', orderData);
 
       if (response.data) {
-          console.log(response.data);
           toast.success('Successfully deactivated order!');
       }
        return response.data;
@@ -160,11 +157,11 @@ const Courier = (props) => {
     var ordersData = orders.map((order) => ({
       id: order.id,
       RestaurantId: order.restaurantId,
-      RestaurantName: restaurants.find(rest => rest.id == order.restaurantId).name,
+      RestaurantName: restaurants.find(rest => rest.id === order.restaurantId).name,
       Date: order.dateOrdered,
       Price: order.price,
-      User: `${users.find(user => user.id == order.userId)?.firstName} ${users.find(user => user.id == order.userId)?.lastName}`,
-      Location: users.find(user => user.id == order.userId)?.deliverTo,
+      User: `${users.find(user => user.id === order.userId)?.firstName} ${users.find(user => user.id === order.userId)?.lastName}`,
+      Location: users.find(user => user.id === order.userId)?.deliverTo,
       MenuItems: order.menuItems,
       SpecialInst: order.specialInstructions
     }));
@@ -218,7 +215,7 @@ const Courier = (props) => {
                         <p>Total Price: {order.Price}</p>
                         <p>User: {order.User}</p>
                         <p>Location: {order.Location}</p>
-                        <p>Menu Items: {getMenuItemsByOrder(order.MenuItems, order.RestaurantId)}</p>
+                        Menu Items: {getMenuItemsByOrder(order.MenuItems, order.RestaurantId)}
                         <p>Special Instructions: {order.SpecialInst}</p>
                       </div>            
                     </div>                                    

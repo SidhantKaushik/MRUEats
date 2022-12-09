@@ -51,7 +51,7 @@ const Account = () => {
                         </div>
                         <div className="ProfileInformation">
                             <div className="editIconWrapper">
-                            <Link to='/account-edit' state={{ userInfo: userInfo }}><img className='editIcon' src={EditIcon} /></Link>
+                            <Link to='/account-edit' state={{ userInfo: userInfo }}><img className='editIcon' src={EditIcon} alt="edit"/></Link>
                             </div>
                             <div className="reqInfo">
                                 <Collapsible open="true" trigger="Required User Information">
