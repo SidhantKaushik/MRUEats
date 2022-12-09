@@ -1,0 +1,201 @@
+.RegisterPage {
+    display:grid;
+    grid-template-columns: 2fr 1fr;
+    height: 100%;
+    width: 100%;
+    min-height: calc(100vh - 96.67px);
+    overflow:hidden;
+}
+.RegisterPage .box{
+    background: #f1ecdc;
+    padding-top: 15px;
+}
+.RegisterPage .box input {
+    background: #d9d2bc;
+    height: 30px;
+    width: 100%;
+    border:none;
+}
+.RegisterPage .box input::placeholder{
+    font-size: .8em;
+    padding-left:5px;
+}
+.RegisterPage .courier{
+    grid-area: courier;
+    display:flex;
+    align-items: center;
+}
+.RegisterPage .courier input[type="checkbox"]{
+    width: initial;
+}
+.RegisterPage .courier label{
+    margin: 0;
+}
+.RegisterPage #Login{
+    grid-area: alreadyAccount;
+}
+.RegisterPage .left{
+    width: 100%;
+    height: 100%;
+}
+.RegisterPage .left img{
+    object-fit: cover;
+width: 100%;
+height: 100%;
+}
+
+.RegisterPage form {
+    display: grid;
+    grid-template-areas:
+        "fName fName"
+        "lName lName"
+        "email email"
+        "dLocation dLocation"
+        "password password"
+        "confirm confirm"
+        "courier courier"
+        "submit submit"
+        "alreadyAccount alreadyAccount";
+    column-gap: 15px;
+    row-gap: 10px;
+    padding: 0 10px 0 10px;
+}
+
+.RegisterPage .dLocation{
+    grid-area: dLocation;
+}
+.RegisterPage .fName{
+    grid-area:fName;
+}
+.RegisterPage .lName{
+    grid-area:lName;
+}
+.RegisterPage .email{
+    grid-area:email;
+}
+.RegisterPage .pass1{
+    grid-area:password;
+    display:grid;
+    grid-template-areas:
+    "PasswordText infoAboutPassword"
+    "passwordInput passwordInput";
+    justify-content: space-between;
+}
+.RegisterPage #passwordText{
+    grid-area: PasswordText;
+}
+.RegisterPage #requirementsForPass{
+    grid-area: infoAboutPassword;
+    margin:0;
+    color: #C93939;
+    font-family: 'Staatliches', cursive !important;
+}
+.RegisterPage #password{
+    grid-area: passwordInput;
+}
+.RegisterPage .pass2{
+    grid-area:confirm;
+}
+.RegisterPage .submitbtn{
+    grid-area:submit;
+    margin-bottom: 20px;
+}
+.RegisterPage .title{
+    grid-area: signup;
+}
+
+.RegisterPage h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'Unna', serif;
+    font-weight: 700;
+    font-size: 2em;
+    line-height: 38px;
+    color: black !important;
+    text-align: center;
+}
+.RegisterPage form label{
+    font-family: 'Staatliches', cursive !important;
+    color: #233c65;
+margin-bottom: 8px;
+font-size:1.1em;
+}
+.RegisterPage #register-button {
+    width: 185px;
+    height: 40px;
+    color: #FFB703 !important;
+    font-size: 1.5em;
+    background: #033453;
+    margin-top:5px;
+    font-family: 'Staatliches', cursive !important;
+}
+
+.RegisterPage a {
+    color: #033453;
+    font-weight: bold;
+}
+
+.RegisterPage input[type="text"] {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 18px;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #000000;
+  }
+  .RegisterPage input[type="email"] {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 18px;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #000000;
+  }
+  .RegisterPage input[type="password"] {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 18px;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #000000;
+  }
+
+.RegisterPage label {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 25px;
+    color: #000;
+}
+
+@media (max-width: 900px) {
+.RegisterPage{
+    grid-template-columns: auto;
+    grid-template-rows: max-content auto;
+}
+.RegisterPage .left img{
+    object-fit: cover;
+width: 100%;
+max-height: 300px;
+}
+}

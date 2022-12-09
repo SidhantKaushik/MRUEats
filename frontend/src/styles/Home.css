@@ -1,0 +1,231 @@
+.home {
+    display: grid;
+    grid-template-areas:
+        "splash splash splash"
+        "categories list list";
+    grid-template-columns: 1fr 1fr 1fr;
+    padding-left: 30px;
+    padding-right:30px;
+    padding-top: 20px;
+    max-width: 1400px;
+    min-width: 70vw;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: #033453;
+    
+}
+
+.HomePage {
+    min-height: 100vh;
+    background-color: blue;
+    background-color: #033453;
+    border-top: 1px solid #ffb703;
+}
+
+.HomePage a {
+    text-decoration: none;
+    color: #033453;
+}
+
+@media (max-width: 900px) {
+    .home{
+        grid-template-areas:
+        "splash"
+        "categories"
+        "list";
+        grid-template-columns: 1fr;
+    }
+    .HomePage .categoriesList{
+        grid-template-columns: 1fr 1fr 1fr !important;
+        padding: 0 5px 0 5px !important;
+        gap: 1px !important;
+    }
+    .HomePage h2{
+        font-size: 1em;
+    }
+    .HomePage .SearchBar{
+        margin-top: 5px;
+    }
+    .HomePage .categories{
+        margin-right: 0 !important;
+    }
+}
+body{
+    background-color: #E5E5E5;
+}
+
+
+.HomePage .categories{
+    grid-area: categories;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+.HomePage .SplashScreen{
+    position: relative;
+    grid-area: splash;
+    height: 300px;
+    width: 100%;
+    justify-self: center;
+    z-index: 0;
+    margin-bottom: 15px;
+}
+.HomePage .SplashScreen .slide img{
+    height: 300px;
+    object-fit: cover;
+    width: 100%;
+}
+.hideInitally{
+    display:none;
+}
+.HomePage .restaurantList{
+    grid-area: list;
+}
+.HomePage .restaurantList img{
+    height: 100px;
+    object-fit: cover;
+}
+.HomePage input {
+    background: #d9d9d9;
+    height: 30px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+.HomePage #orderNow{
+    z-index: 2;
+    position: absolute;
+    right:0px;
+    font-size: 24px;
+    color: #FFB703 !important;
+    bottom: 0px;
+    color: white;
+    background-color: #033453;
+    background: rgba(3, 52, 83, .95);
+    padding-left: 10px;
+    padding-right:10px;
+}
+.HomePage .category-item{
+    font-size: 20px;
+    padding-left:10px;
+    background-color: #033453;
+    color: white;
+    cursor:pointer;
+}
+.HomePage #catTitle{
+    padding-left: 10px;
+    font-family: 'Unna';
+    margin-bottom: 5px;
+}
+.HomePage .categoriesList{
+    margin-top: 10px;
+    list-style: none;
+font-family: 'Unna';
+font-weight: 500;
+font-size: 24px;
+color: #000000;
+padding:0;
+display:grid;
+grid-template-columns: 1fr 1fr 1fr;
+gap: 2px;
+padding: 5px;
+}
+.HomePage .categories{
+    background-color: #f0f1f1;
+}
+.HomePage .categories #all{
+    background-Image: url("https://bcdairy.ca/wp-content/uploads/2021/08/Variety_Image_747px.jpg")
+}
+
+.HomePage .category-item:hover {
+    color: #033453;
+    background-color: white;
+}
+.HomePage .categories .item{
+    cursor: pointer;
+}
+.HomePage .categories .item:hover .category-item {
+    color: #033453;
+    background-color: white;
+    }
+.HomePage .prev{
+    position: absolute;
+    left:0px;
+    cursor: pointer;
+    font-size: 24px;
+    top: 150px;
+    color: white;
+    background-color: #033453;
+    padding-left: 10px;
+    padding-right:10px; 
+}
+.HomePage .next{
+    position: absolute;
+    cursor: pointer;
+    right:0px;
+    font-size: 24px;
+    top: 150px;
+    color: white;
+    background-color: #033453;
+    padding-left: 10px;
+    padding-right:10px; 
+}
+.HomePage .SearchBar{
+    width: 100%;
+    overflow:hidden;
+    border-radius: 5px;
+}
+.HomePage .SearchBar input{
+    background-color: #F6F6F3;
+    padding-left:10px;
+}
+.HomePage .list{
+    background-color: #f0f1f1;
+    padding: 15px;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+.HomePage .restaurantsHomePage{
+    display: grid;
+    grid-template-areas:
+        "logo name . . rating"
+        "logo address . . rating";
+    grid-template-columns: 80px 1fr 1fr;
+    margin-bottom: 10px;
+}
+.restaurantsHomePage .logo{
+    grid-area: logo;
+    align-self: center;
+}
+.restaurantsHomePage .logo img{
+    width: 60px;
+    height:60px;
+}
+.restaurantsHomePage .name{
+    grid-area: name;
+    
+}
+.restaurantsHomePage .name h2{
+    margin:0;
+    
+}
+.HomePage .categories .item{
+    width: 100%;
+    padding-top: 75%;
+    background-size: cover;
+}
+.restaurantsHomePage .rating{
+    grid-area: rating;
+    background-color: #033453;
+    color:white;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-self: center;
+}
+.restaurantsHomePage .rating p{
+    margin-left:auto;
+    margin-right:auto;
+    align-self:center;
+}
+.restaurantsHomePage .address{
+    grid-area: address;
+}

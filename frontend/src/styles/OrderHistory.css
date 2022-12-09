@@ -1,0 +1,165 @@
+.OrderHistoryPage .orderSide{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 80%;
+    padding: 15px;
+    box-sizing: border-box;
+    background: white;
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.OrderHistoryPage .orderHistoryToolBar{
+    outline: 1px solid #cccccc;
+
+}
+
+.OrderHistoryPage #OrderHistory{
+    display: flex;
+    margin: 0 auto;
+
+}
+
+.OrderHistoryPage .orderWrapper{
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    outline: 1px solid #cccccc;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+    border-radius: 10px; 
+}
+
+.OrderHistoryPage .orderHeader{
+    display: flex;
+    justify-content: left;
+    background: #cccccc;
+    padding: 1em;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px; 
+
+}
+
+.OrderHistoryPage .orderHeader > div{
+    display: flex;
+    background: #cccccc;
+    width: 100%;
+    justify-content: space-between;
+
+}
+
+.OrderHistoryPage .orderDetailsWrapper{
+
+    justify-content: center;
+    padding: 1em;
+
+}
+
+.OrderHistoryPage .outputComponent{
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+
+}
+
+.OrderHistoryPage .buttonWrapper{
+    display: flex;
+    justify-content: space-evenly;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 1em;
+    
+}
+
+.OrderHistoryPage .orderDetails{
+
+    display: flex;
+
+}
+
+.OrderHistoryPage .isActive{
+    display: flex;
+
+    justify-content: right;
+}
+
+.OrderHistoryPage .restaurantInfo{
+    justify-content: left;
+    display: flex;
+    align-items: center;
+}
+
+.OrderHistoryPage .orderWrapper#false{
+    opacity: 0.6;
+}
+
+.OrderHistoryPage .backArrow{
+    flex: 1;
+    align-items: center;
+    justify-content: left;
+}
+
+.OrderHistoryPage .backArrow > div{
+    padding: 1em;
+}
+
+.OrderHistoryPage .backArrow > div > a{
+    color: #033453;
+
+}
+
+.OrderHistoryPage .orderHistoryTitle{
+    display: flex;
+    justify-content: center;
+}
+
+.OrderHistoryPage .orderHistoryTitle > h3{
+    flex: 1;
+    width: fit-content;
+}
+
+.OrderHistoryPage .emptyDiv{
+    flex: 1;
+}
+.OrderHistoryPage #myButton{
+    height: 40px;
+    align-self: center;
+    font-family: 'Staatliches', cursive !important;
+    background-color: #033453;
+    color: #ffb703;
+    border: none;
+}
+.OrderHistoryPage .isActive{
+    height: 40px;
+align-self: center;
+font-family: 'Staatliches', cursive !important;
+background-color: #033453;
+color: #ffb703;
+border: none;
+align-items: center;
+padding: 0 10px;
+}
+@media (max-width: 900px) {
+    .OrderHistoryPage .orderSide {
+    margin: 0;
+    }
+    .OrderHistoryPage{
+        display:flex;
+        justify-content: center;
+    }
+    .OrderHistoryPage .orderWrapper{
+        margin: 0;
+        width: 100%;
+    }
+    .OrderHistoryPage #myButton{
+        padding: 5px;
+    }
+    .OrderHistoryPage .buttonWrapper{
+        justify-content: flex-start;
+        gap: 10px;
+    }
+}
+    
