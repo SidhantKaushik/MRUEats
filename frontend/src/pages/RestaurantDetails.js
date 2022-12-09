@@ -25,16 +25,12 @@ const RestaurantDetails = (props) => {
     let item = []
     let filterItem = [];
     const { user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth);
-    // let oldItems = JSON.parse(localStorage.getItem('itemsArray')) || [];
-
    const dispatch = useDispatch()
 
    
 
    const onSubmit = e => {
         e.preventDefault()
-        console.log("current item" + currItem)
-       // let result = currItem.map(a => a.id)
         const menuID = []
         currItem.forEach(e => menuID.push({id: e.id}))
         const menuPrice = []
@@ -67,7 +63,6 @@ const RestaurantDetails = (props) => {
                     
                }
             }
-            console.log("location: " + location.state.id)
             
         }
         if(item.length != 0){
@@ -90,15 +85,11 @@ const RestaurantDetails = (props) => {
     }, [])
 
     useEffect(() => {
-        console.log(priceItem)
         let sum = priceItem.reduce((a, b) => a + b ,0)
         sum += 3.09
         sum = sum * 1.05
         setFinalPrice(formatPrice(sum))
-        console.log(formatPrice(sum))
     }, [priceItem])
-
-    console.log(menuItems)
 
     function filter(props){
         item = []
@@ -120,7 +111,6 @@ const RestaurantDetails = (props) => {
     }
 
     function menuSelect(props) {
-        console.log(props)
         currentItem = [...currItem]
         //finalP = 0
         for(let i = 0; i < menuItems.length; i++){    
@@ -131,7 +121,6 @@ const RestaurantDetails = (props) => {
             }
         }
 
-        console.log(currItem) 
         setCurrItem(currentItem)
         //setPriceItem([..priceItem, menuItems[i].price])
     }
@@ -145,33 +134,20 @@ const RestaurantDetails = (props) => {
         }));
       }
 
-    // function ConvertTime(hour) {
-        
-    //     if(hour <= 1200){
-    //         var hourString = hour.toString();
-    //         hourString = hourString.substring(0,2) + ':' + hourString.substring(2,4);
-    //         return hourString+"AM";
-    //     }
-    //     else{
-    //         hour = hour - 1200;
-    //         var hourString = hour.toString();
-    //         hourString = hourString.substring(0,2) + ':' + hourString.substring(2,4);
-    //         return hourString+"PM";
-    //     }
-    // }
-    // function checkIfOpen() {
-    //     const d = new Date();
-    //     let time = d.getHours() +""+ d.getMinutes();
-    //     console.log(time);
-    //     // console.log(restaurantSelected.open);
-    //     // console.log(restaurantSelected.close);
-    //     if ( time > restaurantSelected.open && time < restaurantSelected.close ){
-    //          return "Open";
-    //     }
-    //     else{
-    //         return "Closed";
-    //     }
-    // }
+      function ConvertTime(hour) {
+        let hours = Math.floor(hour / 100);
+        let minutes = hour % 100;
+        let amPm = hours >= 12 ? 'pm' : 'am';
+
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+
+        let strTime = hours + ':' + minutes + ' ' + amPm;
+
+        return strTime;
+    }
+
     return (
         <div className="RestaurantPage">
             <div className="RestaurantBanner">
@@ -184,11 +160,8 @@ const RestaurantDetails = (props) => {
                     <h2 className="restaurantInfo">$3.09 Delivery</h2>
                 </div>
                 <div className="thirdLine">
-                    <h2 className="restaurantInfo">Delivery Hours: {location.state.open} - {location.state.close} •</h2>
+                    <h2 className="restaurantInfo">Delivery Hours: {ConvertTime(location.state.open)} - {ConvertTime(location.state.close)}</h2>
                     <h2 className="openStatus restaurantInfo">OPEN</h2>
-                </div>
-                <div>
-                    {/* <input type="text" id="menuSearch" className="menuSearchBar" onKeyUp="myFunction()" placeholder="Search for items" title="Type in a menu name"></input> */}
                 </div>
             </div>
             <div className="mainContentBody">
@@ -235,7 +208,7 @@ const RestaurantDetails = (props) => {
                         <p>Special Instructions</p>
                         <input name="specialInstructions" value={formData.specialInstructions} onChange={onChange}></input>
                     </div>
-                    <button type='submit'>Order</button>
+                    <button type='submit' className='orderButton'>Order</button>
                 </form>
                 </div>
             </div>

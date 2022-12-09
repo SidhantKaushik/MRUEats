@@ -84,6 +84,11 @@ width: 100%;
 height: 100%;
 }
 
+.Login a {
+    color: #033453;
+    font-weight: bold;
+}
+
 @media (max-width: 900px) {
     .Login{
     grid-template-columns: auto;
