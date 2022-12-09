@@ -11,7 +11,7 @@ router.post('/login', loginUser);
 router.put('/UPDATE', updateUser, protect);
 //Get user by id
 router.route('/:id').get(getUser, protect);
-//Get all users
-router.get('/', getUsers, protect);
+//MAY NOT NEED!
+router.get('/', getUsers);
 
 module.exports = router;

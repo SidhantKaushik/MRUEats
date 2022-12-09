@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//Define the schema that maps the structure of the data in mongoDB
 const orderSchema = new mongoose.Schema({
   id: Number,
   restaurantId: Number,
