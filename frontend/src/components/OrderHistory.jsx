@@ -121,42 +121,42 @@ const OrderHistory = (props) => {
 
     function outputComponent(order) {
         // const menuItems = order.menuItems.forEach(menu.find(e => e.id === order));
-        return ( <>
-                 
-                    <div className="orderWrapper" id={order.isActive?.toString()}>
-                        <div className="orderHeader">
-                            <div>
-                            <div className="restaurantInfo">{currentRestaurant.name} ({currentRestaurant.address})</div> <div className="isActive">{isActive(order.isActive)}</div>
-                            </div>
-                        </div>
-                    
-                <div className="orderDetailsWrapper">
-                    <div className="orderDetails">
+        return (<>
+
+            <div className="orderWrapper" id={order.isActive?.toString()}>
+                <div className="orderHeader">
                     <div>
-                        {formatDate(order?.dateOrdered, false)} - {order?.price} - {order.menuItems?.length} Items
-                    </div>
-                    <div>
-                        {showItems(currentMenuItems)}
-                    </div>
-                    <div className="buttonWrapper">
-                        <button id="myButton" onClick={() => { toast.error('Coming soon!'); }}>Reorder</button>
-                        {/* Still in development (Not in scope) */}
-                        <Receipt order={order} restaurant={currentRestaurant} menu={currentMenuItems} user={props.user}></Receipt>
+                        <div className="restaurantInfo">{currentRestaurant.name} ({currentRestaurant.address})</div> <div className="isActive">{isActive(order.isActive)}</div>
                     </div>
                 </div>
-            </div>
+
+                <div className="orderDetailsWrapper">
+                    <div className="orderDetails">
+                        <div>
+                            {formatDate(order?.dateOrdered, false)} - {order?.price} - {order.menuItems?.length} Items
+                        </div>
+                        <div>
+                            {showItems(currentMenuItems)}
+                        </div>
+                        <div className="buttonWrapper">
+                            <button id="myButton" onClick={() => { toast.error('Coming soon!'); }}>Reorder</button>
+                            {/* Still in development (Not in scope) */}
+                            <Receipt order={order} restaurant={currentRestaurant} menu={currentMenuItems} user={props.user}></Receipt>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </>
         );
     }
 
-//Return order history component to fill order history
-return (
-    <div className="outputComponent">
-        {outputComponent(order)}
-    </div>
-)
+    //Return order history component to fill order history
+    return (
+        <div className="outputComponent">
+            {outputComponent(order)}
+        </div>
+    )
 }
 
 export default OrderHistory;

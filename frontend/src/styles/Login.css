@@ -6,10 +6,10 @@
 }
 .Login form label p{
     font-family: 'Staatliches', cursive !important;
-margin-bottom: 8px;
-font-size:1.1em;
-color: #233c65;
-font-weight: 700;
+    margin-bottom: 8px;
+    font-size:1.1em;
+    color: #233c65;
+    font-weight: 700;
 }
 
 .Login .submitButton{
@@ -82,6 +82,11 @@ font-weight: 700;
     object-fit: cover;
 width: 100%;
 height: 100%;
+}
+
+.Login a {
+    color: #033453;
+    font-weight: bold;
 }
 
 @media (max-width: 900px) {

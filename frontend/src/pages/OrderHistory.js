@@ -101,17 +101,19 @@ const OrderHistory = (props) => {
 
         return(
 
-
+            <div className="OrderHistoryPage">
         <div className="orderSide">
                     <div className="orderHistoryToolBar">
                         <div id="OrderHistory">
-                        <div className="backArrow"><Link to='/account'><FaArrowLeft /></Link></div>    
+                        <div className="backArrow"><div><Link to='/account'><FaArrowLeft /></Link></div></div>    
                         <div className="orderHistoryTitle"><h3>Order History</h3></div>
+                        <div className="emptyDiv"></div>
                         </div>
                         {sortedOrders.map((order, index) => (
                            <OrderHistoryComponent order={order} menu={props?.menu} restaurants={props?.restaurants}  user={user}/>
                         ))}
                     </div>
+        </div>
         </div>
 
 

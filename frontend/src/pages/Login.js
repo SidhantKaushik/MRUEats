@@ -62,7 +62,7 @@ function Login() {
   return (
     <div className='Login'>
       <div className="left">
-      <img src={RestImg} alt="Image 2"/>
+      <img src={RestImg} alt="pic 2"/>
       </div>
       <div className="box">
           <form onSubmit={onSubmit}>

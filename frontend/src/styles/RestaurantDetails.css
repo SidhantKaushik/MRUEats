@@ -6,13 +6,13 @@
 .RestaurantPage .RestaurantBanner {   
     background-color: #033453;
     padding: 1em;
-    border-top: 1px solid gray;
+    border-top: 1px solid #ffb703;
     display: grid;
     justify-content: space-between;
     grid-template-areas:
-        "firstline search"
-        "secondline search"
-        "thirdline search";
+        "firstline"
+        "secondline"
+        "thirdline";
     max-height: 180px;
     color: #FFFFFF;
 }
@@ -29,25 +29,6 @@
     border-radius: 100px;
     padding-left: 20px;
     padding-right: 20px;
-}
-
-.RestaurantPage .menuSearchBar {
-    grid-area: search;
-    width: 30em;
-    height: 3em;
-    margin-right: 5em;
-    background: rgba(255, 255, 255, 0.22);
-    border: 1px solid #000000;
-    border-radius: 10px;
-
-}
-
-.RestaurantPage .menuSearchBar::placeholder {
-    font-family: 'Unna';
-    font-weight: 400;
-    font-size: 1.5em;
-    color: #D0D0D0;
-    padding: 1em;
 }
 
 .RestaurantPage .restaurantInfo {
@@ -103,6 +84,18 @@
     font-size: 24px;
     color: #000000;
     padding:0;
+}
+
+.RestaurantPage .orderButton {
+    height: 40px;
+    align-self: center;
+    font-family: 'Staatliches', cursive !important;
+    background-color: #033453;
+    color: #ffb703;
+    border: none;
+    border-radius: 20%;
+    margin: 1em 1em 1em 0;
+    cursor: pointer;
 }
 
 .RestaurantPage .restaurantMenu {
@@ -217,8 +210,7 @@
         grid-template-areas:
         "firstline"
         "secondline"
-        "thirdline"
-        "search";
+        "thirdline";
     }
     .RestaurantPage .RestaurantBanner h2{
         font-size: 16px;
@@ -226,11 +218,26 @@
     .RestaurantPage .RestaurantBanner h1{
         font-size: 20px;
     }
+    .RestaurantPage .restaurantMenu {
+        width: calc(100vw - 20px);
+    }
+    .RestaurantPage .menuCategories{
+        width: calc(100vw - 20px);
+    }
+    .RestaurantPage .addItem{
+        width: calc(100vw - 20px);
+        padding: 0;
+    }
+    .RestaurantPage .addItem form{
+        padding-left: 10px;
+    }
+    .RestaurantPage .menu-list .menu-item{
+        padding: 0;
+        padding: 5px 0 5px 0;
+    }
     .RestaurantPage .addItem input{
         margin-bottom: 15px;
         width: 60%;
     }
-    .RestaurantPage .menuSearchBar{
-        width: 90vw;
-    }
+
 }

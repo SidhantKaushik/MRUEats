@@ -89,7 +89,4 @@ module.exports = {
     getActiveOrders,
     getCompleteOrders,
     deactivateOrder
-    //getOrderByRestaurant
-    //setOrder
-    //getActiveOrders
 }

@@ -1,13 +1,13 @@
 import '../styles/RestaurantDetails.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import { set } from 'mongoose'
 import Category from './Category';
 import MenuItem from './MenuItem';
 import CartItems from './CartItems';
 import { useSelector, useDispatch, } from 'react-redux';
 import { createOrder } from '../features/orders/orderSlice';
 import formatPrice from '../helpers/price-format';
+import { toast } from 'react-toastify';
 
 const RestaurantDetails = (props) => {
 
@@ -41,7 +41,6 @@ const RestaurantDetails = (props) => {
 
     const onSubmit = e => {
         e.preventDefault()
-        // let result = currItem.map(a => a.id)
         const menuID = []
         currItem.forEach(e => menuID.push({ id: e.id }))
         const menuPrice = []
@@ -59,6 +58,10 @@ const RestaurantDetails = (props) => {
         setCurrItem([])
         setPriceItem([])
         setFinalPrice()
+        if (menuID.length > 0) {
+            toast.success('Successfully ordered!');
+        }
+
     }
 
     const location = useLocation()
@@ -73,7 +76,7 @@ const RestaurantDetails = (props) => {
             }
 
         }
-        if (item.length != 0) {
+        if (item.length !== 0) {
             localStorage.setItem('itemsArray', JSON.stringify(item))
             setMenuItems(JSON.parse(localStorage.getItem('itemsArray')))
             item = item.filter((value, index, self) =>
@@ -99,18 +102,17 @@ const RestaurantDetails = (props) => {
         setFinalPrice(formatPrice(sum))
     }, [priceItem])
 
-
     function filter(props) {
         item = []
         filterItem = []
         let x = JSON.parse(localStorage.getItem('itemsArray'))
         for (let i = 0; i < x.length; i++) {
-            if (x[i].category == props) {
+            if (x[i].category === props) {
                 filterItem.push(x[i])
             }
         }
 
-        if (props.target != undefined) {
+        if (props.target !== undefined) {
             setMenuItems(x)
         }
         else {
@@ -138,17 +140,17 @@ const RestaurantDetails = (props) => {
 
     function menuSelect(props) {
         currentItem = [...currItem]
-        //finalP = 0
+
         for (let i = 0; i < menuItems.length; i++) {
-            if (menuItems[i].name == props) {
+            if (menuItems[i].name === props) {
                 currentItem.push(menuItems[i])
-                //price.push(menuItems[i].price)
+
                 setPriceItem([...priceItem, menuItems[i].price])
             }
         }
 
         setCurrItem(currentItem)
-        //setPriceItem([..priceItem, menuItems[i].price])
+
     }
 
     const onChange = (e) => {
@@ -158,6 +160,20 @@ const RestaurantDetails = (props) => {
             [e.target.name]: e.target.value
 
         }));
+    }
+
+    function ConvertTime(hour) {
+        let hours = Math.floor(hour / 100);
+        let minutes = hour % 100;
+        let amPm = hours >= 12 ? 'pm' : 'am';
+
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+
+        let strTime = hours + ':' + minutes + ' ' + amPm;
+
+        return strTime;
     }
 
     return (
@@ -172,22 +188,20 @@ const RestaurantDetails = (props) => {
                     <h2 className="restaurantInfo">$3.09 Delivery</h2>
                 </div>
                 <div className="thirdLine">
-                    <h2 className="restaurantInfo">Delivery Hours: {location?.state?.open} - {location?.state?.close} •</h2>
+                    <h2 className="restaurantInfo">Delivery Hours: {ConvertTime(location?.state?.open)} - {ConvertTime(location?.state?.close)}</h2>
                     <h2 className="openStatus restaurantInfo">OPEN</h2>
-                </div>
-                <div>
-                    {/* <input type="text" id="menuSearch" className="menuSearchBar" onKeyUp="myFunction()" placeholder="Search for items" title="Type in a menu name"></input> */}
                 </div>
             </div>
             <div className="mainContentBody">
                 <div className="menuCategories">
                     <h3>Categories</h3>
                     <ol className='categoriesList'>
-                        <li className='category-item' onClick={filter}>
+                        <li key="SDFSDF" className='category-item' onClick={filter}>
                             All
                         </li>
                         {categories.map((p, index) => (
                             <Category
+                                debug={index}
                                 category={p.category}
                                 filter={filter}
                             />
@@ -223,7 +237,7 @@ const RestaurantDetails = (props) => {
                             <p>Special Instructions</p>
                             <input name="specialInstructions" value={formData.specialInstructions} onChange={onChange}></input>
                         </div>
-                        <button type='submit'>Order</button>
+                        <button type='submit' className='orderButton'>Order</button>
                     </form>
                 </div>
             </div>
