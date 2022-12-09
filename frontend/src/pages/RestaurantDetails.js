@@ -1,11 +1,11 @@
-import '../styles/RestaurantDetails.css';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
-import Category from './Category';
-import MenuItem from './MenuItem';
-import CartItems from './CartItems';
-import { useSelector, useDispatch, } from 'react-redux';
-import { createOrder } from '../features/orders/orderSlice';
+import '../styles/RestaurantDetails.css'
+import {useLocation} from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import Category from './Category'
+import MenuItem from './MenuItem'
+import CartItems from './CartItems'
+import {useSelector, useDispatch} from 'react-redux'
+import {createOrder} from '../features/orders/orderSlice'
 import formatPrice from '../helpers/price-format';
 import { toast } from 'react-toastify';
 
@@ -18,71 +18,59 @@ const RestaurantDetails = (props) => {
     const [finalPrice, setFinalPrice] = useState()
     const [formData, setFormData] = useState({
         specialInstructions: ''
-    });
+      });
 
     let currentItem = []
     let item = []
     let filterItem = [];
+    const { user} = useSelector((state) => state.auth);
+   const dispatch = useDispatch()
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+   
 
-    const { user } = useSelector((state) => state.auth);
-    // let oldItems = JSON.parse(localStorage.getItem('itemsArray')) || [];
-
-
-
-    //Checks React Redux user state
-    useEffect(() => {
-        if (!user) {
-            navigate('/login');
-        }
-    }, [user, navigate]);
-
-    const onSubmit = e => {
+   const onSubmit = e => {
         e.preventDefault()
         const menuID = []
-        currItem.forEach(e => menuID.push({ id: e.id }))
+        currItem.forEach(e => menuID.push({id: e.id}))
         const menuPrice = []
-        currItem.forEach(e => menuPrice.push({ price: e.price }))
+        currItem.forEach(e => menuPrice.push({price: e.price}))
         const orderData = {
             menuItems: menuID,
-            userId: user?.id,
+            userId: user.id,
             specialInstructions: formData?.specialInstructions,
             restaurantId: location.state.id,
-            dateOrdered: createDate(),
             price: finalPrice,
-            deliverTo: user?.deliverTo
+            deliverTo: user.deliverTo
         }
         dispatch(createOrder(orderData))
         setCurrItem([])
         setPriceItem([])
         setFinalPrice()
-        if (menuID.length > 0) {
+        if(menuID.length > 0){
             toast.success('Successfully ordered!');
         }
-
-    }
-
+        
+   }
+    
     const location = useLocation()
     useEffect(() => {
-        if (location.state) {
+        if(location.state) {
             item = []
-            for (let i = 0; i < props.menu.menu.length; i++) {
-                if (location.state.id === props.menu.menu[i].restaurantId) {
-                    item.push(props.menu.menu[i])
-
-                }
+            for(let i = 0; i < props.menu.menu.length; i++){    
+                if (location.state.id === props.menu.menu[i].restaurantId){
+                    item.push(props.menu.menu[i]) 
+                    
+               }
             }
-
+            
         }
-        if (item.length !== 0) {
+        if(item.length !== 0){
             localStorage.setItem('itemsArray', JSON.stringify(item))
             setMenuItems(JSON.parse(localStorage.getItem('itemsArray')))
-            item = item.filter((value, index, self) =>
+            item = item.filter((value, index, self) => 
                 index === self.findIndex((t) => (
-                    t.category === value.category
-                ))
+                    t.category === value.category 
+                  ))
             )
             localStorage.setItem('categories', JSON.stringify(item))
             setCategories(JSON.parse(localStorage.getItem('categories')))
@@ -96,73 +84,56 @@ const RestaurantDetails = (props) => {
     }, [])
 
     useEffect(() => {
-        let sum = priceItem.reduce((a, b) => a + b, 0)
+        let sum = priceItem.reduce((a, b) => a + b ,0)
         sum += 3.09
         sum = sum * 1.05
         setFinalPrice(formatPrice(sum))
     }, [priceItem])
 
-    function filter(props) {
+    function filter(props){
         item = []
         filterItem = []
         let x = JSON.parse(localStorage.getItem('itemsArray'))
-        for (let i = 0; i < x.length; i++) {
-            if (x[i].category === props) {
+        for(let i = 0; i < x.length; i++){    
+            if (x[i].category === props){
                 filterItem.push(x[i])
             }
         }
-
-        if (props.target !== undefined) {
+        
+        if (props.target !== undefined){
             setMenuItems(x)
         }
         else {
             setMenuItems(filterItem)
         }
-
+        
     }
-
-    function createDate() {
-
-        const date = new Date();
-
-        const year = date.getFullYear();
-
-        let month = (1 + date.getMonth()).toString();
-        month = month.length > 1 ? month : '0' + month;
-
-        let day = date.getDate().toString();
-        day = day.length > 1 ? day : '0' + day;
-
-        return month + '/' + day + '/' + year;
-    }
-
-
 
     function menuSelect(props) {
         currentItem = [...currItem]
-
-        for (let i = 0; i < menuItems.length; i++) {
-            if (menuItems[i].name === props) {
+        
+        for(let i = 0; i < menuItems.length; i++){    
+            if (menuItems[i].name === props){
                 currentItem.push(menuItems[i])
-
+                
                 setPriceItem([...priceItem, menuItems[i].price])
             }
         }
 
         setCurrItem(currentItem)
-
+        
     }
 
     const onChange = (e) => {
 
         setFormData((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value
-
+          ...prevState,
+          [e.target.name]: e.target.value
+    
         }));
-    }
+      }
 
-    function ConvertTime(hour) {
+      function ConvertTime(hour) {
         let hours = Math.floor(hour / 100);
         let minutes = hour % 100;
         let amPm = hours >= 12 ? 'pm' : 'am';
@@ -180,32 +151,32 @@ const RestaurantDetails = (props) => {
         <div className="RestaurantPage">
             <div className="RestaurantBanner">
                 <div className="firstLine">
-                    <h1 className="restaurant-name">{location?.state?.name}</h1>
-                    <div className="restaurantRating">{"⭐".repeat(location?.state?.rating)}</div>
+                    <h1 className="restaurant-name">{location.state.name}</h1>
+                    <div className="restaurantRating">{"⭐".repeat(location.state.rating)}</div>
                 </div>
                 <div className="secondLine">
-                    <h2 className="restaurantInfo">{location?.state?.address}</h2>
+                    <h2 className="restaurantInfo">{location.state.address}</h2>
                     <h2 className="restaurantInfo">$3.09 Delivery</h2>
                 </div>
                 <div className="thirdLine">
-                    <h2 className="restaurantInfo">Delivery Hours: {ConvertTime(location?.state?.open)} - {ConvertTime(location?.state?.close)}</h2>
+                    <h2 className="restaurantInfo">Delivery Hours: {ConvertTime(location.state.open)} - {ConvertTime(location.state.close)}</h2>
                     <h2 className="openStatus restaurantInfo">OPEN</h2>
                 </div>
             </div>
             <div className="mainContentBody">
                 <div className="menuCategories">
-                    <h3>Categories</h3>
+                <h3>Categories</h3>
                     <ol className='categoriesList'>
-                        <li key="SDFSDF" className='category-item' onClick={filter}>
-                            All
-                        </li>
+                    <li key="SDFSDF" className='category-item' onClick={filter}>
+                        All 
+                    </li>
                         {categories.map((p, index) => (
                             <Category
                                 debug={index}
                                 category={p.category}
                                 filter={filter}
                             />
-                        ))}
+                        ))} 
                     </ol>
                 </div>
                 <div className="restaurantMenu">
@@ -220,25 +191,25 @@ const RestaurantDetails = (props) => {
                                 category={p.category}
                                 menuSelect={menuSelect}
                             />
-                        ))}
+                        ))} 
                     </div>
                 </div>
                 <div className="addItem">
-                    <form onSubmit={onSubmit}>
-                        <h2>Order Details</h2>
-                        <ol className='cart-list'>
+                <form onSubmit={onSubmit}>
+                    <h2>Order Details</h2>
+                    <ol className='cart-list'>
                             {currItem.map((p, index) => (
                                 <CartItems
                                     name={p.name}
-                                />
+                                /> 
                             ))}
-                        </ol>
-                        <div className='order-notes'>
-                            <p>Special Instructions</p>
-                            <input name="specialInstructions" value={formData.specialInstructions} onChange={onChange}></input>
-                        </div>
-                        <button type='submit' className='orderButton'>Order</button>
-                    </form>
+                    </ol>
+                    <div className='order-notes'>
+                        <p>Special Instructions</p>
+                        <input name="specialInstructions" value={formData.specialInstructions} onChange={onChange}></input>
+                    </div>
+                    <button type='submit' className='orderButton'>Order</button>
+                </form>
                 </div>
             </div>
         </div>

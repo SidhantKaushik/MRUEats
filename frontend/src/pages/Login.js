@@ -58,14 +58,14 @@ function Login() {
   if (isLoading) {
     return <Spinner />;
   }
-
+  
   return (
     <div className='Login'>
       <div className="left">
-        <img src={RestImg} alt="pic 2" />
+      <img src={RestImg} alt="pic 2"/>
       </div>
       <div className="box">
-        <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit}>
           <label>
             <p>Email Address</p>
             <input type="text" name="email" value={email} placeholder='Enter your email' onChange={onChange} />

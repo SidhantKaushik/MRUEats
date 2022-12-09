@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/auth/authSlice';
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import Hamburger from "./Hamburger"
 import '../styles/Header.css'
 
@@ -12,7 +12,7 @@ function Header() {
 
     const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
-    const toggleHamburger = () => {
+    const toggleHamburger = () =>{
         setHamburgerOpen(!hamburgerOpen);
     }
 
@@ -26,27 +26,27 @@ function Header() {
 
     return (
         <>
-            <header className='header'>
-                <h1><Link to='/'>MRU EATS</Link></h1>
-                <ul className="menu-header">
-                    {user ? (<>
-                        <li><Link to='/account'>Account</Link></li>
-                        {user.isAdmin ? (<li><Link to='/admin'>Admin</Link></li>) : ""}
-                        {user.isCourier ? (<li><Link to='/courier'>Courier</Link></li>) : ""}
-                        <li><a className='btn' onClick={onLogout}>Logout</a></li>
-
-                    </>) : (<>
-                        <li><Link to='/login'>Login</Link></li>
-                        <li><Link to='/register'>Register</Link></li>
-                    </>)}
-                </ul>
-                <div className="hamburger" onClick={toggleHamburger}>
-                    <Hamburger />
-                </div>
-            </header>
-            <div className="locationInfo">
+        <header className='header'>
+        <h1><Link to='/'>MRU EATS</Link></h1>
+            <ul className="menu-header">
                 {user ? (<>
-                    <p>Delivering to: {user.deliverTo == null ? ("Please set a delivery location") : user.deliverTo}</p>
+                    <li><Link to='/account'>Account</Link></li>
+                    {user.isAdmin ? (<li><Link to='/admin'>Admin</Link></li>) : ""}
+                    {user.isCourier ? (<li><Link to='/courier'>Courier</Link></li>) : ""}
+                    <li><a className='btn' onClick={onLogout}>Logout</a></li>
+                    
+                </>) : (<>
+                    <li><Link to='/login'>Login</Link></li>
+                    <li><Link to='/register'>Register</Link></li>
+                </>)}
+            </ul>
+            <div className="hamburger" onClick={toggleHamburger}>
+            <Hamburger/>
+            </div>
+        </header>
+        <div className="locationInfo">
+        {user ? (<>
+                <p>Delivering to: {user.deliverTo == null ? ("Please set a delivery location") : user.deliverTo}</p>
                 </>) : (
                     <p>Feeding hungry cougars one meal at a time.</p>
                 )}

@@ -33,22 +33,22 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
     }
 });
 
-//Update user
-export const update = createAsyncThunk('auth/update', async (user, thunkAPI) => {
-    try {
-        return await authService.update(user);
-    } catch (error) {
-        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-        return thunkAPI.rejectWithValue(message);
-    }
-});
-
 
 //Logout user
 export const logout = createAsyncThunk('auth/logout', async () => {
     authService.logout();
 });
 
+//Update user
+export const update = createAsyncThunk('auth/update', async (user, thunkAPI) => {
+    try{
+        const token = thunkAPI.getState().auth.user.token;
+        return await authService.update(user, token);
+    } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+});
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -69,6 +69,7 @@ export const authSlice = createSlice({
             .addCase(register.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
+                state.user = action.payload;
             })
             .addCase(register.rejected, (state, action) => {
                 state.isLoading = false;
@@ -94,13 +95,13 @@ export const authSlice = createSlice({
                 state.user = null;
             })
             .addCase(update.pending, (state) => {
-
+                
                 state.isLoading = true;
             })
             .addCase(update.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
-
+                
                 state.user = action.payload;
             })
             .addCase(update.rejected, (state, action) => {
@@ -109,7 +110,7 @@ export const authSlice = createSlice({
                 state.message = action.payload.user;
                 state.user = null;
             })
-
+            
     }
 });
 
