@@ -91,8 +91,8 @@ function Admin(props) {
       
     const populateRestaurant = (e) => {
         var restaurantId = e.target.id;
-        setSelectedRestaurant(restaurants.find(restaurant => restaurant.id === restaurantId));
-        setMenu(allMenuItems.filter((item) => item.restaurantId === restaurantId));
+        setSelectedRestaurant(restaurants.find(restaurant => restaurant.id == restaurantId));
+        setMenu(allMenuItems.filter((item) => item.restaurantId == restaurantId));
     }
 
     var restaurantList = restaurants.map((restaurant) =>
@@ -150,7 +150,7 @@ function Admin(props) {
 
     const handleSelectedMenu = (e) => {
         var menuItemId = e.currentTarget.id;
-        var selectedMenuItem = menu.find(menu => menu.id === menuItemId && menu.restaurantId === selectedRestaurant.id);
+        var selectedMenuItem = menu.find(menu => menu.id == menuItemId && menu.restaurantId == selectedRestaurant.id);
         setSelectedMenuItem(selectedMenuItem);
     }
 
