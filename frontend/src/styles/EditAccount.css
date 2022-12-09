@@ -1,0 +1,284 @@
+.EditAccountPage .backgroundEffect{
+    justify-content: center;
+    align-items: center;
+
+}
+
+.EditAccountPage .profileSide{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 80%;
+    padding: 15px;
+    box-sizing: border-box;
+    background: white;
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.EditAccountPage .wrapper{
+    outline: 1px solid #cccccc;
+}
+
+.EditAccountPage .ProfileInformation{
+    
+    background-color: white;
+    margin: 1em;
+    padding: 0.5em;
+    border-radius: 10px;
+    flex: 1;
+    
+}
+
+.EditAccountPage .standardLayout{
+
+    padding: 1em;
+}
+
+.EditAccountPage .standardLayout > h4{
+    display: block;
+    font-size: 1.17em;
+    margin-left: .25em;
+    margin-right: 0em;
+
+    font-weight: bold;
+}
+
+.EditAccountPage input { 
+    border-color:#cccccc; 
+    padding: 1px; 
+    font-size:19px; 
+    text-align:left;
+    border-width:3px; 
+    border-radius:19px;
+    width: fit-content;
+    height: 32px;
+    text-indent: .5em; 
+    border-style:double; 
+    text-shadow:0px 0px 0px rgba(42,42,42,.75); 
+    box-shadow: 0px 0px 6px 0px rgba(42,42,42,.75);  
+}
+
+.EditAccountPage input:focus { outline:none; }
+
+.EditAccountPage .Collapsible{
+    background-color: #d9d9d9;
+    margin: 1em;
+    padding: 0.25em;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 23px;
+    border-radius: 10px;
+    cursor:pointer;
+}
+
+.EditAccountPage .profileToolBar{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    outline: 1px solid #cccccc;
+}
+
+.EditAccountPage .reqInfo{
+    background-color: #d9d9d9;
+    margin: 1em;
+    padding: 0.1em;
+    border-radius: 10px;
+
+}
+
+
+.EditAccountPage .reqInfoWrapper{
+    display:flex;
+    flex-wrap: wrap;
+    border-top: solid 1px black;
+}
+
+.EditAccountPage .firstName{
+    flex: 1;
+    width: fit-content;
+}
+
+.EditAccountPage .lastName{
+    flex: 1;
+    width: fit-content;
+}
+
+.EditAccountPage .emailDiv{
+    flex: 1;
+    width: fit-content;
+}
+
+.EditAccountPage .deliveryLocation{
+    flex: 1;
+    width: fit-content;
+}
+
+.EditAccountPage .addInfo{
+    background-color: #d9d9d9;
+    margin: 1em;
+    padding: 0.1em;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 23px;
+    border-radius: 10px;
+    cursor:pointer;
+
+}
+
+.EditAccountPage .addInfoWrapper{
+    flex-wrap: wrap;
+    border-top: solid 1px black;
+    
+}
+
+.EditAccountPage .countryPhone{
+    display: flex;
+    
+}
+
+.EditAccountPage .countryCode{
+    flex: 1;
+    justify-items: center;
+    align-items: center;
+    max-width: fit-content;
+}
+
+.EditAccountPage .countryCode > .standardLayout{
+    width: fit-content;
+    height: auto;
+}
+
+.EditAccountPage .countryCode > h4{
+    margin-bottom: .5em;
+}
+
+.EditAccountPage .phoneNumber{
+    flex: 1;
+    width: fit-content;
+
+}
+
+.EditAccountPage .billInfo{
+    background-color: #d9d9d9;
+    margin: 1em;
+    padding: 0.1em;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 23px;
+    border-radius: 10px;
+    cursor:pointer;
+
+}
+
+.EditAccountPage .billInfoWrapper{
+    display:flex;
+    flex-wrap: wrap;
+    border-top: solid 1px black;
+    
+}
+
+.EditAccountPage .streetAddress{
+    flex: 1;
+}
+
+.EditAccountPage .city{
+    flex: 1;
+
+
+}
+
+.EditAccountPage .province{
+    flex: 1;
+
+
+}
+
+.EditAccountPage .postal{
+    flex: 1;
+
+}
+
+.EditAccountPage .country{
+    flex: 1;
+
+}
+
+.EditAccountPage .profileToolBar{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    outline: 1px solid #cccccc;
+}
+
+.EditAccountPage .profileToolBar > h2 {
+    display: flex;
+    flex: 1;
+    justify-content: left;
+    padding-left: 3em;
+}
+
+.EditAccountPage .profileToolBar > p {
+    flex: 1;
+    justify-content: right;
+    align-items: center;
+    padding-right: 5em;
+}
+
+.EditAccountPage .requiredHead{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding-right: 5em;
+}
+
+.EditAccountPage .reqStar{
+
+    color: red;
+
+}
+
+.EditAccountPage .firstNameHeader{
+    display: flex;
+    
+}
+
+.EditAccountPage .lastNameHeader{
+    display: flex;
+}
+
+.EditAccountPage .emailHeader{
+    display: flex;
+}
+
+.EditAccountPage .emailTitle{
+    flex: 1;
+}
+
+
+.EditAccountPage .emailBox{
+    opacity: 0.6;
+}
+
+.EditAccountPage .deliveryLocHeader{
+    display: flex;
+}
+
+.EditAccountPage .cityBox{
+    opacity: 0.6;
+
+}
+
+.EditAccountPage .provinceBox{
+    opacity: 0.6; 
+}
+
+.EditAccountPage .countryBox{
+    opacity: 0.6;  
+}
+
+.EditAccountPage .buttonWrapper{
+    display: flex;
+    justify-content: space-evenly;
+}

@@ -1,0 +1,82 @@
+.modal {
+    font-size: 12px;
+    margin: auto;
+    width:100%;
+    height: auto;
+    background-color: #ffffff;
+  }
+  .modal > .header {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom: 1px solid gray;
+    background: #ffffff;
+    font-size: 12px;
+    text-align: center;
+    padding: 5px;
+  }
+  .modal > .content {
+    width: 100%;
+    padding: 10px 5px;
+  }
+  .modal > .actions {
+    width: 100%;
+    padding: 10px 5px;
+    margin: auto;
+    text-align: center;
+  }
+  .modal > .close {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: -10px;
+    top: -10px;
+    font-size: 24px;
+    background:linear-gradient(to bottom, #a87f2d 5%, #ffb803 100%);
+	  background-color:#a87f2d;
+    border-radius: 18px;
+    border: 1px solid #cfcece;
+  }
+
+  .modal > .close:hover{
+    background:linear-gradient(to bottom, #ffb803 5%, #a87f2d 100%);
+	  background-color:#ffb803;
+  }
+
+  .modal > .orderWrapper{
+    width: 100%;
+    padding: 2px;
+    border: 1px solid #cfcece;
+  }
+
+  .modal > .orderDetailWrapper{
+    width: 100%;
+    padding: 2px;
+    border: 1px solid #cfcece;
+  }
+
+  .modal #myButton {
+	box-shadow: 0px 0px 0px 2px #ffb803;
+	background:linear-gradient(to bottom, #a87f2d 5%, #ffb803 100%);
+	background-color:#a87f2d;
+	border-radius:10px;
+	border:1px solid #debf71;
+	display:inline-block;
+	cursor:pointer;
+	color:#003345;
+	font-family:Arial;
+	font-size:19px;
+	padding:12px 37px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #fadd9b;
+}
+.modal #myButton:hover {
+	background:linear-gradient(to bottom, #ffb803 5%, #a87f2d 100%);
+	background-color:#ffb803;
+}
+.modal #myButton:active {
+	position:relative;
+	top:1px;
+}

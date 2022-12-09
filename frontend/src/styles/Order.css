@@ -1,0 +1,90 @@
+.OrderPage {
+    font-family: 'Unna', serif;
+    font-weight: 400;
+}
+
+.OrderBanner {
+    background-color: #033453;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-template-areas:
+        "image firstline"
+        "image secondline"
+        "image thirdline";
+    max-height: 180px;
+    color: #ffffff;
+}
+
+.OrderBanner * {
+    margin: 0;
+}
+
+.restrauntImage {
+    grid-area: image;
+    height: 150px;
+    width: 150px;
+    align-items: center;
+    border-radius: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.openStatus {
+    color: #C3EC99;
+}
+
+.firstLine {
+    font-style: italic;
+    font-weight: 700;
+    font-size: 20px;
+    grid-area: firstline;
+    display: flex;
+    grid-column-gap: 20px;
+    align-items: center;
+}
+
+.secondLine {
+    grid-area: secondline;
+    display: flex;
+    grid-column-gap: 10px;
+    align-items: center;
+}
+
+.thirdLine {
+    grid-area: thirdline;
+    display: flex;
+    grid-column-gap: 10px;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.mainContent {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 2fr 1fr;
+    grid-template-areas:
+        "orderDetails deliveryInfo"
+        "orderDetails paymentInfo";
+    height: 100%;
+}
+
+.mainContent h2 {
+    text-align: center;
+}
+
+.orderDetails {
+    grid-area: orderDetails;
+    border-right: 1px solid #000;
+}
+
+.deliveryOptions {
+    grid-area: deliveryInfo;
+    border-bottom: 1px solid black;
+}
+
+.paymentInfo {
+    grid-area: paymentInfo;
+}

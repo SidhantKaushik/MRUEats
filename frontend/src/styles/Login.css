@@ -1,0 +1,102 @@
+.Login form{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.Login form label p{
+    font-family: 'Staatliches', cursive !important;
+    margin-bottom: 8px;
+    font-size:1.1em;
+    color: #233c65;
+    font-weight: 700;
+}
+
+.Login .submitButton{
+    background-color: #033453;
+    height: 45px;
+    width: 75px;
+    color: #ffb703;
+    margin-top: 15px;
+    font-family: 'Staatliches', cursive !important;
+    font-size: 1.5em;
+    border:none;
+    cursor: pointer;
+}
+.Login input {
+    background: #d1b181;
+    height: 30px;
+    width: 100%;
+    border:none;
+}
+.Login{
+    min-height: calc(100vh - 96.67px);
+    background-color: #FFB703;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+.Login .box{
+    background: #f1ecdc;
+    padding-top: 15px;
+}
+.Login input[type="password"] {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 18px;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #000000;
+  }
+  .Login input[type="text"] {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 18px;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #000000;
+  }
+  .Login .box input::placeholder{
+    font-size: .8em;
+    padding-left:5px;
+}
+
+.Login .left{
+    width: 100%;
+    height: 100%;
+}
+.Login .left img{
+    object-fit: cover;
+width: 100%;
+height: 100%;
+}
+
+.Login a {
+    color: #033453;
+    font-weight: bold;
+}
+
+@media (max-width: 900px) {
+    .Login{
+    grid-template-columns: auto;
+    grid-template-rows: max-content auto;
+}
+.Login .left img{
+    object-fit: cover;
+width: 100%;
+max-height: 300px;
+}
+}

@@ -1,0 +1,388 @@
+.AdminPage * {
+    font-family: 'Unna', serif;
+    font-weight: 400;
+}
+
+.AdminPage {
+    background-color: #033453;
+    border-top: 1px solid #ffb703;
+}
+
+.AdminPage .adminMainBody {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas:
+        "restaurants restaurantInfo";
+}
+
+.AdminPage .restaurants {
+    grid-area: restaurants;
+    background: #f4f4f4;
+    margin: 1em;
+    border-radius: 15px;
+}
+
+.AdminPage .restaurantsList ul {
+    list-style: none;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-evenly;
+    height: 50vh;
+}
+
+.AdminPage .restaurantSection {
+    grid-area: restaurantInfo;
+    background: #efefef;
+    margin: 1em;
+    display: grid;
+    grid-template-rows: 1fr 10fr 1fr;
+    grid-template-areas:
+        "adminRestaurantBanner"
+        "menuItems"
+        "menuButtons";
+    height: 100vh;
+    border-radius: 15px;
+}
+
+.AdminPage .menuItems {
+    grid-area: menuItems;
+    height: 100%;
+    overflow: auto;
+}
+
+.AdminPage .menuButtons {
+    grid-area: menuButtons;
+    border-top: 1px solid #B4B2AF;
+    float: right;
+    display: flex;
+    justify-content: end;
+}
+
+.AdminPage .adminRestaurantBanner {
+    padding: 2em;
+    grid-area: adminRestaurantBanner;
+    background-color: #f4f4f4;
+    display: grid;
+    grid-template-areas:
+        "firstline buttons"
+        "secondline buttons"
+        "thirdline buttons";
+    color: #000000;
+    border-bottom: 1px solid #B4B2AF;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.AdminPage .adminRestaurantBanner {
+    margin: 0;
+}
+
+.AdminPage .restaurant-name{
+    font-weight: bold;
+    font-size: 1.25em;
+}
+
+.AdminPage .restaurantImage {
+    grid-area: image;
+    height: 150px;
+    width: 150px;
+    align-items: center;
+    border-radius: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.AdminPage .restaurantButtons {
+    grid-area: buttons;
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    float: right;
+}
+
+.AdminPage .menuButton {
+    border-radius: 10px;
+    margin: 1em;
+    padding: 8px;
+    background-color: #3A6179;
+    color: white;
+    font-size: 1em;
+    height: 2em;
+}
+
+.AdminPage .restaurantButton {
+    background-color: transparent;
+    border: none;
+    font-size: 1.25em;
+    display: flex;
+    align-self: end;
+    margin: 10px;
+}
+
+.AdminPage .menuSearchBar::placeholder {
+    font-family: 'Unna';
+    font-weight: 400;
+    font-size: 1.5em;
+    color: #D0D0D0;
+    padding: 1em;
+}
+
+.AdminPage .restaurantInfo {
+    font-weight: 200;
+}
+
+.AdminPage .firstLine {
+    font-style: italic;
+    font-weight: 700;
+    font-size: 20px;
+    grid-area: firstline;
+    display: flex;
+    grid-column-gap: 20px;
+    align-items: center;
+}
+
+.AdminPage .secondLine {
+    grid-area: secondline;
+    display: flex;
+    grid-column-gap: 10px;
+    align-items: center;
+}
+
+.AdminPage .thirdLine {
+    grid-area: thirdline;
+    display: flex;
+    grid-column-gap: 10px;
+    align-items: center;
+    padding-bottom: 10px;
+}
+.AdminPage .restaurantListItem {
+    font-weight: 500;
+    font-size: 24px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.AdminPage .restaurantHeader {
+    border-bottom: 1px solid grey;
+    display: flex;
+    flex-direction: row;
+    place-content: space-between;
+}
+
+.AdminPage #restaurantTitle {
+    padding: 0px 0px 5px 15px;
+    font-weight: bold;
+    font-size: 1.35em;
+}
+
+.AdminPage .addRestoButton {
+    background-color: transparent;
+    width: 35px;
+    height: 35px;
+    margin-right: 15px;
+    border: none;
+    color: grey;
+    font-size: x-large;
+    font-weight: bolder;
+    align-self: center;
+}
+
+.AdminPage .buttonText {
+    margin-right: 1em;
+    cursor: pointer;
+}
+
+/* menu list css */
+
+.AdminPage .menu-list-name {
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 23px;
+}
+
+.AdminPage .menuListItem {
+    background-color: white;
+    margin: 1em;
+    padding: 1em;
+    font-weight: 400;
+    font-size: 1.35em;
+    line-height: 23px;
+    border-radius: 10px;
+    cursor:pointer;
+}
+
+/* popups/form css */
+
+.AdminPage .popup-title {
+    font-weight: bold;
+    font-size: 1.25em;
+    margin-top: 2em;
+    margin-left: 2em;
+}
+
+.AdminPage label {
+    font-weight: 600;
+    font-size: 1em;
+    line-height: 25px;
+}
+
+.AdminPage input, select {
+    background: #d9d9d9;
+    height: 30px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+.AdminPage .restaurant-form {
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: grid;
+    grid-template-areas:
+        "logo logo"
+        "restNameInput rating"
+        "address address"
+        "openTime closingTime"
+        "category category"
+        "submitButton submitButton";
+    column-gap: 15px;
+    row-gap: 10px;
+}
+
+.AdminPage .menu-form {
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: grid;
+    grid-template-areas:
+        "menuName price"
+        "description description"
+        "menuCategory menuCategory"
+        "newMenuCategory newMenuCategory" 
+        "submitButton submitButton";
+    column-gap: 15px;
+    row-gap: 10px;
+}
+
+.AdminPage .logo{
+    grid-area:logo;
+}
+.AdminPage .restNameInput{
+    grid-area:restNameInput;
+}
+.AdminPage .rating{
+    grid-area:rating;
+}
+.AdminPage .address{
+    grid-area:address;
+}
+.AdminPage .openTime{
+    grid-area:openTime;
+}
+.AdminPage .closingTime{
+    grid-area:closingTime;
+}
+.AdminPage .category{
+    grid-area:category;
+}
+.AdminPage .submitButton{
+    margin-top: 1em;
+    grid-area:submitButton;
+    justify-self: right;
+}
+
+.AdminPage .menuName{
+    grid-area:menuName;
+}
+.AdminPage .price{
+    grid-area:price;
+}
+.AdminPage .description{
+    grid-area:description;
+}
+.AdminPage .menuCategory{
+    grid-area:menuCategory;
+}
+.AdminPage .newMenuCategory{
+    grid-area:newMenuCategory;
+}
+
+
+.AdminPage .popup-submit {
+    margin: 2em 0 2em 0;
+    padding: 8px;
+    background-color: #033453;
+    color: white;
+    float: right;
+    width: fit-content;
+}
+
+.AdminPage .delete-confirmation {
+    margin-left: 2em;
+    padding: 1em;
+}
+
+
+/*Mobile*/
+@media (max-width:425px) {
+    .AdminPage .adminMainBody {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "restaurants"
+            "restaurantInfo";
+        height: 100vh;
+        width: 100%;
+    }
+
+    .AdminPage .restaurants, .AdminPage .restaurantSection, .AdminPage .adminRestaurantBanner, .AdminPage .menuItems, .AdminPage .menuButtons {
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+    }
+
+    .AdminPage .restaurantSection {
+        border-top: 1px solid grey;
+    }
+
+    .AdminPage .restaurantsList ul {
+        height: 100%;
+        overflow-y: scroll;
+    }
+
+    .AdminPage .adminRestaurantBanner {
+        grid-template-areas:
+            "firstline"
+            "secondline"
+            "thirdline"
+            "buttons";
+        padding: 2em 0 2em 0;
+    }
+
+    .AdminPage .restaurantButtons {
+        width: 100vw;
+        margin: 0;
+        font-size: 13px;
+    }
+
+    .AdminPage .firstLine, .AdminPage .secondLine, .AdminPage .thirdLine {
+        line-height: 2em;
+        font-size: 1.2em;
+        margin-left: 1em;
+    }
+
+    .AdminPage .restaurantSection {
+        grid-template-rows: 1fr 6fr 1fr;
+    }
+
+    .AdminPage .restaurants {
+        border-radius: 0px;
+    }
+
+    .AdminPage .restaurantSection {
+        border-radius: 0px;
+    }
+
+}

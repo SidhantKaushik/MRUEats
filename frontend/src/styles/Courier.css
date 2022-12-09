@@ -1,0 +1,172 @@
+.courier-page * {
+    font-family: 'Unna', serif;
+    font-weight: 400;
+}
+
+.courier-page {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "active-orders"
+        "past-orders";
+    height: 110vh;
+    background-color: #033453;
+    border-top: 1px solid #ffb703;
+}
+
+.courier-page .order-container {
+    height: 100vh;
+}
+
+.courier-page .active-orders {
+    grid-area: active-orders;
+    margin: 2em 2em 0em 2em;
+    height: 50vh;
+}
+
+.courier-page .past-orders {
+    grid-area: past-orders;
+    margin: 2em;
+    height: 50vh;
+}
+.courier-page .menuItemsOrdered ol{
+    padding-left:3px;
+    font-size: .8em;
+}
+
+.courier-page .active-container {
+    height: 90%;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.courier-page .past-container {
+    height: 80%;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.courier-page h3 {
+    margin: 0 0 10px 0;
+    font-weight: bold;
+    font-size: 25px;
+    color: #ffb703;
+}
+
+.courier-page img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.courier-page .order-item {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-areas:
+        "order-info order-buttons";
+    background-color: #F5F5F5;
+    height: 230px;
+    border-radius: 15px;
+    margin: 1em;
+    overflow-y: auto;
+}
+
+.courier-page .order-logo {
+    grid-area: order-logo;
+    margin: 2em;
+    display: flex;
+    align-self: center;
+}
+
+.courier-page .logo {
+    border-radius: 50px;
+}
+.courier-page .order-info {
+    margin-left: 2em;
+    grid-area: order-info;
+    line-height: 10px;
+}
+.courier-page .order-buttons {
+    grid-area: order-buttons;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.courier-page .status-button, .expand-button{
+    border-radius: 50px;
+    border: 1px solid rgb(190, 189, 189);
+    color: #365466;
+    background-color: white;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bolder;
+    width: max-content;
+}
+
+.courier-page .order-resto-title{
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/*popups*/
+
+.courier-page .popup-title {
+    font-weight: bold;
+    font-size: 1.25em;
+    margin-top: 2em;
+    margin-left: 1em;
+}
+
+.courier-page .menu-list-name {
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 23px;
+}
+
+.courier-page .menuListItem {
+    background-color: #f2f2f2;
+    margin: 1em;
+    padding: 10px;
+    font-size: 1.2em;
+    line-height: 23px;
+    border-radius: 10px;
+}
+
+.no-active-orders {
+    color: white;
+    font-size: 1.2em;
+}
+/*Mobile*/
+@media (max-width:425px) {
+    .courier-page .order-item {
+        display: grid;
+        grid-template-areas:
+            "order-info"
+            "order-buttons";
+        background-color: #F5F5F5;
+        height: 350px;
+        width: 95%;
+        border-radius: 15px;
+        margin: 0 0 1em 0;
+    }
+
+    .courier-page .order-buttons {
+        align-self: flex-end;
+        margin: 1em;
+    }
+
+    .courier-page .active-container {
+        grid-template-columns: 1fr;
+    }
+
+    .courier-page .past-container {
+        grid-template-columns: 1fr;
+    }
+
+    .courier-page .order-info {
+        margin-left: 1em;
+    }
+}
