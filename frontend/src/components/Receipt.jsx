@@ -4,8 +4,8 @@ import '../styles/Receipt.css'
 import 'reactjs-popup/dist/index.css';
 import formatDate from '../helpers/date-format';
 
-
-export default (props) => (
+//Still in development (Not in scope)
+const Receipt = (props) => (
   <Popup
     trigger={<button className="button" id="myButton"> View Receipt </button>}
     modal
@@ -26,16 +26,16 @@ export default (props) => (
           <div className="orderDetails">
             <table className="orderWrapper">
               <tr>
-              <th className="orderNum">Order #{props.order.id}</th>
-              <th className="mruEats">MRU EATS</th>
-              <th className="dateOrdered">{formatDate(props.order?.dateOrdered, true)}</th>
+                <th className="orderNum">Order #{props.order.id}</th>
+                <th className="mruEats">MRU EATS</th>
+                <th className="dateOrdered">{formatDate(props.order?.dateOrdered, true)}</th>
               </tr>
             </table>
             <table className="orderDetailWrapper">
               <tr>
-              <th className="itemHeader">Item</th>
-              <th className="quantityHeader">Qty</th>
-              <th className="priceHeader">Sub Total</th>
+                <th className="itemHeader">Item</th>
+                <th className="quantityHeader">Qty</th>
+                <th className="priceHeader">Sub Total</th>
               </tr>
               <tr></tr>
             </table>
@@ -63,4 +63,5 @@ export default (props) => (
   </Popup>
 );
 
+export { Receipt };
 

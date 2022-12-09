@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import '../styles/Account.css';
+//Passing JWT
 import authHeader from "../features/auth/authHeader";
 import EditIcon from "../images/edit-icon.png";
 import CountryCodes from '../components/CountryCodes';
@@ -14,7 +15,7 @@ const Account = () => {
 
     const { user } = useSelector((state) => state.auth);
 
-    //Gets user info from local storage
+    //Checks React Redux user state
     useEffect(() => {
         if (!user) {
             navigate('/login');
@@ -51,7 +52,7 @@ const Account = () => {
                         </div>
                         <div className="ProfileInformation">
                             <div className="editIconWrapper">
-                            <Link to='/account-edit' state={{ userInfo: userInfo }}><img className='editIcon' src={EditIcon} alt="edit"/></Link>
+                                <Link to='/account-edit' state={{ userInfo: userInfo }}><img className='editIcon' src={EditIcon} alt="edit" /></Link>
                             </div>
                             <div className="reqInfo">
                                 <Collapsible open="true" trigger="Required User Information">
@@ -85,23 +86,23 @@ const Account = () => {
                             </div>
                             <div className="addInfo">
                                 <Collapsible className="addInfo" trigger="Additional Information">
-                                <div className="addInfoWrapper">
-                                    <div className="countryPhone">
-                                        <div className="countryCode">
-                                            <div className="standardLayout">
-                                                <h4>Country</h4>
-                                                <div className="countryCodeComp">
-                                                    <CountryCodes code={userInfo.details?.countryCode}></CountryCodes>
+                                    <div className="addInfoWrapper">
+                                        <div className="countryPhone">
+                                            <div className="countryCode">
+                                                <div className="standardLayout">
+                                                    <h4>Country</h4>
+                                                    <div className="countryCodeComp">
+                                                        <CountryCodes code={userInfo.details?.countryCode}></CountryCodes>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="phoneNumber">
+                                                <div className="standardLayout">
+                                                    <h4>Phone Number</h4>
+                                                    <input type="text" id="phoneNumber" name="phoneNumber" value={userInfo.details?.phoneNumber} placeholder={userInfo.details?.phoneNumber} readOnly></input>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="phoneNumber">
-                                            <div className="standardLayout">
-                                                <h4>Phone Number</h4>
-                                                <input type="text" id="phoneNumber" name="phoneNumber" value={userInfo.details?.phoneNumber} placeholder={userInfo.details?.phoneNumber} readOnly></input>
-                                            </div>
-                                        </div>
-                                    </div>
                                     </div>
                                 </Collapsible>
                             </div>

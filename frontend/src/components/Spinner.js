@@ -4,9 +4,9 @@ import '../styles/Spinner.css';
 function Spinner() {
   return (
     <div className="loadingSpinnerContainer">
-      <div className="Spinner"><img src={spinner}/></div>
+      <div className="Spinner"><img src={spinner} /></div>
     </div>
   )
 };
 
-export default Spinner
+export default Spinner;
