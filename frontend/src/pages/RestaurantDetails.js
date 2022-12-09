@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 
 const RestaurantDetails = (props) => {
 
+    //states
     const [menuItems, setMenuItems] = useState([])
     const [categories, setCategories] = useState([])
     const [currItem, setCurrItem] = useState([])
@@ -27,7 +28,7 @@ const RestaurantDetails = (props) => {
    const dispatch = useDispatch()
 
    
-
+   //POST menu items and will reset the array of items
    const onSubmit = e => {
         e.preventDefault()
         const menuID = []
@@ -54,6 +55,7 @@ const RestaurantDetails = (props) => {
     
     const location = useLocation()
     useEffect(() => {
+        //verifies which resturant id user clicked on the home page
         if(location.state) {
             item = []
             for(let i = 0; i < props.menu.menu.length; i++){    
@@ -83,6 +85,7 @@ const RestaurantDetails = (props) => {
         setCategories(JSON.parse(localStorage.getItem('categories')))
     }, [])
 
+    //calculates total of menu items in cart 
     useEffect(() => {
         let sum = priceItem.reduce((a, b) => a + b ,0)
         sum += 3.09
@@ -90,6 +93,7 @@ const RestaurantDetails = (props) => {
         setFinalPrice(formatPrice(sum))
     }, [priceItem])
 
+    //filters the menu items when users selects categories
     function filter(props){
         item = []
         filterItem = []
@@ -99,7 +103,7 @@ const RestaurantDetails = (props) => {
                 filterItem.push(x[i])
             }
         }
-        
+        //If "All" categories is selected, all menu items are shown
         if (props.target !== undefined){
             setMenuItems(x)
         }
@@ -109,19 +113,18 @@ const RestaurantDetails = (props) => {
         
     }
 
+    //adds menu items to cart
     function menuSelect(props) {
         currentItem = [...currItem]
-        
         for(let i = 0; i < menuItems.length; i++){    
             if (menuItems[i].name === props){
                 currentItem.push(menuItems[i])
-                
+                //menu price stacks on top of current menu items in cart
                 setPriceItem([...priceItem, menuItems[i].price])
             }
         }
 
         setCurrItem(currentItem)
-        
     }
 
     const onChange = (e) => {

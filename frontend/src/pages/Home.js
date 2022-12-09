@@ -13,9 +13,11 @@ const Home = (props) => {
 
     let filterRest = []
     let allRest = [...props.restaurants.restaurants]
+
+    //states
     const [categories, setCategories] = useState([]);
     const [rest, setRest] = useState([]);
-
+    //gets all restaurants
     useEffect(() => {
         const getRestaurants = async () => {
           try {
@@ -30,7 +32,7 @@ const Home = (props) => {
         getRestaurants();
       }, [])
     
-      useEffect(() => {
+    useEffect(() => {
         const uniqueCategories = new Set();
         {rest.map((p, index) => {
             uniqueCategories.add(p.category);
@@ -39,6 +41,7 @@ const Home = (props) => {
         setCategories(categoriesArray);
       }, [rest]);
 
+    //redirects user if not logged in
     useEffect(() => {
         if (!user) {
             navigate('/login');

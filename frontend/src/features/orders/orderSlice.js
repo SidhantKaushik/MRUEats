@@ -9,7 +9,7 @@ const initialState = {
     message: ''
 }
 
-//creat new order
+//create new order
 export const createOrder = createAsyncThunk('orders/create', async(orderData, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
@@ -26,6 +26,7 @@ export const orderSlice = createSlice({
     reducers: {
         reset: (state) => initialState,
     },
+    //various states orders are correctly posted
     extraReducers: (builder) => {
         builder
             .addCase(createOrder.pending, (state) => {

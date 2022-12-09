@@ -17,10 +17,12 @@ import EditAccount from './pages/EditAccount';
 import { useEffect, useState } from 'react';
 
 function App() {
-
+  
+  //states
   const [restaurants, setRestaurants] = useState([]);
   const [menu, setMenu] = useState([])
 
+  //fetches all restaurants
   useEffect(() => {
     const getRestaurants = async () => {
       try {
@@ -35,6 +37,7 @@ function App() {
     getRestaurants();
   }, [])
 
+ //fetches all menu items from each restaurant
   useEffect(() => {
     const getMenu = async () => {
       try {
