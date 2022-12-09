@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
@@ -12,7 +12,6 @@ import RestaurantOrder from './components/RestaurantOrder';
 import OrderHistory from './pages/OrderHistory';
 import RestaurantDetails from './pages/RestaurantDetails';
 import EditAccount from './pages/EditAccount';
-import NotFound from './pages/NotFound';
 
 
 import { useEffect, useState } from 'react';
@@ -59,20 +58,18 @@ function App() {
         <div className="App">
           <Header />
           <Routes>
-            <Route exact path='/' element={<Home restaurants={{ restaurants }} />}></Route>
+            <Route exact path='/' element={<Home restaurants={{restaurants}}/>}></Route>
             <Route exact path='/login' element={<Login />}></Route>
             <Route exact path='/register' element={<Register />}></Route>
             <Route exact path='/account' element={<Account />}></Route>
             <Route exact path='/account-edit' element={<EditAccount />}></Route>
-            <Route exact path='/order-history' element={<OrderHistory restaurants={{ restaurants }} menu={{ menu }} />}></Route>
+            <Route exact path='/order-history' element={<OrderHistory restaurants={{restaurants}} menu={{menu}}/>}></Route>
             <Route exact path='/admin' element={<Admin />}></Route>
             <Route exact path='/courier' element={<Courier />}></Route>
-            <Route exact path='/restaurantDetails' element={<RestaurantDetails menu={{ menu }} />}></Route>
-            <Route path='*' element={<NotFound />}></Route>
+            <Route exact path='/restaurantDetails' element={<RestaurantDetails menu={{menu}}/>}></Route>
           </Routes>
         </div>
       </Router>
-
       <ToastContainer />
     </>
   );

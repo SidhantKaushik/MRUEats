@@ -1,5 +1,4 @@
 import axios from 'axios';
-//Passing JWT
 import authHeader from "./authHeader";
 
 const API_URL = '/api/users/';
@@ -8,13 +7,6 @@ const API_URL = '/api/users/';
 const register = async (userData) => {
 
     const response = await axios.post(API_URL, userData);
-    return response.data;
-};
-
-//Login user
-const login = async (userData) => {
-
-    const response = await axios.post(API_URL + 'login', userData);
 
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
@@ -22,11 +14,11 @@ const login = async (userData) => {
     return response.data;
 };
 
-//Update user info
-const update = async (userData) => {
+//Login user
+const login = async (userData) => {
 
-    const response = await axios.put(API_URL + "UPDATE", userData, authHeader);
-
+    const response = await axios.post(API_URL + 'login', userData);
+     
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
     }
@@ -38,7 +30,15 @@ const logout = () => {
     localStorage.removeItem('user');
 }
 
-
+//Update user info
+const update = async (userData) => {
+    
+    const response = await axios.put(API_URL + "UPDATE", userData, authHeader);
+    if (response.data) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+    }
+    return response.data;
+};
 
 const authService = {
     register,
