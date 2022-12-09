@@ -1,9 +1,9 @@
 import '../styles/RestaurantDetails.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import Category from './Category';
-import MenuItem from './MenuItem';
-import CartItems from './CartItems';
+import Category from '../components/Category';
+import MenuItem from '../components/MenuItem';
+import CartItems from '../components/CartItems';
 import { useSelector, useDispatch, } from 'react-redux';
 import { createOrder } from '../features/orders/orderSlice';
 import formatPrice from '../helpers/price-format';
