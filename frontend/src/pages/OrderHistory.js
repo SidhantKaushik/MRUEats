@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector} from 'react-redux';
 import OrderHistoryComponent from "../components/OrderHistory";
+//Passing JWT
 import authHeader from "../features/auth/authHeader";
 import '../styles/OrderHistory.css';
 import { FaArrowLeft } from "react-icons/fa";
@@ -16,7 +17,6 @@ const OrderHistory = (props) => {
     const navigate = useNavigate();
     
     const { user } = useSelector((state) => state.auth);
-
     useEffect(() => {
 
         if(!user){
@@ -86,6 +86,7 @@ const OrderHistory = (props) => {
     function isEmpty(obj){
         return Object.keys(obj).length === 0;
     }
+
     if(isEmpty(sortedOrders)){
 
         return(

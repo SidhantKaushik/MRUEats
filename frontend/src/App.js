@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {  BrowserRouter as Router, Routes, Route,} from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
@@ -10,10 +10,10 @@ import Account from './pages/Account';
 import Cart from './pages/Cart';
 import Admin from './pages/Admin';
 import Courier from './pages/Courier';
-import RestaurantOrder from './pages/RestaurantOrder';
 import OrderHistory from './pages/OrderHistory';
 import RestaurantDetails from './pages/RestaurantDetails';
 import EditAccount from './pages/EditAccount';
+import NotFound from './pages/NotFound';
 
 
 import { useEffect, useState } from 'react';
@@ -68,9 +68,11 @@ function App() {
             <Route exact path='/admin' element={<Admin />}></Route>
             <Route exact path='/courier' element={<Courier />}></Route>
             <Route exact path='/restaurantDetails' element={<RestaurantDetails menu={{menu}}/>}></Route>
+            <Route path='*' element={<NotFound/>}></Route>
           </Routes>
         </div>
       </Router>
+      
       <ToastContainer />
     </>
   );

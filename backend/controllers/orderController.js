@@ -34,20 +34,18 @@ const getCompleteOrders = asyncHandler(async (req, res) => {
 // @access Private
 const getOrderByUser = asyncHandler(async (req, res) => {
     const orders = await Order.find({ userId: req.params.id });
-
     res.status(200).json(orders);
 });
 
-// @desc   Get order
+// @desc   Post order
 // @route  POST /api/orders
 // @access Private
 const setOrder = asyncHandler(async (req, res) => {
     let id = 1;
-    const { menuItems, userId, restaurantId , price, specialInstructions, deliverTo} = req.body;
-    console.log(req.body)
+    const { menuItems, userId, restaurantId, price, specialInstructions, deliverTo, dateOrdered } = req.body;
     if (!menuItems) {
         res.status(400);
-        throw new Error('Please add a text field');
+        throw new Error('Please add items');
     }
 
     const idCheck = await Order.find({});
@@ -57,7 +55,7 @@ const setOrder = asyncHandler(async (req, res) => {
         id: id,
         restaurantId: restaurantId,
         price: price,
-        dateOrdered: "05/07/2000",
+        dateOrdered: dateOrdered,
         isActive: true,
         specialInstructions: specialInstructions,
         menuItems: menuItems,
@@ -67,18 +65,18 @@ const setOrder = asyncHandler(async (req, res) => {
     res.status(200).json(order);
 });
 
-// @desc   sets orders "isActive" to false
+// @desc   Update orders "isActive" to false
 // @route  PUT /api/orders/DEACTIVATE
 // @access Private
 const deactivateOrder = asyncHandler(async (req, res) => {
 
-    let orderToUpdate = await Order.findById({_id: req.body._id});
+    let orderToUpdate = await Order.findById({ _id: req.body._id });
 
     if (!orderToUpdate) {
         throw new NotFoundError();
     }
 
-    orderToUpdate.set({isActive:"false"});
+    orderToUpdate.set({ isActive: "false" });
     await orderToUpdate.save();
 
 });

@@ -1,15 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import '../styles/Home.css';
 import RestaurantItem from './RestaurantItem';
 import HomepageCategories from './HomepageCategories';
 
 const Home = (props) => {
-
-    const navigate = useNavigate();
-
-    const { user } = useSelector((state) => state.auth);
 
     let filterRest = []
     let allRest = [...props.restaurants.restaurants]

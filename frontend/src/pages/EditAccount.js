@@ -12,33 +12,47 @@ import Spinner from '../components/Spinner';
 import Collapsible from 'react-collapsible';
 
 const EditAccount = (props) => {
-    //Check if userInfo is logged in
+    
     //Needed for passing state through <Link>s
     const location = useLocation();
-    const { userInfo } = location.state;
+const dispatch = useDispatch();
+    const navigate = useNavigate();
+    //Checks React Redux user state
+    useEffect(() => {
+        if (!location) {
+            navigate('/login');
+        }
+    }, [location, navigate]);
+    
+    const { userInfo } = location.state ? location.state : {};
+
+    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+    
+    
+
+    
+    //Checks React Redux user state
+      useEffect(() => {
+        if (!user) {
+            navigate('/login');
+        }
+    }, [user, navigate]);
+
+    
 
     const [phoneNum, setPhoneNum] = useState('');
 
     const [formData, setFormData] = useState({
-        firstName: userInfo.firstName,
-        lastName: userInfo.lastName,
-        deliverTo: userInfo.deliverTo,
-        address: userInfo.details?.address,
-        phoneNumber: userInfo.details?.phoneNumber,
-        postalCode: userInfo.details?.postalCode,
+        firstName: userInfo?.firstName,
+        lastName: userInfo?.lastName,
+        deliverTo: userInfo?.deliverTo,
+        address: userInfo?.details?.address,
+        phoneNumber: userInfo?.details?.phoneNumber,
+        postalCode: userInfo?.details?.postalCode,
     });
 
-    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
-
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-
+    //React Redux state
     useEffect(() => {
-
-        if (!user) {
-            navigate('/login');
-        }
-
         if (isError) {
             toast.error(message);
         }
@@ -49,8 +63,9 @@ const EditAccount = (props) => {
 
         dispatch(reset());
 
-    }, [user, isError, isSuccess, message, navigate, dispatch]);
+    }, [isError, isSuccess, message, navigate, dispatch]);
 
+    //Update state when form is changed
     const onChange = (e) => {
 
         setFormData((prevState) => ({
@@ -59,31 +74,31 @@ const EditAccount = (props) => {
         }));
     }
 
-    //Need to add wrong inputs
+    //Submits edited account data
     const onSubmit = (e) => {
 
         e.preventDefault();
 
         //Postal code input validation
         const formattedPostalCode = PostalCode(formData.postalCode)?.toUpperCase().replace(/(.{3})/g, "$1 ");
-        if (formattedPostalCode === undefined && userInfo.details?.postalCode !== formData.postalCode && formData.postalCode) {
+        if (formattedPostalCode === undefined && userInfo?.details?.postalCode !== formData.postalCode && formData.postalCode) {
             toast.error('Please input valid postal code');
             return;
         }
-
+        //Phone number validation
         if (phoneNum && phoneNum.length !== 14) {
             toast.error('Please input valid phone number');
             return;
         }
 
         const userData = {
-            _id: userInfo._id,
-            id: userInfo.id,
-            email: userInfo.email,
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            deliverTo: formData.deliverTo,
-            address: formData.address,
+            _id: userInfo?._id,
+            id: userInfo?.id,
+            email: userInfo?.email,
+            firstName: formData?.firstName,
+            lastName: formData?.lastName,
+            deliverTo: formData?.deliverTo,
+            address: formData?.address,
             countryCode: userInfo.details?.countryCode,
             phoneNumber: phoneNum,
             postalCode: checkPostalCode(formData.postalCode) ? formattedPostalCode : formData.postalCode,
@@ -133,7 +148,7 @@ const EditAccount = (props) => {
                                             <h4>First Name&nbsp;</h4>
                                             <h4 className="reqStar">*</h4>
                                             </div>
-                                            <input type="text" id="firstName" name="firstName" value={formData.firstName} placeholder={userInfo.firstName} onChange={onChange}></input>
+                                            <input type="text" id="firstName" name="firstName" value={formData.firstName} placeholder={userInfo?.firstName} onChange={onChange}></input>
                                         </div>
                                     </div>
                                     <div className="lastName">
@@ -142,7 +157,7 @@ const EditAccount = (props) => {
                                             <h4>Last Name&nbsp;</h4>
                                             <h4 className="reqStar">*</h4>
                                             </div>
-                                            <input type="text" id="lastName" name="lastName" value={formData.lastName} placeholder={userInfo.lastName} onChange={onChange}></input>
+                                            <input type="text" id="lastName" name="lastName" value={formData.lastName} placeholder={userInfo?.lastName} onChange={onChange}></input>
                                         </div>
                                     </div>
                                 
@@ -151,7 +166,7 @@ const EditAccount = (props) => {
                                         <div className="emailHeader">
                                         <h4 className="emailTitle">Email</h4>
                                         </div>
-                                        <input type="text" className="emailBox" id="email" name="email" value={userInfo.email} placeholder={userInfo.email} readOnly></input>
+                                        <input type="text" className="emailBox" id="email" name="email" value={userInfo?.email} placeholder={userInfo?.email} readOnly></input>
                                     </div>
                                 </div>
                                 <div className="deliveryLocation">
@@ -160,7 +175,7 @@ const EditAccount = (props) => {
                                         <h4>Delivery Location&nbsp;</h4>
                                         <h4 className="reqStar">*</h4>
                                         </div>
-                                        <input type="text" id="dLocation" name="deliverTo" value={formData.deliverTo} placeholder={userInfo.deliverTo} onChange={onChange}></input>
+                                        <input type="text" id="dLocation" name="deliverTo" value={formData.deliverTo} placeholder={userInfo?.deliverTo} onChange={onChange}></input>
                                     </div>
                                 </div>
                                 </div>
@@ -174,7 +189,7 @@ const EditAccount = (props) => {
                                             <div className="standardLayout">
                                                 <h4>Country</h4>
                                                 <div className="countryCodeComp">
-                                                <CountryCodes code={userInfo.details?.countryCode} isActive={false}></CountryCodes>
+                                                <CountryCodes code={userInfo?.details?.countryCode} isActive={false}></CountryCodes>
                                             </div>
                                             </div>
                                         </div>
@@ -194,33 +209,33 @@ const EditAccount = (props) => {
                                     <div className="streetAddress">
                                         <div className="standardLayout">
                                             <h4>Street Address</h4>
-                                            <input type="text" id="address" name="address" value={formData.address} placeholder={userInfo.details?.address} onChange={onChange}></input>
+                                            <input type="text" id="address" name="address" value={formData.address} placeholder={userInfo?.details?.address} onChange={onChange}></input>
                                         </div>
                                     </div>
                                     <div className="postal">
                                             <div className="standardLayout">
                                                 <h4 id="pCode">Postal Code</h4>
-                                                <input type="text" id="postalCode" name="postalCode" value={formData.postalCode} placeholder={userInfo.details?.postalCode} onChange={onChange}></input>
+                                                <input type="text" id="postalCode" name="postalCode" value={formData.postalCode} placeholder={userInfo?.details?.postalCode} onChange={onChange}></input>
                                             </div>
                                         </div>
                                     
                                         <div className="city">
                                             <div className="standardLayout">
                                                 <h4 id="city">City</h4>
-                                                <input type="text" className="cityBox" id="city" name="city" value={userInfo.details?.city} placeholder={userInfo.details?.city} readOnly></input>
+                                                <input type="text" className="cityBox" id="city" name="city" value={userInfo?.details?.city} placeholder={userInfo?.details?.city} readOnly></input>
                                             </div>
                                         </div>
                                         <div className="province">
                                             <div className="standardLayout">
                                                 <h4>Province</h4>
-                                                <input type="text" className="provinceBox" id="province" name="province" value={userInfo.details?.province} placeholder={userInfo.details?.province} readOnly></input>
+                                                <input type="text" className="provinceBox" id="province" name="province" value={userInfo?.details?.province} placeholder={userInfo?.details?.province} readOnly></input>
                                             </div>
                                         </div>
                                         
                                         <div className="country">
                                             <div className="standardLayout">
                                                 <h4>Country</h4>
-                                                <input type="text" className="countryBox" id="country" name="country" value={userInfo.details?.country} placeholder={userInfo.details?.country} readOnly></input>
+                                                <input type="text" className="countryBox" id="country" name="country" value={userInfo?.details?.country} placeholder={userInfo?.details?.country} readOnly></input>
                                             </div>
                                         </div>
                                 </div>

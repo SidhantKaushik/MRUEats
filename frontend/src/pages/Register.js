@@ -9,7 +9,7 @@ import PizzaImg from '../images/pizza.jpg'
 
 
 function Register() {
-    //Add deliverTo
+    //Is Courier check
     const [checked, setChecked] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
@@ -25,20 +25,21 @@ function Register() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+    const { isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
     useEffect(() => {
         if (isError) {
             toast.error(message);
         }
 
-        if (isSuccess || user) {
-            navigate('/');
+        if (isSuccess) {
+            toast.success('Account created!');
+            navigate('/login');
         }
 
         dispatch(reset());
 
-    }, [user, isError, isSuccess, message, navigate, dispatch]);
+    }, [isError, isSuccess, message, navigate, dispatch]);
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -53,7 +54,7 @@ function Register() {
 
         e.preventDefault();
 
-        //if none inputed
+        //if nothing in form is filled
         if(!firstName && !lastName && !email && !deliverTo && !password && !password_c)
         {
             toast.error('Please fill all text fields');
@@ -98,7 +99,7 @@ function Register() {
     return (
         <div class="RegisterPage">
             <div className="left">
-            <img src={PizzaImg} alt="Image of Pizza"/>
+            <img src={PizzaImg} alt=""/>
             </div>
             <div class="box">
                 <form onSubmit={onSubmit}>
@@ -126,10 +127,6 @@ function Register() {
                     <div className='pass2'>
                         <label for="confirm-password">Confirm Password</label>
                         <input type="password" id="password_c" name="password_c" value={password_c} placeholder='Confirm password' onChange={onChange} />
-                    </div>
-                    <div className='dLocation'>
-                        <label for="deliveryLoc">Delivery Location</label>
-                        <input type="text" id="dLocation" name="deliverTo" value={deliverTo} placeholder='Enter delivery location Ex.(B140 or 123 Street SE)' onChange={onChange} />
                     </div>
                     <div className="courier">
                         <label for="courierLabe">Courier account?</label><br/>
